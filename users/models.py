@@ -60,7 +60,7 @@ class SalaryTable(models.Model):
     total_salary = models.CharField(max_length=200, default="0")
     deduction = models.CharField(max_length=200, default="0")
     incentive = models.CharField(max_length=200, default="0")
-    basic_salary = models.OneToOneField(BasicSalary, on_delete=models.CASCADE, max_length=200, default="0")
+    basic_salary = models.ForeignKey(BasicSalary, on_delete=models.CASCADE, max_length=200, default="0")
     descciption = models.TextField(default="")
     date = models.DateField()
     
