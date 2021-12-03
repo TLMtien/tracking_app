@@ -5,19 +5,23 @@ from . models import NewUser, SalePerson
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.views import LoginView
 import openpyxl
+from django.urls import reverse_lazy
 # Create your views here.
 
 def index(request):
     return HttpResponse('ok')
+	
 
-#export data ----> create account for SP 
+
+#import excel data ----> create account for SP 
+
 def Signup(request):
 	excel_file = request.FILES["excel_file"]
 	wb = openpyxl.load_workbook(excel_file)
 	
 	sheets = wb.sheetnames
-	print(sheets[0])
 	worksheet = wb[sheets[0]]  
 
 	excel_data = list()
@@ -29,8 +33,8 @@ def Signup(request):
 			row_data.append(str(cell.value))
 
 		excel_data.append(row_data)
-	print(len(excel_data)-2)
-        
+    #loop 
+
 	user = NewUser.objects.create_user(user_name='user_name', password1='password1')
 	sp=SalePerson.objects.create(user=user, brand = '', full_name = '', province='', outlet='')
 	sp.save()
@@ -59,3 +63,17 @@ def PasswordChange(request):
 
 	return render(request, 'index', context)
 
+
+class LoginView(LoginView):
+    template_name = 'users/login.html'
+    fields = '__all__'
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        return reverse_lazy('page')
+
+login_required
+def page_user(request):
+	if request.user.is_HVN or request.user.is_HVNVip:
+		return HttpResponse('ok')
+	return HttpResponse('ko')
