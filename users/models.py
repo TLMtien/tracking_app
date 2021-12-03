@@ -23,7 +23,9 @@ CHOICES_brand = [
 class SalePerson(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     brand = models.CharField(choices = CHOICES_brand , default = HEINEKEN, max_length=200)
-    phone = models.CharField(max_length=200, null=True, blank=True)
+    full_name = models.CharField(max_length=200, null=True, blank=True)
+    province = models.CharField(max_length=200, null=True, blank=True)
+    outlet = models.CharField(max_length=200, null=True, blank=True)
     joined = models.DateTimeField("Date Joined", auto_now_add=True)
 
     def __str__(self):
@@ -31,8 +33,8 @@ class SalePerson(models.Model):
     
 class HVN(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    position = models.CharField(max_length=50)
-    phone = models.CharField(null=True, blank=True,max_length=200)
+    brand = models.CharField(choices = CHOICES_brand , default = HEINEKEN, max_length=200)
+    full_name = models.CharField(max_length=200, null=True, blank=True)
     joined = models.DateTimeField("Date Joined", auto_now_add=True)
 
     def __str__(self):
@@ -40,8 +42,7 @@ class HVN(models.Model):
 
 class HVN_vip(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    position = models.CharField(max_length=50)
-    phone = models.CharField(null=True, blank=True, max_length=200)
+    full_name = models.CharField(max_length=200, null=True, blank=True)
     joined = models.DateTimeField("Date Joined", auto_now_add=True)
 
     def __str__(self):
@@ -92,20 +93,24 @@ class CustomAccountManager(BaseUserManager):
         user.set_password(password)
         user.save()
         return user
+        
     
 class NewUser(AbstractBaseUser, PermissionsMixin):
 
     user_name = models.CharField(max_length=150, unique=True)
     start_date = models.DateTimeField(default=timezone.now)
-    about = models.TextField(_(
-        'about'), max_length=500, blank=True)
+    about = models.TextField(_('about'), max_length=500, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+
+    is_salePerson = models.BooleanField(default=False)
+    is_HVN = models.BooleanField(default=False)
+    is_HVNVip = models.BooleanField(default=False)
 
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'user_name'
-    #REQUIRED_FIELDS = ['user_name']
+    
 
     def __str__(self):
         return self.user_name

@@ -8,7 +8,7 @@ from . models import NewUser, BasicSalary, SalaryTable, HVN_vip, HVN, SalePerson
 class UserAdminConfig(UserAdmin):
     model = NewUser
    
-    list_display = ('id', 'user_name', 'is_active', 'is_staff')
+    list_display = ('id', 'user_name', 'is_active', 'is_staff', 'is_salePerson', 'is_HVN', 'is_HVNVip')
     ordering = ('-start_date',)
     fieldsets = (
         (None, {'fields': ('user_name',)}),
@@ -20,7 +20,7 @@ class UserAdminConfig(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('user_name', 'password1', 'password2', 'is_active', 'is_staff')}
+            'fields': ('user_name', 'password1', 'password2', 'is_active', 'is_staff', 'is_salePerson', 'is_HVN', 'is_HVNVip')}
          ),
     )
 
