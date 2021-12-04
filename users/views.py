@@ -76,4 +76,5 @@ login_required
 def page_user(request):
 	if request.user.is_HVN or request.user.is_HVNVip:
 		return HttpResponse('ok')
+	
 	return HttpResponse('ko')

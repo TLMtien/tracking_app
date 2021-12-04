@@ -48,27 +48,6 @@ class HVN_vip(models.Model):
     def __str__(self):
         return self.user.user_name
 
-class BasicSalary(models.Model):
-    staff = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    basic_salary = models.CharField(max_length=200)
-    bank_account = models.TextField()
-
-    def __str__(self):
-        return self.staff.user_name
-
-class SalaryTable(models.Model):
-    staff = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    total_salary = models.CharField(max_length=200, default="0")
-    deduction = models.CharField(max_length=200, default="0")
-    incentive = models.CharField(max_length=200, default="0")
-    basic_salary = models.ForeignKey(BasicSalary, on_delete=models.CASCADE, max_length=200, default="0")
-    descciption = models.TextField(default="")
-    date = models.DateField()
-    
-    def __str__(self):
-        return "salary {} - {}".format(self.date.strftime("%d/%m/%y"), self.staff.user_name)
-
-
 
 class CustomAccountManager(BaseUserManager):
 

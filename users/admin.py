@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db import models
 from django.contrib.auth.admin import UserAdmin
 from django.forms import Textarea
-from . models import NewUser, BasicSalary, SalaryTable, HVN_vip, HVN, SalePerson
+from . models import NewUser, HVN_vip, HVN, SalePerson
 # Register your models here.
 
 class UserAdminConfig(UserAdmin):
@@ -29,6 +29,5 @@ admin.site.register(NewUser, UserAdminConfig)
 admin.site.register(SalePerson),
 admin.site.register(HVN),
 admin.site.register(HVN_vip),
-admin.site.register(BasicSalary),
-admin.site.register(SalaryTable),
+
 
