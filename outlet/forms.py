@@ -28,7 +28,11 @@ class giftReportForm(forms.ModelForm):
 class tableReportForm(forms.ModelForm):
     class Meta:
         model = tableReport
-        fields = ("brand_volume_sales","brand_table","other_HVS_table","total_table", "consumers_approach", "consumers_brough", "Total_Consumers")
+        fields = (
+            "other_table","other_beer_table",
+            "brand_table","HVN_table",
+            "total_table"
+        )
 
     def __init__(self, *args, **kwargs):
         self.is_salePerson = kwargs.pop('is_salePerson',None)
