@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlet Detail</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+<body>
+    <div class="app">
+        <div class="container homeoutlet">
+                <!-- Header -->
+                <div class="row header">    
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                    </div>
+                    <div class="profile-user"> 
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    </div>
+                </div>
+    
+                <!-- Main -->
+                <div class="row main">
+                    <div class="main-top">
+                        <div class="search-box">
+                            <input type="search" placeholder="Tìm kiếm">
+                            <i class="ti-search"></i>
+                        </div>
+                        <div class="filter-box"> 
+                            <select name="calc_shipping_provinces" required="">
+                                <option value="">Tỉnh / Thành phố</option>
+                            </select>
+                            <select name="calc_shipping_district" required="">
+                            <option value="">Quận / Huyện</option>
+                            </select>
+                            <input class="billing_address_1" name="" type="hidden" value="">
+                            <input class="billing_address_2" name="" type="hidden" value="">
+                        </div>
+                    </div>
+                    <div class="main-table">
+                        <div class="table-details">
+                            <p class="title">chi tiết outlet</p>
+                            <div class="details-info">
+                                <p class="auth-outlet">
+                                    {{ object.outlet_Name }}
+                                </p>
+                                <span class="local-outlet">
+                                    <i class='ti-location-pin'></i> Địa chỉ : {{ object.outlet_address }}
+                                </span><br>
+                                <span class="date-outlet">
+                                    <i class='ti-timer'></i> Thời gian tạo : {{ object.created }}
+                                </span><br>
+                                <span class="type-outlet">
+                                    <i class='ti-clip'></i> Loại outlet : {{ object.type }}
+                                </span><br>
+                            </div>
+                            
+                        </div>
+                        <div class="box-button">
+                            <a href="#create-outlet"class="btn btn-close">Đóng cửa</a>
+                            <a href="{% url 'pagereport' %}" class="btn btn-checkin">Check - in</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Create Outlet-->
+                <div id="create-outlet" class="create-outlet">
+                    <div class="create-outlet__content">
+                        <div class="create-outlet_body">
+                            <img src="{% static '/img/logo-hnk.png' %}" alt="logo">
+                        </div>
+                
+                        <div class="create-outlet__footer">
+                            <a href="#create-info-outlet" type="button" class="btn btn-add">
+                                Tạo outlet mới <i class="ti-plus"></i>
+                            </a>
+                        </div>
+                
+                        <a href="#" class="create-outlet__close">&times;</a>
+                    </div>
+                </div>
+                <!-- /Modal Create Outlet-->
+
+                <!-- Modal Create Info Outlet-->
+                <div id="create-info-outlet" class="create-info-outlet">
+                    <div class="create-info-outlet__content">
+                        <div class="create-info-outlet_body">
+                            <p class="title">Thông Tin Outlet</p>
+                            <form action="{% url 'outletCreate' %}" method="POST" class="form-create-info">
+                                {% csrf_token %} 
+                                
+                                    {% comment %} <input type="text" placeholder="Tên outlet *">  {% endcomment %}
+                                    {{form.outlet_Name}}
+                                
+                                <div class="input-create-info">
+                                    <input type="text" placeholder="Địa chỉ outlet *">
+                                    {{form.outlet_address}}
+                                </div>
+                                <div class="input-create-info">
+                                    {% comment %} <input type="datetime-local" value=""> {% endcomment %}
+                                    {{form.outlet_Name}}
+                                </div>
+                                <div class="input-create-info">
+                                    {% comment %} <input type="text" placeholder="Loại outlet *"> {% endcomment %}
+                                    {{form.type}}
+                                </div>
+                                <div class="input-create-info">
+                                    {% comment %} <input type="text" placeholder="Loại outlet *"> {% endcomment %}
+                                    {{form.type}}
+                                </div>
+                            </form>
+                        </div>
+                
+                        <div class="create-info-outlet__footer">
+                            <a href="#create-finish-outlet" type="submit" class="btn btn-confirm">
+                                Xác nhận <i class="ti-check-box"></i>
+                            </a>
+                        </div>
+                
+                        <a href="#" class="create-info-outlet__close">&times;</a>
+                    </div>
+                </div>
+                <!-- /Modal Create Info Outlet-->
+                <!-- Modal Create Outlet Finish -->
+                <div id="create-finish-outlet" class="create-finish-outlet">
+                    <div class="create-finish-outlet__content">
+                        <div class="create-finish-outlet_body">
+                            <div class="create-finish-outlet_success">
+                                <img src="{% static '/img/success.png' %}" alt="success">
+                                <h3>Đổi mật khẩu thành công</h3>
+                            </div>    
+                        </div>
+                        <a href="#" class="create-finish-outlet__close">&times;</a>
+                    </div>
+                </div>
+                <!-- /Modal Create Info Outlet-->
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static '/js/districts.min.js' %}"></script>
+    <script src="{% static '/js/filter.js' %}"></script>
+    <script src="{% static '/js/app.js' %}"></script>
+</body>
+</html>

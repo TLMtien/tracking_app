@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Outlet</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+
+<body>
+    <div class="app">
+        <div class="container homeoutlet">
+            <!-- Header -->
+            <div class="row header">    
+                <div class="logo">
+                    <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                </div>
+                <div class="profile-user"> 
+                    <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                </div>
+            </div>
+
+            <!-- Main -->
+            <div class="row main">
+                <div class="main-top">
+                    <div class="search-box">
+                        <input type="search" placeholder="Tìm kiếm">
+                        <i class="ti-search"></i>
+                    </div>
+                    <div class="filter-box">
+
+                        <select name="calc_shipping_provinces" required="">
+                                <option value="">Tỉnh / Thành phố</option>
+                            </select>
+                        <select name="calc_shipping_district" required="">
+                            <option value="">Quận / Huyện</option>
+                            </select>
+                        <input class="billing_address_1" name="" type="hidden" value="">
+                        <input class="billing_address_2" name="" type="hidden" value="">
+                    </div>
+                </div>
+                <div class="main-table">
+                    {% if list_outlet %}
+                    
+                            {% for outlet in list_outlet %}  
+                        <div class="table-list">
+                            <a href={{outlet.id}}>Outlet {{outlet.id}}</a>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>None</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static '/js/districts.min.js' %}"></script>
+    <script src="{% static '/js/filter.js' %}"></script>
+    <script src="{% static '/js/app.js' %}"></script>
+</body>
+
+</html>

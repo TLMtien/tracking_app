@@ -23,7 +23,7 @@ class outletInfo(models.Model):
     created = models.DateField(auto_now_add=True)
     
     def __str__(self):
-        return "{} - {}".format(self.area, self.outletID)
+        return "{} - {}".format(self.area, self.outlet_Name)
     
     # def get_absolute_url(self):   
     #     return reverse("", kwargs={

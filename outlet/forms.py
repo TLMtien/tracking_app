@@ -3,6 +3,8 @@ from django.db.models import fields
 from .models import outletInfo, tableReport, posmReport, giftReport
 
 class outletInfoForm(forms.ModelForm):
+    outlet_Name = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-create-info', 
+													'placeholder':"Tên outlet *"}))
     class Meta:
         model = outletInfo
         fields = ("province", "type","area", 

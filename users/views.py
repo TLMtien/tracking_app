@@ -96,7 +96,8 @@ def page_user(request):
 	if request.user.is_HVN or request.user.is_HVNVip:
 		return HttpResponse('ko')
 	
-	return render(request, 'users/homeoutlet.html')
+	return redirect('listoutlet')
 
+login_required
 def PasswordChangeDone(request):
 	return render(request, 'users/successpass.html') 

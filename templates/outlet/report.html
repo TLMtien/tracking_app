@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACTIVATION TRACKING APP</title>
+    <title>Report</title>
+
     
     <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
     <!-- CSS -->
@@ -26,34 +27,26 @@
     
                 <!-- Main -->
                 <div class="row main">
-                    <div class="main-top">
-                        <div class="search-box">
-                            <input type="search" placeholder="Tìm kiếm">
-                            <i class="ti-search"></i>
+                    <div class="box-report">
+                        <div class="box-center">
+                            <button type="button"><a href="#">Báo cáo POSM</a></button>
                         </div>
-                        <div class="filter-box">
-                            <select id="filter-location">
-                                <option>Khu vực</option>
-                                <option value="Thành phố">Thành phố</option>
-                                <option value="Quận">Quận</option>
-                                <option value="Huyện">Huyện</option>
-                            </select>
+                        <div class="box-center">
+                            <button type="button" disabled><a href="#">Báo cáo quà tặng</a></button>
+                        </div>
+                        <div class="box-center">
+                            <button type="button" disabled><a href="#">Báo cáo bán hàng</a></button>
+                        </div>
+                        <div class="box-center">
+                            <button type="button" disabled><a href="#">Báo cáo cuối ngày</a></button>
                         </div>
                     </div>
-                    <div class="main-table">
-                        <a href="#">Outlet 1</a>
-                    </div>
-                    <div class="main-table">
-                        <a href="#">Outlet 2</a>
-                    </div>
-                    
                 </div>
 
         </div>
     </div>
 
     <!-- JS -->
-    
-    <script src="{% static '/js/app.js' %} "></script>
+    <script src="{% static '/js/app.js' %}"></script>
 </body>
 </html>

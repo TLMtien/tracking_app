@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See You Again</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->        
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+<body>
+    <div class="app">
+        <div class="container">
+                <!-- Header -->
+                <div class="row header">
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %}" alt="logo"></a>
+                    </div>
+                </div>
+                <!-- Main -->
+                <div class="row main">
+                    <div class="form-undo">
+                        <h3 class="title">hẹn bạn lần sau nhé</h3>
+                        <div class="box-center">
+                            <p class="desc-one">
+                                Theo quy định của pháp  luật, rựu bia chỉ dành cho người đủ 18 tuổi
+                            </p>
+                            <p class="desc-two">
+                                Cảm ơn bạn đã quan tâm đến chương trình
+                            </p>
+                        </div>
+                        <div class="box-icon">
+                            <a href="{% url 'index' %}" class="icon-undo">
+                                <i class="ti-back-left"></i>
+                            </a>
+                        </div>
+                        
+                    </div>
+
+                <!-- Footer -->
+                <div class="row footer">
+                    <div class="footer-content">
+                        <img src="{% static '/img/car-ban_white.png' %}" alt="icon">
+                        <img src="{% static '/img/women-alcohol_white.png' %}" alt="icon">  
+                        <img src="{% static '/img/18+_white.png' %} " alt="icon">  
+                        <p class="footer-desc">người dưới 18 tuổi không được uống rượu, bia</p>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="{% static '/js/app.js' %} "></script>
+</body>
+</html>

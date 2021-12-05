@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACTIVATION TRACKING APP</title>
-    
+
     <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
     <!-- CSS -->        
     <link rel="stylesheet" href="{% static '/css/style.css' %} ">
@@ -28,7 +28,7 @@
                             <a href="#" class="btn btn-primary js-modal-btn">tôi đã đủ 18 tuổi</a>
                         </div>
                         <div class="box-center">
-                            <a href="#" class="btn btn-outline">tôi chưa đủ 18 tuổi</a>
+                            <a href="{% url 'undo' %}" class="btn btn-outline">tôi chưa đủ 18 tuổi</a>
                         </div>
                         <label class="box-check">
                             Tôi đã đọc và đồng ý với <a href="#" class="checkbox-link">Các điều khoản bảo mật thông tin</a>
@@ -73,17 +73,17 @@
 
                 <!-- Footer -->
                 <div class="row footer">
-                    <div class="footer-content"> 
+                    <div class="footer-content">
                         <img src="{% static '/img/car-ban_white.png' %}" alt="icon">
                         <img src="{% static '/img/women-alcohol_white.png' %}" alt="icon">  
-                        <img src="{% static '/img/18+_white.png' %} " alt="icon">   
+                        <img src="{% static '/img/18+_white.png' %} " alt="icon">  
                         <p class="footer-desc">người dưới 18 tuổi không được uống rượu, bia</p>
                     </div>
                 </div>
         </div>
     </div>
 
-    <!-- JS -->  
+    <!-- JS -->
     <script src="{% static '/js/app.js' %} "></script>
 </body>
 </html>

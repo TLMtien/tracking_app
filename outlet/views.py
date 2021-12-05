@@ -1,7 +1,9 @@
+from django.db.models import query
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import overallReport, tableReport, outletInfo, giftReport
 from .forms import outletInfoForm, giftReportForm, tableReportForm
+from django.views.generic import DetailView, ListView, detail
 # Create your views here.
 def index(request):
     return HttpResponse('ok')
@@ -31,7 +33,7 @@ def outlet_create(request):
                 return render(request,"users/login.html",{'form':form})
         else:
             form = outletInfoForm()
-            return render(request,"users/login.html",{'form':form})
+            return render(request,"outlet/outletdetails.html",{'form':form})
     return HttpResponse('faulty')
 
 def gift_report_create(request):
@@ -94,3 +96,16 @@ def search_outlet(request):
     outlet = outletInfo.objects.filter(province=query)
 
     return render(request)
+
+login_required
+class ListOutletView(ListView):
+    model = outletInfo
+    context_object_name = 'list_outlet'
+    paginate_by = 2
+    template_name = 'outlet/homeoutlet.html'
+
+login_required
+class OutletDetailView(DetailView):
+    model = outletInfo
+    template_name = 'outlet/outletdetails.html'
+
