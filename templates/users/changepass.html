@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACTIVATION TRACKING APP</title>
 
-    <link rel="stylesheet" href="{% static '/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %}"> 
     <!-- CSS -->
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">       
 </head>
 <body>
     <div class="app">
@@ -17,23 +17,24 @@
                 <!-- Header -->
                 <div class="row header">
                     <div class="logo">
-                        <a href="#"><img src="{% static '/img/logo-hnk.png' %}" alt="logo"></a>
+                        <a href=""><img src="{% static '/img/logo-hnk.png' %}" alt="logo"></a>    
                     </div>
                 </div>
                 <!-- Main -->
                 <div class="row main">
-                    <form action="" class="form-login" method="POST">
+                    <form action="" class="form-login" method='POST'>
                         {% csrf_token %} 
+                        <h3 class="title">xin vui lòng đổi mật khẩu khi đăng nhập lần đầu!</h3>
                         <div class="box-center">
-                            {% comment %} <input type="text" class="input-user" placeholder="Tên đăng nhập"></input> {% endcomment %}
-                            {{form.username}}
+                            {{form.new_password}}
+                            {% comment %} <input type="password" class="input-user" placeholder="Mật khẩu mới"></input> {% endcomment %}
                         </div>
                         <div class="box-center">
-                            {% comment %} <input type="password" class="input-password" placeholder="Mật Khẩu"></input> {% endcomment %}
-                            {{form.password}}
+                            {{form.confirm_password }}
+                            {% comment %} <input type="password" class="input-password" placeholder="Nhập Lại Mật Khẩu"></input> {% endcomment %}
                         </div>
                         
-                        <input type="submit" class="input-submit" value="Đăng nhập">
+                        <input type="submit" class="input-submit" value="Đổi mật khẩu">
                     </form>
                     
                 </div>
@@ -41,16 +42,16 @@
                 <!-- Footer -->
                 <div class="row footer">
                     <div class="footer-content">
-                        <img src="{% static '/img/car-ban_white.png' %}"  alt="icon">
-                        <img src="{% static '/img/women-alcohol_white.png' %}" alt="icon">
-                        <img src="{% static '/img/18+_white.png' %}" alt="icon">
+                        <img src="{% static '/img/car-ban_white.png' %}" alt="icon">  
+                        <img src="{% static '/img/women-alcohol_white.png' %}" alt="icon">   
+                        <img src="{% static '/img/18+_white.png' %}" alt="icon">      
                         <p class="footer-desc">người dưới 18 tuổi không được uống rượu, bia</p>
                     </div>
                 </div>
         </div>
     </div>
 
-    <!-- JS -->
+    <!-- JS -->  
     <script src="{% static '/js/app.js' %}"></script>
 </body>
 </html>

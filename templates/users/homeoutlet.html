@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTIVATION TRACKING APP</title>
+    
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+<body>
+    <div class="app">
+        <div class="container homeoutlet">
+                <!-- Header -->
+                <div class="row header">    
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                    </div>
+                    <div class="profile-user"> 
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    </div>
+                </div>
+    
+                <!-- Main -->
+                <div class="row main">
+                    <div class="main-top">
+                        <div class="search-box">
+                            <input type="search" placeholder="Tìm kiếm">
+                            <i class="ti-search"></i>
+                        </div>
+                        <div class="filter-box">
+                            <select id="filter-location">
+                                <option>Khu vực</option>
+                                <option value="Thành phố">Thành phố</option>
+                                <option value="Quận">Quận</option>
+                                <option value="Huyện">Huyện</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="main-table">
+                        <a href="#">Outlet 1</a>
+                    </div>
+                    <div class="main-table">
+                        <a href="#">Outlet 2</a>
+                    </div>
+                    
+                </div>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    
+    <script src="{% static '/js/app.js' %} "></script>
+</body>
+</html>

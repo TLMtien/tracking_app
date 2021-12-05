@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import  UserCreationForm 
+from django.contrib.auth.forms import PasswordChangeForm
 from .models import NewUser, SalePerson
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
@@ -46,26 +47,22 @@ class SignupForm(forms.ModelForm):
     
 #######
     
+class LoginForm(forms.Form):
+	username = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'input-user', 'placeholder':"Tên đăng nhập"}))
+    
+	password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"Mật Khẩu"}))
 
-class ChangePasswordForm(forms.ModelForm):
-	id = forms.CharField(widget=forms.HiddenInput())
-	old_password = forms.CharField(widget=forms.PasswordInput(), label="Old password", required=True)
-	new_password = forms.CharField(widget=forms.PasswordInput(), label="New password", required=True)
-	confirm_password = forms.CharField(widget=forms.PasswordInput(), label="Confirm new password", required=True)
-
-	class Meta:
-		model = NewUser
-		fields = ('id', 'old_password', 'new_password', 'confirm_password')
+class ChangePasswordForm(forms.Form):
+	    
+	new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-user', 
+													'placeholder':"Mật khẩu mới"}), required=True)
+	confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-password', 
+														'placeholder':"Nhập Lại Mật Khẩu"}), required=True)
 
 	def clean(self):
-		super(ChangePasswordForm, self).clean()
-		id = self.cleaned_data.get('id')
-		old_password = self.cleaned_data.get('old_password')
-		new_password = self.cleaned_data.get('new_password')
-		confirm_password = self.cleaned_data.get('confirm_password')
-		user = NewUser.objects.get(pk=id)
-		if not user.check_password(old_password):
-			self._errors['old_password'] =self.error_class(['Old password do not match.'])
-		if new_password != confirm_password:
+		new_password=self.cleaned_data.get('new_password')
+		confirm_password=self.cleaned_data.get('confirm_password')
+		#similarly old_password
+		if new_password and new_password!=confirm_password :
 			self._errors['new_password'] =self.error_class(['Passwords do not match.'])
-		return self.cleaned_data
+		return self.cleaned_data 

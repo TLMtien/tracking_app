@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTIVATION TRACKING APP</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %}"> 
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">       
+</head>
+<body>
+    <div class="app">
+        <div class="container">
+            <!-- Header -->
+            <div class="row header">
+                <div class="logo">
+                    <a href="{% url 'loginPage' %}"><img src="{% static '/img/logo-hnk.png' %}" alt="logo"></a>    
+                </div>
+            </div>
+            <!-- Box success -->
+            <div class="box-success">
+                <img src="{% static '/img/success.png' %}" alt="success"> 
+                <h3>Đổi mật khẩu thành công</h3>
+            </div>
+            <!-- Next Outlet -->
+            <div class="next-outlet">
+                Tiếp tục
+                <i class="ti-angle-double-right"></i>
+            </div>
+            
+            <!-- Footer -->
+            <div class="row footer">   
+                <div class="footer-content">
+                    <img src="{% static '/img/car-ban_white.png' %}" alt="icon">
+                    <img src="{% static '/img/women-alcohol_white.png' %}" alt="icon">    
+                    <img src="{% static '/img/18+_white.png' %}" alt="icon">   
+                    <p class="footer-desc">người dưới 18 tuổi không được uống rượu, bia</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="{% static '/js/app.js' %}"></script>    
+</body>
+</html>

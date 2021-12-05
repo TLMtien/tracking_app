@@ -6,18 +6,22 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 # Create your models here.
 
-TIGER = 'tiger'
+TIGER_TP= 'tigerTP'
+TIGER_FA= 'tigerFA'
+TIGER_HZA= 'tigerHZA'
 STRONGBOW = 'strongbow'
 HEINEKEN ='heineken'
 BIVINA = 'bivina'
 LARUE = 'larue'
 
 CHOICES_brand = [
-    (TIGER, 'Tiger'),
-    (STRONGBOW,'Strongbow'),
-    (HEINEKEN,'Heineken'),
-    (BIVINA,'Bivina'),
-    (LARUE,'larue'),
+    (TIGER_TP, 'TigerTP'),
+    (TIGER_FA, 'TigerFA'),
+    (TIGER_HZA, 'TigerHZA'),
+    (STRONGBOW,'Strongbow Festive'),
+    (HEINEKEN,'Heineken Festive'),
+    (BIVINA,'Bivina Festive'),
+    (LARUE,'larue Festive'),
 ]
 
 class SalePerson(models.Model):

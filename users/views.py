@@ -1,13 +1,18 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-from . forms import ChangePasswordForm, SignupForm
+from . forms import ChangePasswordForm, SignupForm, LoginForm
 from . models import NewUser, SalePerson
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.views import LoginView
 import openpyxl
+from outlet.models import outletInfo
 from django.urls import reverse_lazy
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from .decorators import unauthenticated_user
+from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 
 def index(request):
@@ -53,28 +58,45 @@ def PasswordChange(request):
 			user.set_password(new_password)
 			user.save()
 			update_session_auth_hash(request, user)
-			return redirect('index')
+			return redirect('PasswordChangeDone')
 	else:
-		form = ChangePasswordForm(instance=user)
+		form = ChangePasswordForm()
 
-	context = {
-		'form':form,
-	}
+		context = {
+			'form':form,
+		}
 
-	return render(request, 'index', context)
+		return render(request, 'users/changepass.html', context)
 
 
-class LoginView(LoginView):
-    template_name = 'users/login.html'
-    fields = '__all__'
-    redirect_authenticated_user = True
 
-    def get_success_url(self):
-        return reverse_lazy('page')
+@unauthenticated_user
+def loginPage(request):
+    if request.method == 'POST':
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('page')
+        else:
+            messages.info(request, "usename or password is incorrect")
+            return redirect('loginPage')
+    form = LoginForm()
+    return render(request, 'users/login.html', {'form':form})
 
 login_required
 def page_user(request):
+	if request.user.is_salePerson:
+		outlet = outletInfo.objects.filter(SP=request.user).count()
+		if outlet < 1:
+			return redirect('passwordchange')
 	if request.user.is_HVN or request.user.is_HVNVip:
-		return HttpResponse('ok')
+		return HttpResponse('ko')
 	
-	return HttpResponse('ko')
+	return render(request, 'users/homeoutlet.html')
+
+def PasswordChangeDone(request):
+	return render(request, 'users/successpass.html') 

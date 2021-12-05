@@ -5,7 +5,7 @@ from .models import outletInfo, tableReport, posmReport, giftReport
 class outletInfoForm(forms.ModelForm):
     class Meta:
         model = outletInfo
-        fields = ("province","outletID","type","area", 
+        fields = ("province", "type","area", 
                     "outlet_address", "outlet_Name",
                  )
 
