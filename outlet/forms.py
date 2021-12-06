@@ -3,12 +3,14 @@ from django.db.models import fields
 from .models import outletInfo, tableReport, posmReport, giftReport
 
 class outletInfoForm(forms.ModelForm):
-    outlet_Name = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-create-info', 
-													'placeholder':"Tên outlet *"}))
+    outlet_Name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Tên outlet *"}))
+    type = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Loại outlet *"}))
+    outlet_address = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Địa chỉ outlet *"}))
+
     class Meta:
         model = outletInfo
-        fields = ("province", "type","area", 
-                    "outlet_address", "outlet_Name",
+        fields = ("type", "outlet_address", 
+                    "outlet_Name",
                  )
 
     def __init__(self, *args, **kwargs):

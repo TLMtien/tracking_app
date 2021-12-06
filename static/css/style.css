@@ -2,50 +2,46 @@
     font-family: Heserbit;
     src: url(/fonts/heserbit.ttf);
 }
+
 @font-face {
     font-family: Heserbol;
     src: url(/fonts/heserbol.ttf);
 }
+
 @font-face {
     font-family: Heserita;
     src: url(/fonts/heserita.ttf);
 }
+
 @font-face {
     font-family: Heserreg;
     src: url(/fonts/heserreg.ttf);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: inherit;
 }
 
-body{
-    background: #72c788;  
+body {
+    background: #72c788;
 }
 
 html {
     box-sizing: border-box;
     font-family: 'Roboto Slab', serif;
-    
 }
 
-::selection{
-    background:#05F22B;
-    color:#fff;
-  }
+::selection {
+    background: #05F22B;
+    color: #fff;
+}
 
 :root {
     --color-primary: #1F6C2F;
-    --color-bg: linear-gradient(135.28deg, 
-    rgba(12, 158, 49, 0.58) 16.86%, 
-    rgba(11, 149, 41, 0.63) 16.87%, 
-    rgba(8, 202, 62, 0.66) 37.54%, 
-    rgba(0, 203, 135, 0.89) 53.65%, 
-    rgba(11, 164, 47, 0.74) 66.05%);
+    --color-bg: linear-gradient(135.28deg, rgba(12, 158, 49, 0.58) 16.86%, rgba(11, 149, 41, 0.63) 16.87%, rgba(8, 202, 62, 0.66) 37.54%, rgba(0, 203, 135, 0.89) 53.65%, rgba(11, 164, 47, 0.74) 66.05%);
     --bg-btn: linear-gradient(90deg, #BAF4C4 8.8%, #76E051 94.19%);
     --shadow: linear-gradient(92.33deg, #95DAA4 8.23%, #F1F1F1 42%, #7DFF92 67.44%, #05F22B 92.44%);
 }
@@ -67,7 +63,7 @@ html {
     opacity: 0.8;
 }
 
-.btn + .btn {
+.btn+.btn {
     margin-left: 16px;
 }
 
@@ -105,7 +101,6 @@ html {
     position: relative;
     max-width: 480px;
     margin: 0 auto;
-    
 }
 
 .container {
@@ -120,8 +115,8 @@ html {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    overflow: auto;
 }
-
 
 .row {
     width: 100%;
@@ -139,6 +134,7 @@ html {
     width: 200px;
     object-fit: cover;
 }
+
 
 /* main */
 
@@ -198,23 +194,23 @@ html {
     border-radius: 8px;
 }
 
-.main .box-check:hover input ~ .checkmark {
+.main .box-check:hover input~.checkmark {
     background-color: #ccc;
-  }
+}
 
-.main .box-check input:checked ~ .checkmark {
+.main .box-check input:checked~.checkmark {
     background-color: #05F22B;
-  }
+}
 
 .main .box-check .checkmark:after {
     content: "";
     position: absolute;
     display: none;
-  }
+}
 
-.box-check input:checked ~ .checkmark:after {
+.box-check input:checked~.checkmark:after {
     display: block;
-  }
+}
 
 .main .box-check .checkmark:after {
     left: 9px;
@@ -226,17 +222,20 @@ html {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
+}
 
 .main .box-check .checkbox-link {
- color: #fff;
-}
-.main .box-check .checkbox-link:hover {
- color: #05F22B;
+    color: #fff;
 }
 
+.main .box-check .checkbox-link:hover {
+    color: #05F22B;
+}
+
+
 /* =========Modal========= */
-.modal{
+
+.modal {
     position: fixed;
     top: 0;
     right: 0;
@@ -258,14 +257,16 @@ html {
     border: 2px solid #05F22B;
     box-shadow: 1px 1px 5px #7DFF92;
     width: 300px;
-    max-width: calc(100% - 32px); /*cách vào 2 bên khi thu nhỏ */
+    max-width: calc(100% - 32px);
+    /*cách vào 2 bên khi thu nhỏ */
     min-height: 250px;
     position: relative;
     border-radius: 0 10px 0 10px;
-    animation: modalFadeIn ease 0.9s; /* gọi animation */
+    animation: modalFadeIn ease 0.9s;
+    /* gọi animation */
 }
 
-.modal-header i{
+.modal-header i {
     margin-right: 16px;
 }
 
@@ -276,7 +277,7 @@ html {
     color: #fff;
     padding: 8px;
     cursor: pointer;
-    background:rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     border-radius: 50%;
     border: 2px solid #fff;
 }
@@ -298,7 +299,6 @@ html {
     text-align: justify;
 }
 
-
 .modal-footer {
     padding: 12px;
     text-align: right;
@@ -313,7 +313,9 @@ html {
     font-weight: bold;
 }
 
+
 /* Tạo keyframe cho animation */
+
 @keyframes modalFadeIn {
     from {
         opacity: 0;
@@ -341,11 +343,12 @@ html {
     line-height: 1.5;
 }
 
-.main .form-undo .desc-one{
+.main .form-undo .desc-one {
     color: #fff;
     margin-bottom: 30px;
 }
-.main .form-undo .desc-two{
+
+.main .form-undo .desc-two {
     color: #fff;
     width: 200px;
     margin: auto;
@@ -355,6 +358,7 @@ html {
     margin-top: 50px;
     text-align: center;
 }
+
 .main .form-undo .box-icon .icon-undo {
     text-decoration: none;
     color: #fff;
@@ -373,6 +377,7 @@ html {
 .main .form-undo .box-icon .icon-undo i {
     font-weight: 600;
 }
+
 
 /* Login Page*/
 
@@ -454,21 +459,24 @@ html {
     font-family: 'Roboto Slab', serif;
 }
 
+
 /* Success Page */
 
 .app .container .box-success {
     text-align: center;
     margin: 50% auto;
-    background:rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
     width: 100%;
     padding: 20px;
     border-radius: 10px;
 }
-.app .container .box-success img{
+
+.app .container .box-success img {
     width: 150px;
     margin-bottom: 40px;
 }
-.app .container .box-success h3{
+
+.app .container .box-success h3 {
     font-size: 24px;
     color: #1F6C2F;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
@@ -485,12 +493,13 @@ html {
 }
 
 .app .container .next-outlet:hover {
-    color: #05F22B;  
+    color: #05F22B;
 }
 
 .app .container .next-outlet i {
     font-size: 15px;
 }
+
 
 /* Home Outlet Page*/
 
@@ -518,17 +527,36 @@ html {
     width: 180px;
 }
 
-.homeoutlet .header .profile-user img{
+.homeoutlet .header .profile-user img {
     height: 60px;
     border-radius: 50%;
 }
 
-.homeoutlet .main {
-    display: block;
-    margin-top: -50px !important;
+.homeoutlet .icon-back {
+    margin-bottom: 20px;
+    margin-top: -30px !important;
 }
 
-.homeoutlet .main .main-top{
+.homeoutlet .icon-back a {
+    text-decoration: none;
+}
+
+.homeoutlet .icon-back a i {
+    font-weight: 600;
+    font-size: 24px;
+    color: #1F6C2F;
+}
+
+.homeoutlet .icon-back a i:hover {
+    opacity: 0.8;
+}
+
+.homeoutlet .main {
+    display: block;
+    /* margin-top: -30px !important; */
+}
+
+.homeoutlet .main .main-top {
     width: 100%;
 }
 
@@ -536,6 +564,7 @@ html {
     position: relative;
     width: 100%;
 }
+
 .homeoutlet .main .main-top .search-box input {
     padding: 10px;
     width: 100%;
@@ -544,12 +573,12 @@ html {
     outline: 0;
     border: 0;
     color: #fff;
-    
 }
 
 .homeoutlet .main .main-top .search-box input::placeholder {
     color: #fff;
 }
+
 .homeoutlet .main .main-top .search-box i {
     color: #fff;
     position: absolute;
@@ -565,6 +594,7 @@ html {
     justify-content: space-around;
     margin-top: 15px;
 }
+
 .homeoutlet .main .main-top .filter-box select {
     width: 100%;
     padding: 8px;
@@ -574,14 +604,14 @@ html {
     outline: 0;
 }
 
-select + select {
+select+select {
     margin-left: 10px;
 }
 
 .homeoutlet .main .main-table {
     width: 100%;
     margin-top: 60px;
-    height: 100vh;
+    /* height: 100vh; */
     overflow: auto;
     padding: 10px;
 }
@@ -642,7 +672,7 @@ select + select {
 
 .homeoutlet .main .main-table .box-button .btn-close {
     padding: 8px 10px;
-    border-radius:5px;
+    border-radius: 5px;
     border: 1px solid #1F6C2F;
     background: transparent;
     cursor: pointer;
@@ -650,9 +680,10 @@ select + select {
     transition: all 0.5s;
     box-shadow: 1px 1px 3px #1F6C2F;
 }
+
 .homeoutlet .main .main-table .box-button .btn-checkin {
     padding: 8px 10px;
-    border-radius:5px;
+    border-radius: 5px;
     border: 1px solid #1F6C2F;
     background: #1F6C2F;
     cursor: pointer;
@@ -670,38 +701,20 @@ select + select {
     opacity: 0.8;
 }
 
-/* modal create oulet */
 
-.create-outlet {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(77, 77, 77, .7);
-    transition: all .4s;
-}
-
-.create-outlet:target {
-    visibility: visible;
-    opacity: 1;
-}
+/* create oulet */
 
 .create-outlet__content {
     border-radius: 4px;
     position: relative;
-    width: 300px;
-    max-width: 90%;
+    width: 90%;
+    max-width: 100%;
     background: #fff;
     padding: 1em 2em;
     text-align: center;
     border: 1px solid #1F6C2F;
     box-shadow: 0px 0px 5px #1F6C2F;
+    margin: auto;
 }
 
 .create-outlet_body img {
@@ -715,7 +728,7 @@ select + select {
 
 .create-outlet__footer .btn-add {
     padding: 8px 15px;
-    border-radius:5px;
+    border-radius: 5px;
     border: 1px solid #1F6C2F;
     background: #1F6C2F;
     cursor: pointer;
@@ -731,48 +744,23 @@ select + select {
     color: #d02d2c;
 }
 
-.create-outlet__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #585858;
-    text-decoration: none;
-}
 
-/* Modal Create Info Outlet */
-.create-info-outlet {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(77, 77, 77, .7);
-    transition: all .4s;
-}
-
-.create-info-outlet:target {
-    visibility: visible;
-    opacity: 1;
-}
+/* Create Info Outlet */
 
 .create-info-outlet__content {
     border-radius: 10px;
     position: relative;
-    width: 300px;
-    max-width: 90%;
+    width: 90%;
+    max-width: 100%;
     background: #fff;
     padding: 1em 2em;
     text-align: center;
     border: 1px solid #1F6C2F;
     box-shadow: 0px 0px 5px #1F6C2F;
+    margin: auto;
 }
 
-.create-info-outlet_body .form-create-info{
+.create-info-outlet_body .form-create-info {
     width: 300px;
     margin: 0 auto;
 }
@@ -780,13 +768,14 @@ select + select {
 .create-info-outlet_body .title {
     color: #333;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 
 .create-info-outlet_body .form-create-info .input-create-info {
-    margin-bottom: 10px;
-    width: 240px;
+    margin-bottom: 20px;
+    width: 300px;
 }
+
 .create-info-outlet_body .form-create-info .input-create-info input {
     width: 100%;
     padding: 8px;
@@ -800,13 +789,14 @@ select + select {
 }
 
 .create-info-outlet__footer {
-    text-align: center;
     margin-top: 2rem;
+    text-align: center;
+    width: 300px;
 }
 
 .create-info-outlet__footer .btn-confirm {
     padding: 8px 15px;
-    border-radius:5px;
+    border-radius: 5px;
     border: 1px solid #1F6C2F;
     background: #1F6C2F;
     cursor: pointer;
@@ -822,51 +812,35 @@ select + select {
     color: #d02d2c;
 }
 
-.create-info-outlet__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #585858;
-    text-decoration: none;
-}
-/* Modal Create finish Outlet */
-.create-finish-outlet {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(77, 77, 77, .7);
-    transition: all .4s;
-}
 
-.create-finish-outlet:target {
-    visibility: visible;
-    opacity: 1;
-}
+/* Create finish Outlet */
 
 .create-finish-outlet__content {
     border-radius: 10px;
     position: relative;
-    width: 300px;
-    max-width: 90%;
+    width: 90%;
+    max-width: 100%;
     background: #fff;
     padding: 1em 2em;
     text-align: center;
     border: 1px solid #1F6C2F;
     box-shadow: 0px 0px 5px #1F6C2F;
     /* height: 200px; */
+    margin: auto;
+}
+
+.create-finish-outlet__content .create-finish-outlet_success .outlet-name {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .create-finish-outlet__content .create-finish-outlet_success img {
     width: 100px;
     object-fit: cover;
 }
+
 .create-finish-outlet__content .create-finish-outlet_success h3 {
     font-size: 20px;
     margin-top: 20px;
@@ -874,13 +848,7 @@ select + select {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.create-finish-outlet__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #585858;
-    text-decoration: none;
-}
+
 /* Report Page */
 
 .homeoutlet .main .box-report .box-center {
@@ -891,20 +859,20 @@ select + select {
 .homeoutlet .main .box-report .box-center button {
     background: #1F6C2F;
     color: #fff;
-    padding: 30px; 
-    border-radius:5px;
+    padding: 30px;
+    border-radius: 5px;
     box-shadow: 2px 2px 5px #1F6C2F;
     width: 100%;
     border: 1px solid #1F6C2F;
     cursor: pointer;
 }
 
-  .homeoutlet .main .box-report .box-center button:disabled,
-  .homeoutlet .main .box-report .box-center button[disabled]{
-  border: 1px solid #999999;
-  background-color: rgba(31, 108, 47, 0.26);
-  color: #666666;
-  cursor: not-allowed;
+.homeoutlet .main .box-report .box-center button:disabled,
+.homeoutlet .main .box-report .box-center button[disabled] {
+    border: 1px solid #999999;
+    background-color: rgba(31, 108, 47, 0.26);
+    color: #666666;
+    cursor: not-allowed;
 }
 
 .homeoutlet .main .box-report .box-center a {
@@ -915,12 +883,10 @@ select + select {
 }
 
 
-
-
 /* Footer */
 
 .footer {
-    position:fixed;
+    position: fixed;
     bottom: 0;
     left: 0;
     margin-bottom: 20px;
@@ -947,24 +913,18 @@ select + select {
 }
 
 @media screen and (max-width: 512px) {
-
     .header {
         margin-top: 20px;
         margin-bottom: 40px;
     }
-
     .footer .footer-content {
         display: block;
         text-align: center;
     }
-
     .footer .footer-content img {
         margin-bottom: 5px;
     }
-
     .homeoutlet .main .main-top .filter-box {
         width: 100%;
     }
-    
 }
-

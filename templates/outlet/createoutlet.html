@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Outlet</title>
+    <title>Outlet Detail</title>
 
     <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
     <!-- CSS -->
@@ -23,38 +23,23 @@
                         <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
                     </div>
                 </div>
-    
+                <div class="icon-back">
+                    <a href="{% url 'listoutlet' %}"><i class="ti-angle-double-left"></i></a>
+                </div>
                 <!-- Main -->
                 <div class="row main">
                     <div class="main-top">
-                        <div class="search-box">
-                            <input type="search" placeholder="Tìm kiếm">
-                            <i class="ti-search"></i>
+                        <div class="create-outlet__content">
+                            <div class="create-outlet_body">
+                                <img src="{% static '/img/logo-hnk.png' %}" alt="logo">
+                            </div>
+                    
+                            <div class="create-outlet__footer">
+                                <a href="{% url 'outletCreate' %}" type="button" class="btn btn-add">
+                                    Tạo outlet mới <i class="ti-plus"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="filter-box">
-                            
-                            <select name="calc_shipping_provinces" required="">
-                                <option value="">Tỉnh / Thành phố</option>
-                            </select>
-                            <select name="calc_shipping_district" required="">
-                            <option value="">Quận / Huyện</option>
-                            </select>
-                            <input class="billing_address_1" name="" type="hidden" value="">
-                            <input class="billing_address_2" name="" type="hidden" value="">
-                        </div>
-                    </div>
-                    <div class="main-table">
-                        {% if list_outlet %}
-                            {% for outlet in list_outlet %} 
-
-                        <div class="table-list">
-                            <a href={{outlet.id}}>Outlet {{outlet.id}}</a>
-                        </div>
-                        {% endfor %}
-                        {% else %}
-                        <p>None</p>
-                        {% endif %}
-                        
                     </div>
                 </div>
 

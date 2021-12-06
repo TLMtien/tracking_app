@@ -13,15 +13,15 @@ def report(instance, filename):
     return 'report/{filename}'.format(filename=filename)
 
 class outletInfo(models.Model): 
-    SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     province = models.CharField(max_length=255, blank=True, null=True)
     type = models.CharField(max_length=255, blank=True, null=True)
     area = models.CharField(max_length=255, blank=True, null=True)
     outlet_address = models.CharField(max_length=255)
     outlet_Name = models.CharField(max_length=255)
     #slug = models.SlugField()
+    ouletID = models.CharField(max_length=255, blank=True, null=True)
     created = models.DateField(auto_now_add=True)
-    
+    time = models.TimeField(auto_now=True)
     def __str__(self):
         return "{} - {}".format(self.area, self.outlet_Name)
     

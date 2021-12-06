@@ -23,7 +23,9 @@
                         <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
                     </div>
                 </div>
-    
+                <div class="icon-back">
+                    <a href="{% url 'listoutlet' %}"><i class="ti-angle-double-left"></i></a>
+                </div>
                 <!-- Main -->
                 <div class="row main">
                     <div class="main-top">
@@ -53,7 +55,7 @@
                                     <i class='ti-location-pin'></i> Địa chỉ : {{ object.outlet_address }}
                                 </span><br>
                                 <span class="date-outlet">
-                                    <i class='ti-timer'></i> Thời gian tạo : {{ object.created }}
+                                    <i class='ti-timer'></i> Thời gian tạo : {{ object.time }}, {{ object.created }}
                                 </span><br>
                                 <span class="type-outlet">
                                     <i class='ti-clip'></i> Loại outlet : {{ object.type }}
@@ -62,83 +64,11 @@
                             
                         </div>
                         <div class="box-button">
-                            <a href="#create-outlet"class="btn btn-close">Đóng cửa</a>
+                            <a href="{% url 'create' %}"class="btn btn-close">Đóng cửa</a>
                             <a href="{% url 'pagereport' %}" class="btn btn-checkin">Check - in</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Modal Create Outlet-->
-                <div id="create-outlet" class="create-outlet">
-                    <div class="create-outlet__content">
-                        <div class="create-outlet_body">
-                            <img src="{% static '/img/logo-hnk.png' %}" alt="logo">
-                        </div>
-                
-                        <div class="create-outlet__footer">
-                            <a href="#create-info-outlet" type="button" class="btn btn-add">
-                                Tạo outlet mới <i class="ti-plus"></i>
-                            </a>
-                        </div>
-                
-                        <a href="#" class="create-outlet__close">&times;</a>
-                    </div>
-                </div>
-                <!-- /Modal Create Outlet-->
-
-                <!-- Modal Create Info Outlet-->
-                <div id="create-info-outlet" class="create-info-outlet">
-                    <div class="create-info-outlet__content">
-                        <div class="create-info-outlet_body">
-                            <p class="title">Thông Tin Outlet</p>
-                            <form action="{% url 'outletCreate' %}" method="POST" class="form-create-info">
-                                {% csrf_token %} 
-                                
-                                    {% comment %} <input type="text" placeholder="Tên outlet *">  {% endcomment %}
-                                    {{form.outlet_Name}}
-                                
-                                <div class="input-create-info">
-                                    <input type="text" placeholder="Địa chỉ outlet *">
-                                    {{form.outlet_address}}
-                                </div>
-                                <div class="input-create-info">
-                                    {% comment %} <input type="datetime-local" value=""> {% endcomment %}
-                                    {{form.outlet_Name}}
-                                </div>
-                                <div class="input-create-info">
-                                    {% comment %} <input type="text" placeholder="Loại outlet *"> {% endcomment %}
-                                    {{form.type}}
-                                </div>
-                                <div class="input-create-info">
-                                    {% comment %} <input type="text" placeholder="Loại outlet *"> {% endcomment %}
-                                    {{form.type}}
-                                </div>
-                            </form>
-                        </div>
-                
-                        <div class="create-info-outlet__footer">
-                            <a href="#create-finish-outlet" type="submit" class="btn btn-confirm">
-                                Xác nhận <i class="ti-check-box"></i>
-                            </a>
-                        </div>
-                
-                        <a href="#" class="create-info-outlet__close">&times;</a>
-                    </div>
-                </div>
-                <!-- /Modal Create Info Outlet-->
-                <!-- Modal Create Outlet Finish -->
-                <div id="create-finish-outlet" class="create-finish-outlet">
-                    <div class="create-finish-outlet__content">
-                        <div class="create-finish-outlet_body">
-                            <div class="create-finish-outlet_success">
-                                <img src="{% static '/img/success.png' %}" alt="success">
-                                <h3>Đổi mật khẩu thành công</h3>
-                            </div>    
-                        </div>
-                        <a href="#" class="create-finish-outlet__close">&times;</a>
-                    </div>
-                </div>
-                <!-- /Modal Create Info Outlet-->
         </div>
     </div>
 
