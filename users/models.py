@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from outlet.models import Campain
 # Create your models here.
 
 TIGER_TP= 'tigerTP'
@@ -26,7 +27,7 @@ CHOICES_brand = [
 
 class SalePerson(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    brand = models.CharField(choices = CHOICES_brand , default = HEINEKEN, max_length=200)
+    brand = models.ForeignKey(Campain , on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200, null=True, blank=True)
     province = models.CharField(max_length=200, null=True, blank=True)
     outlet = models.CharField(max_length=200, null=True, blank=True)

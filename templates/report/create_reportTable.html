@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Number</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+<body>
+    <div class="app">
+        <div class="container homeoutlet">
+                <!-- Header -->
+                <div class="row header">    
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                    </div>
+                    <div class="profile-user"> 
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    </div>
+                </div>
+                <div class="icon-back">
+                    <a href="{% url 'report-sales' %}"><i class="ti-angle-double-left"></i></a>
+                </div>
+                <!-- Main -->
+                <div class="row main">
+                    <form action="" method="" class="listbox">
+                        {% csrf_token %} 
+                        <p class="title">Báo cáo bàn</p>
+                        <table class="table-list" style="width:100%">
+                            <tr>
+                                <th>Danh mục</th>
+                                <th>Số lượng</th>
+                                <th>Tổng cộng</th>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Tổng bàn</td>
+                                <td class="td-total">{{total_table}}</td>
+                                <td class="td-total">{{total_table}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Tổng bàn của Brand</td>
+                                <td class="td-total">{{brand_table}}</td>
+                                <td class="td-total">{{brand_table}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Bàn của HVN</td>
+                                
+                                <td class="td-total">{{HVN_table}}</td>
+                                <td class="td-total">{{HVN_table}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Bàn khác(bia)</td>
+                                <td class="td-total">{{other_beer_table}}</td>
+                                <td class="td-total">{{other_beer_table}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Bàn khác</td>
+                                <td class="td-total">{{other_table}}</td>
+                                <td class="td-total">{{other_table}}</td>
+                            </tr>
+                            
+                        </table>
+                        <p class="noted">*Nhập số lượng bán vào ô “số lượng” </p>
+                        <div class="box-center">
+                            <a href="{% url 'customer-access' %}" class="btn btn-confirm" >Tiếp tục</a>
+                           
+                        </div>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    
+    <script src="{% static '/js/app.js' %}"></script>
+</body>
+</html>

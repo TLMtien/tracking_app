@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report</title>
 
-    
     <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
     <!-- CSS -->
     <link rel="stylesheet" href="{% static '/css/style.css' %} ">
@@ -24,22 +23,24 @@
                         <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
                     </div>
                 </div>
-    
+                {% comment %} <div class="icon-back">
+                    <a href="./outletdetails.html"><i class="ti-angle-double-left"></i></a>
+                </div> {% endcomment %}
                 <!-- Main -->
                 <div class="row main">
-                    <div class="box-report">
-                        <div class="box-center">
-                            <button type="button"><a href="#">Báo cáo POSM</a></button>
-                        </div>
-                        <div class="box-center">
-                            <button type="button" disabled><a href="#">Báo cáo quà tặng</a></button>
-                        </div>
-                        <div class="box-center">
-                            <button type="button" disabled><a href="#">Báo cáo bán hàng</a></button>
-                        </div>
-                        <div class="box-center">
-                            <button type="button" disabled><a href="#">Báo cáo cuối ngày</a></button>
-                        </div>
+                    <div class="box-report" id="boxReport">
+                        
+                            <a href="#"><button type="button" id="report-posm" class="btn-report active">Báo cáo POSM</button></a>
+                        
+                       
+                            <a href="{% url 'quantity-gift' %}"><button type="button" id="report-gift" class="btn-report ">Báo cáo quà tặng</button></a>
+                        
+                        
+                            <a href="{% url 'report-sales' %}"><button type="button" id="report-sale" class="btn-report" >Báo cáo bán hàng</button></a>
+                      
+                        
+                            <a href="#"><button type="button" id="report-time" class="btn-report" >Báo cáo cuối ngày</button></a>
+                      
                     </div>
                 </div>
 
@@ -47,6 +48,21 @@
     </div>
 
     <!-- JS -->
+    <script>/* ============Active Report============= */
+        const room  = document.querySelector('.box-report');
+        const btns = document.querySelectorAll('.btn-report'); 
+
+        room.addEventListener('click', e => {
+
+        btns.forEach(btn => {
+
+            if(btn.getAttribute('id') === e.target.getAttribute('id'))
+            btn.classList.add('active');
+            else
+            btn.classList.remove('active');
+            });
+        });
+    </script>
     <script src="{% static '/js/app.js' %}"></script>
 </body>
 </html>

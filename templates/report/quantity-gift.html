@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity Gift</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+<body>
+    <div class="app">
+        <div class="container homeoutlet">
+                <!-- Header -->
+                <div class="row header">    
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                    </div>
+                    <div class="profile-user"> 
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    </div>
+                </div>
+                <div class="icon-back">
+                    <a href="{% url 'pagereport'%}"><i class="ti-angle-double-left"></i></a>
+                </div>
+                <!-- Main -->
+                <div class="row main">
+                    <div class="box-report">
+                        
+                        <a href="{% url 'listgift-received' %}"><button type="button" id="btn-1" class="btn-report active">Số lượng quà nhận đầu ca</button></a>
+                        
+                        
+                        <a href="{% url 'listgift-sent' %}"><button type="button" id="btn-2" class="btn-report">Số lượng quà phát</button></a>
+                        
+                        
+                        <a href="{% url 'listgift-remain' %}"><button type="button" id="btn-3" class="btn-report">Số lượng quà tồn</button></a>
+                        
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script>/* ============Active Report============= */
+        const room  = document.querySelector('.box-report');
+        const btns = document.querySelectorAll('.btn-report'); 
+
+        room.addEventListener('click', e => {
+
+        btns.forEach(btn => {
+
+            if(btn.getAttribute('id') === e.target.getAttribute('id'))
+            btn.classList.add('active');
+            else
+            btn.classList.remove('active');
+            });
+        });
+    </script>
+    <script src="./js/app.js"></script>
+</body>
+</html>

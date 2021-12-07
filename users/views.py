@@ -89,12 +89,12 @@ def loginPage(request):
 
 login_required
 def page_user(request):
-	if request.user.is_salePerson:
-		outlet = outletInfo.objects.filter(SP=request.user).count()
-		if outlet < 1:
-			return redirect('passwordchange')
-	if request.user.is_HVN or request.user.is_HVNVip:
-		return HttpResponse('ko')
+	# if request.user.is_salePerson:
+	# 	outlet = outletInfo.objects.filter(SP=request.user).count()
+	# 	if outlet < 1:
+	# 		return redirect('passwordchange')
+	# if request.user.is_HVN or request.user.is_HVNVip:
+	# 	return HttpResponse('ko')
 	
 	return redirect('listoutlet')
 

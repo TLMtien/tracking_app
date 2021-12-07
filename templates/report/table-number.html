@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Number</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+<body>
+    <div class="app">
+        <div class="container homeoutlet">
+                <!-- Header -->
+                <div class="row header">    
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                    </div>
+                    <div class="profile-user"> 
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    </div>
+                </div>
+                <div class="icon-back">
+                    <a href="{% url 'report-sales' %}"><i class="ti-angle-double-left"></i></a>
+                </div>
+                <!-- Main -->
+                <div class="row main">
+                    <form action="{% url 'table-number' %}" method="POST" class="listbox">
+                        {% csrf_token %} 
+                        <p class="title">Báo cáo bàn</p>
+                        <table class="table-list" style="width:100%">
+                            <tr>
+                                <th>Danh mục</th>
+                                <th>Số lượng</th>
+                                <th>Tổng cộng</th>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Tổng bàn</td>
+                                <td class="td-number">
+                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
+                                    {{form.total_table}}
+                                </td>
+                                <td class="td-total"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Tổng bàn của Brand</td>
+                                <td class="td-number">
+                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
+                                    {{form.brand_table}}
+                                </td>
+                                <td class="td-total"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Bàn của HVN</td>
+                                <td class="td-number">
+                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
+                                    {{form.HVN_table}}
+                                </td>
+                                <td class="td-total"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Bàn khác(bia)</td>
+                                <td class="td-number">
+                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
+                                    {{form.other_beer_table}}
+                                </td>
+                                <td class="td-total"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Bàn khác</td>
+                                <td class="td-number">
+                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
+                                    {{form.other_table}}
+                                </td>
+                                <td class="td-total"></td>
+                            </tr>
+                            
+                        </table>
+                        <p class="noted">*Nhập số lượng bán vào ô “số lượng” </p>
+                        <div class="box-center">
+                            <input type="submit" class="btn btn-confirm" value="Tiếp tục">
+                        </div>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    
+    <script src="{% static '/js/app.js' %}"></script>
+</body>
+</html>

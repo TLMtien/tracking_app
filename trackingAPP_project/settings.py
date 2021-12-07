@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'outlet.apps.OutletConfig',
+    'report.apps.ReportConfig',
 ]
 
 MIDDLEWARE = [

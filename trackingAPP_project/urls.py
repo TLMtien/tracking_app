@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('outlet/', include('outlet.urls')),
+    path('report/', include('report.urls')),
     path('', TemplateView.as_view(template_name="users/index.html"), name='index'),
     path('undo/', TemplateView.as_view(template_name="users/undo.html"), name='undo'),
 ]
