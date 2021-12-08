@@ -141,8 +141,8 @@ def gift_receiveReport(request):
             report.gift3_received = sum(gift3_received, report.gift3_received)
             report.save()
             return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 'gift2_received':gift2_received,
-                    'gift3_received':gift3_received, 'gift1_remaining':report.gift1_remaining,
-                    'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining })
+                    'gift3_received':gift3_received, 'gift1_remaining':report.gift1_received,
+                    'gift2_remaining': report.gift2_received, 'gift3_remaining': report.gift3_received })
     else:
         form = gift_ReceiveReportForm()
         return render(request,"report/listgift-received.html", {'form':form})
