@@ -81,7 +81,6 @@ class tableReport(models.Model):
 
 class consumerApproachReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     consumers_approach = models.CharField(max_length=255)
     consumers_brough = models.CharField(max_length=255)
     Total_Consumers =  models.CharField(max_length=255)
@@ -96,37 +95,32 @@ class report_sale(models.Model):
 
 class giftReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
-    gift1_received =  models.IntegerField(default=0)
-    gift2_received =  models.IntegerField(default=0)
-    gift3_received =  models.IntegerField(default=0)
-    gift4_received =  models.IntegerField(default=0)
-    gift5_received =  models.IntegerField(default=0)
+    
+    gift1_received =  models.CharField(max_length=255, default='0')
+    gift2_received =  models.CharField(max_length=255, default='0')
+    gift3_received =  models.CharField(max_length=255, default='0', blank=True)
+    
 
-    gift1_given = models.IntegerField(default=0)
-    gift2_given = models.IntegerField(default=0)
-    gift3_given = models.IntegerField(default=0)
-    gift4_given = models.IntegerField(default=0)
-    gift5_given = models.IntegerField(default=0)
+    gift1_given = models.CharField(max_length=255, default='0', blank=True)
+    gift2_given = models.CharField(max_length=255, default='0', blank=True)
+    gift3_given = models.CharField(max_length=255, default='0', blank=True)
+    
 
     gift1_remaining = models.CharField(max_length=50, null=True, blank=True)
     gift2_remaining = models.CharField(max_length=50, null=True, blank=True)
     gift3_remaining = models.CharField(max_length=50, null=True, blank=True)
-    gift4_remaining = models.CharField(max_length=50, null=True, blank=True)
-    gift5_remaining = models.CharField(max_length=50, null=True, blank=True)
-
+    
     created = models.DateField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         self.gift1_remaining = deduct(self.gift1_received , self.gift1_given)
         self.gift2_remaining = deduct(self.gift2_received , self.gift2_given)
         self.gift3_remaining = deduct(self.gift3_received , self.gift3_given)
-        self.gift4_remaining = deduct(self.gift4_received , self.gift4_given)
-        self.gift5_remaining = deduct(self.gift5_received , self.gift5_given)
+        
         super(giftReport, self).save(*args, **kwargs)
     
     def __str__(self):
-        return "gift1{} - gift2{} - gift3{} - gift4{} - gift{}".format(self.gift1_remaining, self.gift2_remaining, self.gift3_remaining, self.gift4_remaining, self.gift5_remaining)
+        return "gift1{} - gift2{} - gift3{}".format(self.gift1_remaining, self.gift2_remaining, self.gift3_remaining)
 
 
 class overallReport(models.Model):

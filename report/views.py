@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from outlet.models import tableReport, report_sale
-from outlet.forms import tableReportForm, reportSaleForm
+from outlet.models import tableReport, report_sale, consumerApproachReport, giftReport
+from outlet.forms import tableReportForm, reportSaleForm, consumerApproachReportForm, gift_ReceiveReportForm, gift_givenReportForm
 from django.views.generic import  DayArchiveView
 import datetime
 # Create your views here.
@@ -80,3 +80,85 @@ def reportSale(request):
     else:
         form = reportSaleForm()
         return render(request,"report/sales.html", {'form':form})
+
+
+def report_customer(request):
+    if request.method == "POST":
+        form = consumerApproachReportForm(request.POST,is_salePerson=request.user.is_salePerson)
+        if form.is_valid():
+            consumers_approach = form.cleaned_data.get('consumers_approach')
+            consumers_brough = form.cleaned_data.get('consumers_brough')
+            Total_Consumers = form.cleaned_data.get('Total_Consumers')
+            
+            
+            report = consumerApproachReport.objects.filter(created = datetime.date.today(), SP = request.user).count()
+
+            if report < 1:
+                p, created = consumerApproachReport.objects.get_or_create(SP=request.user, consumers_approach=consumers_approach, 
+                                                    consumers_brough=consumers_brough, Total_Consumers=Total_Consumers)
+                p.save()
+                return render(request,"report/create-report-customer.html", {'consumers_approach':consumers_approach, 
+                            'consumers_brough':consumers_brough,'Total_Consumers':Total_Consumers})
+
+           
+            report = consumerApproachReport.objects.get(created = datetime.date.today(), SP = request.user)
+            
+            report.consumers_approach = sum(consumers_approach, report.consumers_approach)
+            report.consumers_brough = sum(consumers_brough, report.consumers_brough)
+            report.Total_Consumers = sum(Total_Consumers, report.Total_Consumers)
+            
+            report.save()
+            return render(request,"report/report-total-consumer.html",{'sum_consumers_approach':report.consumers_approach, 
+                'consumers_approach':consumers_approach, 'sum_consumers_brough': report.consumers_brough, 'consumers_brough':consumers_brough, 
+                'sum_Total_Consumers':report.Total_Consumers, 'Total_Consumers': Total_Consumers})
+        
+    else:
+        form = consumerApproachReportForm()
+        return render(request,"report/customer-access.html", {'form':form})
+
+
+def gift_receiveReport(request):
+    if request.method == "POST":
+        form = gift_ReceiveReportForm(request.POST,is_salePerson=request.user.is_salePerson)
+        if form.is_valid():
+            gift1_received = form.cleaned_data.get('gift1_received')
+            gift2_received = form.cleaned_data.get('gift2_received')
+            gift3_received = form.cleaned_data.get('gift3_received')   
+
+            p, created = giftReport.objects.get_or_create(SP=request.user, gift1_received=gift1_received, 
+                                                    gift2_received=gift2_received, gift3_received=gift3_received)
+            p.save()
+            return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 'gift2_received':gift2_received,
+                'gift3_received':gift3_received, 'gift1_remaining':p.gift1_remaining,
+                'gift2_remaining': p.gift2_remaining, 'gift3_remaining': p.gift3_remaining })
+    else:
+        form = gift_ReceiveReportForm()
+        return render(request,"report/listgift-received.html", {'form':form})
+
+
+def gift_givenReport(request):
+    if request.method == "POST":
+        form = gift_givenReportForm(request.POST,is_salePerson=request.user.is_salePerson)
+        if form.is_valid():
+            gift1_given = form.cleaned_data.get('gift1_given')
+            gift2_given = form.cleaned_data.get('gift2_given')
+            gift3_given = form.cleaned_data.get('gift3_given')   
+
+            report = giftReport.objects.get(created = datetime.date.today(), SP = request.user)
+            report.gift1_given = sum(gift1_given, report.gift1_given)
+            report.gift2_given = sum(gift2_given, report.gift2_given)
+            report.gift3_given = sum(gift3_given, report.gift3_given)
+            report.save()
+
+            return redirect('listgift-remain')
+    else:
+        form = gift_givenReportForm()
+        return render(request,"report/listgift-sent.html", {'form':form})
+
+def gift_remaining(request):
+    try:
+        report = giftReport.objects.get(created = datetime.date.today(), SP = request.user)
+        return render(request,'report/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
+            'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining})
+    except:
+        redirect('quantity-gift')

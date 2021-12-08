@@ -28,9 +28,8 @@
                 </div>
                 <!-- Main -->
                 <div class="row main">
-                    <form action=" " method="POST" class="listbox">
-                        {% csrf_token %} 
-                        <p class="title">Danh sách quà phát</p>
+                    <form action="#" method=""class="listbox">
+                        <p class="title">Danh sách quà nhận</p>
                         <table class="table-list" style="width:100%">
                             <tr>
                                 <th>Tên quà tặng</th>
@@ -39,33 +38,24 @@
                             </tr>
                             <tr>
                                 <td class="td-name">Móc chìa khóa 1</td>
-                                <td class="td-number">
-                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
-                                    {{form.gift1_given}}
-                                </td>
-                                <td class="td-total"></td>
+                                <td class="td-total">{{gift1_received}}</td>
+                                <td class="td-total">{{gift1_remaining}}</td>
                             </tr>
                             <tr>
                                 <td class="td-name">Móc chìa khóa 2</td>
-                                <td class="td-number">
-                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
-                                    {{form.gift2_given}}
-                                </td>
-                                <td class="td-total"></td>
+                                <td class="td-total">{{gift2_received}}</td>
+                                <td class="td-total">{{gift2_remaining}}</td>
                             </tr>
                             <tr>
                                 <td class="td-name">Móc chìa khóa 3</td>
-                                <td class="td-number">
-                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
-                                    {{form.gift3_given}}
-                                </td>
-                                <td class="td-total"></td>
+                                <td class="td-total">{{gift3_received}}</td>
+                                <td class="td-total">{{gift3_remaining}}</td>
                             </tr>
-
+                            
                         </table>
-                        <p class="noted">*Nhập số lượng bán vào ô “số lượng” </p>
+                        <
                         <div class="box-center">
-                            <input type="submit" class="btn btn-confirm" value="Xác nhận">
+                            <a href="{% url 'quantity-gift' %}" class="btn btn-confirm">Xác nhận</a>
                         </div>
                     </form>
                 </div>

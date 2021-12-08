@@ -1,8 +1,7 @@
-from django.db.models import query
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import overallReport, tableReport, outletInfo, giftReport
-from .forms import outletInfoForm, giftReportForm, tableReportForm
+from .forms import outletInfoForm
 from django.views.generic import DetailView, ListView, detail
 from users.models import SalePerson
 # Create your views here.

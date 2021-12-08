@@ -1,6 +1,6 @@
 from django import forms
 from django.db.models import fields
-from .models import outletInfo, tableReport, posmReport, giftReport, report_sale
+from .models import outletInfo, tableReport, posmReport, giftReport, report_sale, consumerApproachReport
 
 class outletInfoForm(forms.ModelForm):
     outlet_Name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Tên outlet *"}))
@@ -30,17 +30,32 @@ class reportSaleForm(forms.ModelForm):
         self.is_salePerson = kwargs.pop('is_salePerson',None)
         super(reportSaleForm, self).__init__(*args, **kwargs)
 
-class giftReportForm(forms.ModelForm):
+class gift_ReceiveReportForm(forms.ModelForm):
+    gift1_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
+    gift2_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
+    gift3_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
     class Meta:
         model = giftReport
-        fields = ("gift1_received", "gift2_received", "gift3_received", 
-                  "gift4_received", "gift5_received", "gift1_given", 
-                  "gift2_given", "gift3_given", "gift4_given" , 
-                  "gift5_given",
-                  )
+        fields = ("gift1_received", "gift2_received", 
+                    "gift3_received", 
+                 )
     def __init__(self, *args, **kwargs):
         self.is_salePerson = kwargs.pop('is_salePerson',None)
-        super(giftReportForm, self).__init__(*args, **kwargs)
+        super(gift_ReceiveReportForm, self).__init__(*args, **kwargs)
+
+class gift_givenReportForm(forms.ModelForm):
+    gift1_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
+    gift2_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
+    gift3_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
+    class Meta:
+        model = giftReport
+        fields = ("gift1_given", "gift2_given", 
+                    "gift3_given", 
+                 )
+    def __init__(self, *args, **kwargs):
+        self.is_salePerson = kwargs.pop('is_salePerson',None)
+        super(gift_givenReportForm, self).__init__(*args, **kwargs)
+
 
 class tableReportForm(forms.ModelForm):
     other_beer_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'})) 
@@ -59,4 +74,19 @@ class tableReportForm(forms.ModelForm):
         self.is_salePerson = kwargs.pop('is_salePerson',None)
         super(tableReportForm, self).__init__(*args, **kwargs)
 
+class consumerApproachReportForm(forms.ModelForm):
+    consumers_approach = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'})) 
+    consumers_brough = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'}))
+    Total_Consumers = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'}))
+   
+    class Meta:
+        model = tableReport
+        fields = (
+            "consumers_approach","consumers_brough",
+            "Total_Consumers",
+        )
+
+    def __init__(self, *args, **kwargs):
+        self.is_salePerson = kwargs.pop('is_salePerson',None)
+        super(consumerApproachReportForm, self).__init__(*args, **kwargs)
 
