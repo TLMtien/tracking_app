@@ -62,12 +62,11 @@ class tableReportForm(forms.ModelForm):
     brand_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'}))
     other_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'}))
     HVN_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'}))
-    total_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'}))
     class Meta:
         model = tableReport
         fields = (
             "other_beer_table","other_table",
-            "brand_table","HVN_table", "total_table",
+            "brand_table","HVN_table",
         )
 
     def __init__(self, *args, **kwargs):

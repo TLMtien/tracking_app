@@ -10,6 +10,8 @@ import datetime
 def sum(a, b):
     return str(int(a) + int(b))
 
+def sum_table(a,b,c,d):
+    return  str(int(a)+int(b)+int(c)+int(d))
 
 def reportTable(request):
 
@@ -19,27 +21,27 @@ def reportTable(request):
             other_beer_table = form.cleaned_data.get('other_beer_table')
             brand_table = form.cleaned_data.get('brand_table')
             HVN_table = form.cleaned_data.get('HVN_table')
-            total_table = form.cleaned_data.get('total_table')
             other_table = form.cleaned_data.get('other_table')
             
             report_table = tableReport.objects.filter(created = datetime.date.today(), SP = request.user).count()
 
             if report_table < 1:
                 p, created = tableReport.objects.get_or_create(SP=request.user, other_beer_table=other_beer_table, 
-                    total_table=total_table, other_table=other_table, brand_table=brand_table,  HVN_table=HVN_table)
+                     other_table=other_table, brand_table=brand_table,  HVN_table=HVN_table)
                 p.save()
+
                 return render(request,"report/create_reportTable.html", {'other_beer_table':other_beer_table, 'brand_table':brand_table,
-                                    'HVN_table':HVN_table,'total_table':total_table, 'other_table':other_table})
+                                    'HVN_table':HVN_table,'total_table':p.total_table, 'other_table':other_table})
 
            
             report_table = tableReport.objects.get(created = datetime.date.today(), SP = request.user)
             
             report_table.other_beer_table = sum(other_beer_table, report_table.other_beer_table)
-            report_table.total_table = sum(total_table, report_table.total_table)
             report_table.other_table = sum(other_table, report_table.other_table)
             report_table.brand_table = sum(brand_table, report_table.brand_table)
             report_table.HVN_table = sum(HVN_table, report_table.HVN_table)
             report_table.save()
+            total_table = sum_table(other_beer_table, brand_table, HVN_table, other_table)
             return render(request,"report/sum-totaltable.html",{'sum_other_beer_table':report_table.other_beer_table, 'other_beer_table':other_beer_table,
                 'sum_brand_table':report_table.brand_table, 'brand_table':brand_table, 'sum_HVN_table':report_table.HVN_table, 'HVN_table':HVN_table,
                 'sum_total_table': report_table.total_table, 'total_table':total_table, 'sum_other_table':report_table.other_table, 'other_table':other_table})
@@ -125,12 +127,22 @@ def gift_receiveReport(request):
             gift2_received = form.cleaned_data.get('gift2_received')
             gift3_received = form.cleaned_data.get('gift3_received')   
 
-            p, created = giftReport.objects.get_or_create(SP=request.user, gift1_received=gift1_received, 
-                                                    gift2_received=gift2_received, gift3_received=gift3_received)
-            p.save()
+            report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user).count()
+            if report < 1:
+                p, created = giftReport.objects.get_or_create(SP=request.user, gift1_received=gift1_received, 
+                                                        gift2_received=gift2_received, gift3_received=gift3_received)
+                p.save()
+                return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 'gift2_received':gift2_received,
+                    'gift3_received':gift3_received, 'gift1_remaining':p.gift1_remaining,
+                    'gift2_remaining': p.gift2_remaining, 'gift3_remaining': p.gift3_remaining })
+            report = giftReport.objects.get(created = datetime.date.today(), SP = request.user)
+            report.gift1_received = sum(gift1_received, report.gift1_received)
+            report.gift2_received = sum(gift2_received, report.gift2_received)
+            report.gift3_received = sum(gift3_received, report.gift3_received)
+            report.save()
             return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 'gift2_received':gift2_received,
-                'gift3_received':gift3_received, 'gift1_remaining':p.gift1_remaining,
-                'gift2_remaining': p.gift2_remaining, 'gift3_remaining': p.gift3_remaining })
+                    'gift3_received':gift3_received, 'gift1_remaining':report.gift1_remaining,
+                    'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining })
     else:
         form = gift_ReceiveReportForm()
         return render(request,"report/listgift-received.html", {'form':form})

@@ -29,6 +29,9 @@ CHOICES_COMPAIN = [
 def deduct(a,b):
     return str(int(a)-int(b))
 
+def sum(a,b,c,d):
+    return  str(int(a)+int(b)+int(c)+int(d))
+
 def upload_to(instance, filename):
     return 'salePerson/{filename}'.format(filename=filename)
 
@@ -73,10 +76,16 @@ class tableReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     other_table = models.CharField(max_length=255, default='0')
     other_beer_table = models.CharField(max_length=255, default='0')
+
     brand_table = models.CharField(max_length=255, default='0')
     HVN_table = models.CharField(max_length=255, default='0')
-    total_table = models.CharField(max_length=255, default='0')
+    total_table = models.CharField(max_length=255, default='0', blank=True)
     created = models.DateField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        self.total_table = sum(self.other_table , self.other_beer_table, self.brand_table, self.HVN_table)
+        
+        super(tableReport, self).save(*args, **kwargs)
 
 
 class consumerApproachReport(models.Model):
