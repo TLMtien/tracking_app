@@ -1,6 +1,6 @@
 from django import forms
 from django.db.models import fields
-from .models import outletInfo, tableReport, posmReport, giftReport, report_sale, consumerApproachReport
+from .models import outletInfo, tableReport, posmReport, giftReport, report_sale, consumerApproachReport, search
 
 class outletInfoForm(forms.ModelForm):
     outlet_Name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Tên outlet *"}))
@@ -89,3 +89,11 @@ class consumerApproachReportForm(forms.ModelForm):
         self.is_salePerson = kwargs.pop('is_salePerson',None)
         super(consumerApproachReportForm, self).__init__(*args, **kwargs)
 
+
+class searchForm(forms.ModelForm):
+    province = forms.CharField(widget=forms.TextInput(attrs={'class':"billing_address_1", 'name':'', 'value':''})) 
+    district = forms.CharField(widget=forms.TextInput(attrs={'class':"billing_address_2", 'name':'', 'value':''})) 
+    
+    class Meta:
+        model = search
+        fields = ("province", "district")

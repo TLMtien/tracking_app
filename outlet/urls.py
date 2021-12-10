@@ -13,4 +13,6 @@ urlpatterns = [
     path('report/', TemplateView.as_view(template_name="outlet/report.html"), name='pagereport'),
     path('successcreate/', TemplateView.as_view(template_name="outlet/successcreateoutlet.html"), name='successcreate'),
     path('create/', TemplateView.as_view(template_name="outlet/createoutlet.html"), name='create'),
+    path('search/', views.searchView, name='search'),
+    
 ]

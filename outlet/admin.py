@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import outletInfo, giftReport, overallReport, tableReport, posmReport, consumerApproachReport,  Campain, report_sale
+from .models import outletInfo, giftReport, overallReport, tableReport, posmReport, consumerApproachReport,  Campain, report_sale, search
 # Register your models here.
 
 admin.site.register(giftReport),
@@ -10,3 +10,4 @@ admin.site.register(outletInfo),
 admin.site.register(consumerApproachReport),
 admin.site.register(Campain),
 admin.site.register(report_sale),
+admin.site.register(search),

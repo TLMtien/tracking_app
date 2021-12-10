@@ -5,6 +5,7 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from outlet.models import Campain
+from outlet.models import outletInfo
 # Create your models here.
 
 TIGER_TP= 'tigerTP'
@@ -30,7 +31,7 @@ class SalePerson(models.Model):
     brand = models.ForeignKey(Campain , on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200, null=True, blank=True)
     province = models.CharField(max_length=200, null=True, blank=True)
-    outlet = models.CharField(max_length=200, null=True, blank=True)
+    outlet = models.ForeignKey(outletInfo , on_delete=models.CASCADE, blank=True)
     joined = models.DateTimeField("Date Joined", auto_now_add=True)
 
     def __str__(self):

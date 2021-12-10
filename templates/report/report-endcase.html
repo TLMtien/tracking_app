@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report End Of Case</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %">
+    <link rel="stylesheet" href="{% static '/report_posm.css' %}">
+</head>
+
+<body>
+
+    <div class="app">
+        <div class="container homeoutlet">
+            <!-- Header -->
+            <div class="row header">
+                <div class="logo">
+                    <a href="{% url 'pagereport' %}"><img src="{% static '/img/logo-hnk.png' %}" alt="logo"></a>
+                </div>
+                <div class="profile-user">
+                    <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                </div>
+            </div>
+            <div class="icon-back">
+                <a href="{% url 'pagereport' %}"><i class="ti-angle-double-left"></i></a>
+            </div>
+            <!-- Main -->
+            <div class="row main">
+                <p class="title">Hình ảnh biển bản</p>
+                <div class=btns>
+                    <button class="button is-success is-hidden" id="btnPlay"><i class="ti-control-play"></i></button> 
+                    <button class="button is-dark" id="btnPause"><i class="ti-control-pause"></i></button> 
+                    <button class="button is-light" id="btnScreenshot"><i class="ti-camera"></i></button> 
+                    <button class="button is-warning" id="btnChangeCamera"><i class="ti-reload"></i></button>
+                    <a id="download" download="report_img.png"><button class="downloadBtn button is-danger" type="button" onClick="download()"><i class="ti-download"></i></button></a>
+                </div>
+                
+                <div class="video-screenshot">
+                    
+                    <form action="" method="post">
+                        <video autoplay id="video"></video>
+                        <div>
+                            <div id="screenshotsContainer">
+                            <canvas id="canvas" class="is-hidden"></canvas>
+                            </div>
+                        </div>
+                        <input type="submit" class="button is-success"value="Gửi">
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- JS -->
+    
+    <script>
+        function download(){
+        var download = document.getElementById("download");
+        var image = document.getElementById("canvas").toDataURL("image/png")
+                    .replace("image/png", "image/octet-stream");
+        download.setAttribute("href", image);
+    }
+    </script>
+    
+    <script src="{% static '/js/snapShot.js' %}"></script>
+    <script src="{% static '/js/app.js' %}"></script>
+</body>
+
+</html>

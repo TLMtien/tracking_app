@@ -8,6 +8,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('outlet/', include('outlet.urls')),
     path('report/', include('report.urls')),
+    path('dashboard/', include('dashboard.urls')),
     path('', TemplateView.as_view(template_name="users/index.html"), name='index'),
     path('undo/', TemplateView.as_view(template_name="users/undo.html"), name='undo'),
 ]

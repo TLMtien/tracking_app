@@ -30,7 +30,7 @@
                 <div class="row main">
                     <div class="box-report" id="boxReport">
                         
-                            <a href="#"><button type="button" id="report-posm" class="btn-report active">Báo cáo POSM</button></a>
+                            <a href="{% url 'report-casehead' %}"><button type="button" id="report-posm" class="btn-report active">Báo cáo POSM</button></a>
                         
                        
                             <a href="{% url 'quantity-gift' %}"><button type="button" id="report-gift" class="btn-report ">Báo cáo quà tặng</button></a>
@@ -39,7 +39,7 @@
                             <a href="{% url 'report-sales' %}"><button type="button" id="report-sale" class="btn-report" >Báo cáo bán hàng</button></a>
                       
                         
-                            <a href="#"><button type="button" id="report-time" class="btn-report" >Báo cáo cuối ngày</button></a>
+                            <a href="{% url 'report-endcase' %}"><button type="button" id="report-time" class="btn-report" >Báo cáo cuối ngày</button></a>
                       
                     </div>
                 </div>

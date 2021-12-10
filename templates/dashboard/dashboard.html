@@ -1,0 +1,393 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static '/PC/themify-icons.css' %}">
+    <!-- css -->
+    <link rel="stylesheet" href="{% static '/PC/css/style.css' %}">
+</head>
+<body>
+    <div class="app">
+        <div class="container-home">
+            <!-- Header Home -->
+            <div class="row header-home">
+                <div class="logo">
+                    <a href="./homeadmin.html"><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
+                </div>
+                <div class="navbar" id="topheader">
+                    <ul class="navbar-nav">
+                        <li class="nav-list dropdown-nav active">
+                            <a href="#" class="nav-links drop-btn" onclick="openTigerTp()">
+                                tiger tp
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-sub"><a href="./dashboard.html">Dashboard</a></li>
+                                <li class="nav-sub"><a href="./raw-data.html">Raw data</a></li>
+                                <li class="nav-sub"><a href="#">Management</a></li>
+                                <li class="nav-sub"><a href="#">Export report</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">tiger fa</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">tiger hza</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">stongbow sf</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">stongbow tp</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">strongbow sa</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">bvina tp</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">laru tp</a></li>
+                    </ul>
+                </div>
+                <div class="profile-user">
+                    <a href="#" class="user-img">
+                        <img src="{% static '/PC/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                    </a>
+                </div>
+            </div>
+            <div class="row raw-data">
+                <div class="leftbox">
+                    <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
+                    <span class="title-menu">Dashboard</span>
+                </div>
+                <div class="rightbox">
+                    <form action="#" class="form-filter">
+                        <div class="filter">
+                            <div class="filter-box">
+                                Filter
+                                <input type="date" placeholder="Date">
+                            </div>
+                            <div class="time-box">
+                                By
+                                <input type="time" placeholder="Start At">
+                            </div>
+                            <div class="range-box">
+                                Range
+                                <input type="datetime-local" value="">
+                            </div>
+                        </div>
+    
+                        <div class="btn-box">
+                            <input type="submit" value="Filter" class="input-filter">
+                            <input type="reset" value="Reset" class="input-reset">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Main Home-->
+
+            <div class="main-home main-dashboard">
+                <!-- Sidebar left menu -->
+
+                <div class="sidebar-left" id="leftMenu">
+                    
+                    <ul class="sidebar sidebar-menu">
+                        <li class="menu-item active">
+                            <a href="#" >
+                                <i class='bx bxs-dashboard'></i>
+                                <span>program</span>
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item sidebar-submenu">
+                            <a href="#" class="sidebar-menu-dropdown">
+                                <i class='bx bxs-location-plus' ></i>
+                                <span>province</span>
+                                <div class="dropdown-icon"></div>
+                            </a>
+                            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                                <li>
+                                    <a href="#">
+                                        Cần Thơ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Đà Nẵng
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Hồ Chí Minh
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Khánh Hòa
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Tiền Giang
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item sidebar-submenu">
+                            <a href="#" class="sidebar-menu-dropdown">
+                                <i class='bx bxs-purchase-tag-alt' ></i>
+                                <span>Tyle</span>
+                                <div class="dropdown-icon"></div>
+                            </a>
+                            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                                <li>
+                                    <a href="#">
+                                        GSO
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        QN
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        YSO
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item sidebar-submenu">
+                            <a href="#" class="sidebar-menu-dropdown">
+                                <i class='bx bxs-user-detail' ></i>
+                                <span>Outlet Name</span>
+                                <div class="dropdown-icon"></div>
+                            </a>
+                            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                                <li>
+                                    <a href="#">
+                                        543
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        A Việt
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Ẩm Thực Sơn Hà
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Bò Lý Em
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Cát Biển
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Vườn Chuối
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Vườn Táo
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class='bx bxs-log-out' ></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+                <!-- Main Content -->
+                <div class="main-right" style="padding-top: 160px;">
+                    <div class="box-left">
+                        <div class="col-vertical">
+                            <div class="num-active">
+                                <p class="title">NUMBER OF ACTIVATIONS</p>
+                                <span class="number-one">142</span>
+                                <p class="desc">VS.Taget</p>
+                                <span class="number-two">21%</span>
+                            </div>
+                        </div>
+                        <div class="col-vertical">
+                            <div class="num-active">
+                                <p class="title">VOLUME PERFORMANCE</p>
+                                <p class="desc">(Can/Bottle)</p>
+                                <span class="number-one">142</span>
+                                <br>
+                                <span class="number-two">21%</span>
+                                <div class="icon-color">
+                                    <span class="icon-one"></span> <p class="smart-desc">Actual Achieved</p>
+                                    <span class="icon-two"></span> <p class="smart-desc">Volume Target</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-vertical">
+                            <div class="num-active">
+                                <p class="title">% TARGET VOLUME ACHIEVED</p>
+                                
+                                <span class="number-two">21%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-right">
+                        <div class="row">
+                            <div class="col-horizontal">
+                                <div class="header">
+                                    <div class="col-6">
+                                        <div class="box-one">
+                                            <p class="title">
+                                                Total Consumers Reached
+                                            </p>
+                                        </div>
+                                        <div class="box-two">
+                                            <span class="number">9218</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="box-one">
+                                            <p class="title">
+                                                Average Reach per Act
+                                            </p>
+                                        </div>
+                                        <div class="box-two">
+                                            <span class="number">77</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main">
+                                    <p class="title">AVERAGE PERFORMANCE PER ACT</p>
+                                    <p class="desc">(Can/Bottle)</p>
+                                    <div id="chart-act"></div>
+                                    
+                                </div>
+                                <div class="footer">
+                                    <div class="icon-color">
+                                        <span class="icon-one"></span> <p class="smart-desc">Actual Achieved</p>
+                                        <span class="icon-two"></span> <p class="smart-desc">Volume Target</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-horizontal">
+                                <div class="col-12">
+                                    <p class="title">TABLE SHARE PERFORMANCE</p>
+                                    <div id="chart-share"></div>
+                                </div>
+                            </div>
+                            <div class="col-horizontal">
+                                <div class="header">
+                                    <div class="col-1">
+                                        <div class="box-one">
+                                            <p class="title">Water Bottle 1</p>
+                                        </div>
+                                        <div class="box-two">
+                                            <span class="number">618</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="box-one">
+                                            <p class="title">Backpack F2</p>
+                                        </div>
+                                        <div class="box-two">
+                                            <span class="number">461</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="box-one">
+                                            <p class="title">HNK T Shirt</p>
+                                        </div>
+                                        <div class="box-two">
+                                            <span class="number">62</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="box-one">
+                                            <p class="title">Matal Cup F1</p>
+                                        </div>
+                                        <div class="box-two">
+                                            <span class="number">612</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="box-one">
+                                            <p class="title">HNK Speaker</p>
+                                        </div>
+                                        <div class="box-two">
+                                            <span class="number">101</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="main">
+                                    <div id="chart-product"></div>
+                                </div>
+                                <div class="footer">
+                                    <div class="icon-color">
+                                        <span class="icon-one"></span> <p class="smart-desc">Actual Achieved</p>
+                                        <span class="icon-two"></span> <p class="smart-desc">Volume Target</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row-bottom">
+                                <div class="col-12">
+                                    <p class="title">TOP 10 OUTLET PERFORMANCE</p>
+                                    <div id="chart-top"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+
+
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown-nav").click(function(){
+                $(this).find(".dropdown-menu").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown-nav");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu").slideUp("fast");
+            }            
+        });
+    </script>
+    <script>
+        $( '#topheader .navbar-nav a' ).on( 'click', function () {
+        $( '#topheader .navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+        $( this ).parent( 'li' ).addClass( 'active' );
+    });
+    </script>
+    <script>
+        $( '#leftMenu .sidebar a' ).on( 'click', function () {
+        $( '#leftMenu .sidebar' ).find( 'li.active' ).removeClass( 'active' );
+        $( this ).parent( 'li' ).addClass( 'active' );
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{% static 'PC/js/chart.js' %}"></script>
+    <script src="{% static 'PC/js/app.js' %}"></script>
+</body>
+</html>

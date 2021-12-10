@@ -74,6 +74,7 @@ class posmReport(models.Model):
 
 class tableReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     other_table = models.CharField(max_length=255, default='0')
     other_beer_table = models.CharField(max_length=255, default='0')
 
@@ -90,6 +91,7 @@ class tableReport(models.Model):
 
 class consumerApproachReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     consumers_approach = models.CharField(max_length=255)
     consumers_brough = models.CharField(max_length=255)
     Total_Consumers =  models.CharField(max_length=255)
@@ -97,6 +99,7 @@ class consumerApproachReport(models.Model):
     
 class report_sale(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     beer_brand = models.CharField(max_length=255, default='0')
     beer_HVN = models.CharField(max_length=255, default='0')
     beer_other = models.CharField(max_length=255, default='0')
@@ -104,7 +107,7 @@ class report_sale(models.Model):
 
 class giftReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    
+    outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     gift1_received =  models.CharField(max_length=255, default='0')
     gift2_received =  models.CharField(max_length=255, default='0')
     gift3_received =  models.CharField(max_length=255, default='0', blank=True)
@@ -144,4 +147,6 @@ class overallReport(models.Model):
 
 
 
-    
+class search(models.Model):
+    province =  models.CharField(max_length=255)
+    district =  models.CharField(max_length=255)
