@@ -63,31 +63,31 @@ canvas.toBlob(function(blob) {
 })
 
 
-const reportPOSM = document.getElementById('reportPOSM')
-const canvas = document.getElementById('canvas');
-var image = document.getElementById("canvas").toDataURL("image/png")
-    .replace("image/png", "image/octet-stream");
-const myfile = document.getElementById('screenshot')
+// const reportPOSM = document.getElementById('reportPOSM')
+// const canvas = document.getElementById('canvas');
+// var image = document.getElementById("canvas").toDataURL("image/png")
+//     .replace("image/png", "image/octet-stream");
+// const myfile = document.getElementById('screenshot')
 
 
 
-reportPOSM.addEventListener('submit', e => {
-    e.preventDefault()
-    console.log('submitted')
+// reportPOSM.addEventListener('submit', e => {
+//     e.preventDefault()
+//     console.log('submitted')
 
-    $.ajax({
-        type: 'POST',
-        url: "{% url 'reportPosm' %}",
-        data: {
-            'csrfmiddlewaretoken': csrf[0].value,
-            'image': image,
-        },
-        success: function(response) {
-            console.log(response)
-        },
-        error: function(error) {
-            console.log(error)
+//     $.ajax({
+//         type: 'POST',
+//         url: "{% url 'reportPosm' %}",
+//         data: {
+//             'csrfmiddlewaretoken': csrf[0].value,
+//             'image': image,
+//         },
+//         success: function(response) {
+//             console.log(response)
+//         },
+//         error: function(error) {
+//             console.log(error)
 
-        }
-    })
-})
+//         }
+//     })
+// })
