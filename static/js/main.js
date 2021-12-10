@@ -5,54 +5,22 @@ const provinceInput = document.getElementById('aaa')
 const districtInput = document.getElementById('bbb')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
 
-
-outletForm.addEventListener('submit', e => {
-    e.preventDefault()
-    console.log('submitted')
-
-    $.ajax({
-        type: 'POST',
-        url: '/outlet/search/',
-        data: {
-            'csrfmiddlewaretoken': csrf[0].value,
-            'province': provinceInput.value,
-            'district': districtInput.value,
-        },
-        success: function(response) {
-            console.log(response)
-            $('h2').html(response)
-        },
-        error: function(error) {
-            console.log(error)
-
-        }
-    })
-})
-
-
-
-//--------------------------------------------------------------
-const report = document.getElementById('report')
-const canvas = document.getElementById('canvas');
-//const myfile = document.getElementById('screenshot')
-
-canvas.toBlob(function(blob) {
-    const formData = new FormData();
-    formData.append('my-file', blob, 'filename.png')
-        //
-    report.addEventListener('click', e => {
+if (outletForm) {
+    outletForm.addEventListener('submit', e => {
         e.preventDefault()
         console.log('submitted')
 
         $.ajax({
             type: 'POST',
-            url: "{% url 'reportPosm' %}",
+            url: '/outlet/search/',
             data: {
                 'csrfmiddlewaretoken': csrf[0].value,
-                'image': formData,
+                'province': provinceInput.value,
+                'district': districtInput.value,
             },
             success: function(response) {
                 console.log(response)
+                $('h2').html(response)
             },
             error: function(error) {
                 console.log(error)
@@ -60,8 +28,12 @@ canvas.toBlob(function(blob) {
             }
         })
     })
-})
+}
 
+
+
+
+//--------------------------------------------------------------
 
 // const reportPOSM = document.getElementById('reportPOSM')
 // const canvas = document.getElementById('canvas');

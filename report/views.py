@@ -99,7 +99,7 @@ def report_customer(request):
             consumers_approach = form.cleaned_data.get('consumers_approach')
             consumers_brough = form.cleaned_data.get('consumers_brough')
             Total_Consumers = form.cleaned_data.get('Total_Consumers')
-            
+          
             
             report = consumerApproachReport.objects.filter(created = datetime.date.today(), SP = request.user).count()
 
@@ -142,8 +142,8 @@ def gift_receiveReport(request):
                                                         gift2_received=gift2_received, gift3_received=gift3_received)
                 p.save()
                 return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 'gift2_received':gift2_received,
-                    'gift3_received':gift3_received, 'gift1_remaining':p.gift1_remaining,
-                    'gift2_remaining': p.gift2_remaining, 'gift3_remaining': p.gift3_remaining })
+                    'gift3_received':gift3_received, 'gift1_remaining':p.gift1_received,
+                    'gift2_remaining': p.gift2_received, 'gift3_remaining': p.gift3_received })
             report = giftReport.objects.get(created = datetime.date.today(), SP = request.user)
             report.gift1_received = sum(gift1_received, report.gift1_received)
             report.gift2_received = sum(gift2_received, report.gift2_received)
