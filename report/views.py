@@ -1,7 +1,7 @@
 from os import name
 from django.shortcuts import render, redirect
-from outlet.models import tableReport, report_sale, consumerApproachReport, giftReport, outletInfo, posmReport
-from outlet.forms import tableReportForm, reportSaleForm, consumerApproachReportForm, gift_ReceiveReportForm, gift_givenReportForm, overallReport
+from outlet.models import tableReport, report_sale, consumerApproachReport, giftReport, outletInfo, posmReport, overallReport
+from outlet.forms import tableReportForm, reportSaleForm, consumerApproachReportForm, gift_ReceiveReportForm, gift_givenReportForm
 from django.views.generic import  DayArchiveView
 import datetime
 from users.models import SalePerson
