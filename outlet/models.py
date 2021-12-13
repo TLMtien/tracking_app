@@ -24,6 +24,7 @@ CHOICES_COMPAIN = [
     ('STB', 'FES_SBW'),
     ('bivina', 'TAB_BVN'),
     ('Larue', 'TAB_LRE'),
+    ('Larue_SPE','SPE_LRE'),
 ]
 
 def deduct(a,b):
@@ -71,13 +72,14 @@ class posmReport(models.Model):
     outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=upload_to)
     created = models.DateField(auto_now_add=True)
+    #modified = models.DateTimeField(auto_now=True)
 
 class tableReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     other_table = models.CharField(max_length=255, default='0')
     other_beer_table = models.CharField(max_length=255, default='0')
-
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
     brand_table = models.CharField(max_length=255, default='0')
     HVN_table = models.CharField(max_length=255, default='0')
     total_table = models.CharField(max_length=255, default='0', blank=True)
@@ -95,6 +97,7 @@ class consumerApproachReport(models.Model):
     consumers_approach = models.CharField(max_length=255)
     consumers_brough = models.CharField(max_length=255)
     Total_Consumers =  models.CharField(max_length=255)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
     created = models.DateField(auto_now_add=True)
     
 class report_sale(models.Model):
@@ -118,9 +121,9 @@ class giftReport(models.Model):
     gift3_given = models.CharField(max_length=255, default='0', blank=True)
     
 
-    gift1_remaining = models.CharField(max_length=50, null=True, blank=True)
-    gift2_remaining = models.CharField(max_length=50, null=True, blank=True)
-    gift3_remaining = models.CharField(max_length=50, null=True, blank=True)
+    gift1_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
+    gift2_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
+    gift3_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
     
     created = models.DateField(auto_now_add=True)
 

@@ -1,3 +1,4 @@
+from os import name
 from django.shortcuts import render, redirect
 from outlet.models import tableReport, report_sale, consumerApproachReport, giftReport, outletInfo, posmReport
 from outlet.forms import tableReportForm, reportSaleForm, consumerApproachReportForm, gift_ReceiveReportForm, gift_givenReportForm
@@ -7,7 +8,12 @@ from users.models import SalePerson
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from django.http import JsonResponse
-
+import base64
+from PIL import Image
+import io
+from django.core.files.base import ContentFile
+from outlet.conver_file import get_image_from_data_url
+from django import forms
 
 def sum(a, b):
     return str(int(a) + int(b))
@@ -28,11 +34,11 @@ def reportTable(request):
             HVN_table = form.cleaned_data.get('HVN_table')
             other_table = form.cleaned_data.get('other_table')
             
-            report_table = tableReport.objects.filter(created = datetime.date.today(), SP = request.user).count()
+            report_table = tableReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
 
             if report_table < 1:
-                p, created = tableReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, other_beer_table=other_beer_table, 
-                     other_table=other_table, brand_table=brand_table,  HVN_table=HVN_table)
+                p, created = tableReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, campain=SP.brand, 
+                        other_beer_table=other_beer_table, other_table=other_table, brand_table=brand_table,  HVN_table=HVN_table)
                 p.save()
 
                 return render(request,"report/create_reportTable.html", {'other_beer_table':other_beer_table, 'brand_table':brand_table,
@@ -66,7 +72,7 @@ def reportSale(request):
             beer_other = form.cleaned_data.get('beer_other')
             
             
-            report = report_sale.objects.filter(created = datetime.date.today(), SP = request.user).count()
+            report = report_sale.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
 
             if report < 1:
                 p, created = report_sale.objects.get_or_create(SP=request.user, outlet=SP.outlet, beer_brand=beer_brand, beer_HVN=beer_HVN, beer_other=beer_other)
@@ -101,11 +107,11 @@ def report_customer(request):
             Total_Consumers = form.cleaned_data.get('Total_Consumers')
           
             
-            report = consumerApproachReport.objects.filter(created = datetime.date.today(), SP = request.user).count()
+            report = consumerApproachReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
 
             if report < 1:
-                p, created = consumerApproachReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, consumers_approach=consumers_approach, 
-                                                    consumers_brough=consumers_brough, Total_Consumers=Total_Consumers)
+                p, created = consumerApproachReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, campain=SP.brand,
+                            consumers_approach=consumers_approach, consumers_brough=consumers_brough, Total_Consumers=Total_Consumers)
                 p.save()
                 return render(request,"report/create-report-customer.html", {'consumers_approach':consumers_approach, 
                             'consumers_brough':consumers_brough,'Total_Consumers':Total_Consumers})
@@ -136,7 +142,7 @@ def gift_receiveReport(request):
             gift2_received = form.cleaned_data.get('gift2_received')
             gift3_received = form.cleaned_data.get('gift3_received')   
 
-            report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user).count()
+            report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
             if report < 1:
                 p, created = giftReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, gift1_received=gift1_received, 
                                                         gift2_received=gift2_received, gift3_received=gift3_received)
@@ -179,26 +185,38 @@ def gift_givenReport(request):
 login_required
 def gift_remaining(request):
     try:
-        report = giftReport.objects.get(created = datetime.date.today(), SP = request.user)
+        SP = SalePerson.objects.get(user=request.user)
+        report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
         return render(request,'report/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
             'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining})
     except:
-        redirect('quantity-gift')
+        return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
+            'gift2_remaining': '0', 'gift3_remaining': '0'})
 
 
 
 
-
+from django.views.decorators.csrf import csrf_exempt
+from django.core.files.images import ImageFile
+import re
+@csrf_exempt
 #####
-login_required
+@login_required
 def reportPosm(request):
     if request.is_ajax():
         user = request.user
         SP = SalePerson.objects.get(user=user)
-
+       
         image = request.POST.get('image')
-        print(image)
-        posmReport.objects.create(image=image, SP=user, outlet=SP.outlet)
+        print('image')
+        report = posmReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
+        if report < 1:
+            posmReport.objects.create(image= get_image_from_data_url(image)[0], SP=user, outlet=SP.outlet)
+            return JsonResponse({'created': 'true'})
         
-        return JsonResponse({'created': True})
+        report = posmReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+        report.image.delete()
+        report.image=get_image_from_data_url(image)[0]
+        report.save()
+        return JsonResponse({'created': 'true'})
     return JsonResponse({'created': False})

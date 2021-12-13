@@ -30,18 +30,20 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-sub"><a href="./dashboard.html">Dashboard</a></li>
-                                <li class="nav-sub"><a href="./raw-data.html">Raw data</a></li>
+                                <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
                                 <li class="nav-sub"><a href="#">Management</a></li>
                                 <li class="nav-sub"><a href="#">Export report</a></li>
                             </ul>
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">tiger fa</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">tiger hza</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">stongbow sf</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">stongbow tp</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">strongbow sa</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">bvina tp</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">laru tp</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">TIGER TP</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">TIGER FA</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">TIGER HZA</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">STRONGBOW FES</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">HEINEKEN TP</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">HEINEKEN SA</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">BIVINIA FP</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">LARUE FP</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">LARUE FSP</a></li>
                     </ul>
                 </div>
                 <div class="profile-user">
@@ -56,19 +58,16 @@
                     <span class="title-menu">Dashboard</span>
                 </div>
                 <div class="rightbox">
-                    <form action="#" class="form-filter">
+                    <form action="{% url 'dashboard' %}" class="form-filter" method='POST'>
                         <div class="filter">
-                            <div class="filter-box">
+                            <div class="range-box">
                                 Filter
-                                <input type="date" placeholder="Date">
+                                <input type="date" placeholder="Date" name>
                             </div>
-                            <div class="time-box">
-                                By
-                                <input type="time" placeholder="Start At">
-                            </div>
+    
                             <div class="range-box">
                                 Range
-                                <input type="datetime-local" value="">
+                                <input type="date" value="">
                             </div>
                         </div>
     
@@ -343,7 +342,7 @@
                         <div class="row">
                             <div class="row-bottom">
                                 <div class="col-12">
-                                    <p class="title">TOP 10 OUTLET PERFORMANCE</p>
+                                    <p class="title"></p>
                                     <div id="chart-top"></div>
                                 </div>
                             </div>
@@ -354,11 +353,91 @@
 
             
         </div>
+
+        
+        <script src="{% static '/chart/js/accessibility.js' %}"></script>
+        <script src="{% static '/chart/js/export-data.js' %}"></script>
+        <script src="{% static '/chart/js/exporting.js' %}"></script>
+        <script src="{% static '/chart/js/highcharts.js' %}"></script>
+        <script>
+            //var chart = {{chart|safe}};
+            Highcharts.chart('chart-share', {
+                chart: {
+                        type: 'pie',
+                        width: 350,
+                },
+                title: {
+                    //text: 'TABLE SHARE PERFORMANCE'
+                    display: false,
+                },
+                subtitle: {
+                    text: ['HVN_Table', 'brand_table', 'total_table'],         
+                }, 
+                series: [{
+                        name: ['HVN_Table', 'brand_table', 'total_table'],
+                        data: {{table_report|safe}},
+                        colors: ['#198631', '#1C263F', '#939393'],   
+                }],
+                
+            });
+            
+
+            Highcharts.chart('chart-top', {
+                series: [{
+                    name: 'Total',
+                    type: 'column',
+                    data: [2000, 1000, 660, 648, 618, 600, 546, 538, 534, 527]
+                }, {
+                    name: 'Top %',
+                    type: 'line',
+                    data: [90, 81, 43, 94, 100, 100, 95, 65, 87, 78],
+                }],
+                chart: {
+                    height: 350,
+                    type: 'line',
+                },
+                subtitle: {
+                    text: ['HẾN', 'LÚA NẾP', 'ỐC NGON', 'TƠ', 'ĐỒNG NỘI', 'TRÀNG AN', 'BÒ TƠ', 'HƯƠNG', 'LẨU 79', 'LẨU DÊ'],         
+                }, 
+                stroke: {
+                    width: [0, 4],
+                },
+                title: {
+                    text: 'TOP 10 OUTLET PERFORMANCE'
+                },
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1],
+                    labels: ['HẾN', 'LÚA NẾP', 'ỐC NGON', 'TƠ', 'ĐỒNG NỘI', 'TRÀNG AN', 'BÒ TƠ', 'HƯƠNG', 'LẨU 79', 'LẨU DÊ'],
+                    style: {
+                        colors: ['#1C263F']
+                    }
+                },
+                labels: ['HẾN', 'LÚA NẾP', 'ỐC NGON', 'TƠ', 'ĐỒNG NỘI', 'TRÀNG AN', 'BÒ TƠ', 'HƯƠNG', 'LẨU 79', 'LẨU DÊ'],
+                colors: ['#198631', '#1C263F'],
+                yaxis: [{
+                    title: {
+                        text: 'Top 10',
+                       
+                    },
+                }, {
+                    opposite: true,
+                    title: {
+                        text: 'Outlet'
+                    }
+                }]
+                
+            });
+                
+            </script>
+        
     </div>
 
 
 
     <!-- js -->
+    
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -386,8 +465,8 @@
         $( this ).parent( 'li' ).addClass( 'active' );
     });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="{% static 'PC/js/chart.js' %}"></script>
+     {% comment %} <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{% static 'PC/js/chart.js' %}"></script>  {% endcomment %}
     <script src="{% static 'PC/js/app.js' %}"></script>
 </body>
 </html>

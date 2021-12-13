@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import overallReport, tableReport, outletInfo, giftReport, search, posmReport
+from .models import overallReport, tableReport, outletInfo, giftReport, search, posmReport, Campain
 from .forms import outletInfoForm
 from django.views.generic import DetailView, ListView, detail
 from users.models import SalePerson
@@ -28,12 +28,13 @@ def outlet_create(request):
             outlet_Name = form.cleaned_data.get('outlet_Name')
             type = form.cleaned_data.get('type')
             outlet_address = form.cleaned_data.get('outlet_address')
-
+            
             #create outlet
             p, created = outletInfo.objects.get_or_create(outlet_Name=outlet_Name, type=type,  outlet_address=outlet_address)
+            #CP = Campain.objects.get(program=SP.brand)
+            p.compain.add(SP.brand)
             p.save()
 
-            #set outlet for SP
             SP.outlet = p
             SP.save()
 
@@ -62,6 +63,7 @@ login_required
 class OutletDetailView(DetailView):
     model = outletInfo
     template_name = 'outlet/outletdetails.html'
+ 
 
 
 login_required

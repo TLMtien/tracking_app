@@ -1,40 +1,66 @@
 from django.shortcuts import render
 from dateutil.relativedelta import relativedelta
-
+from .forms import TimeReportForm, TimeDashBoard
+from outlet.models import posmReport, outletInfo, tableReport, report_sale, consumerApproachReport, giftReport, Campain
+from .test import date_generator, revenue_char_bar, sum_value_iv
+from django.shortcuts import get_object_or_404
 # Create your views here.
+
+
+def sum(a, b):
+    return int(int(a) + int(b))
+
+def percent(a,b):
+    return (int(a)*100)/(int(b))
 # def sum_revenue(request):
 #     user = request.user
-#     if user.is_admin:
-#         customers = User.objects.exclude(profile__isnull=True)
-#         form_calculate = CalculateRevenueForm(request.GET)
+#     form_calculate = TimeReportForm(request.GET)
         
 #     if form_calculate.is_valid():
 #         from_date = form_calculate.cleaned_data["from_date"]
 #         to_date = form_calculate.cleaned_data["to_date"]
-#         projects = Project.objects.all()
 #         print(type(from_date))
+#         all_outlet =outletInfo.objects.filter(compain='TAB_TGR')
+#         for outlet in all_outlet: 
+#             tb = tableReport.objects.filter(created__gte=from_date, oulet=outlet).filter(created__lte=to_date, compain='TAB_TGR')
+        
 
-#         iv_isp = InvoiceISP.objects.filter(
-#             date_upload__gte=from_date).filter(date_upload__lte=to_date)
-#         value_iv_isp = sum_value_iv(iv_isp)
-
-#         iv_general = InvoiceGeneral.objects.filter(
-#             date_upload__gte=from_date).filter(date_upload__lte=to_date)
-#         value_iv_general = sum_value_iv(iv_general)
-
-#         iv_customer = InvoiceCustomer.objects.filter(
-#             date_upload__gte=from_date).filter(date_upload__lte=to_date)
-#         value_iv_customer = sum_value_iv(iv_customer)
-
-#         value_iv_isp_not_pay = sum_value_iv(iv_isp.filter(payment=False))
-#         value_iv_customer_not_pay = sum_value_iv(iv_customer.filter(paymented=False))
-#         value_iv_general_not_pay = sum_value_iv(iv_general.filter(payment=False))
-
-#         total_profit = value_iv_customer - (value_iv_general + value_iv_isp)
-
-#         vendors = Vendor.objects.all()
 
 #         # chart
-#         dump = revenue_char_bar(iv_isp, iv_general, iv_customer, from_date, to_date)
+#         dump = revenue_char_bar(tb, from_date, to_date)
+#     return render(request,"dashboard/dashboard.html", {'text':[20,30,40,10]}) 
+#         #return render(request,"report/dashboard.html",{ "from_date":from_date,"to_date":to_date,"chart":dump}) 
+def sum_revenue(request):
+    
+    CP = get_object_or_404(Campain, program='tigerTP')
+    total_table = 0
+    total_table_HVN = 0
+    total_brand_table = 0
+     
+    table_rp = tableReport.objects.filter(campain=CP)
+    for tb in table_rp: 
+        total_table = sum(total_table, tb.total_table)
+        total_table_HVN = sum(total_table_HVN, tb.HVN_table)
+        total_brand_table = sum(total_brand_table, tb.brand_table)
+        
+    a = percent(total_table_HVN, total_table)
+    b = percent(total_brand_table, total_table)
+    c=100-a-b
+    
+    ##################################
+    customer_report = consumerApproachReport.objects.filter(campain=CP)
+    sum_Total_Consumers = 0
+    total_consumers_approach = 0
+    total_consumers_brough = 0
+    for cus_rp in customer_report:
+        total_consumers_approach = sum(total_consumers_approach, cus_rp.consumers_approach)
+        sum_Total_Consumers = sum(sum_Total_Consumers, cus_rp.Total_Consumers)
+        total_consumers_brough = sum(total_consumers_brough, cus_rp.consumers_brough)
+    Average_reach = percent(total_consumers_approach, sum_Total_Consumers)
+    Average_conversion = percent(total_consumers_brough, total_consumers_approach)
 
-#         return render(request,"user/calculate_revenue.html",{"customers":customers,"total_revenue":value_iv_customer,"accrued_expenses":value_iv_general + value_iv_isp,"total_profit":total_profit,"value_iv_general":value_iv_general,"value_iv_isp":value_iv_isp,"value_iv_isp_not_pay":value_iv_isp_not_pay,"value_iv_customer_not_pay":value_iv_customer_not_pay,"value_iv_general_not_pay":value_iv_general_not_pay,"from_date":from_date,"to_date":to_date,"iv_general":iv_general,"vendors":vendors,"projects":projects,"chart":dump}) 
+    
+    return render(request,"dashboard/dashboard.html", {'table_report':[a, b, c], 'total_consumers_approach':total_consumers_approach,
+        'sum_Total_Consumers':sum_Total_Consumers,'total_consumers_brough':total_consumers_brough,
+        'Average_reach':Average_reach, 'Average_conversion':Average_conversion}) 
+        #return render(request,"report/dashboard.html",{ "from_date":from_date,"to_date":to_date,"chart":dump}) 

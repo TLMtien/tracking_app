@@ -1,4 +1,3 @@
-//
 (function() {
     if (!"mediaDevices" in navigator ||
         !"getUserMedia" in navigator.mediaDevices
@@ -11,7 +10,7 @@
     const canvas = document.querySelector("#canvas");
     const screenshotsContainer = document.querySelector("#screenshotsContainer");
     let videoStream = null
-    let useFrontCamera = true; //camera trước
+    let useFrontCamera = false; //camera trước
     const constraints = {
         video: {
             width: {
@@ -55,13 +54,23 @@
             });
         }
     }
+    // Chụp nhiều ảnh
+    //   btnScreenshot.addEventListener("click", function () {
+    //     const img = document.createElement("img");
+    //     canvas.width = video.videoWidth;
+    //     canvas.height = video.videoHeight;
+    //     canvas.getContext("2d").drawImage(video, 0, 0);
+    //     img.src = canvas.toDataURL("image/png");
+    //     screenshotsContainer.prepend(img);
+    //   });
 
+    // Chụp 1 ảnh
     btnScreenshot.addEventListener("click", function() {
         let img = document.getElementById('screenshot');
         if (!img) {
             img = document.createElement("img");
             img.id = 'screenshot';
-            img.style.width = '100%';
+            img.style.width = '30%';
         }
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;

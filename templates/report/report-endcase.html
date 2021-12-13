@@ -7,55 +7,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report End Of Case</title>
 
-    <link rel="stylesheet" href="{% static '/themify-icons.css' %">
-    <link rel="stylesheet" href="{% static '/report_posm.css' %}">
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %}">
 </head>
 
 <body>
 
     <div class="app">
-        <div class="container homeoutlet">
+        <div class="container homeoutlet container-camera">
             <!-- Header -->
-            <div class="row header">
+            <!-- <div class="row header">
                 <div class="logo">
-                    <a href="{% url 'pagereport' %}"><img src="{% static '/img/logo-hnk.png' %}" alt="logo"></a>
+                    <a href="#"><img src="./img/logo-hnk.png" alt="logo"></a>
                 </div>
                 <div class="profile-user">
-                    <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    <img src="./img/img_avatar3.png" alt="avatar"></img>
                 </div>
-            </div>
-            <div class="icon-back">
-                <a href="{% url 'pagereport' %}"><i class="ti-angle-double-left"></i></a>
-            </div>
+            </div> -->
+            
             <!-- Main -->
             <div class="row main">
-                <p class="title">Hình ảnh biển bản</p>
-                <div class=btns>
-                    <button class="button is-success is-hidden" id="btnPlay"><i class="ti-control-play"></i></button> 
-                    <button class="button is-dark" id="btnPause"><i class="ti-control-pause"></i></button> 
-                    <button class="button is-light" id="btnScreenshot"><i class="ti-camera"></i></button> 
-                    <button class="button is-warning" id="btnChangeCamera"><i class="ti-reload"></i></button>
-                    <a id="download" download="report_img.png"><button class="downloadBtn button is-danger" type="button" onClick="download()"><i class="ti-download"></i></button></a>
-                </div>
-                
-                <div class="video-screenshot">
+                <!-- <p class="title">Hình ảnh biển bản</p> -->
+                <div class="boxvideo">
+                    <div class="icon-back-report">
+                        <a href="{% url 'pagereport' %}l"><i class="ti-angle-double-left"></i></a>
+                    </div>
+                    <video autoplay playsinline id="video"></video>
+                    <div class="video-screenshot">
                     
-                    <form action="" method="post">
-                        <video autoplay id="video"></video>
-                        <div>
-                            <div id="screenshotsContainer">
-                            <canvas id="canvas" class="is-hidden"></canvas>
+                        <form action="" method="post" class="form-img-canvas">
+
+                                <div class="container-img">
+                                    <input type="checkbox" id="zoomCheck">
+                                    <label for="zoomCheck">
+                                        <div id="screenshotsContainer">
+                                            <canvas id="canvas" class="is-hidden "></canvas>
+                                        </div>
+                                    </label>
+                                </div>
+
+                            <div class="btn-submit">
+                                <button type="submit" class="button is-danger send-img" ><i class='bx bxs-send'></i></button>
+                                <a id="download" download="report_img.png"><button class="downloadBtn button is-danger is-hidden" type="button" onClick="download()"><i class="ti-download"></i></button></a>
                             </div>
-                        </div>
-                        <input type="submit" class="button is-success"value="Gửi">
-                    </form>
+                        </form>
+                        
+                    </div>
                 </div>
-                
+                <div class="boximg">
+                    <div class=btns>
+                        <button class="button is-success is-hidden" id="btnPlay"><i class="ti-control-play"></i></button> 
+                        <button class="button is-dark is-hidden" id="btnPause"><i class="ti-control-pause"></i></button> 
+                        <button class="button is-light" id="btnScreenshot"><i class="ti-camera"></i></button> 
+                    </div>
+                    <div class="btn-change">
+                        <button class="button is-dark is-hidden" id="btnChangeCamera"><i class="ti-reload"></i></button>
+                    </div>
+                    
+                </div>
             </div>
         </div>
     </div>
     <!-- JS -->
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         function download(){
         var download = document.getElementById("download");
@@ -64,7 +80,15 @@
         download.setAttribute("href", image);
     }
     </script>
-    
+    <script>
+        // Image to Lightbox Overlay 
+        $('img').on('click', function() {
+        $('#screenshotsContainer')
+            .css({backgroundImage: `url(${this.src})`})
+            .addClass('open')
+            .one('click', function() { $(this).removeClass('open'); });
+        });
+    </script>
     <script src="{% static '/js/snapShot.js' %}"></script>
     <script src="{% static '/js/app.js' %}"></script>
 </body>
