@@ -31,14 +31,12 @@
             <div class="row main">
                 <!-- <p class="title">Hình ảnh biển bản</p> -->
                 <div class="boxvideo">
-                    <div class="icon-back-report">
-                        <a href="{% url 'pagereport' %}l"><i class="ti-angle-double-left"></i></a>
-                    </div>
+                   
                     <video autoplay playsinline id="video"></video>
                     <div class="video-screenshot">
                     
-                        <form action="" method="post" class="form-img-canvas">
-
+                        <form action="" method="post" class="form-img-canvas" id="report-endcase">
+                            {% csrf_token %} 
                                 <div class="container-img">
                                     <input type="checkbox" id="zoomCheck">
                                     <label for="zoomCheck">
@@ -54,6 +52,9 @@
                             </div>
                         </form>
                         
+                    </div>
+                    <div class="icon-back-report">
+                        <a href="{% url 'pagereport' %}l"><i class="ti-angle-double-left"></i></a>
                     </div>
                 </div>
                 <div class="boximg">
@@ -88,7 +89,9 @@
             .addClass('open')
             .one('click', function() { $(this).removeClass('open'); });
         });
+        var icon_sales = "{% url 'report-endcase' %}"
     </script>
+    <script src="{% static '/js/report-encase.js' %} " ></script>
     <script src="{% static '/js/snapShot.js' %}"></script>
     <script src="{% static '/js/app.js' %}"></script>
 </body>

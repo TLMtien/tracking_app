@@ -30,9 +30,7 @@
             <div class="row main">
                 <!-- <p class="title">Hình ảnh biển bản</p> -->
                 <div class="boxvideo">
-                    <div class="icon-back-report">
-                        <a href="{% url 'pagereport' %}"><i class="ti-angle-double-left"></i></a>
-                    </div>
+                    
                     <video autoplay playsinline id="video"></video>
                     <div class="video-screenshot">
                     
@@ -52,7 +50,9 @@
                                 <a id="download" download="report_img.png"><button class="downloadBtn button is-danger is-hidden" type="button" onClick="download()"><i class="ti-download"></i></button></a>
                             </div>
                         </form>
-            
+                        <div class="icon-back-report">
+                            <a href="{% url 'pagereport' %}"><i class="ti-angle-double-left"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="boximg">

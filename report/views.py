@@ -1,19 +1,17 @@
 from os import name
 from django.shortcuts import render, redirect
 from outlet.models import tableReport, report_sale, consumerApproachReport, giftReport, outletInfo, posmReport
-from outlet.forms import tableReportForm, reportSaleForm, consumerApproachReportForm, gift_ReceiveReportForm, gift_givenReportForm
+from outlet.forms import tableReportForm, reportSaleForm, consumerApproachReportForm, gift_ReceiveReportForm, gift_givenReportForm, overallReport
 from django.views.generic import  DayArchiveView
 import datetime
 from users.models import SalePerson
 from django.contrib.auth.decorators import login_required
-# Create your views here.
 from django.http import JsonResponse
-import base64
-from PIL import Image
-import io
-from django.core.files.base import ContentFile
-from outlet.conver_file import get_image_from_data_url
-from django import forms
+from django.views.decorators.csrf import csrf_exempt
+# Create your views here.
+
+
+
 
 def sum(a, b):
     return str(int(a) + int(b))
@@ -196,27 +194,44 @@ def gift_remaining(request):
 
 
 
-from django.views.decorators.csrf import csrf_exempt
-from django.core.files.images import ImageFile
-import re
+
+
 @csrf_exempt
-#####
 @login_required
 def reportPosm(request):
-    if request.is_ajax():
-        user = request.user
-        SP = SalePerson.objects.get(user=user)
-       
-        image = request.POST.get('image')
-        print('image')
-        report = posmReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
-        if report < 1:
-            posmReport.objects.create(image= get_image_from_data_url(image)[0], SP=user, outlet=SP.outlet)
-            return JsonResponse({'created': 'true'})
-        
-        report = posmReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-        report.image.delete()
-        report.image=get_image_from_data_url(image)[0]
-        report.save()
+    user = request.user
+    SP = SalePerson.objects.get(user=user)
+    
+    # image = request.POST.get('image')
+    image = request.FILES.get('image')
+    print(image.name)
+    print(image.content_type)
+    # print(image.read())
+    report = posmReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
+    if report < 1:
+        posmReport.objects.create(image= image, SP=user, outlet=SP.outlet)
         return JsonResponse({'created': 'true'})
-    return JsonResponse({'created': False})
+    
+    report = posmReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+    report.image.delete()
+    report.image=image
+    report.save()
+    print(report.image.url)
+    return JsonResponse({'created': 'true'})
+
+
+@login_required
+def reportEndcase(request):
+    user = request.user
+    SP = SalePerson.objects.get(user=user) 
+   
+    image = request.FILES.get('image')
+    report_posm = posmReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+    report_table = tableReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+    report_gift = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+    report_consumer = consumerApproachReport.objects.get(created = datetime.date.today(), SP = request.user)
+    report = overallReport.objects.create(user = SP, confirm = image, outlet = SP.outlet, 
+                table_Report=report_table, posm_Report=report_posm, gift_report=report_gift, consumer_report=report_consumer)
+
+
+    return JsonResponse({'created': 'true'})
