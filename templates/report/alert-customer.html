@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Customer Access</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+<body>
+    <div class="app">
+        <div class="container homeoutlet">
+                <!-- Header -->
+                <div class="row header">    
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                    </div>
+                    <div class="profile-user"> 
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    </div>
+                </div>
+                <div class="icon-back">
+                    <a href="{% url 'report-sales' %}"><i class="ti-angle-double-left"></i></a>
+                </div>
+                <!-- Main -->
+                <div class="row main">
+                    <p class="report_title">tiếp cận</p>
+                    <form action="" method=""class="listbox">
+                        
+                        <table class="table-list" style="width:100%">
+                            <tr>
+                                <th>Danh mục</th>
+                                <th>Số lượng</th>
+                                <th>Tổng cộng</th>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Khách tại quán</td>
+                                {% comment %} <td class="td-number"><input type="number" id="input_quality" placeholder="Điền số lượng *" required></td>{% endcomment %}
+                                <td class="td-total">{{Total_Consumers}}</td> 
+                            </tr>
+                            <tr>
+                                <td class="td-name">khách đã tiếp cận</td>
+                                {% comment %} <td class="td-number"><input type="number" id="input_quality" placeholder="Điền số lượng *" required></td>
+                                 {% endcomment %}
+                                <td class="td-total">{{consumers_approach}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">Khách đã mua</td>
+                                {% comment %} <td class="td-number"><input type="number" id="input_quality" placeholder="Điền số lượng *" required></td>
+                                 {% endcomment %}
+                                <td class="td-total">{{consumers_brough}}</td>
+                            </tr>
+                            
+                            
+                        </table>
+                        <p class="alert"> *Số khách tiếp cận phải nhỏ hơn số khách trong quán , yêu cầu
+                            <a href="{% url 'customer-access' %}">“ Nhập lại ”</a> </p>
+                        <div class="box-center">
+                            <a class="btn btn-confirm"  href="{% url 'customer-access' %}">Xác nhận"</a>
+                        </div>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    
+    <script src="{% static '/js/app.js' %}"></script>
+</body>
+</html>

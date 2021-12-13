@@ -33,39 +33,31 @@
                             <input type="search" placeholder="Tìm kiếm">
                             <i class="ti-search"></i>
                         </div>
-                        <div class="filter-box"> 
-                            <select name="calc_shipping_provinces" required="">
-                                <option value="">Tỉnh / Thành phố</option>
-                            </select>
-                            <select name="calc_shipping_district" required="">
-                            <option value="">Quận / Huyện</option>
-                            </select>
-                            <input class="billing_address_1" name="" type="hidden" value="">
-                            <input class="billing_address_2" name="" type="hidden" value="">
-                        </div>
+                        
                     </div>
                     <div class="main-table">
+                        
                         <div class="table-details">
-                            <p class="title">chi tiết outlet</p>
+                            <p class="table-details_title">XÁC NHẬN THÔNG TIN OUTLET</p>
                             <div class="details-info">
                                 <p class="auth-outlet">
                                     {{ object.outlet_Name }}
                                 </p>
                                 <span class="local-outlet">
-                                    <i class='ti-location-pin'></i> Địa chỉ : {{ object.outlet_address }}
+                                    <i class='ti-location-pin'></i> Địa chỉ: {{ object.outlet_address }}
                                 </span><br>
                                 <span class="date-outlet">
-                                    <i class='ti-timer'></i> Thời gian tạo : {{ object.time }}, {{ object.created }}
+                                    <i class='ti-timer'></i> Thời gian tạo: {{ object.time }}, {{ object.created }}
                                 </span><br>
                                 <span class="type-outlet">
-                                    <i class='ti-clip'></i> Loại outlet : {{ object.type }}
+                                    <i class='ti-clip'></i> Loại outlet: {{ object.type }}
                                 </span><br>
                             </div>
                             
                         </div>
                         <div class="box-button">
-                            <a href="{% url 'create' %}"class="btn btn-close">Đóng cửa</a>
-                            <a href="{% url 'pagereport' %}" class="btn btn-checkin">Check - in</a>
+                            <a href="outletCreate/"class="btn btn-close">Tạo outlet mới</a>
+                            <a href='check_in/' class="btn btn-checkin">Bắt đầu ca làm</a>
                         </div>
                     </div>
                 </div>
@@ -74,8 +66,6 @@
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{% static '/js/districts.min.js' %}"></script>
-    <script src="{% static '/js/filter.js' %}"></script>
     <script src="{% static '/js/app.js' %}"></script>
 </body>
 </html>

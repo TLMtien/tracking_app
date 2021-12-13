@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,67 +10,70 @@
     <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
     <!-- CSS -->
     <link rel="stylesheet" href="{% static '/css/style.css' %} ">
-
-
 </head>
-
 <body>
     <div class="app">
         <div class="container homeoutlet">
-            <!-- Header -->
-            <div class="row header">
-                <div class="logo">
-                    <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                <!-- Header -->
+                <div class="row header">
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                    </div>
+                    <div class="profile-user">
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    </div>
                 </div>
-                <div class="profile-user">
-                    <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
-                </div>
-            </div>
-
-            <!-- Main -->
-            <div class="row main">
-                <div class="main-top">
-                    <form action="" method="POST" id='outlet-form'>
-                        {% csrf_token %}
+    
+                <!-- Main -->
+                <div class="row main">
+                    <p class="title">Chọn Outlet</p>
+                    <div class="main-top">
                         <div class="search-box">
                             <input type="search" placeholder="Tìm kiếm">
-                            <i class="ti-search"><button type="submit"></button></i>
+                            <i class="ti-search"></i>
                         </div>
                         <div class="filter-box">
-
-                            <select name="calc_shipping_provinces" id='province'>
-                                    <option value=""  selected>Tỉnh / Thành phố</option>
+                            
+                            <select name="calc_shipping_provinces" required="">
+                                <option value="">Tỉnh / Thành phố</option>
                             </select>
-                            <select name="calc_shipping_district" id='district'>
-                                <option value="" selected>Quận / Huyện</option>
+                            <select name="calc_shipping_district" required="">
+                            <option value="">Quận / Huyện</option>
                             </select>
-                            <input class="billing_address_1" name="" type="hidden" value="" id='aaa'>
-                            <input class="billing_address_2" name="" type="hidden" value="" id='bbb'>
+                            <input class="billing_address_1" name="" type="hidden" value="">
+                            <input class="billing_address_2" name="" type="hidden" value="">
                         </div>
-                    </form>
-                </div>
-                <div class="main-table">
-                    {% if list_outlet %} {% for outlet in list_outlet %}
-
-                    <div class="table-list">
-                        <a href={{outlet.id}}>{{outlet.outlet_Name}}</a>
                     </div>
-                    {% endfor %} {% else %}
-                    <p>None</p>
-                    {% endif %}
-
+                    <div class="main-table">
+                        {% if list_outlet %} 
+                        {% for outlet in list_outlet %}
+                        <div class="table-list">
+                            <a class="table-list_name" href={{outlet.id}}>
+                                {{outlet.outlet_Name}}
+                            </a>
+                            <p class="table-list_id">
+                                {{outlet.ouletID}}
+                            </p>
+                            <p class="table-list_address">
+                                {{outlet.outlet_address}}
+                            </p>
+                        </div>
+                        {% endfor %} 
+                        {% else %}
+                        <p>None</p>
+                        {% endif %}
+                        
+                    </div>
                 </div>
-            </div>
 
         </div>
     </div>
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static '/js/main.js' %}"></script>
     <script src="{% static '/js/districts.min.js' %}"></script>
     <script src="{% static '/js/filter.js' %}"></script>
     <script src="{% static '/js/app.js' %}"></script>
-    <script src="{% static '/js/main.js' %}"></script>
 </body>
-
 </html>

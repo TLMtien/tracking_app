@@ -24,15 +24,16 @@
                     </div>
                 </div>
                 <div class="icon-back">
-                    <a href="{% url 'listoutlet' %}"><i class="ti-angle-double-left"></i></a>
+                    <a href='back/'><i class="ti-angle-double-left"></i></a>
                 </div>
                 <!-- Main -->
                 <div class="row main">
                     <div class="main-top">
                         <div class="create-info-outlet__content">
                             <div class="create-info-outlet_body">
-                                <p class="title">Thông Tin Outlet</p>
+                                
                                 <form action="" class="form-create-info" method='POST'>
+                                    <p class="form-create-info_title">Thông Tin Outlet</p>
                                     {% csrf_token %} 
                                     <div class="input-create-info">
                                         {% comment %} <input type="text" placeholder="Tên outlet *"> {% endcomment %}
@@ -42,13 +43,16 @@
                                         {% comment %} <input type="text" placeholder="Địa chỉ outlet *"> {% endcomment %}
                                         {{form.outlet_address}}
                                     </div>
-                                    <div class="input-create-info">
-                                        <input type="datetime-local" value="">
-                                    </div>
+                                    
                                     <div class="input-create-info">
                                         {% comment %} <input type="text" placeholder="Loại outlet *"> {% endcomment %}
                                         {{form.type}}
                                     </div>
+
+                                    <div class="input-create-info">
+                                        <input type="datetime-local" value="">
+                                    </div>
+                                    
                                     <div class="create-info-outlet__footer">
                                         <input type="submit" class="btn btn-confirm" value="Xác nhận">
                                     </div>
@@ -62,8 +66,6 @@
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{% static '/js/districts.min.js' %}"></script>
-    <script src="{% static '/js/filter.js' %}"></script>
     <script src="{% static '/js/app.js' %}"></script>
 </body>
 </html>

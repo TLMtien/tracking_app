@@ -96,6 +96,23 @@ button {
     padding: 15px 50px;
 }
 
+.btn-outline-confirm {
+    background: transparent;
+    border: 1px solid #1F6C2F;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    color: #1F6C2F;
+    font-weight: 600;
+    padding: 8px 10px;
+    border-radius: 5px;
+}
+
+.btn-confirm {
+    background: #1F6C2F;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    padding: 8px 10px;
+    border-radius: 5px;
+}
+
 .app {
     position: relative;
     max-width: 480px;
@@ -556,6 +573,15 @@ button {
     /* margin-top: -30px !important; */
 }
 
+.homeoutlet .main .title {
+    text-align: center;
+    text-transform: uppercase;
+    color: #111;
+    margin-bottom: 30px;
+    font-size: 24px;
+    margin-top: -30px;
+}
+
 .homeoutlet .main .main-top {
     width: 100%;
 }
@@ -641,10 +667,12 @@ select+select {
     background: #eee;
 }
 
-.homeoutlet .main .main-table .table-details .title {
+.homeoutlet .main .main-table .table-details_title {
     color: #111;
-    text-transform: capitalize;
+    text-transform: uppercase;
     font-weight: 600;
+    margin-bottom: 50px;
+    text-align: center;
 }
 
 .homeoutlet .main .main-table .table-details .details-info {
@@ -656,6 +684,12 @@ select+select {
     text-transform: capitalize;
     font-weight: 600;
     color: #1F6C2F;
+    font-size: 15px;
+}
+
+.homeoutlet .main .main-table .table-details .details-info i {
+    color: #1F6C2F;
+    font-weight: 600;
 }
 
 .homeoutlet .main .main-table .table-details .details-info .local-outlet,
@@ -765,9 +799,10 @@ select+select {
     margin: 0 auto;
 }
 
-.create-info-outlet_body .title {
+.create-info-outlet_body .form-create-info_title {
     color: #333;
     font-weight: 600;
+    font-size: 20px;
     margin-bottom: 14px;
 }
 
@@ -794,22 +829,18 @@ select+select {
     width: 300px;
 }
 
-.create-info-outlet__footer .btn-confirm {
-    padding: 8px 15px;
-    border-radius: 5px;
-    border: 1px solid #1F6C2F;
-    background: #1F6C2F;
-    cursor: pointer;
-    color: #fff;
-    box-shadow: 1px 1px 3px #1F6C2F;
-}
-
 .create-info-outlet__footer a {
     color: #585858;
 }
 
 .create-info-outlet__footer i {
     color: #d02d2c;
+}
+
+.create-info-outlet__content .cornfirm-createoutlet_title {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 20px;
 }
 
 
@@ -850,6 +881,14 @@ select+select {
 
 
 /* Report Page */
+
+.homeoutlet .main .report_title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
 
 .homeoutlet .main .box-report .btn-report {
     background: #1F6C2F;
@@ -1083,17 +1122,11 @@ select+select {
 
 /* List Gift Page */
 
-.listbox .title {
-    color: #111;
-    font-size: 20px;
-    font-weight: 600;
-}
-
 .listbox .table-list {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #ccc;
-    margin-top: -20px;
+    margin-top: 20px;
 }
 
 .listbox .table-list th {
@@ -1117,6 +1150,7 @@ select+select {
 
 .listbox .table-list .td-name {
     font-size: 16px;
+    text-align: left;
 }
 
 .listbox .table-list .td-total {
@@ -1149,10 +1183,15 @@ select+select {
     color: #666;
 }
 
-.listbox .btn-confirm {
-    background: #1F6C2F;
-    padding: 8px 10px;
-    border-radius: 5px;
+.listbox .alert {
+    margin: 10px;
+    color: red;
+}
+
+.listbox .alert a {
+    color: #1F6C2F;
+    font-weight: 600;
+    text-decoration: none;
 }
 
 

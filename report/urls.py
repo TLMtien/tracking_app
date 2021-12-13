@@ -12,7 +12,7 @@ urlpatterns = [
     path('quantity-gift/', TemplateView.as_view(template_name="report/quantity-gift.html"), name='quantity-gift'),
     path('report-sales/', TemplateView.as_view(template_name="report/report-sales.html"), name='report-sales'),
     path('report-casehead/', TemplateView.as_view(template_name="report/report-casehead.html"), name='report-casehead'),
-    path('report-endcase/', TemplateView.as_view(template_name="report/report-endcase.html"), name='report-endcase'),
+    path('report-endcase/', TemplateView.as_view(template_name="report/report-endcase.html"), name='report_endcase'),
     path('reportPOSM/', views.reportPosm, name='reportPosm'),
     path('report-endcase/', views.reportEndcase, name='report-endcase'),
 ]

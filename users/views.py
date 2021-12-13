@@ -1,4 +1,5 @@
-from django.http.response import HttpResponse
+from django.http import response
+from django.http.response import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from . forms import ChangePasswordForm, SignupForm, LoginForm
 from . models import NewUser, SalePerson
@@ -13,13 +14,12 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .decorators import unauthenticated_user
 from django.contrib.auth.forms import PasswordChangeForm
+
 # Create your views here.
 
 def index(request):
     return HttpResponse('ok')
 	
-
-
 #import excel data ----> create account for SP 
 
 def Signup(request):
@@ -89,14 +89,11 @@ def loginPage(request):
 
 login_required
 def page_user(request):
-	# if request.user.is_salePerson:
-	# 	outlet = outletInfo.objects.filter(SP=request.user).count()
-	# 	if outlet < 1:
-	# 		return redirect('passwordchange')
-	# if request.user.is_HVN or request.user.is_HVNVip:
-	# 	return HttpResponse('ko')
+	if request.user.is_salePerson:
+		return redirect('listoutlet')
+	return  Http404
 	
-	return redirect('listoutlet')
+	
 
 login_required
 def PasswordChangeDone(request):

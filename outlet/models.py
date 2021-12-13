@@ -85,10 +85,7 @@ class tableReport(models.Model):
     total_table = models.CharField(max_length=255, default='0', blank=True)
     created = models.DateField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        self.total_table = sum(self.other_table , self.other_beer_table, self.brand_table, self.HVN_table)
-        
-        super(tableReport, self).save(*args, **kwargs)
+    
 
 
 class consumerApproachReport(models.Model):

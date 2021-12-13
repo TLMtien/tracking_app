@@ -4,9 +4,8 @@ from .models import overallReport, tableReport, outletInfo, giftReport, search, 
 from .forms import outletInfoForm
 from django.views.generic import DetailView, ListView, detail
 from users.models import SalePerson
-
-
 from django.http import JsonResponse
+
 # Create your views here.
 def index(request):
     return HttpResponse('ok')
@@ -20,7 +19,7 @@ def ListReport(request):
         return render(request, 'outlet/index.html',{'tasks': rpview})
 
 login_required
-def outlet_create(request):
+def outlet_create(request, pk):
     if request.method == "POST":
         SP =SalePerson.objects.get(user=request.user)
         form = outletInfoForm(request.POST,is_salePerson=request.user.is_salePerson)
@@ -28,7 +27,6 @@ def outlet_create(request):
             outlet_Name = form.cleaned_data.get('outlet_Name')
             type = form.cleaned_data.get('type')
             outlet_address = form.cleaned_data.get('outlet_address')
-            
             #create outlet
             p, created = outletInfo.objects.get_or_create(outlet_Name=outlet_Name, type=type,  outlet_address=outlet_address)
             #CP = Campain.objects.get(program=SP.brand)
@@ -76,4 +74,17 @@ def searchView(request):
         return JsonResponse({'created': True})
     return JsonResponse({'created': False})
 
+login_required
+def check_in(request, pk):
+    user = request.user
+    outlet = outletInfo.objects.get(id=pk)
+    SP = SalePerson.objects.get(user=user)
+    SP.outlet = outlet
+    SP.save()
+    return redirect('pagereport')
 
+
+login_required
+def come_back(request, pk):
+    pk = str(pk)
+    return redirect('http://127.0.0.1:8000/outlet/listoutlet/'+pk+'/')  #return redirect('https://bluesungroup.vn/outlet/listoutlet/'+pk+'/')

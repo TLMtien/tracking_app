@@ -30,12 +30,12 @@
                 <div class="row main">
                     <form action=" " method="POST" class="listbox">
                         {% csrf_token %} 
-                        <p class="title">Danh sách quà phát</p>
+                        <p class="report_title">quà phát trong ca</p>
                         <table class="table-list" style="width:100%">
                             <tr>
                                 <th>Tên quà tặng</th>
                                 <th>Số lượng</th>
-                                <th>Tổng cộng</th>
+                            
                             </tr>
                             <tr>
                                 <td class="td-name">Móc chìa khóa 1</td>
@@ -43,7 +43,7 @@
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.gift1_given}}
                                 </td>
-                                <td class="td-total"></td>
+                               
                             </tr>
                             <tr>
                                 <td class="td-name">Móc chìa khóa 2</td>
@@ -51,7 +51,7 @@
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.gift2_given}}
                                 </td>
-                                <td class="td-total"></td>
+                                
                             </tr>
                             <tr>
                                 <td class="td-name">Móc chìa khóa 3</td>
@@ -59,7 +59,7 @@
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.gift3_given}}
                                 </td>
-                                <td class="td-total"></td>
+                               
                             </tr>
 
                         </table>

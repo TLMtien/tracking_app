@@ -28,9 +28,10 @@
                 </div>
                 <!-- Main -->
                 <div class="row main">
+                    <p class="report_title">tiếp cận</p>
                     <form action=" " method="" class="listbox">
                         {% csrf_token %} 
-                        <p class="title">Báo cáo tiếp cận khách hàng</p>
+                        
                         <table class="table-list" style="width:100%">
                             <tr>
                                 <th>Danh mục</th>
@@ -38,34 +39,28 @@
                                 <th>Tổng cộng</th>
                             </tr>
                             <tr>
-                                <td class="td-name">Số khách trong quán</td>
+                                <td class="td-name">Khách tại quán</td>
                                 <td class="td-total">{{Total_Consumers}}</td>
                                 <td class="td-total">{{sum_Total_Consumers}}</td>
                             </tr>
                             <tr>
-                                <td class="td-name">Số khách tiếp cận</td>
+                                <td class="td-name">khách đã tiếp cận</td>
                                
                                 <td class="td-total">{{consumers_approach}}</td>
                                 <td class="td-total">{{sum_consumers_approach}}</td>
                             </tr>
                             <tr>
-                                <td class="td-name">Số khách mua hàng</td>
+                                <td class="td-name">khách đã mua</td>
                                 
                                 <td class="td-total">{{consumers_brough}}</td>
                                 <td class="td-total">{{sum_consumers_brough}}</td>
                             </tr>
-                            <tr>
-                                <td class="td-name">Số quà phát</td>
-                                <td class="td-number add-table">
-                                    <a href='{% url "listgift-sent" %}'> <span>Tiếp tục</span></a>
-                                </td>
-                                <td class="td-total"></td>
-                            </tr>
+                            
                             
                         </table>
-                        <p class="noted">*Nhập số lượng bán vào ô “số lượng” </p>
+                        <br>
                         <div class="box-center">
-                            <input type="submit" class="btn btn-confirm" value="Xác nhận">
+                            <a class="btn btn-confirm" href="{% url 'pagereport' %}">Xác nhận</a>
                         </div>
                     </form>
                 </div>

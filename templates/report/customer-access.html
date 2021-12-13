@@ -28,9 +28,10 @@
                 </div>
                 <!-- Main -->
                 <div class="row main">
+
                     <form action=" " method="POST" class="listbox">
                         {% csrf_token %} 
-                        <p class="title">Báo cáo tiếp cận khách hàng</p>
+                        <p class="report_title">tiếp cận</p>
                         <table class="table-list" style="width:100%">
                             <tr>
                                 <th>Danh mục</th>
@@ -38,7 +39,7 @@
                                 <th>Tổng cộng</th>
                             </tr>
                             <tr>
-                                <td class="td-name">Số khách trong quán</td>
+                                <td class="td-name">Khách tại quán</td>
                                 <td class="td-number">
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.Total_Consumers}}
@@ -46,7 +47,7 @@
                                 <td class="td-total"></td>
                             </tr>
                             <tr>
-                                <td class="td-name">Số khách tiếp cận</td>
+                                <td class="td-name">khách đã tiếp cận</td>
                                 <td class="td-number">
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.consumers_approach}}
@@ -54,16 +55,11 @@
                                 <td class="td-total"></td>
                             </tr>
                             <tr>
-                                <td class="td-name">Số khách mua hàng</td>
+                                <td class="td-name">Khách đã mua</td>
                                 <td class="td-number">
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.consumers_brough}}
                                 </td>
-                                <td class="td-total"></td>
-                            </tr>
-                            <tr>
-                                <td class="td-name">Số quà phát</td>
-                                <td class="td-number add-table"><span> Tiếp tục</span></td>
                                 <td class="td-total"></td>
                             </tr>
                             
