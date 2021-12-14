@@ -254,8 +254,8 @@ def reportEndcase(request):
     report_posm = posmReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
     report_table = tableReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
     report_gift = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-    report_consumer = consumerApproachReport.objects.get(created = datetime.date.today(), SP = request.user)
-    report = overallReport.objects.create(user = SP, confirm = image, outlet = SP.outlet, 
+    report_consumer = consumerApproachReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+    report = overallReport.objects.create(user = user, confirm = image, outlet = SP.outlet, 
                 table_Report=report_table, posm_Report=report_posm, gift_report=report_gift, consumer_report=report_consumer)
 
 
