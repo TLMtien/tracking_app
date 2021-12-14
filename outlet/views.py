@@ -69,8 +69,25 @@ def searchView(request):
     if request.is_ajax():
         province = request.POST.get('province')
         district = request.POST.get('district')
+        all_outlet = outletInfo.objects.all()
+        list_outlet = ""
+        for outlet in all_outlet:
+            if district in outlet.outlet_address:
+                list_outlet += f'''<tr>
+                    <div class="table-list">
+                            <a class="table-list_name" href={outlet.id}>
+                                {outlet.outlet_Name}
+                            </a>
+                            <p class="table-list_id">
+                                {outlet.ouletID}
+                            </p>
+                            <p class="table-list_address">
+                                {outlet.outlet_address}
+                            </p>
+                    </div>
+                </tr>
+                '''
         search.objects.create(province=province, district=district)
-        redirect('create')
         return JsonResponse({'created': True})
     return JsonResponse({'created': False})
 
@@ -87,4 +104,4 @@ def check_in(request, pk):
 login_required
 def come_back(request, pk):
     pk = str(pk)
-    return redirect('http://127.0.0.1:8000/outlet/listoutlet/'+pk+'/')  #return redirect('https://bluesungroup.vn/outlet/listoutlet/'+pk+'/')
+    return redirect('https://bluesungroup.vn/outlet/listoutlet/'+pk+'/')

@@ -415,10 +415,58 @@ button {
     font-family: 'Roboto Slab', serif;
 }
 
+
+/* Dropdown-nav */
+
+.header {
+    position: relative;
+    line-height: 50px;
+}
+
+.header .dropdown-menu {
+    min-width: 150px;
+    /* Set width of the dropdown */
+    height: 50px;
+    background: #fff;
+    display: none;
+    position: absolute;
+    z-index: 999;
+    right: 0;
+    top: 55%;
+    list-style-type: none;
+    margin-top: 5px;
+    border: 1px solid #1A5D1F;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.header.dropdown-menu .nav-sub {
+    display: block;
+    font-weight: normal;
+    padding: 8px;
+    transition: all 0.5s;
+}
+
+.header .dropdown-menu .nav-sub:hover {
+    background-color: rgba(80, 151, 85, 0.404);
+}
+
+.header .dropdown-menu i {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.header .dropdown-menu a {
+    text-decoration: none;
+    color: #111;
+    padding: 10px;
+    font-weight: 600;
+}
+
 .main .form-login .input-user::placeholder {
     color: #111;
     font-weight: 600;
-    font-family: 'Roboto Slab', serif;
+    /* font-family: 'Roboto Slab', serif; */
 }
 
 .main .form-login .input-user:focus {
