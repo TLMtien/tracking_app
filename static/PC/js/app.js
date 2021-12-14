@@ -19,11 +19,8 @@ document.querySelectorAll('.sidebar-submenu').forEach(e => {
 
 function openLeftMenu() {
     document.getElementById("leftMenu").style.display = "block";
-  }
-  
-  function closeLeftMenu() {
+}
+
+function closeLeftMenu() {
     document.getElementById("leftMenu").style.display = "none";
-  }
-
-
-
+}

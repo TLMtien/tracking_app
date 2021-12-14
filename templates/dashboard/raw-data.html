@@ -30,10 +30,10 @@
                                 tiger tp
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="nav-sub"><a href="./dashboard.html">Dashboard</a></li>
-                                <li class="nav-sub"><a href="./raw-data.html">Raw data</a></li>
-                                <li class="nav-sub"><a href="#">Management</a></li>
-                                <li class="nav-sub"><a href="#">Export report</a></li>
+                                <li class="nav-sub"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                                <li class="nav-sub"><a href="#">Raw data</a></li>
+                                <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
+                                <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                             </ul>
                         </li>
                         <li class="nav-list dropdown-nav"><a href="#" class="nav-links">tiger fa</a></li>

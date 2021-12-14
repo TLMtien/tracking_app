@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Report</title>
+
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static '/PC/themify-icons.css' %}">
+    <!-- css -->
+    <link rel="stylesheet" href="{% static '/PC/css/style.css' %}">
+</head>
+<body>
+    <div class="app">
+        <div class="container-home">
+            <!-- Header Home -->
+            <div class="row header-home">
+                <div class="logo">
+                    <a href=""><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
+                </div>
+                <div class="navbar" id="topheader">
+                    <ul class="navbar-nav">
+                        <li class="nav-list dropdown-nav active">
+                            <a href="#" class="nav-links drop-btn" onclick="openTigerTp()">
+                                Tiger Table Promotion
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-sub"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                                <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
+                                <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
+                                <li class="nav-sub"><a href="">Export report</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Special Festive Promotion</a></li>
+                    </ul>
+                </div>
+                <div class="profile-user">
+                    <a href="#" class="user-img">
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                    </a>
+                </div>
+            </div>
+            <div class="row raw-data">
+                <div class="leftbox dropdown_raw">
+                    <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
+                    <span class="title-menu">Management</span>
+                    <ul class="dropdown-menu_raw">
+                        <li class="nav-sub"><a href="./management.html">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="./outlet-approval.html">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="./kpi-setting.html">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="./sp-info.html">SP Information</a></li>
+                    </ul>
+                </div>
+                <div class="rightbox">
+                    <div class="lock-icon">
+                        <i class='bx bxs-lock-open-alt'></i> <span>Lock</span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row raw-data-sub">
+                <div class="leftbox">
+                    <span class="title-menu">Export Report</span>
+                    
+                </div>
+                <div class="rightbox_kpi">
+                    <button class="btn-kpi">Export</button>
+
+                </div>
+                
+            </div>
+
+            <!-- Main Home-->
+            
+            <div class="main-table_managenment">
+                <form action="#" method="post">
+                    <div class="filter-day">
+                        <div class="col-6">
+                            From <br>
+                            <input type="date" name="" id="" class="input-date">
+                        </div>
+                        <div class="col-6">
+                            Go <br>
+                            <input type="date" name="" id="" class="input-date">
+                        </div>
+                    </div>
+                    <div class="type-report">
+                        <p class="title">Type of report</p>
+                        <ul class="type-report_main">
+                            <li>
+                                <div class="type-report_main-item">
+                                    <label for="" class="type-report_container">
+                                        <input type="checkbox" checked="checked" class="report_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="desc">Full Report</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="type-report_main-item">
+                                    <label for="" class="type-report_container">
+                                        <input type="checkbox" class="report_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="desc">Performance Report</div>
+                                    
+                                </div>
+                                <ul class="type-report_sub">
+                                    <li>
+                                        <div class="type-report_sub-item">
+                                            <label for="" class="type-report_container">
+                                                <input type="checkbox" class="report_checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <div class="desc_sub">Dashboard</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="type-report_sub-item">
+                                            <label for="" class="type-report_container">
+                                                <input type="checkbox"  class="report_checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <div class="desc_sub">Raw Data</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="type-report_sub-item">
+                                            <label for="" class="type-report_container">
+                                                <input type="checkbox"  class="report_checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <div class="desc_sub">Visibilities</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="type-report_sub-item">
+                                            <label for="" class="type-report_container">
+                                                <input type="checkbox" class="report_checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <div class="desc_sub">Paper report</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="type-report_main-item">
+                                    <label for="" class="type-report_container">
+                                        <input type="checkbox"  class="report_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="desc">Photo Report</div>
+                                    
+                                </div>
+                                <ul class="type-report_sub">
+                                    <li>
+                                        <div class="type-report_sub-item">
+                                            <label for="" class="type-report_container">
+                                                <input type="checkbox"  class="report_checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <div class="desc_sub">Visibilities</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="type-report_sub-item">
+                                            <label for="" class="type-report_container">
+                                                <input type="checkbox"  class="report_checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <div class="desc_sub">Paper report</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </form>
+                
+            </div>
+            <!-- End Main Home -->
+            
+    </div>
+
+
+
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown-nav").click(function(){
+                $(this).find(".dropdown-menu").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown-nav");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu").slideUp("fast");
+            }            
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown_raw").click(function(){
+                $(this).find(".dropdown-menu_raw").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown_raw");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu_raw").slideUp("fast");
+            }            
+        });
+    </script>
+    <script>
+        $( '#topheader .navbar-nav a' ).on( 'click', function () {
+        $( '#topheader .navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+        $( this ).parent( 'li' ).addClass( 'active' );
+    });
+    </script>
+    <script>
+        $( '#leftMenu .sidebar a' ).on( 'click', function () {
+        $( '#leftMenu .sidebar' ).find( 'li.active' ).removeClass( 'active' );
+        $( this ).parent( 'li' ).addClass( 'active' );
+    });
+    </script>
+    <script>/* ============Active Pagin============= */
+        const room  = document.querySelector('.pagin-table');
+        const btns = document.querySelectorAll('.number-page'); 
+
+        room.addEventListener('click', e => {
+
+        btns.forEach(btn => {
+
+            if(btn.getAttribute('id') === e.target.getAttribute('id'))
+            btn.classList.add('active');
+            else
+            btn.classList.remove('active');
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{% static 'PC/js/chart.js' %}"></script>
+    <script src="{% static 'PC/js/app.js' %}"></script>
+</body>
+</html>
