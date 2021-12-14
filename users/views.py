@@ -25,25 +25,19 @@ def index(request):
 def Signup(request):
 	excel_file = request.FILES["excel_file"]
 	wb = openpyxl.load_workbook(excel_file)
-	
+
 	sheets = wb.sheetnames
 	worksheet = wb[sheets[0]]  
-
-	excel_data = list()
-	
+	excel_data = list()	
 	for row in worksheet.iter_rows():
 		row_data = list()
-
 		for cell in row:
 			row_data.append(str(cell.value))
-
 		excel_data.append(row_data)
     #loop 
-
 	user = NewUser.objects.create_user(user_name='user_name', password1='password1')
 	sp=SalePerson.objects.create(user=user, brand = '', full_name = '', province='', outlet='')
 	sp.save()
-
 	return redirect('index')
 	
 
