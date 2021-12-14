@@ -325,8 +325,8 @@ a {
     /* line-height: 1.5; */
 }
 
-.header-home .navbar .dropdown-menu {
-    min-width: 150px;
+.header-home .dropdown-menu {
+    min-width: 180px;
     /* Set width of the dropdown */
     background: #fff;
     display: none;
@@ -340,14 +340,14 @@ a {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
-.header-home .navbar .dropdown-menu .nav-sub {
+.header-home .dropdown-menu .nav-sub {
     display: block;
     font-weight: normal;
-    padding: 8px;
+    padding: 3px;
     transition: all 0.5s;
 }
 
-.header-home .navbar .dropdown-menu .nav-sub:hover {
+.header-home .dropdown-menu .nav-sub:hover {
     background-color: rgba(80, 151, 85, 0.404);
 }
 
@@ -766,7 +766,8 @@ a {
 .raw-data-sub .rightbox .lock-icon {
     float: left;
     right: 0;
-    margin-left: 55%;
+    width: 10%;
+    margin-left: 80%;
 }
 
 .raw-data-sub .rightbox .lock-icon i {
@@ -779,21 +780,37 @@ a {
     color: #666;
 }
 
-.update-file-outlet {
-    position: relative;
-    width: 180px;
-    text-align: center;
-    margin: 20% auto;
+#uploadFile {
+    position: fixed;
+    top: 20%;
+    left: 40%;
+    z-index: 10000;
 }
 
-.update-file-outlet span.label {
+#uploadFile .content-upload {
+    background: #fff;
+    border: 1px solid #1A5D1F;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    min-height: 200px;
+}
+
+#uploadFile .update-file-outlet {
+    position: relative;
+    width: 250px;
+    text-align: center;
+    margin: 10% auto;
+}
+
+#uploadFile .update-file-outlet span.label {
     position: relative;
     z-index: 0;
     display: inline-block;
     width: 100%;
-    background: #1A5D1F;
+    background: #fff;
     cursor: pointer;
-    color: #fff;
+    color: red;
+    border: 1px solid #1A5D1F;
     padding: 10px;
     text-transform: uppercase;
     font-size: 12px;
@@ -810,6 +827,34 @@ a {
     left: 0;
     opacity: 0;
     cursor: pointer;
+}
+
+#uploadFile .btns {
+    text-align: center;
+}
+
+#uploadFile .btns .btn-cancel {
+    padding: 8px 10px;
+    outline: none;
+    border: 1px solid #1A5D1F;
+    color: #1F6C2F;
+    border-radius: 5px;
+    background: transparent;
+    margin-right: 20px;
+}
+
+#uploadFile .btns .btn-upload {
+    padding: 8px 10px;
+    outline: none;
+    border: 1px solid #1A5D1F;
+    color: #fff;
+    border-radius: 5px;
+    background: #1F6C2F;
+}
+
+#uploadFile .btns .btn-cancel:hover,
+#uploadFile .btns .btn-upload:hover {
+    opacity: .8;
 }
 
 .main-table_managenment .th-btns div {
@@ -861,7 +906,7 @@ a {
 }
 
 .raw-data-sub .btn-input,
-.raw-data-sub .btn-btn-upload,
+.raw-data-sub .btn-upload,
 .raw-data-sub .btn-kpi,
 .btn-create {
     padding: 10px 20px;
@@ -870,6 +915,7 @@ a {
     border-radius: 5px;
     border: 1px solid #1A5D1F;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .raw-data-sub .rightbox_lock {

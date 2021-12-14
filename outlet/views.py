@@ -5,7 +5,7 @@ from .forms import outletInfoForm
 from django.views.generic import DetailView, ListView, detail
 from users.models import SalePerson
 from django.http import JsonResponse
-
+import openpyxl
 # Create your views here.
 def index(request):
     return HttpResponse('ok')
@@ -87,8 +87,8 @@ def searchView(request):
                     </div>
                 </tr>
                 '''
-        search.objects.create(province=province, district=district)
-        return JsonResponse({'created': True})
+        #search.objects.create(province=province, district=district)
+        return JsonResponse({'created': True, 'list_outlet':list_outlet})
     return JsonResponse({'created': False})
 
 login_required
@@ -105,3 +105,55 @@ login_required
 def come_back(request, pk):
     pk = str(pk)
     return redirect('https://bluesungroup.vn/outlet/listoutlet/'+pk+'/')
+
+
+def uploadFile_outlet(request):
+    if "GET" == request.method:
+        return render(request, 'dashboard/upload-file.html', {})
+    else:
+        excel_file = request.FILES["upload"]
+        wb = openpyxl.load_workbook(excel_file)
+        
+        sheets = wb.sheetnames
+        print(sheets[0])
+        worksheet = wb[sheets[0]]   #Trang tính
+
+        excel_data = list()
+      
+        for row in worksheet.iter_rows():
+            row_data = list()
+
+            for cell in row:
+                #if not (cell.value) == None: 
+                row_data.append(str(cell.value))
+
+            excel_data.append(row_data)
+        print(len(excel_data)-2)
+        # for i in range(len(excel_data)-1):
+        #     a = Message(phone_number = '+84'+ excel_data[i+1][0][1:len(excel_data[i+1][0])], content = excel_data[i+1][1])
+        #     a.save()
+        list_outlet = []
+        for i in range(10):
+            filter_outlet = outletInfo.objects.filter(ouletID=excel_data[i+1][3], outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
+            if filter_outlet <1:
+                campain = Campain.objects.get(program='bivina')
+                a = outletInfo.objects.create(created=excel_data[i+1][1], province=excel_data[i+1][2], ouletID=excel_data[i+1][3],
+                    type=excel_data[i+1][4], area=excel_data[i+1][5], outlet_address=excel_data[i+1][6], 
+                    outlet_Name=excel_data[i+1][7], created_by_HVN = True)
+                
+                a.compain.add(campain)
+                a.save()
+                list_outlet.append(a)
+        return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
+
+
+
+# tigerTP
+# heineken
+# Larue_SPE
+# Larue
+# bivina
+# STB
+# heineken_hnk
+# tigerHZA
+# tigerFA

@@ -1,9 +1,12 @@
+from django.http import response
 from django.shortcuts import render
 from dateutil.relativedelta import relativedelta
 from .forms import TimeReportForm, TimeDashBoard
 from outlet.models import posmReport, outletInfo, tableReport, report_sale, consumerApproachReport, giftReport, Campain
 from .test import date_generator, revenue_char_bar, sum_value_iv
 from django.shortcuts import get_object_or_404
+from django.views.generic import DetailView, ListView
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -12,6 +15,33 @@ def sum(a, b):
 
 def percent(a,b):
     return (int(a)*100)/(int(b))
+
+# login_required
+#ADMIN HVN
+class ListOutletDashbordView(ListView):
+    model = outletInfo
+    context_object_name = 'list_outlet_view'
+    paginate_by = 25
+    template_name = 'dashboard/management.html'
+
+def outlet_approval(request):
+    count = outletInfo.objects.filter(created_by_HVN = False).count()
+    outlet = outletInfo.objects.filter(created_by_HVN = False)
+    
+    return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet})
+
+def delete_outlet_byHVN(request):
+    if request.is_ajax and request.method == "POST":
+        arr = request.POST.get('arr')
+        a = arr.split(',')
+        array = []
+        for i in a:
+            print(int(i))
+            outlet = outletInfo.objects.get(id=i)
+            outlet.delete()
+
+        return JsonResponse({'created': 'success'})
+
 # def sum_revenue(request):
 #     user = request.user
 #     form_calculate = TimeReportForm(request.GET)

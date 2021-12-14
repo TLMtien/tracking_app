@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management</title>
+
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static '/PC/themify-icons.css' %}">
+    <!-- css -->
+    <link rel="stylesheet" href="{% static '/PC/css/style.css' %}">
+</head>
+<body>
+    <div class="app">
+        <div class="container-home">
+            <!-- Header Home -->
+            <div class="row header-home">
+                <div class="logo">
+                    <a href="#"><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
+                </div>
+                <div class="navbar" id="topheader">
+                    <ul class="navbar-nav">
+                        <li class="nav-list dropdown-nav active">
+                            <a href="#" class="nav-links drop-btn" onclick="openTigerTp()">
+                                Tiger Table Promotion
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-sub"><a href="./dashboard.html">Dashboard</a></li>
+                                <li class="nav-sub"><a href="./raw-data.html">Raw data</a></li>
+                                <li class="nav-sub"><a href="./management.html">Management</a></li>
+                                <li class="nav-sub"><a href="./export-report.html">Export report</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Special Festive Promotion</a></li>
+                    </ul>
+                </div>
+                <div class="profile-user">
+                    <a href="#" class="user-img">
+                        <img src="{% static '/PC/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                    </a>
+                </div>
+            </div>
+            <div class="row raw-data">
+                <div class="leftbox dropdown_raw">
+                    <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
+                    <span class="title-menu">Management</span>
+                    <ul class="dropdown-menu_raw">
+                        <li class="nav-sub"><a href="./management.html">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="./outlet-approval.html">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="./kpi-setting.html">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="./sp-info.html">SP Information</a></li>
+                    </ul>
+                </div>
+                <div class="rightbox">
+                    <div class="lock-icon">
+                        <i class='bx bxs-lock-alt' ></i> <span>Unlock to change</span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row raw-data-sub">
+                <div class="leftbox">
+                    <span class="title-menu">Outlet Information</span>
+                    
+                </div>
+                <div class="rightbox">
+                    <span class="date-menu"></span>
+                    
+                    <a href="./upload-file.html"><button class="btn-upload">UPLOAD NEW OUTLET LIST</button></a>
+                    
+
+                </div>
+                
+            </div>
+
+            <!-- Main Home-->
+            
+            <div class="main-table_managenment">
+                <div class="table-outlet">
+                    <table style="width:100%" class="table-list">  
+                        
+                        <tr>  
+                            <th rowspan="2" class="td-title ">No.</th>  
+                            <th rowspan="2"  class="td-title ">
+                                PROVINCE<br>
+                                <input type="search" class="td-search"> 
+                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                            </th>  
+                            <th rowspan="2"  class="td-title ">
+                                OUTLET ID <br>
+                                <input type="search" class="td-search"> 
+                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                            </th>  
+                            <th rowspan="2"  class="td-title ">
+                                TYPE <br>
+                                <input type="search" class="td-search">
+                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                            </th>
+                            <th rowspan="2"  class="td-title  dropdown">
+                                AREA<br>
+                                <input type="search" class="td-search">
+                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                            </th>  
+                            <th rowspan="2"  class="td-title  dropdown">
+                                ADDRESS<br>
+                                <input type="search" class="td-search">
+                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                            </th>  
+                            <th rowspan="2"  class="td-title ">
+                                OUTLET NAME<br>
+                                <input type="search" class="td-search"> 
+                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                            </th>   
+                            <th colspan="2"  class="td-title ">
+                                PERFORMANCE
+                            </th> 
+                        </tr>  
+                        <tr>
+                            <th>Average sale volume
+                                (Can/bottle)</th>
+                            <th>Average Table share
+                                (Can/bottle)</th>
+                        </tr>
+                        <tr>  
+                            <td class="td-desc"></td>  
+                            <td class="td-desc"></td>  
+                            <td class="td-desc"></td>  
+                            <td class="td-desc"></td>  
+                            <td class="td-desc"></td>  
+                            <td class="td-desc"></td>  
+                            <td class="td-desc"></td>   
+                            <td class="td-desc"></td>  
+                            <td class="td-desc"></td> 
+                        </tr>  
+                        
+                    </table> 
+                    {% comment %} <div class="pagin-table">
+                        <a href="#" class="back-page"><i class='bx bxs-chevrons-left' ></i></a>
+                        <a href="#" id="page-1" class="number-page active">1</a>
+                        <span>|</span>
+                        <a href="#" id="page-2" class="number-page">10</a>
+                        <a href="#" class="next-page"><i class='bx bxs-chevrons-right' ></i></a>
+                    </div> {% endcomment %}
+                </div>
+                
+            </div>
+            <!-- End Main Home -->
+    </div>
+
+    <div id="uploadFile">
+        <div class="content-upload">
+        <form action="{% url 'uploadFile_outlet' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-upload">
+                <div class="update-file-outlet">
+                    <span class="label">
+                        <i class='ti-clip'></i> Upload File
+                    </span>
+                    <input type="file" name="upload" id="upload" class="upload-box" placeholder="UPLOAD NEW OUTLET LIST">
+                </div>
+            </div>
+            <div class="btns">
+                <a class="btn-cancel" href="{% url 'management' %}">Cancel</a>
+                <button class="btn-upload">Upload</button>
+            </div>
+        </form>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown-nav").click(function(){
+                $(this).find(".dropdown-menu").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown-nav");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu").slideUp("fast");
+            }            
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown_raw").click(function(){
+                $(this).find(".dropdown-menu_raw").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown_raw");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu_raw").slideUp("fast");
+            }            
+        });
+    </script>
+    <script>
+        $( '#topheader .navbar-nav a' ).on( 'click', function () {
+        $( '#topheader .navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+        $( this ).parent( 'li' ).addClass( 'active' );
+    });
+    </script>
+    <script>
+        $( '#leftMenu .sidebar a' ).on( 'click', function () {
+        $( '#leftMenu .sidebar' ).find( 'li.active' ).removeClass( 'active' );
+        $( this ).parent( 'li' ).addClass( 'active' );
+    });
+    </script>
+    <script>/* ============Active Pagin============= */
+        const room  = document.querySelector('.pagin-table');
+        const btns = document.querySelectorAll('.number-page'); 
+
+        room.addEventListener('click', e => {
+
+        btns.forEach(btn => {
+
+            if(btn.getAttribute('id') === e.target.getAttribute('id'))
+            btn.classList.add('active');
+            else
+            btn.classList.remove('active');
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{% static 'PC/js/chart.js' %}"></script>
+    <script src="{% static 'PC/js/app.js' %}"></script>
+</body>
+</html>

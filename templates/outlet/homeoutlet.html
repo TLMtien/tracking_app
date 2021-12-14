@@ -27,23 +27,25 @@
                 <!-- Main -->
                 <div class="row main">
                     <p class="title">Chọn Outlet</p>
-                    <div class="main-top">
-                        <div class="search-box">
-                            <input type="search" placeholder="Tìm kiếm">
-                            <i class="ti-search"></i>
+                    <form action="" class="form-create-info" method='POST'>
+                        <div class="main-top">
+                            <div class="search-box">
+                                <input type="search" placeholder="Tìm kiếm">
+                                <i class="ti-search"></i>
+                            </div>
+                            <div class="filter-box">
+                                
+                                <select name="calc_shipping_provinces" required="">
+                                    <option value="">Tỉnh / Thành phố</option>
+                                </select>
+                                <select name="calc_shipping_district" required="">
+                                <option value="">Quận / Huyện</option>
+                                </select>
+                                <input class="billing_address_1" name="" type="hidden" value="">
+                                <input class="billing_address_2" name="" type="hidden" value="">
+                            </div>
                         </div>
-                        <div class="filter-box">
-                            
-                            <select name="calc_shipping_provinces" required="">
-                                <option value="">Tỉnh / Thành phố</option>
-                            </select>
-                            <select name="calc_shipping_district" required="">
-                            <option value="">Quận / Huyện</option>
-                            </select>
-                            <input class="billing_address_1" name="" type="hidden" value="">
-                            <input class="billing_address_2" name="" type="hidden" value="">
-                        </div>
-                    </div>
+                    </form>
                     <div class="main-table">
                         {% if list_outlet %} 
                         {% for outlet in list_outlet %}

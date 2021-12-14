@@ -20,7 +20,7 @@
             <!-- Header Home -->
             <div class="row header-home">
                 <div class="logo">
-                    <a href="#"><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
+                    <a href=""><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
                 </div>
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
@@ -56,10 +56,10 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Management</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="./management.html">Outlet Information</a></li>
-                        <li class="nav-sub"><a href="./outlet-approval.html">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="./kpi-setting.html">KPI Tracking</a></li>
-                        <li class="nav-sub"><a href="./sp-info.html">SP Information</a></li>
+                        <li class="nav-sub"><a href="">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'outlet-approval' %}">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="{% url 'kpi' %}">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="#">SP Information</a></li>
                     </ul>
                 </div>
                 <div class="rightbox">
@@ -75,9 +75,9 @@
                     
                 </div>
                 <div class="rightbox">
-                    <span class="date-menu">Latest Update: 25/12/2021</span>
+                    <span class="date-menu"></span>
                     
-                    <div class="btn-upload">UPLOAD NEW OUTLET LIST</div>
+                    <a href="{% url 'upload' %}"><button class="btn-upload">UPLOAD NEW OUTLET LIST</button></a>
                     <!-- <div class="update-file-outlet">
                         <span class="label">
                             UPLOAD NEW OUTLET LIST
@@ -137,26 +137,41 @@
                             <th>Average Table share
                                 (Can/bottle)</th>
                         </tr>
+                        {% for outlet in list_outlet %}
                         <tr>  
-                            <td class="td-desc"></td>  
-                            <td class="td-desc"></td>  
-                            <td class="td-desc"></td>  
-                            <td class="td-desc"></td>  
-                            <td class="td-desc"></td>  
-                            <td class="td-desc"></td>  
-                            <td class="td-desc"></td>   
+                            <td class="td-desc">{{outlet.id}}</td>  
+                            <td class="td-desc">{{outlet.province}}</td>  
+                            <td class="td-desc">{{outlet.ouletID}}</td>  
+                            <td class="td-desc">{{outlet.type}}</td>  
+                            <td class="td-desc">{{outlet.area}}</td>  
+                            <td class="td-desc">{{outlet.outlet_address}}</td>  
+                            <td class="td-desc">{{outlet.outlet_Name}}</td>   
                             <td class="td-desc"></td>  
                             <td class="td-desc"></td> 
                         </tr>  
-                        
+                        {% endfor %}
+
+                        {% for outlet in list_outlet_view %}
+                        <tr>  
+                            <td class="td-desc">{{outlet.id}}</td>  
+                            <td class="td-desc">{{outlet.province}}</td>  
+                            <td class="td-desc">{{outlet.ouletID}}</td>  
+                            <td class="td-desc">{{outlet.type}}</td>  
+                            <td class="td-desc">{{outlet.area}}</td>  
+                            <td class="td-desc">{{outlet.outlet_address}}</td>  
+                            <td class="td-desc">{{outlet.outlet_Name}}</td>   
+                            <td class="td-desc"></td>  
+                            <td class="td-desc"></td> 
+                        </tr>  
+                        {% endfor %}
                     </table> 
-                    <div class="pagin-table">
+                    {% comment %} <div class="pagin-table">
                         <a href="#" class="back-page"><i class='bx bxs-chevrons-left' ></i></a>
                         <a href="#" id="page-1" class="number-page active">1</a>
                         <span>|</span>
                         <a href="#" id="page-2" class="number-page">10</a>
                         <a href="#" class="next-page"><i class='bx bxs-chevrons-right' ></i></a>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
                 
             </div>

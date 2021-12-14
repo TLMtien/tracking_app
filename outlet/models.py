@@ -57,7 +57,7 @@ class outletInfo(models.Model):
     ouletID = models.CharField(max_length=255, blank=True, null=True, default='00')
     created = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now=True)
-
+    created_by_HVN = models.BooleanField(default=False, blank=True)
     def __str__(self):
         return "{} - {}".format(self.area, self.outlet_Name)
     class Meta:

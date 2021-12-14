@@ -20,7 +20,7 @@ if (outletForm) {
             },
             success: function(response) {
                 console.log(response)
-                $('h2').html(response)
+                    //$('h2').html(response)
             },
             error: function(error) {
                 console.log(error)
