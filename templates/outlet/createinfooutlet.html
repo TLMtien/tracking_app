@@ -50,8 +50,12 @@
                                     </div>
 
                                     <div class="input-create-info">
-                                        <input type="datetime-local" value="">
+                                        {% comment %} <input type="text" placeholder="Loại outlet *"> {% endcomment %}
+                                        {{form.ouletID}}
                                     </div>
+                                    {% comment %} <div class="input-create-info">
+                                        <input type="datetime-local" value="">
+                                    </div> {% endcomment %}
                                     
                                     <div class="create-info-outlet__footer">
                                         <input type="submit" class="btn btn-confirm" value="Xác nhận">

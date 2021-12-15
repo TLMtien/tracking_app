@@ -27,8 +27,9 @@ def outlet_create(request, pk):
             outlet_Name = form.cleaned_data.get('outlet_Name')
             type = form.cleaned_data.get('type')
             outlet_address = form.cleaned_data.get('outlet_address')
+            ouletID = form.cleaned_data.get('ouletID')
             #create outlet
-            p, created = outletInfo.objects.get_or_create(outlet_Name=outlet_Name, type=type,  outlet_address=outlet_address)
+            p, created = outletInfo.objects.get_or_create(outlet_Name=outlet_Name, type=type,  outlet_address=outlet_address, ouletID=ouletID)
             #CP = Campain.objects.get(program=SP.brand)
             p.compain.add(SP.brand)
             p.save()
