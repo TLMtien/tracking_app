@@ -14,6 +14,6 @@ urlpatterns = [
     path('upload/', TemplateView.as_view(template_name="dashboard/upload-file.html"), name='upload'),
     path('kpi/', TemplateView.as_view(template_name="dashboard/kpi-setting.html"), name='kpi'),
     path('delete_outlet_byHVN/', views.delete_outlet_byHVN, name='delete_outlet_byHVN'),
-
+    path('sp-info/', TemplateView.as_view(template_name="dashboard/sp-info.html"), name='sp-info'),
     path('test/', TemplateView.as_view(template_name="dashboard/dashboard_testonetime.html"), name='test'),
 ]
