@@ -6,7 +6,7 @@ var options = {
     },
     series: [{
         name: 'ACT',
-        data: [186, 182],
+        data: [160, 167],
     }],
     labels: ['Total'],
     colors: ['#198631', '#1C263F']
@@ -20,7 +20,7 @@ chart.render();
 //   chart-share
 
 var options = {
-    series: [100, 25, 10, 1],
+    series: [150, 35, 10, 1],
     chart: {
         width: 350,
         type: 'pie',
@@ -48,7 +48,7 @@ chart.render();
 var options = {
     series: [{
         name: 'Inflation',
-        data: [18, 17, 5, 15, 15]
+        data: [15, 20, 10, 5, 15]
     }],
     chart: {
         height: 270,

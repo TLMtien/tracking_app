@@ -232,7 +232,7 @@
                 $.each($("input[name ='outlet']:checked"), function(){
                     arr.push((this.value));
                 });
-                alert("Bạn chắc chắn muốn xóa?");
+                //alert("Bạn đã xóa thành công");
                 console.log(arr);
                 const csrf = document.getElementsByName('csrfmiddlewaretoken')
                 var fd = new FormData();
