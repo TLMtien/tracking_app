@@ -27,11 +27,12 @@
                 <!-- Main -->
                 <div class="row main">
                     <p class="title">Chọn Outlet</p>
-                    <form action="" class="form-create-info" method='POST'>
+                    <form action="" class="form-create-info" method='POST' id='outlet-form'>
+                        {% csrf_token %} 
                         <div class="main-top">
                             <div class="search-box">
-                                <input type="search" placeholder="Tìm kiếm">
-                                <i class="ti-search"></i>
+                                <input type="search" placeholder="Tìm kiếm" id="outlet-id" value="">
+                                <button type=submit><i class="ti-search"></i></button>
                             </div>
                             <div class="filter-box">
                                 
@@ -41,12 +42,12 @@
                                 <select name="calc_shipping_district" required="">
                                 <option value="">Quận / Huyện</option>
                                 </select>
-                                <input class="billing_address_1" name="" type="hidden" value="">
-                                <input class="billing_address_2" name="" type="hidden" value="">
+                                <input class="billing_address_1" name="" type="hidden" value="" id='aaa'>
+                                <input class="billing_address_2" name="" type="hidden" value="" id='bbb'>
                             </div>
                         </div>
                     </form>
-                    <div class="main-table">
+                    <div class="main-table" id='list_table_search'>
                         {% if list_outlet %} 
                         {% for outlet in list_outlet %}
                         <div class="table-list">
@@ -72,6 +73,9 @@
     </div>
 
     <!-- JS -->
+    <script>
+        icon_sales = "{% url 'search' %}"
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static '/js/main.js' %}"></script>
     <script src="{% static '/js/districts.min.js' %}"></script>

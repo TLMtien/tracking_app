@@ -1,3 +1,4 @@
+from django.http.response import Http404
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import overallReport, tableReport, outletInfo, giftReport, search, posmReport, Campain
@@ -68,28 +69,50 @@ class OutletDetailView(DetailView):
 login_required
 def searchView(request):
     if request.is_ajax():
-        province = request.POST.get('province')
-        district = request.POST.get('district')
-        all_outlet = outletInfo.objects.all()
-        list_outlet = ""
-        for outlet in all_outlet:
-            if district in outlet.outlet_address:
-                list_outlet += f'''<tr>
-                    <div class="table-list">
-                            <a class="table-list_name" href={outlet.id}>
-                                {outlet.outlet_Name}
-                            </a>
-                            <p class="table-list_id">
-                                {outlet.ouletID}
-                            </p>
-                            <p class="table-list_address">
-                                {outlet.outlet_address}
-                            </p>
-                    </div>
-                </tr>
-                '''
-        #search.objects.create(province=province, district=district)
-        return JsonResponse({'created': True, 'list_outlet':list_outlet})
+        try:
+            SP = SalePerson.objects.get(user = request.user)
+            outletID = request.POST.get('outletID')
+            outlet = outletInfo.objects.get(ouletID = outletID, compain = SP.brand)
+            list_outlet = ""
+            list_outlet += f'''<tr>
+                        <div class="table-list">
+                                <a class="table-list_name" href={outlet.id}>
+                                    {outlet.outlet_Name}
+                                </a>
+                                <p class="table-list_id">
+                                    {outlet.ouletID}
+                                </p>
+                                <p class="table-list_address">
+                                    {outlet.outlet_address}
+                                </p>
+                        </div>
+                    </tr>
+                    '''
+            return JsonResponse({'created': 'ok', 'list_outlet':list_outlet})  
+        except:
+            SP = SalePerson.objects.get(user = request.user)
+            district = request.POST.get('district')
+            all_outlet = outletInfo.objects.filter(compain = SP.brand)
+            list_outlet = ""
+            for outlet in all_outlet:
+                if district.lower() in outlet.outlet_address.lower():
+                    list_outlet += f'''<tr>
+                        <div class="table-list">
+                                <a class="table-list_name" href={outlet.id}>
+                                    {outlet.outlet_Name}
+                                </a>
+                                <p class="table-list_id">
+                                    {outlet.ouletID}
+                                </p>
+                                <p class="table-list_address">
+                                    {outlet.outlet_address}
+                                </p>
+                        </div>
+                    </tr>
+                    '''
+            #print(list_outlet)
+            #search.objects.create(province=province, district=district)
+            return JsonResponse({'created': True, 'list_outlet':list_outlet})
     return JsonResponse({'created': False})
 
 login_required
@@ -107,45 +130,49 @@ def come_back(request, pk):
     pk = str(pk)
     return redirect('https://bluesungroup.vn/outlet/listoutlet/'+pk+'/')
 
-
+#HVN
 def uploadFile_outlet(request):
-    if "GET" == request.method:
-        return render(request, 'dashboard/upload-file.html', {})
-    else:
-        excel_file = request.FILES["upload"]
-        wb = openpyxl.load_workbook(excel_file)
+    try:
+        if "GET" == request.method:
+            return render(request, 'dashboard/upload-file.html', {})
+        else:
+            excel_file = request.FILES["upload"]
+            wb = openpyxl.load_workbook(excel_file)
+            
+            sheets = wb.sheetnames
+            print(sheets[0])
+            worksheet = wb[sheets[0]]   #Trang tính
+
+            excel_data = list()
         
-        sheets = wb.sheetnames
-        print(sheets[0])
-        worksheet = wb[sheets[0]]   #Trang tính
+            for row in worksheet.iter_rows():
+                row_data = list()
 
-        excel_data = list()
-      
-        for row in worksheet.iter_rows():
-            row_data = list()
+                for cell in row:
+                    #if not (cell.value) == None: 
+                    row_data.append(str(cell.value))
 
-            for cell in row:
-                #if not (cell.value) == None: 
-                row_data.append(str(cell.value))
+                excel_data.append(row_data)
+            print(len(excel_data)-2)
+            # for i in range(len(excel_data)-1):
+            #     a = Message(phone_number = '+84'+ excel_data[i+1][0][1:len(excel_data[i+1][0])], content = excel_data[i+1][1])
+            #     a.save()
+            list_outlet = []
+            for i in range(10):
+                filter_outlet = outletInfo.objects.filter(ouletID=excel_data[i+1][3], outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
+                if filter_outlet <1:
+                    campain = Campain.objects.get(program='bivina')
+                    a = outletInfo.objects.create(created=excel_data[i+1][1], province=excel_data[i+1][2], ouletID=excel_data[i+1][3],
+                        type=excel_data[i+1][4], area=excel_data[i+1][5], outlet_address=excel_data[i+1][6], 
+                        outlet_Name=excel_data[i+1][7], created_by_HVN = True)
+                    
+                    a.compain.add(campain)
+                    a.save()
+                    list_outlet.append(a)
+            return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
+    except:
+        return Http404('file is not support')
 
-            excel_data.append(row_data)
-        print(len(excel_data)-2)
-        # for i in range(len(excel_data)-1):
-        #     a = Message(phone_number = '+84'+ excel_data[i+1][0][1:len(excel_data[i+1][0])], content = excel_data[i+1][1])
-        #     a.save()
-        list_outlet = []
-        for i in range(10):
-            filter_outlet = outletInfo.objects.filter(ouletID=excel_data[i+1][3], outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
-            if filter_outlet <1:
-                campain = Campain.objects.get(program='bivina')
-                a = outletInfo.objects.create(created=excel_data[i+1][1], province=excel_data[i+1][2], ouletID=excel_data[i+1][3],
-                    type=excel_data[i+1][4], area=excel_data[i+1][5], outlet_address=excel_data[i+1][6], 
-                    outlet_Name=excel_data[i+1][7], created_by_HVN = True)
-                
-                a.compain.add(campain)
-                a.save()
-                list_outlet.append(a)
-        return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
 
 
 

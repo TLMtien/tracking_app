@@ -24,12 +24,26 @@ class ListOutletDashbordView(ListView):
     paginate_by = 25
     template_name = 'dashboard/management.html'
 
-def outlet_approval(request):
+def list_outlet_approval(request):
     count = outletInfo.objects.filter(created_by_HVN = False).count()
     outlet = outletInfo.objects.filter(created_by_HVN = False)
     
     return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet})
 
+#HVN
+def outlet_approval_byHVN(request):
+    if request.is_ajax and request.method == "POST":
+        arr = request.POST.get('arr')
+        a = arr.split(',')
+        for i in a:
+            print(int(i))
+            outlet = outletInfo.objects.get(id=i)
+            outlet.created_by_HVN = True
+            outlet.save()
+
+        return JsonResponse({'created': 'success'})
+
+#HVN
 def delete_outlet_byHVN(request):
     if request.is_ajax and request.method == "POST":
         arr = request.POST.get('arr')

@@ -8,12 +8,13 @@ urlpatterns = [
     #path('test/', TemplateView.as_view(template_name="dashboard/test.html")),
     path('export-report/', TemplateView.as_view(template_name="dashboard/export-report.html"), name='export-report'),
     path('management/', views.ListOutletDashbordView.as_view(), name='management'),
-    path('outlet-approval/', views.outlet_approval, name='outlet-approval'),
+    path('list_outlet-approval/', views.list_outlet_approval, name='outlet-approval'),
     path('input-outlet-approval/', TemplateView.as_view(template_name="dashboard/input-outlet-approval.html"), name='input-outlet-approval'),
     path('lock-outlet-approval/', TemplateView.as_view(template_name="dashboard/lock-outlet-approval.html"), name='lock-outlet-approval'),
     path('upload/', TemplateView.as_view(template_name="dashboard/upload-file.html"), name='upload'),
     path('kpi/', TemplateView.as_view(template_name="dashboard/kpi-setting.html"), name='kpi'),
     path('delete_outlet_byHVN/', views.delete_outlet_byHVN, name='delete_outlet_byHVN'),
     path('sp-info/', TemplateView.as_view(template_name="dashboard/sp-info.html"), name='sp-info'),
-    path('test/', TemplateView.as_view(template_name="dashboard/dashboard_testonetime.html"), name='test'),
+    path('test/', TemplateView.as_view(template_name="dashboard/dashboard_testonetime.html"), name='test'),  #TEST DASHBOARD
+    path('outlet_approval_byHVN/', views.outlet_approval_byHVN, name='outlet_approval_byHVN'),
 ]

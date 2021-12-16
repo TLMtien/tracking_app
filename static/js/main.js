@@ -1,65 +1,44 @@
 const outletForm = document.getElementById('outlet-form')
     //const provinceInput = document.getElementById('province')
     //const districtInput = document.getElementById('district')
-const provinceInput = document.getElementById('aaa')
-const districtInput = document.getElementById('bbb')
+const table = document.getElementById('list_table_search')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
 
 if (outletForm) {
     outletForm.addEventListener('submit', e => {
         e.preventDefault()
         console.log('submitted')
+        const provinceInput = document.getElementById('aaa')
+        const districtInput = document.getElementById('bbb')
 
-        $.ajax({
-            type: 'POST',
-            url: '/outlet/search/',
-            data: {
-                'csrfmiddlewaretoken': csrf[0].value,
-                'province': provinceInput.value,
-                'district': districtInput.value,
-            },
-            success: function(response) {
-                console.log(response)
-                    //$('h2').html(response)
-            },
-            error: function(error) {
-                console.log(error)
+        const outlet_id = document.getElementById('outlet-id')
 
-            }
-        })
+        console.log(provinceInput.value)
+        console.log(districtInput.value)
+        console.log(outlet_id.value)
+        var fd = new FormData();
+        fd.append("district", districtInput.value);
+        fd.append("outletID", outlet_id.value),
+            $.ajax({
+                type: 'POST',
+                url: icon_sales,
+                headers: {
+                    "X-CSRFToken": csrf[0].value
+                },
+                data: fd,
+                processData: false,
+                contentType: false,
+
+                success: function(response) {
+                    //alert('ok')
+                    console.log(response)
+                    outlet_id.value = ""
+                    table.innerHTML = response.list_outlet
+                },
+                error: function(error) {
+                    console.log(error)
+
+                }
+            })
     })
 }
-
-
-
-
-//--------------------------------------------------------------
-
-// const reportPOSM = document.getElementById('reportPOSM')
-// const canvas = document.getElementById('canvas');
-// var image = document.getElementById("canvas").toDataURL("image/png")
-//     .replace("image/png", "image/octet-stream");
-// const myfile = document.getElementById('screenshot')
-
-
-
-// reportPOSM.addEventListener('submit', e => {
-//     e.preventDefault()
-//     console.log('submitted')
-
-//     $.ajax({
-//         type: 'POST',
-//         url: "{% url 'reportPosm' %}",
-//         data: {
-//             'csrfmiddlewaretoken': csrf[0].value,
-//             'image': image,
-//         },
-//         success: function(response) {
-//             console.log(response)
-//         },
-//         error: function(error) {
-//             console.log(error)
-
-//         }
-//     })
-// })

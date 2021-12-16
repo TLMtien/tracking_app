@@ -36,7 +36,7 @@
                             <tr>
                                 <th>Danh mục</th>
                                 <th>Số lượng</th>
-                                <th>Tổng cộng</th>
+                                {% comment %} <th>Tổng cộng</th> {% endcomment %}
                             </tr>
                             <tr>
                                 <td class="td-name">Khách tại quán</td>
@@ -44,7 +44,7 @@
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.Total_Consumers}}
                                 </td>
-                                <td class="td-total"></td>
+                                {% comment %} <td class="td-total"></td> {% endcomment %}
                             </tr>
                             <tr>
                                 <td class="td-name">khách đã tiếp cận</td>
@@ -52,7 +52,7 @@
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.consumers_approach}}
                                 </td>
-                                <td class="td-total"></td>
+                                {% comment %} <td class="td-total"></td> {% endcomment %}
                             </tr>
                             <tr>
                                 <td class="td-name">Khách đã mua</td>
@@ -60,7 +60,7 @@
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.consumers_brough}}
                                 </td>
-                                <td class="td-total"></td>
+                                {% comment %} <td class="td-total"></td> {% endcomment %}
                             </tr>
                             
                         </table>
