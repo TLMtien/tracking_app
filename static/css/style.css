@@ -645,7 +645,7 @@ button {
     background: #1F6C2F;
     border-radius: 5px;
     outline: 0;
-    border: 0;
+    border: 1px solid #1A5D1F;
     color: #fff;
 }
 
@@ -653,12 +653,21 @@ button {
     color: #fff;
 }
 
-.homeoutlet .main .main-top .search-box i {
+.homeoutlet .main .main-top .search-box input:focus {
+    border: 1px solid #1A5D1F;
+    outline: 1px solid #1A5D1F;
+    border-radius: 5px;
+}
+
+.homeoutlet .main .main-top .search-box button {
     color: #fff;
     position: absolute;
     right: 5px;
     top: 10px;
     cursor: pointer;
+    background: transparent;
+    outline: none;
+    border: none;
 }
 
 .homeoutlet .main .main-top .filter-box {
