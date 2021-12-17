@@ -50,7 +50,7 @@ class SignupForm(forms.ModelForm):
 class LoginForm(forms.Form):
 	username = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'input-user', 'placeholder':"Tên đăng nhập"}))
     
-	password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"Mật Khẩu"}))
+	password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"Mật Khẩu", 'id':"password-field", 'name':"password"}))
 
 #---------------------------------------------
 class LoginHVNForm(forms.Form):
