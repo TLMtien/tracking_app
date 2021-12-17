@@ -16,11 +16,17 @@
         <div class="container homeoutlet">
                 <!-- Header -->
                 <div class="row header">    
+        
                     <div class="logo">
-                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %}" alt="logo"></a>
                     </div>
-                    <div class="profile-user"> 
-                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    <div class="profile-user dropdown-nav">
+                        <a href="#" class="user-img" onclick="openTigerTp()">
+                            <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-sub"><a href="{% url 'logout' %}"><i class="ti-shift-left"></i> Đăng xuất</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="icon-back">
@@ -69,6 +75,20 @@
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown-nav").click(function(){
+                $(this).find(".dropdown-menu").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown-nav");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu").slideUp("fast");
+            }            
+        });
+    </script>
     <script src="{% static '/js/app.js' %}"></script>
 </body>
 </html>
