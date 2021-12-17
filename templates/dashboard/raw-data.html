@@ -30,9 +30,9 @@
                                 Tiger Table Promotion
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="nav-sub"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                                <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
                                 <li class="nav-sub"><a href="#">Raw data</a></li>
-                                <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
+                                <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
                                 <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                             </ul>
                         </li>
@@ -59,9 +59,9 @@
                     </button>
                     <span class="title-menu">Raw Data</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
                         <li class="nav-sub"><a href="#">Raw data</a></li>
-                        <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
                         <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                     </ul>
                 </div>

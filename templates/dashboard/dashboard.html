@@ -25,25 +25,25 @@
                 </div>
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
-                        <li class="nav-list dropdown-nav active">
-                            <a href="#" class="nav-links drop-btn" onclick="openTigerTp()">
+                        <li class="nav-list dropdown-nav ">
+                            <a href="{% url 'dashboard' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
                                 Tiger Table Promotion
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-sub"><a href="">Dashboard</a></li>
                                 <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                                <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
+                                <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
                                 <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                             </ul>
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Festive Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Hot Zone Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Strongbow Festive</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Table Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Special Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Bivina Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Special Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
                 <div class="profile-user">
@@ -59,7 +59,7 @@
                     <ul class="dropdown-menu_raw">
                         <li class="nav-sub"><a href="">Dashboard</a></li>
                         <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                        <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
                         <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                     </ul>
                 </div>

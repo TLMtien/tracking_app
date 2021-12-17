@@ -52,6 +52,13 @@ class LoginForm(forms.Form):
     
 	password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"Mật Khẩu"}))
 
+#---------------------------------------------
+class LoginHVNForm(forms.Form):
+	username = forms.CharField(max_length=20, widget=forms.EmailInput(attrs={'class': 'input-user', 'placeholder':"example@example.com"}))
+    
+	password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"enter your password"}))
+
+#--------------------------------------------
 class ChangePasswordForm(forms.Form):
 	    
 	new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-user', 

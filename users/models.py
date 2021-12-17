@@ -39,7 +39,7 @@ class SalePerson(models.Model):
     
 class HVN(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    brand = models.CharField(choices = CHOICES_brand , default = HEINEKEN, max_length=200)
+    brand = models.ManyToManyField(Campain)
     full_name = models.CharField(max_length=200, null=True, blank=True)
     joined = models.DateTimeField("Date Joined", auto_now_add=True)
 

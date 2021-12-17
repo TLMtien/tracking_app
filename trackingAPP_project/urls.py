@@ -3,14 +3,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
-from users.views import loginPage
+from users.views import loginPage, loginHVN
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('outlet/', include('outlet.urls')),
     path('report/', include('report.urls')),
     path('dashboard/', include('dashboard.urls')),
-    path('', loginPage, name='loginPage'),
+    path('SP/', loginPage, name='loginPage'),
+    path('HVN/', loginHVN, name='loginHVN'),
     path('undo/', TemplateView.as_view(template_name="users/undo.html"), name='undo'),
 ]
 if settings.DEBUG:

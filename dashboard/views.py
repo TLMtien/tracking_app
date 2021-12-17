@@ -1,32 +1,68 @@
 from django.http import response
 from django.shortcuts import render
 from dateutil.relativedelta import relativedelta
+
+from dashboard.models import KPI
 from .forms import TimeReportForm, TimeDashBoard
 from outlet.models import posmReport, outletInfo, tableReport, report_sale, consumerApproachReport, giftReport, Campain
 from .test import date_generator, revenue_char_bar, sum_value_iv
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.http import JsonResponse
+from .forms import KPIForm
+from django.views.generic import DetailView
 # Create your views here.
 
-
+# tigerTP 1
+# tigerFA 2
+# tigerHZA 3
+# heineken 4
+# heineken_hnk 5
+# STB 6
+# bivina 7
+# Larue 8
+# Larue_SPE 9
 def sum(a, b):
     return int(int(a) + int(b))
 
 def percent(a,b):
     return (int(a)*100)/(int(b))
 
+# class dash_board_View(DetailView):
+#     model = Campain
+#     template_name = 'dashboard/dashboard.html'
+
+#dashboard_view
+def dash_board_View(request, campainID):
+    campain = Campain.objects.get(id=campainID)
+    return render(request,'dashboard/dashboard.html')
+
+#HVN
+def List_outlet_management(request, campainID):
+    campain = Campain.objects.get(id=campainID)
+    all_outlet = outletInfo.objects.filter(compain=campain)
+    return render(request,  'dashboard/management.html', {'list_outlet_view':all_outlet})
+
+def management_View(request):
+    #campain = Campain.objects.get(id=campainID)
+    return render(request,'dashboard/management.html')
 # login_required
 #ADMIN HVN
-class ListOutletDashbordView(ListView):
-    model = outletInfo
-    context_object_name = 'list_outlet_view'
-    paginate_by = 25
-    template_name = 'dashboard/management.html'
+# class ListOutletDashbordView(ListView):
+#     model = outletInfo
+#     context_object_name = 'list_outlet_view'
+#     paginate_by = 25
+#     template_name = 'dashboard/management.html'
 
-def list_outlet_approval(request):
-    count = outletInfo.objects.filter(created_by_HVN = False).count()
-    outlet = outletInfo.objects.filter(created_by_HVN = False)
+def listOutletInformation(request, campainID):
+    campain = Campain.objects.get(id=campainID)
+    list_outlet = outletInfo.objects.filter(compain = campain)
+    
+    return render(request, 'dashboard/management.html', {'list_outlet_view' : list_outlet})
+
+def list_outlet_approval(request, campainID):
+    campain = Campain.objects.get(id=campainID)
+    outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
     
     return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet})
 
@@ -41,6 +77,9 @@ def outlet_approval_byHVN(request):
             outlet.created_by_HVN = True
             outlet.save()
 
+        campain = Campain.objects.all()
+        for i in campain:
+            print(i.program, i.id)
         return JsonResponse({'created': 'success'})
 
 #HVN
@@ -55,6 +94,33 @@ def delete_outlet_byHVN(request):
             outlet.delete()
 
         return JsonResponse({'created': 'success'})
+
+
+def KPI_view(request, campainID):
+    campain = Campain.objects.get(id=campainID)
+    kpi = KPI.objects.filter(campain=campain)
+    return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi})
+
+#HVN  create_KPI
+def create_KPI(request, campainID):
+    campain = Campain.objects.get(id=campainID)
+    if request.method == "POST":
+        form = KPIForm(request.POST)
+        if form.is_valid():
+            volume_achieved = form.cleaned_data.get('volume_achieved')
+            table_share = form.cleaned_data.get('table_share')
+            consumer_reached = form.cleaned_data.get('consumer_reached')
+            conversion = form.cleaned_data.get('conversion')
+            start_day = request.POST.get('start_day')
+            kpi = KPI.objects.create(user=request.user, campain=campain, volume_achieved=volume_achieved,
+            table_share=table_share, consumer_reached=consumer_reached, conversion=conversion, start_day=start_day)
+    
+            kpi.save()
+            all_kpi = KPI.objects.filter(campain=campain)
+            return render(request, "dashboard/kpi-setting.html", {'all_kpi':all_kpi})
+    else:
+        form = KPIForm()
+        return render(request,"dashboard/create-kpi.html", {'form':form})
 
 # def sum_revenue(request):
 #     user = request.user

@@ -25,26 +25,26 @@
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
                         <li class="nav-list dropdown-nav active">
-                            <a href="#" class="nav-links drop-btn" onclick="openTigerTp()">
+                            <a href="{% url 'outlet-approval' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
                                 Tiger Table Promotion
                             </a>
                             <ul class="dropdown-menu">
                                 <ul class="dropdown-menu">
-                                    <li class="nav-sub"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                                    <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
                                     <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                                    <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
+                                    <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
                                     <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                                 </ul>
                             </ul>
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Festive Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Hot Zone Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Strongbow Festive</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Table Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Special Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Bivina Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Special Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
                 <div class="profile-user">
@@ -58,9 +58,9 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Management</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'management' %}">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
                         <li class="nav-sub"><a href="#">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="{% url 'kpi' %}">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="{% url 'kpi' 1 %}">KPI Tracking</a></li>
                         <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
                     </ul>
                 </div>
@@ -178,7 +178,7 @@
                        {% for outlet in list_outlet_False %}
                         
                         <tr id={{outlet.id}}>  
-                            <td class="td-desc">{{outlet.id}}</td>  
+                            <td class="td-desc">{{ forloop.counter }}</td>  
                             <td class="td-desc">{{outlet.province}}</td>  
                             <td class="td-desc text-red"></td>  
                             <td class="td-desc text-red">{{outlet.type}}</td>  

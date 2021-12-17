@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPI Setting</title>
+
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static '/PC/themify-icons.css' %}">
+    <!-- css -->
+    <link rel="stylesheet" href="{% static '/PC/css/style.css' %}">
+</head>
+
+<body>
+    <div class="app">
+        <div class="container-home">
+            <!-- Header Home -->
+            <div class="row header-home">
+                <div class="logo">
+                    <a href=""><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
+                </div>
+                <div class="navbar" id="topheader">
+                    <ul class="navbar-nav">
+                        <li class="nav-list dropdown-nav active">
+                            {% comment %} <a href="{% url 'create_KPI' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
+                                Tiger Table Promotion
+                            </a>  {% endcomment %}
+                            <ul class="dropdown-menu">
+                                <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
+                                <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
+                                <li class="nav-sub"><a href="#">KPI Tracking</a></li>
+                                <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
+                            </ul>
+                        </li>
+                        {% comment %} <li class="nav-list dropdown-nav"><a href="{% url 'create_KPI' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'create_KPI' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'create_KPI' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'create_KPI' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'create_KPI' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'create_KPI' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'create_KPI' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'create_KPI' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li> {% endcomment %}
+                    </ul>
+                </div>
+                <div class="profile-user">
+                    <a href="#" class="user-img">
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                    </a>
+                </div>
+            </div>
+            <div class="row raw-data">
+                <div class="leftbox dropdown_raw">
+                    <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
+                    <span class="title-menu">Management</span>
+                    <ul class="dropdown-menu_raw">
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="#">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
+                    </ul>
+                </div>
+                <div class="rightbox">
+                    <div class="lock-icon">
+                        <i class='bx bxs-lock-open-alt'></i> <span>Lock</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row raw-data-sub">
+                <div class="leftbox">
+                    <span class="title-menu">KPI Setting</span>
+
+                </div>
+                <div class="rightbox_kpi">
+                    {% comment %} <button class="btn-kpi">SET NEW KPI</button> {% endcomment %}
+
+                    <!-- <div class="update-file-outlet">
+                        <span class="label">
+                            UPLOAD NEW OUTLET LIST
+                        </span>
+                        <input type="file" name="upload" id="upload" class="upload-box" placeholder="UPLOAD NEW OUTLET LIST">
+                    </div> -->
+
+                </div>
+
+            </div>
+
+            <!-- Main Home-->
+            <form method='POST' action="">
+            <div class="main-table_managenment">
+                <div class="table-outlet">
+                    <table style="width:60%" class="table-list">
+                        
+                                {% csrf_token %} 
+                            <tr>
+                                <th>KPI</th>  
+                                <th>Input</th>
+                            </tr>
+                            <tr>
+                                <td class="td-desc bg-green">Start date</td>
+                                <td class="td-desc bg-green">
+                                    <input type="date" name="start_day" id="input-date_kpi">
+                                    <i class='bx bxs-sort-alt'></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-desc">Volume Achieved (Can/Bottle)</td>
+                                <td class="td-desc text-red">
+                                    {{form.volume_achieved}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-desc">Table Share</td>
+                                <td class="td-desc text-red">
+                                    {{form.table_share}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-desc">% Consumer Reached</td>
+                                <td class="td-desc text-red">
+                                    {{form.consumer_reached}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-desc">% Conversion</td>
+                                <td class="td-desc text-red">
+                                    
+                                    {{form.conversion}}
+                                </td>
+                            </tr>
+                        
+                    </table>
+                    <div class="btn-box">
+                        <button type = 'submit' class="btn-create">CREATE</button>
+                    </div>
+                </div>
+            
+            </div>
+        </form>
+            <!-- End Main Home -->
+        </div>
+
+
+
+        <!-- js -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // Show hide popover
+                $(".dropdown-nav").click(function() {
+                    $(this).find(".dropdown-menu").slideToggle("fast");
+                });
+            });
+            $(document).on("click", function(event) {
+                var $trigger = $(".dropdown-nav");
+                if ($trigger !== event.target && !$trigger.has(event.target).length) {
+                    $(".dropdown-menu").slideUp("fast");
+                }
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                // Show hide popover
+                $(".dropdown_raw").click(function() {
+                    $(this).find(".dropdown-menu_raw").slideToggle("fast");
+                });
+            });
+            $(document).on("click", function(event) {
+                var $trigger = $(".dropdown_raw");
+                if ($trigger !== event.target && !$trigger.has(event.target).length) {
+                    $(".dropdown-menu_raw").slideUp("fast");
+                }
+            });
+        </script>
+        <script>
+            $('#topheader .navbar-nav a').on('click', function() {
+                $('#topheader .navbar-nav').find('li.active').removeClass('active');
+                $(this).parent('li').addClass('active');
+            });
+        </script>
+        <script>
+            $('#leftMenu .sidebar a').on('click', function() {
+                $('#leftMenu .sidebar').find('li.active').removeClass('active');
+                $(this).parent('li').addClass('active');
+            });
+        </script>
+        <script>
+            /* ============Active Pagin============= */
+            const room = document.querySelector('.pagin-table');
+            const btns = document.querySelectorAll('.number-page');
+
+            room.addEventListener('click', e => {
+
+                btns.forEach(btn => {
+
+                    if (btn.getAttribute('id') === e.target.getAttribute('id'))
+                        btn.classList.add('active');
+                    else
+                        btn.classList.remove('active');
+                });
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="{% static 'PC/js/chart.js' %}"></script>
+        <script src="{% static 'PC/js/app.js' %}"></script>
+</body>
+
+</html>

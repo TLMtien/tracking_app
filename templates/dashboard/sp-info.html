@@ -30,9 +30,9 @@
                                 Tiger Table Promotion
                             </a>
                             <ul class="dropdown-menu">
-                            <li class="nav-sub"><a href="{% url 'management' %}">Dashboard</a></li>
+                            <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
                         <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                        <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
                         <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                             </ul>
                         </li>
@@ -57,9 +57,9 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Management</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'management' %}">Outlet Information</a></li>
-                        <li class="nav-sub"><a href="{% url 'outlet-approval' %}">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="{% url 'kpi' %}">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="{% url 'kpi' 1 %}">KPI Tracking</a></li>
                         <li class="nav-sub"><a href="#">SP Information</a></li>
                     </ul>
                 </div>
@@ -70,11 +70,11 @@
                     <span class="title-menu">SP Information</span>
                     
                 </div>
-                <div class="rightbox">
+                {% comment %} <div class="rightbox">
                     <div class="lock-icon">
                         <i class='bx bxs-lock-alt' ></i> <span>Unlock to change</span>
                     </div>
-                </div>
+                </div> {% endcomment %}
                 
             </div>
 
