@@ -158,7 +158,7 @@ def uploadFile_outlet(request):
             #     a = Message(phone_number = '+84'+ excel_data[i+1][0][1:len(excel_data[i+1][0])], content = excel_data[i+1][1])
             #     a.save()
             list_outlet = []
-            for i in range(10):
+            for i in range(len(excel_data)-1):
                 filter_outlet = outletInfo.objects.filter(ouletID=excel_data[i+1][3], outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
                 if filter_outlet <1:
                     campain = Campain.objects.get(program='bivina')
