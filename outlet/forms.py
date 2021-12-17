@@ -32,9 +32,9 @@ class reportSaleForm(forms.ModelForm):
         super(reportSaleForm, self).__init__(*args, **kwargs)
 
 class gift_ReceiveReportForm(forms.ModelForm):
-    gift1_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
-    gift2_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
-    gift3_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
+    gift1_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
+    gift2_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
+    gift3_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     class Meta:
         model = giftReport
         fields = ("gift1_received", "gift2_received", 
@@ -45,9 +45,9 @@ class gift_ReceiveReportForm(forms.ModelForm):
         super(gift_ReceiveReportForm, self).__init__(*args, **kwargs)
 
 class gift_givenReportForm(forms.ModelForm):
-    gift1_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
-    gift2_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
-    gift3_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *"}))
+    gift1_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
+    gift2_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
+    gift3_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     class Meta:
         model = giftReport
         fields = ("gift1_given", "gift2_given", 
@@ -76,9 +76,9 @@ class tableReportForm(forms.ModelForm):
         super(tableReportForm, self).__init__(*args, **kwargs)
 
 class consumerApproachReportForm(forms.ModelForm):
-    consumers_approach = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'})) 
-    consumers_brough = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'}))
-    Total_Consumers = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality'}))
+    consumers_approach = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'})) 
+    consumers_brough = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
+    Total_Consumers = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
    
     class Meta:
         model = tableReport
