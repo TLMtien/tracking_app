@@ -11,6 +11,7 @@ from django.views.generic import DetailView, ListView
 from django.http import JsonResponse
 from .forms import KPIForm
 from django.views.generic import DetailView
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 # tigerTP 1
@@ -33,16 +34,19 @@ def percent(a,b):
 #     template_name = 'dashboard/dashboard.html'
 
 #dashboard_view
+login_required
 def dash_board_View(request, campainID):
     campain = Campain.objects.get(id=campainID)
     return render(request,'dashboard/dashboard.html')
 
 #HVN
+login_required
 def List_outlet_management(request, campainID):
     campain = Campain.objects.get(id=campainID)
     all_outlet = outletInfo.objects.filter(compain=campain)
     return render(request,  'dashboard/management.html', {'list_outlet_view':all_outlet})
 
+login_required
 def management_View(request):
     #campain = Campain.objects.get(id=campainID)
     return render(request,'dashboard/management.html')
