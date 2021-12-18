@@ -111,7 +111,7 @@ report.addEventListener('click', e => {
         processData: false,
         contentType: false,
         success: function(response) {
-            alert('success')
+            alert('Bạn đã gửi thành công')
         },
         error: function(error) {
             console.log(error)
