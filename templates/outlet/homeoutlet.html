@@ -42,10 +42,10 @@
                             </div>
                             <div class="filter-box">
                                 
-                                <select name="calc_shipping_provinces" required="">
+                                <select name="calc_shipping_provinces" >
                                     <option value="">Tỉnh / Thành phố</option>
                                 </select>
-                                <select name="calc_shipping_district" required="">
+                                <select name="calc_shipping_district" >
                                 <option value="">Quận / Huyện</option>
                                 </select>
                                 <input class="billing_address_1" name="" type="hidden" value="" id='aaa'>
@@ -98,21 +98,7 @@
             }            
         });
     </script>
-    <script>/* ============Active Report============= */
-        const room  = document.querySelector('.box-report');
-        const btns = document.querySelectorAll('.btn-report'); 
-
-        room.addEventListener('click', e => {
-
-        btns.forEach(btn => {
-
-            if(btn.getAttribute('id') === e.target.getAttribute('id'))
-            btn.classList.add('active');
-            else
-            btn.classList.remove('active');
-            });
-        });
-    </script>
+    
     <script src="{% static '/js/main.js' %}"></script>
     <script src="{% static '/js/districts.min.js' %}"></script>
     <script src="{% static '/js/filter.js' %}"></script>
