@@ -7,6 +7,7 @@ from django.views.generic import DetailView, ListView, detail
 from users.models import SalePerson
 from django.http import JsonResponse
 import openpyxl
+from django.db.models import Q
 # Create your views here.
 def index(request):
     return HttpResponse('ok')
@@ -69,27 +70,31 @@ class OutletDetailView(DetailView):
 login_required
 def searchView(request):
     if request.is_ajax():
-        try:
+        outletID = request.POST.get('outletID')
+        if outletID != '':
             SP = SalePerson.objects.get(user = request.user)
+            all_outlet = outletInfo.objects.filter(compain = SP.brand)
             outletID = request.POST.get('outletID')
-            outlet = outletInfo.objects.get(ouletID = outletID, compain = SP.brand)
             list_outlet = ""
-            list_outlet += f'''<tr>
-                        <div class="table-list">
-                                <a class="table-list_name" href={outlet.id}>
-                                    {outlet.outlet_Name}
-                                </a>
-                                <p class="table-list_id">
-                                    {outlet.ouletID}
-                                </p>
-                                <p class="table-list_address">
-                                    {outlet.outlet_address}
-                                </p>
-                        </div>
-                    </tr>
-                    '''
+            for outlet in all_outlet:
+                if outletID in outlet.ouletID or outletID.lower() in outlet.outlet_Name.lower():
+                    list_outlet += f'''<tr>
+                                <div class="table-list">
+                                        <a class="table-list_name" href={outlet.id}>
+                                            {outlet.outlet_Name}
+                                        </a>
+                                        <p class="table-list_id">
+                                            {outlet.ouletID}
+                                        </p>
+                                        <p class="table-list_address">
+                                            {outlet.outlet_address}
+                                        </p>
+                                </div>
+                            </tr>
+                            '''
+                
             return JsonResponse({'created': 'ok', 'list_outlet':list_outlet})  
-        except:
+        else:
             SP = SalePerson.objects.get(user = request.user)
             district = request.POST.get('district')
             all_outlet = outletInfo.objects.filter(compain = SP.brand)
