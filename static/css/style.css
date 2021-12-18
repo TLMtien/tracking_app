@@ -9,9 +9,6 @@
 }
 
 
-/**/
-
-
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
 
 * {
@@ -398,27 +395,6 @@ button {
 }
 
 
-/* Login Page*/
-
-.main .form-login {
-    text-align: center;
-    width: 300px;
-}
-
-.main .form-login .input-user {
-    padding: 15px;
-    width: 100%;
-    background: var(--bg-btn);
-    border: 2px solid #fff;
-    box-shadow: 1px 1px 5px #fff;
-    text-transform: capitalize;
-    border-radius: 50px;
-    margin-bottom: 20px;
-    font-weight: 600;
-    font-family: 'Roboto Slab', serif;
-}
-
-
 /* Dropdown-nav */
 
 .header {
@@ -429,15 +405,13 @@ button {
 .header .dropdown-menu {
     min-width: 150px;
     /* Set width of the dropdown */
-    height: 50px;
     background: #fff;
     display: none;
     position: absolute;
     z-index: 999;
     right: 0;
-    top: 55%;
+    margin-top: -8px;
     list-style-type: none;
-    margin-top: 5px;
     border: 1px solid #1A5D1F;
     border-radius: 5px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -466,18 +440,40 @@ button {
     font-weight: 600;
 }
 
+
+/* Login Page*/
+
+.main .form-login {
+    text-align: center;
+    width: 300px;
+}
+
+.main .form-login .input-user {
+    padding: 15px;
+    width: 100%;
+    background: var(--bg-btn);
+    border: 2px solid #fff;
+    box-shadow: 1px 1px 5px #fff;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    outline: none;
+    /* font-family: 'Roboto Slab', serif; */
+}
+
 .main .form-login .input-user::placeholder {
     color: #111;
     font-weight: 600;
     /* font-family: 'Roboto Slab', serif; */
 }
 
-.main .form-login .input-user:focus {
+
+/* .main .form-login .input-user:focus {
     outline: none;
     box-shadow: 1px 1px 5px #fff;
     border-radius: 50px;
     border: 1px solid #fff;
-}
+} */
 
 .main .form-login .input-password {
     padding: 15px;
@@ -486,24 +482,34 @@ button {
     background: transparent;
     border: 2px solid #05F22B;
     box-shadow: 1px 1px 5px #7DFF92;
-    text-transform: capitalize;
     border-radius: 50px;
-    font-family: 'Roboto Slab', serif;
+    outline: none;
+    /* font-family: 'Roboto Slab', serif; */
+    color: #fff;
+}
+
+.main .form-login .box-center .field-icon {
+    float: right;
+    margin-right: 15px;
+    margin-top: -32px;
+    position: relative;
+    z-index: 2;
     color: #fff;
 }
 
 .main .form-login .input-password::placeholder {
     color: #fff;
     font-weight: 600;
-    font-family: 'Roboto Slab', serif;
+    /* font-family: 'Roboto Slab', serif; */
 }
 
-.main .form-login .input-password:focus {
+
+/* .main .form-login .input-password:focus {
     outline: none;
     box-shadow: 1px 1px 5px #7DFF92;
     border-radius: 50px;
     border: 1px solid #05F22B;
-}
+} */
 
 .main .form-login .input-submit {
     margin-top: 80px;
@@ -646,9 +652,9 @@ button {
     padding: 10px;
     width: 100%;
     background: #1F6C2F;
+    border: 1px solid #1F6C2F;
     border-radius: 5px;
     outline: 0;
-    border: 1px solid #1A5D1F;
     color: #fff;
 }
 
@@ -656,11 +662,12 @@ button {
     color: #fff;
 }
 
-.homeoutlet .main .main-top .search-box input:focus {
-    border: 1px solid #1A5D1F;
-    outline: 1px solid #1A5D1F;
+
+/* .homeoutlet .main .main-top .search-box input:focus {
     border-radius: 5px;
-}
+    border: 1px solid #1F6C2F;
+    outline: 1px solid #1F6C2F;
+} */
 
 .homeoutlet .main .main-top .search-box button {
     color: #fff;
@@ -668,9 +675,9 @@ button {
     right: 5px;
     top: 10px;
     cursor: pointer;
-    background: transparent;
-    outline: none;
     border: none;
+    outline: none;
+    background: transparent;
 }
 
 .homeoutlet .main .main-top .filter-box {
@@ -706,16 +713,20 @@ select+select {
     border: 1px solid #1F6C2F;
     border-radius: 10px;
     box-shadow: 1px 1px 3px #1F6C2F;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
     background: #eee;
 }
 
 .homeoutlet .main .main-table .table-list a {
     text-decoration: none;
     color: #111;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
+}
+
+.homeoutlet .main .main-table .table-list p {
+    font-size: 15px;
 }
 
 .homeoutlet .main .main-table .table-details {
@@ -871,14 +882,16 @@ select+select {
     width: 300px;
 }
 
-.create-info-outlet_body .form-create-info .input-create-info input {
+.create-info-outlet_body .form-create-info .input-create-info input,
+.create-info-outlet_body .form-create-info .input-create-info select {
     width: 100%;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #1F6C2F;
 }
 
-.create-info-outlet_body .form-create-info .input-create-info input:focus {
+.create-info-outlet_body .form-create-info .input-create-info input:focus,
+.create-info-outlet_body .form-create-info .input-create-info select:focus {
     border: 1px solid #1F6C2F;
     outline: 1px solid #1F6C2F;
 }
@@ -1098,9 +1111,9 @@ select+select {
 
 .container-camera .btn-submit .send-img {
     position: absolute;
-    top: 1%;
+    bottom: -12%;
     right: 15%;
-    margin-top: 10px !important;
+    /* margin-top: 5px !important; */
 }
 
 .container-camera input[type=checkbox]:checked~label #screenshotsContainer img:hover {
@@ -1304,5 +1317,16 @@ select+select {
     }
     .container-camera .main {
         margin-bottom: 20px;
+    }
+    .create-info-outlet_body .form-create-info {
+        width: 250px;
+        margin: 0 auto;
+    }
+    .create-info-outlet_body .form-create-info .input-create-info {
+        width: 80%;
+        margin: 15px auto;
+    }
+    .create-info-outlet__footer .btn-confirm {
+        margin-left: -10%;
     }
 }
