@@ -1,4 +1,5 @@
 from os import name
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from outlet.models import tableReport, report_sale, consumerApproachReport, giftReport, outletInfo, posmReport, overallReport
 from outlet.forms import tableReportForm, reportSaleForm, consumerApproachReportForm, gift_ReceiveReportForm, gift_givenReportForm
@@ -26,7 +27,7 @@ def check_valid_tableReport(a,b,c,d,e):
     return False
 
 def check_valid_customerReport(a, b):
-    if int(a)<int(b):
+    if int(a)<=int(b):
         return True
     return False
 
@@ -43,30 +44,29 @@ def reportTable(request):
             brand_table = form.cleaned_data.get('brand_table')
             HVN_table = form.cleaned_data.get('HVN_table')
             other_table = form.cleaned_data.get('other_table')
-            total_table = form.cleaned_data.get('total_table')
+            # total_table = form.cleaned_data.get('total_table')
 
-            if check_valid_tableReport(other_beer_table, brand_table, HVN_table, other_table, total_table) == False:
-                return render(request, "report/alert_tableReport.html",{'other_beer_table':other_beer_table, 'brand_table':brand_table,
-                            'HVN_table':HVN_table,'total_table':total_table, 'other_table':other_table})
-
+            
             report_table = tableReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
 
             if report_table < 1:
-                p, created = tableReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, campain=SP.brand, total_table=total_table,
+                total_table = sum_table(other_beer_table, brand_table, HVN_table, other_table)
+                p= tableReport.objects.create(SP=request.user, outlet=SP.outlet, campain=SP.brand, total_table=total_table,
                         other_beer_table=other_beer_table, other_table=other_table, brand_table=brand_table,  HVN_table=HVN_table)
                 p.save()
-
+                
                 return render(request,"report/create_reportTable.html", {'other_beer_table':other_beer_table, 'brand_table':brand_table,
                                     'HVN_table':HVN_table,'total_table':total_table, 'other_table':other_table})
 
            
             report_table = tableReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
             
-            report_table.other_beer_table = sum(other_beer_table, report_table.other_beer_table)
-            report_table.other_table = sum(other_table, report_table.other_table)
-            report_table.brand_table = sum(brand_table, report_table.brand_table)
-            report_table.HVN_table = sum(HVN_table, report_table.HVN_table)
-            report_table.total_table = sum(total_table, report_table.total_table)
+            report_table.other_beer_table = other_beer_table
+            report_table.other_table = other_table
+            report_table.brand_table = brand_table
+            report_table.HVN_table = HVN_table 
+            total_table = sum_table(other_beer_table, brand_table, HVN_table, other_table)
+            report_table.total_table = total_table
             report_table.save()
             
             return render(request,"report/sum-totaltable.html",{'sum_other_beer_table':report_table.other_beer_table, 'other_beer_table':other_beer_table,
@@ -91,7 +91,7 @@ def reportSale(request):
             report = report_sale.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
 
             if report < 1:
-                p, created = report_sale.objects.get_or_create(SP=request.user, outlet=SP.outlet, beer_brand=beer_brand, beer_HVN=beer_HVN, beer_other=beer_other)
+                p = report_sale.objects.create(SP=request.user, outlet=SP.outlet, beer_brand=beer_brand, beer_HVN=beer_HVN, beer_other=beer_other, campain=SP.brand)
                 p.save()
                 return render(request,"report/create_salereport.html", {'beer_brand':beer_brand, 
                                         'beer_HVN':beer_HVN,'beer_other':beer_other})
@@ -121,7 +121,7 @@ def report_customer(request):
             consumers_approach = form.cleaned_data.get('consumers_approach')
             consumers_brough = form.cleaned_data.get('consumers_brough')
             Total_Consumers = form.cleaned_data.get('Total_Consumers')
-            if check_valid_customerReport(consumers_approach, Total_Consumers) == False:
+            if (check_valid_customerReport(consumers_approach, Total_Consumers) == False) or (check_valid_customerReport(consumers_brough, consumers_approach) == False):
                 return render(request,"report/alert-customer.html", {'consumers_approach':consumers_approach, 
                             'consumers_brough':consumers_brough,'Total_Consumers':Total_Consumers})
 
@@ -129,7 +129,7 @@ def report_customer(request):
             report = consumerApproachReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
 
             if report < 1:
-                p, created = consumerApproachReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, campain=SP.brand,
+                p= consumerApproachReport.objects.create(SP=request.user, outlet=SP.outlet, campain=SP.brand,
                             consumers_approach=consumers_approach, consumers_brough=consumers_brough, Total_Consumers=Total_Consumers)
                 p.save()
                 return render(request,"report/create-report-customer.html", {'consumers_approach':consumers_approach, 
@@ -161,44 +161,50 @@ def gift_receiveReport(request):
             gift1_received = form.cleaned_data.get('gift1_received')
             gift2_received = form.cleaned_data.get('gift2_received')
             gift3_received = form.cleaned_data.get('gift3_received')   
-
+            gift4_received = form.cleaned_data.get('gift4_received')
             report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
             if report < 1:
-                p, created = giftReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, gift1_received=gift1_received, 
-                                                        gift2_received=gift2_received, gift3_received=gift3_received)
+                p, created = giftReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, campain=SP.brand, gift1_received=gift1_received, 
+                        gift2_received=gift2_received, gift3_received=gift3_received, gift4_received=gift4_received)
                 p.save()
                 return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
-                'gift2_received':gift2_received,  'gift3_received':gift3_received })
+                'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received})
             report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
             report.gift1_received = sum(gift1_received, report.gift1_received)
             report.gift2_received = sum(gift2_received, report.gift2_received)
             report.gift3_received = sum(gift3_received, report.gift3_received)
+            report.gift4_received = sum(gift4_received, report.gift4_received)
             report.save()
             return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 'gift2_received':gift2_received,
-                    'gift3_received':gift3_received })
+                    'gift3_received':gift3_received, 'gift4_received':gift4_received })
     else:
         form = gift_ReceiveReportForm()
         return render(request,"report/listgift-received.html", {'form':form})
 
 login_required
 def gift_givenReport(request):
-    if request.method == "POST":
-        form = gift_givenReportForm(request.POST,is_salePerson=request.user.is_salePerson)
-        if form.is_valid():
-            gift1_given = form.cleaned_data.get('gift1_given')
-            gift2_given = form.cleaned_data.get('gift2_given')
-            gift3_given = form.cleaned_data.get('gift3_given')   
-            SP = SalePerson.objects.get(user=request.user)
-            report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-            report.gift1_given = sum(gift1_given, report.gift1_given)
-            report.gift2_given = sum(gift2_given, report.gift2_given)
-            report.gift3_given = sum(gift3_given, report.gift3_given)
-            report.save()
+    try:
+        if request.method == "POST":
+            form = gift_givenReportForm(request.POST,is_salePerson=request.user.is_salePerson)
+            if form.is_valid():
+                gift1_given = form.cleaned_data.get('gift1_given')
+                gift2_given = form.cleaned_data.get('gift2_given')
+                gift3_given = form.cleaned_data.get('gift3_given') 
+                gift4_given = form.cleaned_data.get('gift4_given')  
+                SP = SalePerson.objects.get(user=request.user)
+                report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+                report.gift1_given = sum(gift1_given, report.gift1_given)
+                report.gift2_given = sum(gift2_given, report.gift2_given)
+                report.gift3_given = sum(gift3_given, report.gift3_given)
+                report.gift4_given = sum(gift4_given, report.gift4_given)
+                report.save()
 
-            return redirect('listgift-remain')
-    else:
-        form = gift_givenReportForm()
-        return render(request,"report/listgift-sent.html", {'form':form})
+                return redirect('listgift-remain')
+        else:
+            form = gift_givenReportForm()
+            return render(request,"report/listgift-sent.html", {'form':form})
+    except:
+        return HttpResponse('Yêu cầu nhập số quà nhận trước')
 
 login_required
 def gift_remaining(request):
@@ -206,13 +212,14 @@ def gift_remaining(request):
         SP = SalePerson.objects.get(user=request.user)
         report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
         return render(request,'report/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
-            'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining,
+            'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining, 'gift4_remaining': report.gift4_remaining,
             'gift1_received':report.gift1_received, 'gift2_received':report.gift2_received,
-                    'gift3_received':report.gift3_received, 'gift1_given':report.gift1_given,
-                    'gift2_given':report.gift2_given, 'gift3_given':report.gift3_given})
+                    'gift3_received':report.gift3_received, 'gift4_received':report.gift4_received,
+            'gift1_given':report.gift1_given, 'gift2_given':report.gift2_given, 
+            'gift3_given':report.gift3_given, 'gift4_given':report.gift4_given})
     except:
         return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
-            'gift2_remaining': '0', 'gift3_remaining': '0'})
+            'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0'})
 
 
 
@@ -232,7 +239,7 @@ def reportPosm(request):
     # print(image.read())
     report = posmReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
     if report < 1:
-        posmReport.objects.create(image= image, SP=user, outlet=SP.outlet)
+        posmReport.objects.create(image= image, SP=user, outlet=SP.outlet, campain=SP.brand)
         return JsonResponse({'created': 'true'})
     
     report = posmReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
@@ -247,16 +254,28 @@ def reportPosm(request):
 
 @login_required
 def reportEndcase(request):
-    user = request.user
-    SP = SalePerson.objects.get(user=user) 
-   
+    SP = SalePerson.objects.get(user=request.user) 
     image = request.FILES.get('image')
     report_posm = posmReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
     report_table = tableReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
     report_gift = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
     report_consumer = consumerApproachReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-    report = overallReport.objects.create(user = user, confirm = image, outlet = SP.outlet, 
-                table_Report=report_table, posm_Report=report_posm, gift_report=report_gift, consumer_report=report_consumer)
 
+    report = overallReport.objects.filter(created = datetime.date.today(), user = request.user, outlet = SP.outlet, campain=SP.brand).count()
+    print(report)
+    if report < 1:
+        report = overallReport.objects.create(user = request.user, confirm = image, outlet = SP.outlet, campain=SP.brand,
+                table_Report=report_table, posm_Report=report_posm, gift_report=report_gift, consumer_report=report_consumer)
+    
+        return JsonResponse({'created': 'true'})
+    
+    report = overallReport.objects.get(created = datetime.date.today(), user = request.user, outlet = SP.outlet)
+    report.confirm.delete()
+    report.confirm = image
+    report.report_posm = report_posm
+    report.report_table = report_table
+    report.report_gift = report_gift
+    report.report_consumer = report_consumer
+    report.save()
 
     return JsonResponse({'created': 'true'})
