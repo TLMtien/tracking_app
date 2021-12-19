@@ -70,14 +70,16 @@
         if (!img) {
             img = document.createElement("img");
             img.id = 'screenshot';
-            img.style.width = '30%';
+            img.style.width = '90%';
         }
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         canvas.getContext("2d").drawImage(video, 0, 0);
         img.src = canvas.toDataURL("image/png");
         screenshotsContainer.prepend(img);
+
     });
+
 
     async function init() {
         stopVideoStream();

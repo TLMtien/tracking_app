@@ -5,7 +5,7 @@ const csrf = document.getElementsByName('csrfmiddlewaretoken')
 var anh = document.getElementById("screenshotsContainer");
 
 
-report.addEventListener('click', e => {
+report.addEventListener('submit', e => {
     e.preventDefault()
     var image = document.getElementById("canvas").toDataURL("image/png")
 

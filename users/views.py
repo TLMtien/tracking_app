@@ -8,38 +8,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.views import LoginView
 import openpyxl
-from outlet.models import outletInfo
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .decorators import unauthenticated_user, unauthenticated_user_HVN
 from django.contrib.auth.forms import PasswordChangeForm
-
+from outlet.models import Campain, outletInfo
 # Create your views here.
 
 def index(request):
     return HttpResponse('ok')
 	
-#import excel data ----> create account for SP 
 
-def Signup(request):
-	excel_file = request.FILES["excel_file"]
-	wb = openpyxl.load_workbook(excel_file)
-
-	sheets = wb.sheetnames
-	worksheet = wb[sheets[0]]  
-	excel_data = list()	
-	for row in worksheet.iter_rows():
-		row_data = list()
-		for cell in row:
-			row_data.append(str(cell.value))
-		excel_data.append(row_data)
-    #loop 
-	user = NewUser.objects.create_user(user_name='user_name', password1='password1')
-	sp=SalePerson.objects.create(user=user, brand = '', full_name = '', province='', outlet='')
-	sp.save()
-	return redirect('index')
-	
 
 
 login_required
@@ -110,3 +90,47 @@ def page_user(request):
 login_required
 def PasswordChangeDone(request):
 	return render(request, 'users/successpass.html') 
+
+
+
+#import excel data ----> create account for SP 
+def upload_user(request):
+	if "GET" == request.method:
+			return render(request, 'users/upload-user.html', {})
+	else:
+		excel_file = request.FILES["upload"]
+		wb = openpyxl.load_workbook(excel_file)
+		
+		sheets = wb.sheetnames
+		print(sheets[0])
+		worksheet = wb[sheets[0]]   #Trang tính
+
+		excel_data = list()
+	
+		for row in worksheet.iter_rows():
+			row_data = list()
+
+			for cell in row:
+				#if not (cell.value) == None: 
+				row_data.append(str(cell.value))
+
+			excel_data.append(row_data)
+		print(len(excel_data)-2)
+		
+		for i in range(7):
+			campain = Campain.objects.get(program='bivina')
+			print(excel_data[i+1][2])
+			print(excel_data[i+1][3])
+			
+			outlet = outletInfo.objects.filter(compain = campain)
+			try:
+				user1 = NewUser.objects.create_user_SP(user_name=excel_data[i+1][2], password=excel_data[i+1][3])
+				sp=SalePerson.objects.create(user=user1, brand = campain, outlet = outlet[1])
+				sp.save()
+			except:
+				pass
+			
+		return redirect('PasswordChangeDone')
+
+	
+

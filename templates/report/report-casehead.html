@@ -30,29 +30,27 @@
             <div class="row main">
                 <!-- <p class="title">Hình ảnh biển bản</p> -->
                 <div class="boxvideo">
-                    
+                    <div class="icon-back-report">
+                        <a href="{% url 'pagereport' %}" class="button is-danger back-report"><i class='bx bx-undo'></i></a>
+                    </div>
                     <video autoplay playsinline id="video"></video>
                     <div class="video-screenshot">
                     
                         <form action="" method="post" class="form-img-canvas" id="reportPOSM">
                             {% csrf_token %} 
-                                <div class="container-img">
-                                    <input type="checkbox" id="zoomCheck">
-                                    <label for="zoomCheck">
-                                        <div id="screenshotsContainer">
-                                            <canvas id="canvas" class="is-hidden "></canvas>
-                                        </div>
-                                    </label>
+                            <div class="container-img">
+                                <div id="screenshotsContainer">
+                                    <canvas id="canvas" class="is-hidden "></canvas>
                                 </div>
+                                
+                            </div>
 
                             <div class="btn-submit">
-                                <button type="button" class="button is-danger send-img" ><i class='bx bxs-send'></i></button>
+                                <button type="submit" class="button is-danger send-img" ><i class='bx bxs-send'></i></button>
                                 <a id="download" download="report_img.png"><button class="downloadBtn button is-danger is-hidden" type="button" onClick="download()"><i class="ti-download"></i></button></a>
                             </div>
                         </form>
-                        <div class="icon-back-report">
-                            <a href="{% url 'pagereport' %}"><i class="ti-angle-double-left"></i></a>
-                        </div>
+                       
                     </div>
                 </div>
                 <div class="boximg">

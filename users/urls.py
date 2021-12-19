@@ -9,4 +9,5 @@ urlpatterns = [
     path('PasswordChange/', views.PasswordChange, name="passwordchange"),
     path('page/', views.page_user, name='page'),
     path('PasswordChange/Done', views.PasswordChangeDone, name='PasswordChangeDone'),
+    path('upload_user/', views.upload_user, name='upload_user'),
 ]
