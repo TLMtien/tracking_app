@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table Number</title>
+    <title>List Gift Received</title>
 
     <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
     <!-- CSS -->
@@ -24,57 +24,56 @@
                     </div>
                 </div>
                 <div class="icon-back">
-                    <a href="{% url 'report-sales' %}"><i class="ti-angle-double-left"></i></a>
+                    <a href="{% url 'quantity-gift' %}"><i class="ti-angle-double-left"></i></a>
                 </div>
                 <!-- Main -->
                 <div class="row main">
-                    <form action="{% url 'table-number' %}" method="POST" class="listbox">
+                    <p class="report_title">quà nhận đầu ca</p>
+                    <form action=" " method="POST"class="listbox">
                         {% csrf_token %} 
-                        <p class="title">Báo cáo bàn</p>
+                        
                         <table class="table-list" style="width:100%">
                             <tr>
-                                <th>Danh mục</th>
+                                <th>Tên quà tặng</th>
                                 <th>Số lượng</th>
                                 
                             </tr>
-                            
                             <tr>
-                                <td class="td-name">Bàn bia bán</td>
+                                <td class="td-name">Túi du lịch</td>
                                 <td class="td-number">
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
-                                    {{form.brand_table}}
+                                    {{gift1_given}}
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="td-name">Đồng Hồ Treo Tường</td>
+                                <td class="td-number">
+                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
+                                    {{gift2_given}}
                                 </td>
                                
                             </tr>
                             <tr>
-                                <td class="td-name">Bàn bia HVN</td>
+                                <td class="td-name">Bình Nước 1,6L</td>
                                 <td class="td-number">
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
-                                    {{form.HVN_table}}
+                                    {{gift3_given}}
                                 </td>
                                 
                             </tr>
                             <tr>
-                                <td class="td-name">Bàn bia đối thủ</td>
+                                <td class="td-name">Ly</td>
                                 <td class="td-number">
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
-                                    {{form.other_beer_table}}
+                                    {{gift4_given}}
                                 </td>
                                 
                             </tr>
-                            <tr>
-                                <td class="td-name">Bàn thức uống khác</td>
-                                <td class="td-number">
-                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
-                                    {{form.other_table}}
-                                </td>
-                                
-                            </tr>
-                            
                         </table>
-                        <p class="noted">*Nhập số lượng bàn vào ô “số lượng” </p>
+                        <p class="alert"> *Bạn chưa nhập số quà nhận
                         <div class="box-center">
-                            <input type="submit" class="btn btn-confirm" value="Xác nhận">
+                            <a class="btn btn-confirm"  href="{% url 'quantity-gift' %}">Quay lại"</a>
                         </div>
                     </form>
                 </div>

@@ -214,7 +214,14 @@ def gift_givenReport(request):
             form = gift_givenReportForm()
             return render(request,"report/listgift-sent.html", {'form':form})
     except:
-        return HttpResponse('Yêu cầu nhập số quà nhận trước')
+        gift1_given = form.cleaned_data.get('gift1_given')
+        gift2_given = form.cleaned_data.get('gift2_given')
+        gift3_given = form.cleaned_data.get('gift3_given') 
+        gift4_given = form.cleaned_data.get('gift4_given') 
+        return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
+        'gift3_given':gift3_given,'gift4_given':gift4_given} )
+
+#---------------------------------------GIFT REMAINING--------------------
 
 login_required
 def gift_remaining(request):
