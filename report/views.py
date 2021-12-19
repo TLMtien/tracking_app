@@ -109,7 +109,17 @@ def reportSale(request):
         
     else:
         form = reportSaleForm()
-        return render(request,"report/sales.html", {'form':form})
+        SP = SalePerson.objects.get(user=request.user)
+        beer_brand = '0'
+        beer_other = '0'
+        beer_HVN = '0'
+        report = report_sale.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
+        if report == 1:
+            report = report_sale.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+            beer_brand = report.beer_brand
+            beer_other = report.beer_other
+            beer_HVN = beer_HVN
+        return render(request,"report/sales.html", {'form':form, 'beer_brand':beer_brand, 'beer_other':beer_other, 'beer_HVN':beer_HVN})
 
 #------------------------------------------------------Report customer----------------------------------------
 login_required
