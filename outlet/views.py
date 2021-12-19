@@ -39,7 +39,7 @@ def outlet_create(request, pk):
             SP.outlet = p
             SP.save()
 
-            return redirect('successcreate')
+            return redirect('pagereport')
     else:
         form = outletInfoForm()
         return render(request,"outlet/createinfooutlet.html",{'form':form})
