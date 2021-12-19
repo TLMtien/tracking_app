@@ -34,6 +34,17 @@
                         <a href="{% url 'pagereport' %}" class="button is-danger back-report"><i class='bx bx-undo'></i></a>
                     </div>
                     <video autoplay playsinline id="video"></video>
+                    <div class="boximg">
+                        <div class=btns>
+                            <button class="button is-success is-hidden" id="btnPlay"><i class="ti-control-play"></i></button> 
+                            <button class="button is-dark is-hidden" id="btnPause"><i class="ti-control-pause"></i></button> 
+                            <button class="button is-light" id="btnScreenshot"><i class="ti-camera"></i></button> 
+                        </div>
+                        <div class="btn-change">
+                            <button class="button is-dark is-hidden" id="btnChangeCamera"><i class="ti-reload"></i></button>
+                        </div>
+                        
+                    </div>
                     <div class="video-screenshot">
                     
                         <form action="" method="post" class="form-img-canvas" id="reportPOSM">
