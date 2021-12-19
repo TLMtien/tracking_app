@@ -118,7 +118,7 @@ def reportSale(request):
             report = report_sale.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
             beer_brand = report.beer_brand
             beer_other = report.beer_other
-            beer_HVN = beer_HVN
+            beer_HVN = report.beer_HVN
         return render(request,"report/sales.html", {'form':form, 'beer_brand':beer_brand, 'beer_other':beer_other, 'beer_HVN':beer_HVN})
 
 #------------------------------------------------------Report customer----------------------------------------
