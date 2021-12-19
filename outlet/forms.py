@@ -35,10 +35,11 @@ class gift_ReceiveReportForm(forms.ModelForm):
     gift1_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     gift2_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     gift3_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
+    gift4_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     class Meta:
         model = giftReport
         fields = ("gift1_received", "gift2_received", 
-                    "gift3_received", 
+                    "gift3_received", "gift4_received",
                  )
     def __init__(self, *args, **kwargs):
         self.is_salePerson = kwargs.pop('is_salePerson',None)
@@ -48,10 +49,11 @@ class gift_givenReportForm(forms.ModelForm):
     gift1_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     gift2_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     gift3_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
+    gift4_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     class Meta:
         model = giftReport
         fields = ("gift1_given", "gift2_given", 
-                    "gift3_given", 
+                    "gift3_given", "gift4_given",
                  )
     def __init__(self, *args, **kwargs):
         self.is_salePerson = kwargs.pop('is_salePerson',None)
@@ -63,12 +65,12 @@ class tableReportForm(forms.ModelForm):
     brand_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
     other_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
     HVN_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
-    total_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
+    
     class Meta:
         model = tableReport
         fields = (
             "other_beer_table","other_table",
-            "brand_table","HVN_table", "total_table",
+            "brand_table","HVN_table", 
         )
 
     def __init__(self, *args, **kwargs):

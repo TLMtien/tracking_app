@@ -42,7 +42,7 @@ def report(instance, filename):
 
 class Campain(models.Model):
     program = models.CharField(choices=CHOICES_COMPAIN, max_length=200)
-
+    
     def __str__(self):
         return self.program
 
@@ -72,6 +72,7 @@ class posmReport(models.Model):
     outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=upload_to)
     created = models.DateField(auto_now_add=True)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
     #modified = models.DateTimeField(auto_now=True)
 
 class tableReport(models.Model):
@@ -104,23 +105,35 @@ class report_sale(models.Model):
     beer_HVN = models.CharField(max_length=255, default='0')
     beer_other = models.CharField(max_length=255, default='0')
     created = models.DateField(auto_now_add=True)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
 
 class giftReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
+
     outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     gift1_received =  models.CharField(max_length=255, default='0')
     gift2_received =  models.CharField(max_length=255, default='0')
     gift3_received =  models.CharField(max_length=255, default='0', blank=True)
+    gift4_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift5_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift6_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
     
 
-    gift1_given = models.CharField(max_length=255, default='0', blank=True)
-    gift2_given = models.CharField(max_length=255, default='0', blank=True)
-    gift3_given = models.CharField(max_length=255, default='0', blank=True)
+    gift1_given = models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift2_given = models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift3_given = models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift4_given = models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift5_given = models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift6_given = models.CharField(max_length=255, default='0', blank=True, null=True)
     
 
     gift1_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
     gift2_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
     gift3_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
+    gift4_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
+    gift5_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
+    gift6_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
     
     created = models.DateField(auto_now_add=True)
 
@@ -128,22 +141,26 @@ class giftReport(models.Model):
         self.gift1_remaining = deduct(self.gift1_received , self.gift1_given)
         self.gift2_remaining = deduct(self.gift2_received , self.gift2_given)
         self.gift3_remaining = deduct(self.gift3_received , self.gift3_given)
-        
+        self.gift4_remaining = deduct(self.gift4_received , self.gift4_given)
+        self.gift5_remaining = deduct(self.gift5_received , self.gift5_given)
+        self.gift6_remaining = deduct(self.gift6_received , self.gift6_given)
         super(giftReport, self).save(*args, **kwargs)
     
     def __str__(self):
-        return "gift1{} - gift2{} - gift3{}".format(self.gift1_remaining, self.gift2_remaining, self.gift3_remaining)
+        return "{} - {} - {}- {}- {}- {}".format(self.gift1_remaining, self.gift2_remaining, 
+            self.gift3_remaining, self.gift4_remaining, self.gift5_remaining, self.gift6_remaining)
 
 
 class overallReport(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     posm_Report = models.ForeignKey(posmReport, on_delete=models.CASCADE)
     table_Report = models.ForeignKey(tableReport, on_delete=models.CASCADE)
     gift_report = models.ForeignKey(giftReport, on_delete=models.CASCADE)
     consumer_report = models.ForeignKey(consumerApproachReport, on_delete=models.CASCADE)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
     confirm = models.ImageField(upload_to=report)  
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateField(auto_now_add=True)
 
 
 
