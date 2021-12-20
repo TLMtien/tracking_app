@@ -60,8 +60,8 @@ class outletInfo(models.Model):
     created_by_HVN = models.BooleanField(default=False, blank=True)
     def __str__(self):
         return "{} - {}".format(self.area, self.outlet_Name)
-    # class Meta:
-	#     ordering = ["id"]
+    class Meta:
+	    ordering = ["created"]
     
     # def get_absolute_url(self):   
     #     return reverse("", kwargs={
@@ -118,6 +118,10 @@ class giftReport(models.Model):
     gift4_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
     gift5_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
     gift6_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift7_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift8_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift9_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift10_received =  models.CharField(max_length=255, default='0', blank=True, null=True)
     
 
     gift1_given = models.CharField(max_length=255, default='0', blank=True, null=True)
@@ -126,6 +130,10 @@ class giftReport(models.Model):
     gift4_given = models.CharField(max_length=255, default='0', blank=True, null=True)
     gift5_given = models.CharField(max_length=255, default='0', blank=True, null=True)
     gift6_given = models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift7_given = models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift8_given = models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift9_given = models.CharField(max_length=255, default='0', blank=True, null=True)
+    gift10_given = models.CharField(max_length=255, default='0', blank=True, null=True)
     
 
     gift1_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
@@ -134,6 +142,10 @@ class giftReport(models.Model):
     gift4_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
     gift5_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
     gift6_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
+    gift7_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
+    gift8_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
+    gift9_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
+    gift10_remaining = models.CharField(max_length=50, null=True, blank=True, default='0')
     
     created = models.DateField(auto_now_add=True)
 
@@ -144,6 +156,10 @@ class giftReport(models.Model):
         self.gift4_remaining = deduct(self.gift4_received , self.gift4_given)
         self.gift5_remaining = deduct(self.gift5_received , self.gift5_given)
         self.gift6_remaining = deduct(self.gift6_received , self.gift6_given)
+        self.gift7_remaining = deduct(self.gift7_received , self.gift7_given)
+        self.gift8_remaining = deduct(self.gift8_received , self.gift8_given)
+        self.gift9_remaining = deduct(self.gift9_received , self.gift9_given)
+        self.gift10_remaining = deduct(self.gift10_received , self.gift10_given)
         super(giftReport, self).save(*args, **kwargs)
     
     def __str__(self):
