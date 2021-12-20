@@ -139,7 +139,7 @@
                         </tr>
                         {% for outlet in list_outlet %}
                         <tr>  
-                            <td class="td-desc">{{outlet.id}}</td>  
+                            <td class="td-desc">{{ forloop.counter }}</td>  
                             <td class="td-desc">{{outlet.province}}</td>  
                             <td class="td-desc">{{outlet.ouletID}}</td>  
                             <td class="td-desc">{{outlet.type}}</td>  
@@ -153,7 +153,7 @@
 
                         {% for outlet in list_outlet_view %}
                         <tr>  
-                            <td class="td-desc">{{outlet.id}}</td>  
+                            <td class="td-desc">{{ forloop.counter }}</td>  
                             <td class="td-desc">{{outlet.province}}</td>  
                             <td class="td-desc">{{outlet.ouletID}}</td>  
                             <td class="td-desc">{{outlet.type}}</td>  
