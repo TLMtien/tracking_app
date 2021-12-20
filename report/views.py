@@ -1,7 +1,7 @@
 from os import name
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-from outlet.models import tableReport, report_sale, consumerApproachReport, giftReport, outletInfo, posmReport, overallReport
+from outlet.models import tableReport, report_sale, consumerApproachReport, giftReport, outletInfo, posmReport, overallReport, Campain
 from outlet.forms import tableReportForm, reportSaleForm, consumerApproachReportForm, gift_ReceiveReportForm, gift_givenReportForm
 from django.views.generic import  DayArchiveView
 import datetime
@@ -172,24 +172,55 @@ def gift_receiveReport(request):
             gift2_received = form.cleaned_data.get('gift2_received')
             gift3_received = form.cleaned_data.get('gift3_received')   
             gift4_received = form.cleaned_data.get('gift4_received')
-            report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
-            if report < 1:
-                p, created = giftReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, campain=SP.brand, gift1_received=gift1_received, 
-                        gift2_received=gift2_received, gift3_received=gift3_received, gift4_received=gift4_received)
-                p.save()
-                return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
-                'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received})
-            report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-            report.gift1_received = sum(gift1_received, report.gift1_received)
-            report.gift2_received = sum(gift2_received, report.gift2_received)
-            report.gift3_received = sum(gift3_received, report.gift3_received)
-            report.gift4_received = sum(gift4_received, report.gift4_received)
-            report.save()
-            return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 'gift2_received':gift2_received,
-                    'gift3_received':gift3_received, 'gift4_received':gift4_received })
+            gift5_received = form.cleaned_data.get('gift5_received')
+            gift6_received = form.cleaned_data.get('gift6_received')
+            campain7 = Campain.objects.get(program='bivina')
+            campain4 = Campain.objects.get(id=4)
+            #form = gift_ReceiveReportForm()
+            if SP.brand == campain7:
+                report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
+                if report < 1:
+                    p, created = giftReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, campain=SP.brand, gift1_received=gift1_received, 
+                            gift2_received=gift2_received, gift3_received=gift3_received, gift4_received=gift4_received)
+                    p.save()
+                    return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
+                    'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received})
+                report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+                report.gift1_received = sum(gift1_received, report.gift1_received)
+                report.gift2_received = sum(gift2_received, report.gift2_received)
+                report.gift3_received = sum(gift3_received, report.gift3_received)
+                report.gift4_received = sum(gift4_received, report.gift4_received)
+                report.save()
+                return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 'gift2_received':gift2_received,
+                        'gift3_received':gift3_received, 'gift4_received':gift4_received })
+            else:
+                report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
+                if report < 1:
+                    p = giftReport.objects.create(SP=request.user, outlet=SP.outlet, campain=SP.brand, gift1_received=gift1_received, 
+                            gift2_received=gift2_received, gift3_received=gift3_received, gift4_received=gift4_received, 
+                            gift5_received=gift5_received, gift6_received=gift6_received)
+                    p.save()
+                    return render(request, "list_gift/create-list-gift-receive.html", {'gift1_received':gift1_received, 
+                    'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift5_received':gift5_received, 'gift6_received':gift6_received})
+                report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+                report.gift1_received = sum(gift1_received, report.gift1_received)
+                report.gift2_received = sum(gift2_received, report.gift2_received)
+                report.gift3_received = sum(gift3_received, report.gift3_received)
+                report.gift4_received = sum(gift4_received, report.gift4_received)
+                report.gift5_received = sum(gift5_received, report.gift5_received)
+                report.gift6_received = sum(gift6_received, report.gift6_received)
+                report.save()
+                return render(request, "list_gift/create-list-gift-receive.html", {'gift1_received':gift1_received, 'gift2_received':gift2_received,
+                        'gift3_received':gift3_received, 'gift4_received':gift4_received, 'gift5_received':gift5_received, 'gift6_received':gift6_received })
     else:
+        SP = SalePerson.objects.get(user=request.user)
+        campain7 = Campain.objects.get(program='bivina')
+        campain4 = Campain.objects.get(id=4)
         form = gift_ReceiveReportForm()
-        return render(request,"report/listgift-received.html", {'form':form})
+        if SP.brand == campain7:
+            return render(request,"report/listgift-received.html", {'form':form})
+        return render(request,"list_gift/listgift-received.html", {'form':form})
+        
 
 login_required
 def gift_givenReport(request):
@@ -200,26 +231,55 @@ def gift_givenReport(request):
                 gift1_given = form.cleaned_data.get('gift1_given')
                 gift2_given = form.cleaned_data.get('gift2_given')
                 gift3_given = form.cleaned_data.get('gift3_given') 
-                gift4_given = form.cleaned_data.get('gift4_given')  
+                gift4_given = form.cleaned_data.get('gift4_given') 
+                gift5_given = form.cleaned_data.get('gift5_given') 
+                gift6_given = form.cleaned_data.get('gift6_given')
+                campain7 = Campain.objects.get(program='bivina')
+                campain4 = Campain.objects.get(id=4)
+                form = gift_ReceiveReportForm()
                 SP = SalePerson.objects.get(user=request.user)
-                report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-                report.gift1_given = sum(gift1_given, report.gift1_given)
-                report.gift2_given = sum(gift2_given, report.gift2_given)
-                report.gift3_given = sum(gift3_given, report.gift3_given)
-                report.gift4_given = sum(gift4_given, report.gift4_given)
-                report.save()
-
-                return redirect('listgift-remain')
+                if SP.brand == campain7:
+                    SP = SalePerson.objects.get(user=request.user)
+                    report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+                    report.gift1_given = sum(gift1_given, report.gift1_given)
+                    report.gift2_given = sum(gift2_given, report.gift2_given)
+                    report.gift3_given = sum(gift3_given, report.gift3_given)
+                    report.gift4_given = sum(gift4_given, report.gift4_given)
+                    report.save()
+                    return redirect('quantity-gift')
+                else:
+                    SP = SalePerson.objects.get(user=request.user)
+                    report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+                    report.gift1_given = sum(gift1_given, report.gift1_given)
+                    report.gift2_given = sum(gift2_given, report.gift2_given)
+                    report.gift3_given = sum(gift3_given, report.gift3_given)
+                    report.gift4_given = sum(gift4_given, report.gift4_given)
+                    report.gift5_given = sum(gift4_given, report.gift5_given)
+                    report.gift6_given = sum(gift4_given, report.gift6_given)
+                    report.save()
+                    return redirect('quantity-gift')
         else:
             form = gift_givenReportForm()
-            return render(request,"report/listgift-sent.html", {'form':form})
+            campain7 = Campain.objects.get(program='bivina')
+            campain4 = Campain.objects.get(id=4)
+            form = gift_ReceiveReportForm()
+            SP = SalePerson.objects.get(user=request.user)
+            if SP.brand == campain7:
+                return render(request,"report/listgift-sent.html", {'form':form})
+            return render(request,"list_gift/listgift-sent.html", {'form':form})
     except:
         gift1_given = form.cleaned_data.get('gift1_given')
         gift2_given = form.cleaned_data.get('gift2_given')
         gift3_given = form.cleaned_data.get('gift3_given') 
         gift4_given = form.cleaned_data.get('gift4_given') 
-        return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
-        'gift3_given':gift3_given,'gift4_given':gift4_given} )
+        campain7 = Campain.objects.get(program='bivina')
+        campain4 = Campain.objects.get(id=4)
+        form = gift_ReceiveReportForm()
+        SP = SalePerson.objects.get(user=request.user)
+        if SP.brand == campain7:
+            return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
+                'gift3_given':gift3_given,'gift4_given':gift4_given} )
+        return HttpResponse('Bạn chưa nhập mục số quà nhận')
 
 #---------------------------------------GIFT REMAINING--------------------
 
@@ -228,15 +288,30 @@ def gift_remaining(request):
     try:
         SP = SalePerson.objects.get(user=request.user)
         report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-        return render(request,'report/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
-            'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining, 'gift4_remaining': report.gift4_remaining,
-            'gift1_received':report.gift1_received, 'gift2_received':report.gift2_received,
-                    'gift3_received':report.gift3_received, 'gift4_received':report.gift4_received,
-            'gift1_given':report.gift1_given, 'gift2_given':report.gift2_given, 
-            'gift3_given':report.gift3_given, 'gift4_given':report.gift4_given})
+        campain7 = Campain.objects.get(program='bivina')
+        campain4 = Campain.objects.get(id=4)
+        if SP.brand == campain7:
+            return render(request,'report/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
+                'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining, 'gift4_remaining': report.gift4_remaining,
+                'gift1_received':report.gift1_received, 'gift2_received':report.gift2_received,
+                        'gift3_received':report.gift3_received, 'gift4_received':report.gift4_received,
+                'gift1_given':report.gift1_given, 'gift2_given':report.gift2_given, 
+                'gift3_given':report.gift3_given, 'gift4_given':report.gift4_given})
+        return render(request,'list_gift/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
+                'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining, 'gift4_remaining': report.gift4_remaining,'gift5_remaining': report.gift5_remaining,'gift6_remaining': report.gift6_remaining,
+                'gift1_received':report.gift1_received, 'gift2_received':report.gift2_received,
+                        'gift3_received':report.gift3_received, 'gift4_received':report.gift4_received,'gift5_received':report.gift5_received, 'gift6_received':report.gift6_received,
+                'gift1_given':report.gift1_given, 'gift2_given':report.gift2_given, 
+                'gift3_given':report.gift3_given, 'gift4_given':report.gift4_given, 'gift5_given':report.gift5_given, 'gift6_given':report.gift6_given})
     except:
-        return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
-            'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0'})
+        SP = SalePerson.objects.get(user=request.user)
+        campain7 = Campain.objects.get(program='bivina')
+        campain4 = Campain.objects.get(id=4)
+        if SP.brand == campain7:
+            return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
+                'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0'})
+        return render(request,'list_gift/listgift-remain.html', {'gift1_remaining':'0',
+                'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0', 'gift5_remaining': '0', 'gift6_remaining': '0'})
 
 
 

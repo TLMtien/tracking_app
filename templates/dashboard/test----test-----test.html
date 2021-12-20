@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-
+    
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- font icons -->
@@ -14,197 +14,192 @@
     <!-- css -->
     <link rel="stylesheet" href="{% static '/PC/css/style.css' %}">
 </head>
+</head>
 <body>
     <div class="app">
         <div class="container-home">
             <!-- Header Home -->
             <div class="row header-home">
                 <div class="logo">
-                    <a href="./homeadmin.html"><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
+                    <a href=""><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
                 </div>
+                
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
-                        <li class="nav-list dropdown-nav active">
-                            <a href="#" class="nav-links drop-btn" onclick="openTigerTp()">
-                                tiger tp
+                        <li class="nav-list dropdown-nav ">
+                            <a href="{% url 'dashboard' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
+                                Tiger Table Promotion
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="nav-sub"><a href="./dashboard.html">Dashboard</a></li>
+                                <li class="nav-sub"><a href="">Dashboard</a></li>
                                 <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                                <li class="nav-sub"><a href="#">Management</a></li>
-                                <li class="nav-sub"><a href="#">Export report</a></li>
+                                <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
+                                <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                             </ul>
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">TIGER TP</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">TIGER FA</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">TIGER HZA</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">STRONGBOW FES</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">HEINEKEN TP</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">HEINEKEN SA</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">BIVINIA FP</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">LARUE FP</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">LARUE FSP</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
                 <div class="profile-user">
                     <a href="#" class="user-img">
-                        <img src="{% static '/PC/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
                     </a>
                 </div>
             </div>
             <div class="row raw-data">
-                <div class="leftbox">
+                <div class="leftbox dropdown_raw">
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Dashboard</span>
+                    <ul class="dropdown-menu_raw">
+                        <li class="nav-sub"><a href="">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
+                    </ul>
                 </div>
                 <div class="rightbox">
-                    <form action="{% url 'dashboard' %}" class="form-filter" method='POST'>
-                        <div class="filter">
-                            <div class="range-box">
-                                Filter
-                                <input type="date" placeholder="Date" name>
+                    <div class="bg-filter">
+                        <form action="#" class="form-filter">
+                            <div class="filter">
+                                <div class="filter-box">
+                                    From
+                                    <input type="date" placeholder="Date">
+                                </div>
+                                <div class="time-box">
+                                    To
+                                    <input type="date" placeholder="Date">
+                                </div>
+                                <!-- <div class="range-box">
+                                    Range
+                                    <input type="datetime-local" value="">
+                                </div> -->
                             </div>
-    
-                            <div class="range-box">
-                                Range
-                                <input type="date" value="">
+        
+                            <div class="btn-box">
+                                <input type="submit" value="Apply" class="input-filter">
+                                <input type="reset" value="Clear" class="input-reset">
                             </div>
-                        </div>
-    
-                        <div class="btn-box">
-                            <input type="submit" value="Filter" class="input-filter">
-                            <input type="reset" value="Reset" class="input-reset">
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
 
             <!-- Main Home-->
 
-            <div class="main-home main-dashboard">
+            <div class="main-home">
                 <!-- Sidebar left menu -->
 
                 <div class="sidebar-left" id="leftMenu">
                     
-                    <ul class="sidebar sidebar-menu">
-                        <li class="menu-item active">
-                            <a href="#" >
-                                <i class='bx bxs-dashboard'></i>
-                                <span>program</span>
-                            </a>
-                        </li>
+                    <div class="sidebar">
+                        <div class="sidebar-menu sidebar-menu_main">
+                            <span class="sidebar-menu_title">SELECT ACTIVATION</span>
+                        </div>
                     
-                        <li class="menu-item sidebar-submenu">
-                            <a href="#" class="sidebar-menu-dropdown">
-                                <i class='bx bxs-location-plus' ></i>
-                                <span>province</span>
-                                <div class="dropdown-icon"></div>
-                            </a>
-                            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                                <li>
-                                    <a href="#">
-                                        Cần Thơ
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Đà Nẵng
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
+                        <div class="sidebar-menu">
+                            <div class="sidebar-menu_dropdown">
+                                <i class='bx bxs-location-plus sidebar-menu_icon' ></i>
+                                <span class="sidebar-menu_title">Province</span>
+                                <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
+                            </div>
+                            
+                            <div class="sidebar-menu_dropdown-content">
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
                                         Hồ Chí Minh
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Khánh Hòa
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Tiền Giang
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item sidebar-submenu">
-                            <a href="#" class="sidebar-menu-dropdown">
-                                <i class='bx bxs-purchase-tag-alt' ></i>
-                                <span>Tyle</span>
-                                <div class="dropdown-icon"></div>
-                            </a>
-                            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                                <li>
-                                    <a href="#">
-                                        GSO
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        QN
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        YSO
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item sidebar-submenu">
-                            <a href="#" class="sidebar-menu-dropdown">
-                                <i class='bx bxs-user-detail' ></i>
-                                <span>Outlet Name</span>
-                                <div class="dropdown-icon"></div>
-                            </a>
-                            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                                <li>
-                                    <a href="#">
-                                        543
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        A Việt
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Ẩm Thực Sơn Hà
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Bò Lý Em
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Cát Biển
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Vườn Chuối
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Vườn Táo
-                                    </a>
-                                </li>
+                                    </p>
+                                </div>
                                 
-                            </ul>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#">
-                                <i class='bx bxs-log-out' ></i>
-                                <span>Logout</span>
-                            </a>
-                        </li>
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                        Tiền Giang
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-menu">
+                            <div class="sidebar-menu_dropdown">
+                                <i class='bx bxs-purchase-tag-alt sidebar-menu_icon' ></i>
+                                <span class="sidebar-menu_title">Outlet Tyle</span>
+                                <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
+                            </div>
+                            <div class="sidebar-menu_dropdown-content">
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                        GSO
+                                    </p>
+                                </div>
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                        QN
+                                    </p>
+                                </div>
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                        YSO
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-menu">
+                            <div href="#" class="sidebar-menu_dropdown">
+                                <i class='bx bxs-user-detail sidebar-menu_icon' ></i>
+                                <span class="sidebar-menu_title">Outlet Name</span>
+                                <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
+                            </div>
+                            <div class="sidebar-menu_dropdown-content">
+                                
+                    
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                        Cát Biển
+                                    </p>
+                                </div>
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                        Vườn Táo
+                                    </p>
+                                </div>
+                                
+                            </div>
+                        </div>
                         
-                    </ul>
+                    </div>
                 </div>
             </div>
 
@@ -213,7 +208,7 @@
                     <div class="box-left">
                         <div class="col-vertical">
                             <div class="num-active">
-                                <p class="title">NUMBER OF ACTIVATIONS</p>
+                                <p class="chart-title">VOLUME PROGRESS</p>
                                 <span class="number-one">142</span>
                                 <p class="desc">VS.Taget</p>
                                 <span class="number-two">21%</span>
@@ -221,7 +216,7 @@
                         </div>
                         <div class="col-vertical">
                             <div class="num-active">
-                                <p class="title">VOLUME PERFORMANCE</p>
+                                <p class="chart-title">VOLUME PERFORMANCE</p>
                                 <p class="desc">(Can/Bottle)</p>
                                 <span class="number-one">142</span>
                                 <br>
@@ -234,7 +229,7 @@
                         </div>
                         <div class="col-vertical">
                             <div class="num-active">
-                                <p class="title">% TARGET VOLUME ACHIEVED</p>
+                                <p class="chart-title">VOLUME PERFORMANCE</p>
                                 
                                 <span class="number-two">21%</span>
                             </div>
@@ -243,87 +238,92 @@
                     <div class="box-right">
                         <div class="row">
                             <div class="col-horizontal">
+                                {% comment %} <p class="chart-title">SP PERFORMANCE</p> {% endcomment %}
                                 <div class="header">
-                                    <div class="col-6">
-                                        <div class="box-one">
-                                            <p class="title">
-                                                Total Consumers Reached
-                                            </p>
-                                        </div>
-                                        <div class="box-two">
-                                            <span class="number">9218</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="box-one">
-                                            <p class="title">
-                                                Average Reach per Act
-                                            </p>
-                                        </div>
-                                        <div class="box-two">
-                                            <span class="number">77</span>
+                                    <div class="row-1">
+                                        <div class="col-12">
+                                            <div class="col-6">
+                                                <p class="title">
+                                                    Total Consumers Reached
+                                                </p>
+                                            </div>
+                                    
+                                            <div class="col-6">
+                                                <p class="title">
+                                                    Average Reach per Act
+                                                </p>
+                                            </div>
+                                            
                                         </div>
                                     </div>
+                                    <div class="row-2">
+                                        <div class="col-12">
+                                        
+                                            <div class="col-6">
+                                                <span class="number">{{customer_app}}</span>
+                                            </div>
+                                            <div class="col-6">
+                                                <span class="number">{{percent_customer_app}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 <div class="main">
-                                    <p class="title">AVERAGE PERFORMANCE PER ACT</p>
+                                    <p class="chart-title">AVERAGE PERFORMANCE PER ACT</p>
                                     <p class="desc">(Can/Bottle)</p>
                                     <div id="chart-act"></div>
                                     
                                 </div>
-                                <div class="footer">
+                                <!-- <div class="footer">
                                     <div class="icon-color">
                                         <span class="icon-one"></span> <p class="smart-desc">Actual Achieved</p>
                                         <span class="icon-two"></span> <p class="smart-desc">Volume Target</p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-horizontal">
                                 <div class="col-12">
-                                    <p class="title">TABLE SHARE PERFORMANCE</p>
+                                    <p class="chart-title">TABLE SHARE PERFORMANCE</p>
                                     <div id="chart-share"></div>
                                 </div>
                             </div>
                             <div class="col-horizontal">
-                                <div class="header">
-                                    <div class="col-1">
-                                        <div class="box-one">
-                                            <p class="title">Water Bottle 1</p>
+                                <div class="header ">
+                                    <div class="row dropdown_table">
+                                        <div class="col-12 boxcorlor">
+                                            <span class="box-color"></span>
+                                            Scheme 1
                                         </div>
-                                        <div class="box-two">
-                                            <span class="number">618</span>
-                                        </div>
+                                        <ul class="dropdown-menu_table">
+                                            <p class="title_sub">Select Scheme <i class='bx bx-sort-alt-2' ></i></p>
+                                            <li class="nav-sub"><a href="#">Scheme 1</a></li>
+                                            <li class="nav-sub"><a href="#">Scheme 2</a></li>
+                                            <li class="nav-sub"><a href="#">Scheme 3</a></li>
+                                            <li class="nav-sub"><a href="#">Scheme 4</a></li>
+                                        </ul>
                                     </div>
-                                    <div class="col-1">
-                                        <div class="box-one">
-                                            <p class="title">Backpack F2</p>
-                                        </div>
-                                        <div class="box-two">
-                                            <span class="number">461</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="box-one">
-                                            <p class="title">HNK T Shirt</p>
-                                        </div>
-                                        <div class="box-two">
-                                            <span class="number">62</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="box-one">
-                                            <p class="title">Matal Cup F1</p>
-                                        </div>
-                                        <div class="box-two">
-                                            <span class="number">612</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="box-one">
-                                            <p class="title">HNK Speaker</p>
-                                        </div>
-                                        <div class="box-two">
-                                            <span class="number">101</span>
+                                    
+                                    <div class="row-1">
+                                        <div class="col-12">
+                                            <div class="col-2">
+                                                <p class="title"> Glass 30cl</p>
+                                            </div>
+                                            <div class="col-2">
+                                                <p class="title">Cup 33cl 3D</p>
+                                            </div>
+                                            <div class="col-2">
+                                                <p class="title">Glass of Casablanca</p>
+                                            </div>
+                                            <div class="col-2">
+                                                <p class="title">Wallet</p>
+                                            </div>
+                                            <div class="col-2">
+                                                <p class="title">Tiger Crystal Hat</p>
+                                            </div>
+                                            <div class="col-2">
+                                                <p class="title">Beer Voucher</p>
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -342,7 +342,7 @@
                         <div class="row">
                             <div class="row-bottom">
                                 <div class="col-12">
-                                    <p class="title"></p>
+                                    <p class="chart-title">TOP 10 OUTLET PERFORMANCE</p>
                                     <div id="chart-top"></div>
                                 </div>
                             </div>
@@ -353,91 +353,11 @@
 
             
         </div>
-
-        
-        <script src="{% static '/chart/js/accessibility.js' %}"></script>
-        <script src="{% static '/chart/js/export-data.js' %}"></script>
-        <script src="{% static '/chart/js/exporting.js' %}"></script>
-        <script src="{% static '/chart/js/highcharts.js' %}"></script>
-        <script>
-            //var chart = {{chart|safe}};
-            Highcharts.chart('chart-share', {
-                chart: {
-                        type: 'pie',
-                        width: 350,
-                },
-                title: {
-                    //text: 'TABLE SHARE PERFORMANCE'
-                    display: false,
-                },
-                subtitle: {
-                    text: ['HVN_Table', 'brand_table', 'total_table'],         
-                }, 
-                series: [{
-                        name: ['HVN_Table', 'brand_table', 'total_table'],
-                        data: {{table_report|safe}},
-                        colors: ['#198631', '#1C263F', '#939393'],   
-                }],
-                
-            });
-            
-
-            Highcharts.chart('chart-top', {
-                series: [{
-                    name: 'Total',
-                    type: 'column',
-                    data: [2000, 1000, 660, 648, 618, 600, 546, 538, 534, 527]
-                }, {
-                    name: 'Top %',
-                    type: 'line',
-                    data: [90, 81, 43, 94, 100, 100, 95, 65, 87, 78],
-                }],
-                chart: {
-                    height: 350,
-                    type: 'line',
-                },
-                subtitle: {
-                    text: ['HẾN', 'LÚA NẾP', 'ỐC NGON', 'TƠ', 'ĐỒNG NỘI', 'TRÀNG AN', 'BÒ TƠ', 'HƯƠNG', 'LẨU 79', 'LẨU DÊ'],         
-                }, 
-                stroke: {
-                    width: [0, 4],
-                },
-                title: {
-                    text: 'TOP 10 OUTLET PERFORMANCE'
-                },
-                dataLabels: {
-                    enabled: true,
-                    enabledOnSeries: [1],
-                    labels: ['HẾN', 'LÚA NẾP', 'ỐC NGON', 'TƠ', 'ĐỒNG NỘI', 'TRÀNG AN', 'BÒ TƠ', 'HƯƠNG', 'LẨU 79', 'LẨU DÊ'],
-                    style: {
-                        colors: ['#1C263F']
-                    }
-                },
-                labels: ['HẾN', 'LÚA NẾP', 'ỐC NGON', 'TƠ', 'ĐỒNG NỘI', 'TRÀNG AN', 'BÒ TƠ', 'HƯƠNG', 'LẨU 79', 'LẨU DÊ'],
-                colors: ['#198631', '#1C263F'],
-                yaxis: [{
-                    title: {
-                        text: 'Top 10',
-                       
-                    },
-                }, {
-                    opposite: true,
-                    title: {
-                        text: 'Outlet'
-                    }
-                }]
-                
-            });
-                
-            </script>
-        
     </div>
 
 
 
     <!-- js -->
-    
-    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -460,13 +380,81 @@
     });
     </script>
     <script>
-        $( '#leftMenu .sidebar a' ).on( 'click', function () {
-        $( '#leftMenu .sidebar' ).find( 'li.active' ).removeClass( 'active' );
-        $( this ).parent( 'li' ).addClass( 'active' );
-    });
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown_raw").click(function(){
+                $(this).find(".dropdown-menu_raw").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown_raw");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu_raw").slideUp("fast");
+            }            
+        });
     </script>
-     {% comment %} <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="{% static 'PC/js/chart.js' %}"></script>  {% endcomment %}
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown_table").click(function(){
+                $(this).find(".dropdown-menu_table").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown_table");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu_table").slideUp("fast");
+            }            
+        });
+    </script>
+
+    <script src="{% static 'PC/js/apexcharts.js' %}"></script>
+    
+    <script> 
+        var options = {
+            series:  {{text}},
+            chart: {
+                width: 350,
+                type: 'pie',
+            },
+            labels: ['HVN', 'Brand', 'Other', 'Other beer'],
+            colors: ['#198631', '#1C263F', '#000', '#939393'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+        var chart = new ApexCharts(document.querySelector("#chart-share"), options);
+        chart.render();  
+    </script>
+
+<script>
+    var options = {
+        chart: {
+            type: 'bar'
+        },
+        series: [{
+            name: 'ACT',
+            data: [186, {{Volume_sale}}],
+        }],
+        
+        labels: ['Total', 'Average Volue Sales'],
+        colors: ['#198631', '#1C263F']
+    }
+    
+    var chart = new ApexCharts(document.querySelector("#chart-act"), options);
+    
+    chart.render();
+    
+</script>
     <script src="{% static 'PC/js/app.js' %}"></script>
 </body>
 </html>
+

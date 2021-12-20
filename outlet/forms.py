@@ -36,10 +36,12 @@ class gift_ReceiveReportForm(forms.ModelForm):
     gift2_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     gift3_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     gift4_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
+    gift5_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
+    gift6_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
     class Meta:
         model = giftReport
         fields = ("gift1_received", "gift2_received", 
-                    "gift3_received", "gift4_received",
+                    "gift3_received", "gift4_received", "gift5_received", "gift6_received",
                  )
     def __init__(self, *args, **kwargs):
         self.is_salePerson = kwargs.pop('is_salePerson',None)
@@ -50,10 +52,12 @@ class gift_givenReportForm(forms.ModelForm):
     gift2_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     gift3_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
     gift4_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
+    gift5_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
+    gift6_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
     class Meta:
         model = giftReport
         fields = ("gift1_given", "gift2_given", 
-                    "gift3_given", "gift4_given",
+                    "gift3_given", "gift4_given", "gift5_given", "gift6_given",
                  )
     def __init__(self, *args, **kwargs):
         self.is_salePerson = kwargs.pop('is_salePerson',None)
