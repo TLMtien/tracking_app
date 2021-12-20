@@ -110,7 +110,7 @@
                                 <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
                             </div>
                             
-                            <div class="sidebar-menu_dropdown-content">
+                            {% comment %} <div class="sidebar-menu_dropdown-content">
                                 <div class="sidebar-menu_sub">
                                     <label>
                                         <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
@@ -156,7 +156,7 @@
                                         Tiền Giang
                                     </p>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                         <div class="sidebar-menu">
                             <div class="sidebar-menu_dropdown">
@@ -165,7 +165,7 @@
                                 <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
                             </div>
                             <div class="sidebar-menu_dropdown-content">
-                                <div class="sidebar-menu_sub">
+                                {% comment %} <div class="sidebar-menu_sub">
                                     <label>
                                         <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
                                         <span class="checkmark"></span>
@@ -191,7 +191,7 @@
                                     <p class="sidebar-menu_item">
                                         YSO
                                     </p>
-                                </div>
+                                </div> {% endcomment %}
                             </div>
                         </div>
                         <div class="sidebar-menu">
@@ -201,7 +201,7 @@
                                 <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
                             </div>
                             <div class="sidebar-menu_dropdown-content">
-                                <div class="sidebar-menu_sub">
+                                {% comment %} <div class="sidebar-menu_sub">
                                     <label>
                                         <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
                                         <span class="checkmark"></span>
@@ -263,7 +263,7 @@
                                     <p class="sidebar-menu_item">
                                         Vườn Chuối
                                     </p>
-                                </div>
+                                </div> {% endcomment %}
                                 
                             </div>
                         </div>
@@ -278,18 +278,18 @@
                         <div class="col-vertical">
                             <div class="num-active">
                                 <p class="chart-title">VOLUME PROGRESS</p>
-                                <span class="number-one">142</span>
+                                <span class="number-one">0</span>
                                 <p class="desc">VS.Taget</p>
-                                <span class="number-two">21%</span>
+                                <span class="number-two">0%</span>
                             </div>
                         </div>
                         <div class="col-vertical">
                             <div class="num-active">
                                 <p class="chart-title">VOLUME PERFORMANCE</p>
                                 <p class="desc">(Can/Bottle)</p>
-                                <span class="number-one">142</span>
+                                <span class="number-one">0</span>
                                 <br>
-                                <span class="number-two">21%</span>
+                                <span class="number-two">0%</span>
                                 <div class="icon-color">
                                     <span class="icon-one"></span> <p class="smart-desc">Actual Achieved</p>
                                     <span class="icon-two"></span> <p class="smart-desc">Volume Target</p>
@@ -300,7 +300,7 @@
                             <div class="num-active">
                                 <p class="chart-title">VOLUME PERFORMANCE</p>
                                 
-                                <span class="number-two">21%</span>
+                                <span class="number-two">0%</span>
                             </div>
                         </div>
                     </div>
@@ -333,10 +333,10 @@
                                         <div class="col-12">
                                         
                                             <div class="col-6">
-                                                <span class="number">Average Reach 80%</span>
+                                                <span class="number">Average Reach 0%</span>
                                             </div>
                                             <div class="col-6">
-                                                <span class="number">Average Conversion 90%</span>
+                                                <span class="number">Average Conversion 0%</span>
                                             </div>
                                         </div>
                                     </div>
@@ -378,7 +378,7 @@
                                     </div>
                                     
                                     <div class="row-1">
-                                        <div class="col-12">
+                                        {% comment %} <div class="col-12">
                                             <div class="col-2">
                                                 <p class="title"> Glass 30cl</p>
                                             </div>
@@ -397,7 +397,7 @@
                                             <div class="col-2">
                                                 <p class="title">Beer Voucher</p>
                                             </div>
-                                        </div>
+                                        </div> {% endcomment %}
                                     </div>
                                     
                                 </div>
@@ -486,8 +486,8 @@
         $( this ).parent( 'li' ).addClass( 'active' );
     });
     </script> -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="{% static 'PC/js/chart.js' %}"></script>
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{% static 'PC/js/chart.js' %}"></script> {% endcomment %}
     <script src="{% static 'PC/js/app.js' %}"></script>
 </body>
 </html>
