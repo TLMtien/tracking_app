@@ -271,7 +271,9 @@ def gift_givenReport(request):
         gift1_given = form.cleaned_data.get('gift1_given')
         gift2_given = form.cleaned_data.get('gift2_given')
         gift3_given = form.cleaned_data.get('gift3_given') 
-        gift4_given = form.cleaned_data.get('gift4_given') 
+        gift4_given = form.cleaned_data.get('gift4_given')
+        gift5_given = form.cleaned_data.get('gift5_given')
+        gift6_given = form.cleaned_data.get('gift6_given') 
         campain7 = Campain.objects.get(program='bivina')
         campain4 = Campain.objects.get(id=4)
         form = gift_givenReportForm()
@@ -279,7 +281,9 @@ def gift_givenReport(request):
         if SP.brand == campain7:
             return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
                 'gift3_given':gift3_given,'gift4_given':gift4_given} )
-        return HttpResponse('Bạn chưa nhập mục số quà nhận')
+        
+        return render(request, 'list_gift/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
+                'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift5_given':gift5_given, 'gift6_given':gift6_given}) 
 
 #---------------------------------------GIFT REMAINING--------------------
 
