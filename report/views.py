@@ -254,8 +254,8 @@ def gift_givenReport(request):
                     report.gift2_given = sum(gift2_given, report.gift2_given)
                     report.gift3_given = sum(gift3_given, report.gift3_given)
                     report.gift4_given = sum(gift4_given, report.gift4_given)
-                    report.gift5_given = sum(gift4_given, report.gift5_given)
-                    report.gift6_given = sum(gift4_given, report.gift6_given)
+                    report.gift5_given = sum(gift5_given, report.gift5_given)
+                    report.gift6_given = sum(gift6_given, report.gift6_given)
                     report.save()
                     return redirect('quantity-gift')
         else:
