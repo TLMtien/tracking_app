@@ -118,7 +118,7 @@ def upload_user(request):
 		print(len(excel_data)-2)
 		
 		for i in range(len(excel_data)-1):
-			campain = Campain.objects.get(program='bivina')
+			campain = Campain.objects.get(program='heineken')
 			print(excel_data[i+1][2])
 			print(excel_data[i+1][3])
 			
@@ -133,4 +133,12 @@ def upload_user(request):
 		return redirect('PasswordChangeDone')
 
 	
-
+# tigerTP 1
+# tigerFA 2
+# tigerHZA 3
+# heineken 4
+# heineken_hnk 5
+# STB 6
+# bivina 7
+# Larue 8
+# Larue_SPE 9
