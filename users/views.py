@@ -102,8 +102,8 @@ def upload_user(request):
 		wb = openpyxl.load_workbook(excel_file)
 		
 		sheets = wb.sheetnames
-		print(sheets[0])
-		worksheet = wb[sheets[0]]   #Trang tính
+		print(sheets[1])
+		worksheet = wb[sheets[1]]   #Trang tính
 
 		excel_data = list()
 	
