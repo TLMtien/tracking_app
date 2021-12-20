@@ -262,7 +262,7 @@ def gift_givenReport(request):
             form = gift_givenReportForm()
             campain7 = Campain.objects.get(program='bivina')
             campain4 = Campain.objects.get(id=4)
-            form = gift_ReceiveReportForm()
+            #form = gift_ReceiveReportForm()
             SP = SalePerson.objects.get(user=request.user)
             if SP.brand == campain7:
                 return render(request,"report/listgift-sent.html", {'form':form})
@@ -274,7 +274,7 @@ def gift_givenReport(request):
         gift4_given = form.cleaned_data.get('gift4_given') 
         campain7 = Campain.objects.get(program='bivina')
         campain4 = Campain.objects.get(id=4)
-        form = gift_ReceiveReportForm()
+        form = gift_givenReportForm()
         SP = SalePerson.objects.get(user=request.user)
         if SP.brand == campain7:
             return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
