@@ -165,16 +165,16 @@ def uploadFile_outlet(request):
             list_outlet = []
             for i in range(len(excel_data)-1):
                 campain = Campain.objects.get(program ='Larue')
-                filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
-                if filter_outlet <1:
-                    campain = Campain.objects.get(program='Larue')
-                    a = outletInfo.objects.create(created=excel_data[i+1][1], province=excel_data[i+1][2], ouletID=excel_data[i+1][3],
-                        type=excel_data[i+1][4], area=excel_data[i+1][5], outlet_address=excel_data[i+1][6], 
-                        outlet_Name=excel_data[i+1][7], created_by_HVN = True)
-                    
-                    a.compain.add(campain)
-                    a.save()
-                    list_outlet.append(a)
+                # filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
+                # if filter_outlet <1:
+                campain = Campain.objects.get(program='Larue')
+                a = outletInfo.objects.create(created=excel_data[i+1][1], province=excel_data[i+1][2], ouletID=excel_data[i+1][3],
+                    type=excel_data[i+1][4], area=excel_data[i+1][5], outlet_address=excel_data[i+1][6], 
+                    outlet_Name=excel_data[i+1][7], created_by_HVN = True)
+                
+                a.compain.add(campain)
+                a.save()
+                list_outlet.append(a)
             return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
     except:
         return Http404('file is not support')
