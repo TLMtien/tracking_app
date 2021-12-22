@@ -229,7 +229,9 @@ def export(request):
         list_rp_table = tableReport.objects.filter(campain = Cp, outlet = outlet)
         list_rp_sale = report_sale.objects.filter(campain = Cp, outlet = outlet)
         list_rp_consumer = consumerApproachReport.objects.filter(campain = Cp, outlet = outlet)
+        count_list_rp_consumer = consumerApproachReport.objects.filter(campain = Cp, outlet = outlet).count()
         list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet)
+        count_list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet).count()
         total_gift1_receive = 0
         total_gift2_receive = 0
         total_gift3_receive = 0
@@ -243,7 +245,7 @@ def export(request):
         total_gift4_given =0
         total_gift5_given =0
         total_gift6_given =0
-        if count_list_rp_sale > 1:
+        if count_list_rp_sale > 1 or count_list_rp_consumer>1 or count_list_gift_rp>1:
             for rp_sale in list_rp_sale:
                 total_sale = sum(total_sale, rp_sale.beer_brand)
             for rp_table in list_rp_table:
