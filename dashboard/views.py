@@ -245,7 +245,7 @@ def export(request):
         total_gift4_given =0
         total_gift5_given =0
         total_gift6_given =0
-        if count_list_rp_sale > 1 or count_list_rp_consumer>1 or count_list_gift_rp>1:
+        if count_list_rp_sale > 0 or count_list_rp_consumer> 0 or count_list_gift_rp>0:
             for rp_sale in list_rp_sale:
                 total_sale = sum(total_sale, rp_sale.beer_brand)
             for rp_table in list_rp_table:
@@ -288,3 +288,4 @@ def export(request):
 
 
     return response
+   ## 
