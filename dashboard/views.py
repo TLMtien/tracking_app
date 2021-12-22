@@ -181,7 +181,7 @@ def sum_revenue(request):
 
 ##################################################
 def charts_views(request):
-    id =7
+    id =4
     pie=pie_chart(id)
     #print(pie)
     customer_app = total_consumers_reached(id)
