@@ -6,7 +6,7 @@ urlpatterns = [
     
     path('raw-data/', TemplateView.as_view(template_name="dashboard/raw-data.html"), name='raw-data'),
     
-    path('export-report/', TemplateView.as_view(template_name="dashboard/export-report.html"), name='export-report'),
+    path('export-report/<int:campainID>/', TemplateView.as_view(template_name="dashboard/export-report.html"), name='export-report'),
     #path('management/', views.ListOutletDashbordView.as_view(), name='management'),
    
     path('input-outlet-approval/', TemplateView.as_view(template_name="dashboard/input-outlet-approval.html"), name='input-outlet-approval'),
@@ -28,7 +28,7 @@ urlpatterns = [
     path('management/<int:campainID>/', views.List_outlet_management, name='managementlist'),
     path('list_outlet-approval/<int:campainID>/', views.list_outlet_approval, name='outlet-approval'),
     path('kpi/<int:campainID>/create_KPI/', views.create_KPI, name='create_KPI'),
-    path('export/', views.export, name ='export'),
+    path('export-report/<int:campainID>/export/', views.export, name ='export'),
 
 
 

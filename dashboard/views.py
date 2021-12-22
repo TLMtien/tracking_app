@@ -181,7 +181,7 @@ def sum_revenue(request):
 
 ##################################################
 def charts_views(request):
-    id =4
+    id =7
     pie=pie_chart(id)
     #print(pie)
     customer_app = total_consumers_reached(id)
@@ -191,7 +191,7 @@ def charts_views(request):
     gift_rp = gift(id)
     print(top10)
     return render(request, 'dashboard/test----test-----test.html', {'text':pie, 'customer_app':customer_app[0],'target_volume_achieved':target_volume_achieved, 
-    'percent_customer_app':customer_app[1], 'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp})
+    'percent_customer_app':customer_app[1], 'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1]})
 
 ######################################
 import datetime
@@ -200,7 +200,7 @@ from outlet.models import tableReport, report_sale
 from datetime import datetime
 from django.http import HttpResponse
 
-def export(request):
+def export(request, campainID):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment;filename={}.xls'.format(str(datetime.now()))
     wb = xlwt.Workbook(encoding='utf-8') 
@@ -208,18 +208,31 @@ def export(request):
     row_num = 0
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
+
+    Cp = Campain.objects.get(id=campainID)
+    all_outlet = outletInfo.objects.filter(compain=Cp)
+
     colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HNK Tables', 'HVB Table Share', 'Others', 'Total Tables','Consumers Approach','Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly', 'Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
+
+    if campainID == 4:
+        colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HNK Tables', 'HVB Table Share', 'Others', 'Total Tables','Consumers Approach','Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly', 'Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
+
+    if campainID == 5:
+        colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HNK Tables', 'HVB Table Share', 'Others', 'Total Tables','Consumers Approach','Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao', 'Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao']
+
+    if campainID == 7:
+        colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HNK Tables', 'HVB Table Share', 'Others', 'Total Tables','Consumers Approach','Túi du lịch', 'Đồng Hồ Treo Tường', 'Bình Nước 1,6L', 'Ly', 'Túi du lịch', 'Đồng Hồ Treo Tường', 'Bình Nước 1,6L', 'Ly']
+    
+    if campainID == 8:
+        colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HNK Tables', 'HVB Table Share', 'Others', 'Total Tables','Consumers Approach','Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly', 'Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
+
     for col_num in range(len(colums)):
         ws.write(row_num, col_num, colums[col_num], font_style)
 
     font_style = xlwt.XFStyle()
     all_outlet = outletInfo.objects.all()
-    #rows = report_sale.objects.all().values_list('province', 'ouletID', 'type', 'area', 'outlet_address', 'outlet_Name')
     
-    #################
-    Cp = Campain.objects.get(id=4)
-    all_outlet = outletInfo.objects.filter(compain=Cp)
-      
+  
     for outlet in all_outlet:
         count_list_rp_sale = report_sale.objects.filter(campain = Cp, outlet = outlet).count()
         list_rp_table = tableReport.objects.filter(campain = Cp, outlet = outlet)
@@ -241,12 +254,12 @@ def export(request):
         total_gift5_receive = 0
         total_gift6_receive = 0
 
-        total_gift1_given =0
-        total_gift2_given =0
-        total_gift3_given =0
-        total_gift4_given =0
-        total_gift5_given =0
-        total_gift6_given =0
+        total_gift1_given = 0
+        total_gift2_given = 0
+        total_gift3_given = 0
+        total_gift4_given = 0
+        total_gift5_given = 0
+        total_gift6_given = 0
         if count_list_rp_sale > 0 or count_list_rp_consumer> 0 or count_list_gift_rp>0:
             for rp_sale in list_rp_sale:
                 total_sale = sum(total_sale, rp_sale.beer_brand)
@@ -272,22 +285,22 @@ def export(request):
                 total_gift5_given = sum(total_gift5_given, gift.gift5_given)
                 total_gift6_given = sum(total_gift6_given, gift.gift6_given)
 
-
-            list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, total_HNK, total_HVB, total_other_beer, total_table, total_consumers_approach, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given]
-            row_num +=1
-            for col_num in range(len(list)):
-                ws.write(row_num, col_num, str(list[col_num]), font_style)
+            if campainID == 4:
+                list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, total_HNK, total_HVB, total_other_beer, total_table, total_consumers_approach, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given]
+                try:
+                    for col_num in range(len(list)):
+                        ws.write(row_num, col_num, str(list[col_num]), font_style)
+                except:
+                    pass
+            else:
+                list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, total_HNK, total_HVB, total_other_beer, total_table, total_consumers_approach, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given]
+                row_num +=1
+                try:
+                    for col_num in range(len(list)):
+                        ws.write(row_num, col_num, str(list[col_num]), font_style)
+                except:
+                    pass
     wb.save(response) 
     return response
         
-    #################
-
-    for row in rows:
-        row_num +=1
-        for col_num in range(len(row)):
-            ws.write(row_num, col_num, str(row[col_num]), font_style)
-    wb.save(response) 
-
-
-    return response
-   ## 
+    

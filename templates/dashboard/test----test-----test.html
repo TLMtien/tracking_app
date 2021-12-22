@@ -34,7 +34,7 @@
                                 <li class="nav-sub"><a href="">Dashboard</a></li>
                                 <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
                                 <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                                <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
+                                <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
                             </ul>
                         </li>
                         <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
@@ -61,7 +61,7 @@
                         <li class="nav-sub"><a href="">Dashboard</a></li>
                         <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
                         <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                        <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
                     </ul>
                 </div>
                 <div class="rightbox">
@@ -208,7 +208,7 @@
                     <div class="box-left">
                         <div class="col-vertical">
                             <div class="num-active">
-                                <p class="chart-title">VOLUME PROGRESS</p>
+                                <p class="chart-title">ACTIVATION PROGRESS</p>
                                 <span class="number-one">82</span>
                                 <p class="desc">VS.Taget</p>
                                 <span class="number-two">0%</span>
@@ -238,19 +238,24 @@
                     <div class="box-right">
                         <div class="row">
                             <div class="col-horizontal">
-                                {% comment %} <p class="chart-title">SP PERFORMANCE</p> {% endcomment %}
+                                <p class="chart-title">SP PERFORMANCE</p>
                                 <div class="header">
                                     <div class="row-1">
                                         <div class="col-12">
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <p class="title">
-                                                    Total Consumers Reached
+                                                    Total Consumers 1000
+                                            </div>
+
+                                            <div class="col-4">
+                                                <p class="title">
+                                                    Total Reached Consumers 8000
                                                 </p>
                                             </div>
                                     
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <p class="title">
-                                                    Average Reach per Act
+                                                    Total Bought Consumers 7500
                                                 </p>
                                             </div>
                                             
@@ -270,17 +275,17 @@
                                     
                                 </div>
                                 <div class="main">
-                                    <p class="chart-title">AVERAGE PERFORMANCE PER ACT</p>
+                                    <p class="chart-title">AVERAGE VOLUME PERFORMANCE PER ACT</p>
                                     <p class="desc">(Can/Bottle)</p>
                                     <div id="chart-act"></div>
                                     
                                 </div>
-                                <!-- <div class="footer">
+                                {% comment %} <div class="footer">
                                     <div class="icon-color">
-                                        <span class="icon-one"></span> <p class="smart-desc">Actual Achieved</p>
+                                        <span class="icon-one"></span> <p class="smart-desc">Average Brand Volume</p>
                                         <span class="icon-two"></span> <p class="smart-desc">Volume Target</p>
                                     </div>
-                                </div> -->
+                                </div>  {% endcomment %}
                             </div>
                             <div class="col-horizontal">
                                 <div class="col-12">
@@ -306,25 +311,12 @@
                                     
                                     <div class="row-1">
                                         <div class="col-12">
-                                            <div class="col-2">
-                                                <p class="title">Pin sạc</p>
+                                            {% for gift in gift_name%}
+                                            <div >
+                                                <p class="title">{{gift}}</p>
                                             </div>
                                             
-                                            <div class="col-2">
-                                                <p class="title">Ba lô</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <p class="title">Bình Nước</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <p class="title">Áo thun</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <p class="title">Loa Bluetooth</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <p class="title">Ly</p>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                     
@@ -439,14 +431,15 @@
 <script>
     var options = {
         chart: {
-            type: 'bar'
+            height: 250,
+            type: 'bar',
         },
         series: [{
             name: 'ACT',
             data: [186, {{Volume_sale}}],
         }],
         
-        labels: ['Total', 'Average Volue Sales'],
+        labels: ['Average Brand Volume', 'Average Target Volume'],
         colors: ['#198631', '#1C263F']
     }
     

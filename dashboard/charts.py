@@ -184,12 +184,12 @@ def gift(campain_id):
     total_gift5_receive = 0
     total_gift6_receive = 0
 
-    total_gift1_given =0
-    total_gift2_given =0
-    total_gift3_given =0
-    total_gift4_given =0
-    total_gift5_given =0
-    total_gift6_given =0
+    total_gift1_given = 0
+    total_gift2_given = 0
+    total_gift3_given = 0
+    total_gift4_given = 0
+    total_gift5_given = 0
+    total_gift6_given = 0
 
     list_gift_rp = giftReport.objects.filter(campain = Cp)
     #all report in 1 outlet
@@ -229,5 +229,23 @@ def gift(campain_id):
     if total_gift5_receive != 0:
         percent_gift6 = percent(total_gift6_given, total_gift6_receive)
     list = [percent_gift1, percent_gift2, percent_gift3, percent_gift4, percent_gift5, percent_gift6]
+    list_4 = [percent_gift1, percent_gift2, percent_gift3, percent_gift4]
+    list_gift = []
 
-    return list
+    if campain_id == 4:
+        list_gift = ['Pin sạc', 'Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
+        return list, list_gift
+
+    elif campain_id == 5:
+        list_gift = ['Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao']
+        return list_4, list_gift
+
+    elif campain_id == 7:
+        list_gift = ['Túi du lịch', 'Đồng Hồ Treo Tường', 'Bình Nước 1,6L', 'Ly']
+        return list_4, list_gift
+    
+    elif campain_id == 8:
+        list_gift = ['Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
+        return list_4, list_gift
+
+    return list, list_gift
