@@ -216,7 +216,7 @@ def export(request):
     #rows = report_sale.objects.all().values_list('province', 'ouletID', 'type', 'area', 'outlet_address', 'outlet_Name')
     
     #################
-    Cp = Campain.objects.get(id=7)
+    Cp = Campain.objects.get(id=4)
     all_outlet = outletInfo.objects.filter(compain=Cp)
     total_sale = 0
     total_HNK = 0
