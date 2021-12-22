@@ -1,5 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @font-face {
     font-family: Henikenbol;
     src: url(../fonts/heserbol.ttf);
@@ -22,13 +21,17 @@ body {
 
 html {
     box-sizing: border-box;
-    /* font-family: 'Roboto Slab', serif; */
-    font-family: Henikenreg, sans-serif;
+    font-family: 'Roboto Slab', serif;
+    /* font-family: Henikenreg, sans-serif; */
 }
 
+button,
+seclect,
+option,
 input,
 input::placeholder {
-    font-family: Henikenreg, sans-serif;
+    font-family: 'Roboto Slab', serif;
+    /* font-family: Henikenreg, sans-serif; */
 }
 
 a {
@@ -110,17 +113,17 @@ a {
     background: #F1F1F1;
     border: 2px solid #05F22B;
     box-shadow: 1px 1px 5px #7DFF92;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     border-radius: 5px;
     color: #111;
-    font-family: Henikenreg, sans-serif;
+    font-family: 'Roboto Slab', serif;
 }
 
 .main-login .form-login .input-password::placeholder,
 .main-login .form-login .input-user::placeholder {
     color: #111;
     font-weight: 600;
-    font-family: Henikenreg, sans-serif;
+    font-family: 'Roboto Slab', serif;
 }
 
 .main-login .form-login .input-password:focus,
@@ -149,7 +152,7 @@ a {
 .main-login .form-login .input-submit::placeholder {
     color: #111;
     font-weight: 600;
-    font-family: Henikenreg, sans-serif;
+    font-family: 'Roboto Slab', serif;
 }
 
 .main-login .box-center i {
@@ -351,6 +354,32 @@ a {
     background-color: rgba(80, 151, 85, 0.404);
 }
 
+.dropdown-menu_logout {
+    min-width: 150px;
+    /* Set width of the dropdown */
+    background: #fff;
+    display: none;
+    position: absolute;
+    z-index: 999;
+    right: 20px;
+    list-style-type: none;
+    margin-top: 10px;
+    border: 1px solid #1A5D1F;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu_logout .nav-sub {
+    display: block;
+    font-weight: normal;
+    padding: 8px;
+    transition: all 0.5s;
+}
+
+.dropdown-menu_logout .nav-sub:hover {
+    background-color: rgba(80, 151, 85, 0.404);
+}
+
 
 /* Sidebar left menu */
 
@@ -424,6 +453,12 @@ a {
 .sidebar-menu_dropdown-content {
     overflow-y: auto;
     height: 150px;
+    width: 95%;
+}
+
+.content-height {
+    overflow-y: auto;
+    height: 250px;
     width: 95%;
 }
 
@@ -595,8 +630,16 @@ a {
     opacity: 0.8;
 }
 
+#chart-share {
+    margin-top: 30%;
+}
+
 
 /* =======Management Page======= */
+
+.raw-data .open-left-menu {
+    cursor: pointer;
+}
 
 .raw-data .dropdown-menu_raw {
     min-width: 150px;
@@ -624,6 +667,48 @@ a {
 .raw-data .dropdown-menu_raw .nav-sub:hover {
     background-color: rgba(80, 151, 85, 0.404);
 }
+
+
+/* ---Sub */
+
+.raw-data-sub .dropdown-menu_raw {
+    min-width: 150px;
+    /* Set width of the dropdown */
+    background: #fff;
+    display: none;
+    position: absolute;
+    z-index: 999;
+    top: 60%;
+    left: 3%;
+    list-style-type: none;
+    margin-top: 10px;
+    border: 1px solid #1A5D1F;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.raw-data-sub .dropdown-menu_raw .nav-sub {
+    display: block;
+    font-weight: normal;
+    padding: 8px;
+    transition: all 0.5s;
+}
+
+.raw-data-sub .dropdown-menu_raw .nav-sub:hover {
+    background-color: rgba(80, 151, 85, 0.404);
+}
+
+.raw-data-sub .open-left-menu {
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Roboto Slab', serif;
+}
+
+
+/* ----end---- */
 
 .main-table_managenment {
     padding-top: 225px;
@@ -760,14 +845,14 @@ a {
     width: 40%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: right;
 }
 
 .raw-data-sub .rightbox .lock-icon {
     float: left;
     right: 0;
-    width: 10%;
-    margin-left: 80%;
+    width: 30%;
+    margin-right: 50px;
 }
 
 .raw-data-sub .rightbox .lock-icon i {
@@ -779,6 +864,13 @@ a {
 .raw-data-sub .rightbox .lock-icon span {
     color: #666;
 }
+
+.raw-data-sub .rightbox .date-menu {
+    margin-right: 50px;
+}
+
+
+/* Upload - file */
 
 #uploadFile {
     position: fixed;
@@ -856,6 +948,108 @@ a {
 #uploadFile .btns .btn-upload:hover {
     opacity: .8;
 }
+
+
+/* ------------ */
+
+
+/* Unlock */
+
+
+/* Upload - file */
+
+#unlock {
+    position: fixed;
+    top: 20%;
+    left: 40%;
+    z-index: 10000;
+}
+
+#unlock .content-unlock {
+    background: #fff;
+    border: 1px solid #1A5D1F;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    min-height: 200px;
+    border-radius: 5px;
+}
+
+#unlock .container-unlock {
+    position: relative;
+    width: 250px;
+    text-align: center;
+    margin: 10% auto;
+}
+
+#unlock .container-unlock .unlock-box {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    cursor: pointer;
+    color: #111;
+    border: 2px solid #1A5D1F;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 5px;
+    outline: none;
+}
+
+#unlock .container-unlock .unlock-box::placeholder {
+    color: red;
+}
+
+
+/* #unlock .unlock-box {
+    background: #fff;
+    cursor: pointer;
+    color: red;
+    border: 1px solid #1A5D1F;
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 50px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+} */
+
+#unlock .btns {
+    text-align: center;
+    margin-top: 130px;
+}
+
+#unlock .btns .btn-cancel {
+    padding: 8px 10px;
+    outline: none;
+    border: 1px solid #1A5D1F;
+    color: #1F6C2F;
+    border-radius: 5px;
+    background: transparent;
+    margin-right: 20px;
+}
+
+#unlock .btns .btn-upload {
+    padding: 8px 10px;
+    outline: none;
+    border: 1px solid #1A5D1F;
+    color: #fff;
+    border-radius: 5px;
+    background: #1F6C2F;
+}
+
+#unlock .btns .btn-cancel:hover,
+#unlock .btns .btn-upload:hover {
+    opacity: .8;
+}
+
+
+/* ----------- */
 
 .main-table_managenment .th-btns div {
     margin: 10px;
@@ -1429,7 +1623,8 @@ a {
 .raw-data .rightbox .lock-icon {
     float: left;
     right: 0;
-    margin-right: 100px;
+    width: 25%;
+    margin-left: 100px;
 }
 
 .raw-data .rightbox .lock-icon i {
@@ -1640,4 +1835,19 @@ td {
 
 .dropdown-content a:hover {
     background-color: rgba(80, 151, 85, 0.404);
+}
+
+
+/* Mobile */
+
+@media only screen and (max-width: 1024px) {
+    .app {
+        display: none;
+    }
+    body::before {
+        content: "Giao diện chưa hỗ trợ trên Table/Mobile";
+        color: red;
+        font-size: 24px;
+        font-weight: 600;
+    }
 }
