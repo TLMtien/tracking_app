@@ -32,5 +32,5 @@ urlpatterns = [
 
 
 
-    path('test-test/', views.charts_views),
+    path('test-test/', views.charts_views, name='tesstt'),
 ]
