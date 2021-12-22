@@ -1,20 +1,20 @@
 // chart-act
 
-var options = {
-    chart: {
-        type: 'bar'
-    },
-    series: [{
-        name: 'ACT',
-        data: [186, 182],
-    }],
-    labels: ['Total'],
-    colors: ['#198631', '#1C263F']
-}
+// var options = {
+//     chart: {
+//         type: 'bar'
+//     },
+//     series: [{
+//         name: 'ACT',
+//         data: [186, 182],
+//     }],
+//     labels: ['Total'],
+//     colors: ['#198631', '#1C263F']
+// }
 
-var chart = new ApexCharts(document.querySelector("#chart-act"), options);
+// var chart = new ApexCharts(document.querySelector("#chart-act"), options);
 
-chart.render();
+// chart.render();
 
 
 //   chart-share
