@@ -231,16 +231,17 @@ def export(request, campainID):
 
     font_style = xlwt.XFStyle()
     
-    
+    from_date = request.POST.get('from-date')
+    to_date = request.POST.get('to-date')
   
     for outlet in all_outlet:
-        count_list_rp_sale = report_sale.objects.filter(campain = Cp, outlet = outlet).count()
-        list_rp_table = tableReport.objects.filter(campain = Cp, outlet = outlet)
-        list_rp_sale = report_sale.objects.filter(campain = Cp, outlet = outlet)
-        list_rp_consumer = consumerApproachReport.objects.filter(campain = Cp, outlet = outlet)
-        count_list_rp_consumer = consumerApproachReport.objects.filter(campain = Cp, outlet = outlet).count()
-        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet)
-        count_list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet).count()
+        count_list_rp_sale = report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet).count()
+        list_rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet)
+        list_rp_sale = report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet)
+        list_rp_consumer = consumerApproachReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet)
+        count_list_rp_consumer = consumerApproachReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet).count()
+        list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet)
+        count_list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet).count()
         total_sale = 0
         total_HNK = 0
         total_HVB = 0
@@ -287,19 +288,18 @@ def export(request, campainID):
 
             if campainID == 4:
                 list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, total_HNK, total_HVB, total_other_beer, total_table, total_consumers_approach, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given]
-                try:
-                    for col_num in range(len(list)):
-                        ws.write(row_num, col_num, str(list[col_num]), font_style)
-                except:
-                    pass
+                
+                row_num +=1
+                for col_num in range(len(list)):
+                    ws.write(row_num, col_num, str(list[col_num]), font_style)
+            
             else:
                 list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, total_HNK, total_HVB, total_other_beer, total_table, total_consumers_approach, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given]
                 row_num +=1
-                try:
-                    for col_num in range(len(list)):
-                        ws.write(row_num, col_num, str(list[col_num]), font_style)
-                except:
-                    pass
+                
+                for col_num in range(len(list)):
+                    ws.write(row_num, col_num, str(list[col_num]), font_style)
+                
     wb.save(response) 
     return response
         
