@@ -1308,7 +1308,7 @@ a {
     border-radius: 10px;
     margin: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    min-height: 293px;
+    min-height: 270px;
 }
 
 .main-right .col-vertical .num-active {
@@ -1329,12 +1329,13 @@ a {
 }
 
 .main-right .col-vertical .num-active .number-one {
-    padding: 10px 50px;
+    padding: 10px;
     background: #198631;
     border-radius: 5px;
     display: inline-block;
     margin-bottom: 20px;
     color: #fff;
+    cursor: pointer;
 }
 
 .main-right .col-vertical .num-active .number-two {
@@ -1343,6 +1344,18 @@ a {
     border-radius: 5px;
     display: inline-block;
     color: #fff;
+    width: 100%;
+    cursor: pointer;
+}
+
+.main-right .col-vertical .num-active .max-size {
+    padding: 10px 50px;
+    background: #198631;
+    border-radius: 5px;
+    display: inline-block;
+    color: #fff;
+    width: 100%;
+    cursor: pointer;
 }
 
 .main-right .col-vertical .num-active .icon-color {
@@ -1390,7 +1403,7 @@ a {
     margin: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     min-height: 470px;
-    width: 33.33%;
+    width: 33%;
 }
 
 .chart-title {
@@ -1517,6 +1530,67 @@ a {
 .box-right .row-bottom .col-12 {
     text-align: center;
     padding: 10px;
+    position: relative;
+}
+
+.row-bottom .btns {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+.row-bottom .btns .button-change {
+    background: #1A5D1F;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #1A5D1F;
+    cursor: pointer;
+}
+
+.row-bottom .btns .button-change:hover {
+    opacity: .8;
+}
+
+.row-bottom .btns .btn-arrow {
+    float: right;
+    right: 0;
+    display: block;
+    margin-left: 10px;
+}
+
+.row-bottom .btns .btn-arrow button {
+    background: transparent;
+    outline: none;
+    border: none;
+}
+
+.row-bottom .btns .btn-arrow i {
+    color: #1A5D1F;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.row-bottom .btns .btn-arrow i:hover {
+    background: #1A5D1F;
+    color: #fff;
+    border-radius: 5px;
+}
+
+#chart-act {}
+
+#chart-product {
+    margin-top: 56px;
+}
+
+#chart-top {
+    margin-top: 70px;
 }
 
 

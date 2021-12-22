@@ -1,32 +1,129 @@
+var options = {
+    series: [{
+        name: 'Actual Volume',
+        data: [42]
+    }],
+    chart: {
+        type: 'bar',
+        height: 130,
+        stacked: true,
+    },
+    plotOptions: {
+        bar: {
+            horizontal: true,
+        },
+    },
+    stroke: {
+        width: 1,
+        colors: ['#fff']
+    },
+
+    labels: [''],
+    yaxis: {
+        title: {
+            text: undefined
+        },
+    },
+    tooltip: {
+        y: {
+            formatter: function(val) {
+                return val + "/21%"
+            }
+        }
+    },
+    colors: ['#198631'],
+    fill: {
+        opacity: 1
+    },
+    legend: {
+        position: 'top',
+        horizontalAlign: 'left',
+        offsetX: 40
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart-acti"), options);
+chart.render();
+
+// chart activation progress bar
+
+var options = {
+    series: [{
+        name: 'Actual Acts',
+        data: [25000],
+
+    }],
+    chart: {
+        type: 'bar',
+        height: 130,
+        stacked: true,
+    },
+    plotOptions: {
+        bar: {
+            horizontal: true,
+        },
+    },
+    stroke: {
+        width: 1,
+        colors: ['#fff']
+    },
+
+    labels: [''],
+    yaxis: {
+        title: {
+            text: undefined
+        },
+    },
+    tooltip: {
+        y: {
+            formatter: function(val) {
+                return val + "/25%"
+            }
+        }
+    },
+    colors: ['#198631'],
+    fill: {
+        opacity: 1
+    },
+    legend: {
+        position: 'top',
+        horizontalAlign: 'left',
+        offsetX: 40
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart-prog"), options);
+chart.render();
+
 // chart-act
 
-// var options = {
-//     chart: {
-//         type: 'bar'
-//     },
-//     series: [{
-//         name: 'ACT',
-//         data: [186, 182],
-//     }],
-//     labels: ['Total'],
-//     colors: ['#198631', '#1C263F']
-// }
+var options = {
+    chart: {
+        type: 'bar'
+    },
+    series: [{
+        name: 'ACT',
+        data: [186, 182],
+    }],
+    labels: ['Total'],
+    colors: ['#198631', '#1C263F']
+}
 
-// var chart = new ApexCharts(document.querySelector("#chart-act"), options);
+var chart = new ApexCharts(document.querySelector("#chart-act"), options);
 
-// chart.render();
+chart.render();
 
 
 //   chart-share
 
 var options = {
-    series: [100, 25, 10, 1],
+    series: [79, 20, 1],
     chart: {
         width: 350,
         type: 'pie',
     },
-    labels: ['Heineken', 'HNK', 'Other beer', 'other'],
-    colors: ['#198631', '#1C263F', '#000', '#939393'],
+    labels: ['Heineken', 'HVN', 'Cambi'],
+    colors: ['#198631', '#1C263F', '#939393'],
     responsive: [{
         breakpoint: 480,
         options: {
@@ -48,7 +145,7 @@ chart.render();
 var options = {
     series: [{
         name: 'Inflation',
-        data: [18, 17, 5, 15, 15]
+        data: [18, 17, 5, 20, 15, 15]
     }],
     chart: {
         height: 270,
@@ -111,16 +208,16 @@ chart.render();
 
 var options = {
     series: [{
-        name: 'Total',
+        name: '[Brand] Volume',
         type: 'column',
         data: [1152, 1000, 660, 648, 618, 600, 546, 538, 534, 527]
     }, {
-        name: 'Top %',
+        name: '[Brand] Table Share',
         type: 'line',
         data: [90, 81, 43, 94, 100, 100, 95, 65, 87, 78],
     }],
     chart: {
-        height: 350,
+        height: 370,
         type: 'line',
     },
     stroke: {

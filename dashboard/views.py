@@ -11,7 +11,7 @@ from django.http import JsonResponse
 from .forms import KPIForm
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift
+from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress
 # Create your views here.
 
 # tigerTP 1
@@ -23,6 +23,26 @@ from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_o
 # bivina 7
 # Larue 8
 # Larue_SPE 9
+def reverse(A):
+    try:
+        a = A[9]
+        b = A[8]
+        c = A[7]
+        d = A[6]
+        e = A[5]
+        f = A[4]
+        g = A[3]
+        h = A[2]
+        j = A[1]
+        k = A[0]
+        list = [a,b,c,d,e,f,g,h,j, k]
+        return list
+    except:
+        pass
+
+
+
+
 def sum(a, b):
     return int(int(a) + int(b))
 
@@ -180,18 +200,23 @@ def sum_revenue(request):
         #return render(request,"report/dashboard.html",{ "from_date":from_date,"to_date":to_date,"chart":dump}) 
 
 ##################################################
-def charts_views(request):
-    id =4
+def charts_views(request, campainID):
+    id = campainID
     pie=pie_chart(id)
     #print(pie)
-    customer_app = total_consumers_reached(id)
+    report_customer = total_consumers_reached(id)
     Volume_sale = HNK_volume_sale(id)
     top10 = top10_outlet(id)
     target_volume_achieved =volume_achieved_byProvince(id)
     gift_rp = gift(id)
-    print(top10)
-    return render(request, 'dashboard/test----test-----test.html', {'text':pie, 'customer_app':customer_app[0],'target_volume_achieved':target_volume_achieved, 
-    'percent_customer_app':customer_app[1], 'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1]})
+    volume_per = VOLUME_PERFORMANCE(id)
+    Average_brand_volume = [volume_per[2], volume_per[3]]
+    activation = activation_progress(id)
+    top10_sale_reverse = reverse(top10[0])
+    top10_table_reverse = reverse(top10[1])
+    top10_name_reverse = reverse(top10[2])
+    return render(request, 'dashboard/dashboard.html', {'text':pie, 'target_volume_achieved':target_volume_achieved, 
+     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1], 'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'Average_brand_volume': Average_brand_volume, 'activation':activation, 'top10_sale_reverse':top10_sale_reverse, 'top10_table_reverse':top10_table_reverse, 'top10_name_reverse':top10_name_reverse})
 
 ######################################
 import datetime

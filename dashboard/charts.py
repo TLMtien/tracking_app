@@ -12,7 +12,7 @@ def sum_table(a, b, c, d):
     return int(int(a) + int(b) + int(c) + int(d))
 
 def percent(a,b):
-    return round((int(a)*100)/(int(b)), 2)
+    return round((int(a)*100)/(int(b)), 0)
 
 def get_allReport_outlet(outlet, campain_id):
     Cp = Campain.objects.get(id=campain_id)
@@ -63,19 +63,24 @@ def pie_chart(campain_id):
         return [0,0,0,0]
 
 def total_consumers_reached(campain_id):
-    try:
-        Cp = Campain.objects.get(id = campain_id)
-        ctm_reached = 0
-        total_consumers = 0
-        consumers_rp = consumerApproachReport.objects.filter(campain=Cp)
-        for customer in consumers_rp:
-            ctm_reached = sum(ctm_reached, customer.consumers_approach)
-            total_consumers = sum(total_consumers, customer.Total_Consumers)
-        
+   
+    Cp = Campain.objects.get(id = campain_id)
+    ctm_reached = 0
+    total_bought_consumers = 0
+    total_consumers = 0
+    per_reached = 0
+    average_conversion = 0
+    consumers_rp = consumerApproachReport.objects.filter(campain=Cp)
+    for customer in consumers_rp:
+        ctm_reached = sum(ctm_reached, customer.consumers_approach)
+        total_consumers = sum(total_consumers, customer.Total_Consumers)
+        total_bought_consumers = sum(total_bought_consumers, customer.consumers_brough)
+    
+    if total_consumers > 0  and ctm_reached > 0:
         per_reached = percent(ctm_reached, total_consumers)
-        return ctm_reached, per_reached
-    except:
-        return [0,0]
+        average_conversion = percent(total_bought_consumers, ctm_reached)
+
+    return total_consumers, ctm_reached, total_bought_consumers, per_reached, average_conversion
 
 def HNK_volume_sale(campain_id):
     try:
@@ -93,7 +98,61 @@ def HNK_volume_sale(campain_id):
     except:
         return 0
 
+def VOLUME_PERFORMANCE(campain_id):
+    if campain_id == 1:
+        volume_achieved = 168
+    elif campain_id == 2:
+        volume_achieved = 360
+    elif campain_id == 3:
+        volume_achieved = 120
+    elif campain_id == 4:
+        volume_achieved = 120
+    elif campain_id == 5:
+        volume_achieved = 480
+    elif campain_id == 6:
+        volume_achieved = 48
+    elif campain_id == 7:
+        volume_achieved = 192
+    elif campain_id == 8:
+        volume_achieved = 192
+    else :
+        volume_achieved = 192
 
+    Cp = Campain.objects.get(id = campain_id)
+    all_outlet = outletInfo.objects.filter(compain=Cp)
+    count = 0
+    total_sale = 0
+    for outlet in all_outlet:
+        all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet)
+        count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+        if count_report_sale > 0:
+            count = count + 1
+            for report_Sale in all_report_sale:
+                total_sale = sum(total_sale, report_Sale.beer_brand)
+    
+    average_volume = 0
+    if count > 0:
+        average_volume = (total_sale)/(count)
+    
+    total_volume_achieved = volume_achieved * count
+
+    return [total_sale, total_volume_achieved , average_volume, volume_achieved]
+
+def activation_progress(campain_id):
+    Cp = Campain.objects.get(id = campain_id)
+    all_outlet = outletInfo.objects.filter(compain=Cp)
+    count = 0
+    list = []
+    for outlet in all_outlet:
+        all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet)
+        for rp_sale in all_report_sale:
+            if rp_sale.SP != list:
+                list.append(rp_sale)
+                count = count + 1
+    
+    return count
+
+    
 def top10_outlet(campain_id):
     
         Cp = Campain.objects.get(id = campain_id)
