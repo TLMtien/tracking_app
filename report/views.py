@@ -425,26 +425,21 @@ def reportPosm(request):
 def reportEndcase(request):
     SP = SalePerson.objects.get(user=request.user) 
     image = request.FILES.get('image')
-    report_posm = posmReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-    report_table = tableReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-    report_gift = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
-    report_consumer = consumerApproachReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+    # report_posm = posmReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+    # report_table = tableReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+    # report_gift = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+    # report_consumer = consumerApproachReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
 
     report = overallReport.objects.filter(created = datetime.date.today(), user = request.user, outlet = SP.outlet, campain=SP.brand).count()
     print(report)
     if report < 1:
-        report = overallReport.objects.create(user = request.user, confirm = image, outlet = SP.outlet, campain=SP.brand,
-                table_Report=report_table, posm_Report=report_posm, gift_report=report_gift, consumer_report=report_consumer)
+        report = overallReport.objects.create(user = request.user, confirm = image, outlet = SP.outlet, campain=SP.brand)
     
         return JsonResponse({'created': 'true'})
     
     report = overallReport.objects.get(created = datetime.date.today(), user = request.user, outlet = SP.outlet)
     report.confirm.delete()
     report.confirm = image
-    report.report_posm = report_posm
-    report.report_table = report_table
-    report.report_gift = report_gift
-    report.report_consumer = report_consumer
     report.save()
 
     return JsonResponse({'created': 'true'})
