@@ -46,10 +46,14 @@
                         <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
-                <div class="profile-user">
-                    <a href="#" class="user-img">
+                
+                <div class="profile-user dropdown-logout">
+                    <a href="#" class="user-img" onclick="openTigerTp()">
                         <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
                     </a>
+                    <ul class="dropdown-menu_logout">
+                        <li class="nav-sub"><a href="{% url 'logoutHVN' %}"><i class="ti-shift-left"></i>Logout</a></li>
+                    </ul>
                 </div>
             </div>
             
@@ -58,17 +62,23 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Management</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
-                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="{% url 'kpi' 1 %}">KPI Tracking</a></li>
-                        <li class="nav-sub"><a href="#">SP Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'dashboard' 1%}">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                     </ul>
                 </div>
                 
             </div>
             <div class="row raw-data-sub">
-                <div class="leftbox">
-                    <span class="title-menu">SP Information</span>
+                <div class="leftbox dropdown_raw">
+                    <button onclick="openLeftMenu()" class="open-left-menu"><span class="title-menu">SP Information</span> </button>
+                    <ul class="dropdown-menu_raw">
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="{% url 'kpi' 1 %}">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
+                    </ul>
                     
                 </div>
                 {% comment %} <div class="rightbox">

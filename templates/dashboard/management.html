@@ -56,23 +56,24 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Management</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="#">Outlet Information</a></li>
-                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="{% url 'kpi' 1 %}">KPI Tracking</a></li>
-                        <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'dashboard' 1%}">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                     </ul>
-                </div>
-                <div class="rightbox">
-                    <div class="lock-icon">
-                        <i class='bx bxs-lock-alt' ></i> <span>Unlock to change</span>
-                    </div>
                 </div>
                 
             </div>
             <div class="row raw-data-sub">
-                <div class="leftbox">
-                    <span class="title-menu">Outlet Information</span>
+                <div class="leftbox dropdown_raw">
+                    <button onclick="openLeftMenu()" class="open-left-menu"><span class="title-menu">Outlet Information</span> </button>
                     
+                    <ul class="dropdown-menu_raw">
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="{% url 'kpi' 1 %}">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
+                    </ul>
                 </div>
                 <div class="rightbox">
                     <span class="date-menu"></span>

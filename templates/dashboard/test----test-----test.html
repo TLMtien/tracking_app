@@ -229,9 +229,9 @@
                         </div>
                         <div class="col-vertical">
                             <div class="num-active">
-                                <p class="chart-title">VOLUME PERFORMANCE</p>
+                                <p class="chart-title">% TARGET VOLUME ACHIEVED </p>
                                 
-                                <span class="number-two">21%</span>
+                                <span class="number-two">{{target_volume_achieved}}%</span>
                             </div>
                         </div>
                     </div>
@@ -309,6 +309,7 @@
                                             <div class="col-2">
                                                 <p class="title"> Glass 30cl</p>
                                             </div>
+                                            
                                             <div class="col-2">
                                                 <p class="title">Cup 33cl 3D</p>
                                             </div>
@@ -453,6 +454,59 @@
     
     chart.render();
     
+</script>
+
+{% comment %} TOP 10 OUTLET {% endcomment %}
+<script>
+    var top10_name = {{ top10_name| safe}}
+    var top10_sale = {{ top10_sale| safe}}
+    var top10_table = {{ top10_table| safe}}
+    console.log(top10_sale)
+    var options = {
+        series: [{
+            name: 'Total',
+            type: 'column',
+            data: top10_sale,
+        }, {
+            name: 'Top %',
+            type: 'line',
+            data: top10_table,
+        }],
+        chart: {
+            height: 350,
+            type: 'line',
+        },
+        stroke: {
+            width: [0, 4],
+        },
+        title: {
+            text: 'Traffic Sources'
+        },
+        dataLabels: {
+            enabled: true,
+            enabledOnSeries: [1],
+            style: {
+                colors: ['#1C263F']
+            }
+        },
+
+        labels: top10_name,
+        colors: ['#198631', '#1C263F'],
+        yaxis: [{
+            title: {
+                text: 'Top 10',
+            },
+    
+        }, {
+            opposite: true,
+            title: {
+                text: 'Outlet'
+            }
+        }]
+    };
+    
+    var chart = new ApexCharts(document.querySelector("#chart-top"), options);
+    chart.render();
 </script>
     <script src="{% static 'PC/js/app.js' %}"></script>
 </body>

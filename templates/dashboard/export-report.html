@@ -29,9 +29,9 @@
                                 Tiger Table Promotion
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="nav-sub"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                                <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
                                 <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                                <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
+                                <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
                                 <li class="nav-sub"><a href="">Export report</a></li>
                             </ul>
                         </li>
@@ -56,43 +56,30 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Management</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'management' %}">Outlet Information</a></li>
-                        <li class="nav-sub"><a href="{% url 'outlet-approval' %}">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="{% url 'kpi' %}">KPI Tracking</a></li>
-                        <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'dashboard' 1%}">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
                     </ul>
                 </div>
-                <div class="rightbox">
-                    <div class="lock-icon">
-                        <i class='bx bxs-lock-open-alt'></i> <span>Lock</span>
-                    </div>
-                </div>
+                
                 
             </div>
-            <div class="row raw-data-sub">
-                <div class="leftbox">
-                    <span class="title-menu">Export Report</span>
-                    
-                </div>
-                <div class="rightbox_kpi">
-                    <button class="btn-kpi">Export</button>
-
-                </div>
-                
-            </div>
+            
 
             <!-- Main Home-->
             
             <div class="main-table_managenment">
-                <form action="#" method="post">
+                <form action="{% url 'export' %}" method="post">
+                    {% csrf_token %} 
                     <div class="filter-day">
                         <div class="col-6">
                             From <br>
-                            <input type="date" name="" id="" class="input-date">
+                            <input type="date" name="from-date" id="" class="input-date">
                         </div>
                         <div class="col-6">
                             Go <br>
-                            <input type="date" name="" id="" class="input-date">
+                            <input type="date" name="to-date" id="" class="input-date">
                         </div>
                     </div>
                     <div class="type-report">
@@ -107,7 +94,7 @@
                                     <div class="desc">Full Report</div>
                                 </div>
                             </li>
-                            <li>
+                            {% comment %} <li>
                                 <div class="type-report_main-item">
                                     <label for="" class="type-report_container">
                                         <input type="checkbox" class="report_checkbox">
@@ -137,8 +124,8 @@
                                     </li>
                                     
                                 </ul>
-                            </li>
-                            <li>
+                            </li> {% endcomment %}
+                            {% comment %} <li>
                                 
                                 <div class="type-report_main-item">
                                     <label for="" class="type-report_container">
@@ -169,7 +156,17 @@
                                     </li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> {% endcomment %}
+                        <div class="row raw-data-sub">
+                            <div class="leftbox">
+                                <span class="title-menu">Export Report</span>
+                                
+                            </div>
+                            <div class="rightbox_kpi">
+                                <button class="btn-kpi">Export</button>
+                            </div>
+                        </div>
+                           
                         
                     </div>
                 </form>
