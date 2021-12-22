@@ -230,7 +230,7 @@ def export(request, campainID):
         ws.write(row_num, col_num, colums[col_num], font_style)
 
     font_style = xlwt.XFStyle()
-    all_outlet = outletInfo.objects.all()
+    
     
   
     for outlet in all_outlet:
