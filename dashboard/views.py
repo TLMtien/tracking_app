@@ -3,15 +3,15 @@ from django.shortcuts import render
 from dateutil.relativedelta import relativedelta
 
 from dashboard.models import KPI
-from .forms import TimeReportForm, TimeDashBoard
+#from .forms import TimeReportForm, TimeDashBoard
 from outlet.models import posmReport, outletInfo, tableReport, report_sale, consumerApproachReport, giftReport, Campain
-from .test import date_generator, revenue_char_bar, sum_value_iv
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.http import JsonResponse
 from .forms import KPIForm
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
+from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince
 # Create your views here.
 
 # tigerTP 1
@@ -178,3 +178,111 @@ def sum_revenue(request):
         'sum_Total_Consumers':sum_Total_Consumers,'total_consumers_brough':total_consumers_brough,
         'Average_reach':Average_reach, 'Average_conversion':Average_conversion}) 
         #return render(request,"report/dashboard.html",{ "from_date":from_date,"to_date":to_date,"chart":dump}) 
+
+
+def charts_views(request):
+    id =7
+    pie=pie_chart(id)
+    #print(pie)
+    customer_app = total_consumers_reached(id)
+    Volume_sale = HNK_volume_sale(id)
+    top10 = top10_outlet(id)
+    target_volume_achieved =volume_achieved_byProvince(id)
+    print(top10)
+    return render(request, 'dashboard/test----test-----test.html', {'text':pie, 'customer_app':customer_app[0],'target_volume_achieved':target_volume_achieved, 
+    'percent_customer_app':customer_app[1], 'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2]})
+
+
+import datetime
+import xlwt
+from outlet.models import tableReport, report_sale
+from datetime import datetime
+from django.http import HttpResponse
+
+def export(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment;filename={}.xls'.format(str(datetime.now()))
+    wb = xlwt.Workbook(encoding='utf-8') 
+    ws=wb.add_sheet('Expenses')
+    row_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+    colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HNK Tables', 'HVB Table Share', 'Others', 'Total Tables','Consumers Approach','Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly', 'Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
+    for col_num in range(len(colums)):
+        ws.write(row_num, col_num, colums[col_num], font_style)
+
+    font_style = xlwt.XFStyle()
+    all_outlet = outletInfo.objects.all()
+    #rows = report_sale.objects.all().values_list('province', 'ouletID', 'type', 'area', 'outlet_address', 'outlet_Name')
+    
+    #################
+    Cp = Campain.objects.get(id=7)
+    all_outlet = outletInfo.objects.filter(compain=Cp)
+    total_sale = 0
+    total_HNK = 0
+    total_HVB = 0
+    total_other_beer = 0
+    total_table = 0
+    total_consumers_approach =0  
+    for outlet in all_outlet:
+        count_list_rp_sale = report_sale.objects.filter(campain = Cp, outlet = outlet).count()
+        list_rp_table = tableReport.objects.filter(campain = Cp, outlet = outlet)
+        list_rp_sale = report_sale.objects.filter(campain = Cp, outlet = outlet)
+        list_rp_consumer = consumerApproachReport.objects.filter(campain = Cp, outlet = outlet)
+        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet)
+        total_gift1_receive = 0
+        total_gift2_receive = 0
+        total_gift3_receive = 0
+        total_gift4_receive = 0
+        total_gift5_receive = 0
+        total_gift6_receive = 0
+
+        total_gift1_given =0
+        total_gift2_given =0
+        total_gift3_given =0
+        total_gift4_given =0
+        total_gift5_given =0
+        total_gift6_given =0
+        if count_list_rp_sale > 1:
+            for rp_sale in list_rp_sale:
+                total_sale = sum(total_sale, rp_sale.beer_brand)
+            for rp_table in list_rp_table:
+                total_HNK = sum(total_HNK, rp_table.brand_table)
+                total_HVB = sum(total_HVB, rp_table.HVN_table)
+                total_other_beer = sum(total_other_beer, rp_table.other_beer_table)
+                total_table = sum(total_table, rp_table.total_table)
+            for consumer in list_rp_consumer:
+                total_consumers_approach = sum(total_consumers_approach, consumer.consumers_approach)
+            for gift in list_gift_rp:
+                total_gift1_receive = sum(total_gift1_receive, gift.gift1_received)
+                total_gift2_receive = sum(total_gift2_receive, gift.gift2_received)
+                total_gift3_receive = sum(total_gift3_receive, gift.gift3_received)
+                total_gift4_receive = sum(total_gift4_receive, gift.gift4_received)
+                total_gift5_receive = sum(total_gift5_receive, gift.gift5_received)
+                total_gift6_receive = sum(total_gift6_receive, gift.gift6_received)
+
+                total_gift1_given = sum(total_gift1_given, gift.gift1_given)
+                total_gift2_given = sum(total_gift2_given, gift.gift2_given)
+                total_gift3_given = sum(total_gift3_given, gift.gift3_given)
+                total_gift4_given = sum(total_gift4_given, gift.gift4_given)
+                total_gift5_given = sum(total_gift5_given, gift.gift5_given)
+                total_gift6_given = sum(total_gift6_given, gift.gift6_given)
+
+
+            list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, total_HNK, total_HVB, total_other_beer, total_table, total_consumers_approach, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given]
+            row_num +=1
+            for col_num in range(len(list)):
+                ws.write(row_num, col_num, str(list[col_num]), font_style)
+    wb.save(response) 
+    return response
+        
+    #################
+
+    for row in rows:
+        row_num +=1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, str(row[col_num]), font_style)
+    wb.save(response) 
+
+
+    return response

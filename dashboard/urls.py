@@ -3,10 +3,9 @@ from django.views.generic import TemplateView
 from django.conf.urls import url
 from . import views
 urlpatterns = [
-    #path('', views.sum_revenue, name='dashboard'),
-    #path('', TemplateView.as_view(template_name="dashboard/index.html"), name='dashboard'),
+    
     path('raw-data/', TemplateView.as_view(template_name="dashboard/raw-data.html"), name='raw-data'),
-    #path('test/', TemplateView.as_view(template_name="dashboard/test.html")),
+    
     path('export-report/', TemplateView.as_view(template_name="dashboard/export-report.html"), name='export-report'),
     #path('management/', views.ListOutletDashbordView.as_view(), name='management'),
    
@@ -29,4 +28,9 @@ urlpatterns = [
     path('management/<int:campainID>/', views.List_outlet_management, name='managementlist'),
     path('list_outlet-approval/<int:campainID>/', views.list_outlet_approval, name='outlet-approval'),
     path('kpi/<int:campainID>/create_KPI/', views.create_KPI, name='create_KPI'),
+    path('export/', views.export, name ='export'),
+
+
+
+    path('test-test/', views.charts_views),
 ]
