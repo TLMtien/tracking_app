@@ -307,23 +307,23 @@
                                     <div class="row-1">
                                         <div class="col-12">
                                             <div class="col-2">
-                                                <p class="title"> Glass 30cl</p>
+                                                <p class="title">Pin sạc</p>
                                             </div>
                                             
                                             <div class="col-2">
-                                                <p class="title">Cup 33cl 3D</p>
+                                                <p class="title">Ba lô</p>
                                             </div>
                                             <div class="col-2">
-                                                <p class="title">Glass of Casablanca</p>
+                                                <p class="title">Bình Nước</p>
                                             </div>
                                             <div class="col-2">
-                                                <p class="title">Wallet</p>
+                                                <p class="title">Áo thun</p>
                                             </div>
                                             <div class="col-2">
-                                                <p class="title">Tiger Crystal Hat</p>
+                                                <p class="title">Loa Bluetooth</p>
                                             </div>
                                             <div class="col-2">
-                                                <p class="title">Beer Voucher</p>
+                                                <p class="title">Ly</p>
                                             </div>
                                         </div>
                                     </div>
@@ -507,6 +507,72 @@
     
     var chart = new ApexCharts(document.querySelector("#chart-top"), options);
     chart.render();
+</script>
+
+<script>
+    var gift_rp = {{ gift_rp| safe}}
+    var options = {
+        series: [{
+            name: 'Inflation',
+            data: gift_rp,
+        }],
+        chart: {
+            height: 270,
+            type: 'bar',
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top', // top, center, bottom
+                },
+    
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function(val) {
+                return val + "%";
+            },
+            offsetY: -20,
+            style: {
+                fontSize: '12px',
+                colors: ["#304758"]
+            }
+        },
+        yaxis: {
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false,
+            },
+            labels: {
+                show: false,
+                formatter: function(val) {
+                    return val + "%";
+                }
+            }
+    
+        },
+        title: {
+            text: 'Total',
+            floating: true,
+            offsetY: 240,
+            align: 'center',
+            style: {
+                color: '#444'
+            }
+        },
+        labels: [''],
+        colors: ['#198631', '#1C263F'],
+    
+    
+    };
+    
+    var chart = new ApexCharts(document.querySelector("#chart-product"), options);
+    chart.render();
+    
 </script>
     <script src="{% static 'PC/js/app.js' %}"></script>
 </body>

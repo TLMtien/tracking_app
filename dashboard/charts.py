@@ -1,6 +1,6 @@
 import json
 from django.db.models import Q
-from outlet.models import tableReport, Campain, consumerApproachReport, report_sale, outletInfo
+from outlet.models import tableReport, Campain, consumerApproachReport, report_sale, outletInfo, giftReport
 
 def sum(a, b):
     return int(int(a) + int(b))
@@ -115,7 +115,6 @@ def top10_outlet(campain_id):
             total_table = 0
             #all report in 1 outlet
             
-
             for rp_table in table_rp:
                 total_table_brand = sum(total_table_brand, rp_table.brand_table)
                 total_table = sum(total_table, rp_table.total_table)
@@ -176,4 +175,59 @@ def volume_achieved_byProvince(campain_id):
                 test.append(percent(sale_outlet[i], sum_sale_pro))
     return result
 
+def gift(campain_id):
+    Cp = Campain.objects.get(id = campain_id)
+    total_gift1_receive = 0
+    total_gift2_receive = 0
+    total_gift3_receive = 0
+    total_gift4_receive = 0
+    total_gift5_receive = 0
+    total_gift6_receive = 0
+
+    total_gift1_given =0
+    total_gift2_given =0
+    total_gift3_given =0
+    total_gift4_given =0
+    total_gift5_given =0
+    total_gift6_given =0
+
+    list_gift_rp = giftReport.objects.filter(campain = Cp)
+    #all report in 1 outlet
     
+    for gift in list_gift_rp:
+        total_gift1_receive = sum(total_gift1_receive, gift.gift1_received)
+        total_gift2_receive = sum(total_gift2_receive, gift.gift2_received)
+        total_gift3_receive = sum(total_gift3_receive, gift.gift3_received)
+        total_gift4_receive = sum(total_gift4_receive, gift.gift4_received)
+        total_gift5_receive = sum(total_gift5_receive, gift.gift5_received)
+        total_gift6_receive = sum(total_gift6_receive, gift.gift6_received)
+
+        total_gift1_given = sum(total_gift1_given, gift.gift1_given)
+        total_gift2_given = sum(total_gift2_given, gift.gift2_given)
+        total_gift3_given = sum(total_gift3_given, gift.gift3_given)
+        total_gift4_given = sum(total_gift4_given, gift.gift4_given)
+        total_gift5_given = sum(total_gift5_given, gift.gift5_given)
+        total_gift6_given = sum(total_gift6_given, gift.gift6_given)
+    
+    percent_gift1 =0
+    percent_gift2 = 0
+    percent_gift3 = 0
+    percent_gift4 = 0
+    percent_gift5 = 0
+    percent_gift6 = 0
+
+    if total_gift1_receive != 0:
+        percent_gift1 = percent(total_gift1_given, total_gift1_receive)
+    if total_gift2_receive != 0:
+        percent_gift2 = percent(total_gift2_given, total_gift2_receive)
+    if total_gift3_receive != 0:
+        percent_gift3 = percent(total_gift3_given, total_gift3_receive)
+    if total_gift4_receive != 0:
+        percent_gift4 = percent(total_gift4_given, total_gift4_receive)
+    if total_gift5_receive != 0:
+        percent_gift5 = percent(total_gift5_given, total_gift5_receive)
+    if total_gift5_receive != 0:
+        percent_gift6 = percent(total_gift6_given, total_gift6_receive)
+    list = [percent_gift1, percent_gift2, percent_gift3, percent_gift4, percent_gift5, percent_gift6]
+
+    return list

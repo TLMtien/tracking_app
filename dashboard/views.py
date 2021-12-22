@@ -11,7 +11,7 @@ from django.http import JsonResponse
 from .forms import KPIForm
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince
+from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift
 # Create your views here.
 
 # tigerTP 1
@@ -188,9 +188,10 @@ def charts_views(request):
     Volume_sale = HNK_volume_sale(id)
     top10 = top10_outlet(id)
     target_volume_achieved =volume_achieved_byProvince(id)
+    gift_rp = gift(id)
     print(top10)
     return render(request, 'dashboard/test----test-----test.html', {'text':pie, 'customer_app':customer_app[0],'target_volume_achieved':target_volume_achieved, 
-    'percent_customer_app':customer_app[1], 'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2]})
+    'percent_customer_app':customer_app[1], 'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp})
 
 ######################################
 import datetime
