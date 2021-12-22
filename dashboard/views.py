@@ -179,7 +179,7 @@ def sum_revenue(request):
         'Average_reach':Average_reach, 'Average_conversion':Average_conversion}) 
         #return render(request,"report/dashboard.html",{ "from_date":from_date,"to_date":to_date,"chart":dump}) 
 
-
+##################################################
 def charts_views(request):
     id =4
     pie=pie_chart(id)
@@ -192,7 +192,7 @@ def charts_views(request):
     return render(request, 'dashboard/test----test-----test.html', {'text':pie, 'customer_app':customer_app[0],'target_volume_achieved':target_volume_achieved, 
     'percent_customer_app':customer_app[1], 'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2]})
 
-
+######################################
 import datetime
 import xlwt
 from outlet.models import tableReport, report_sale
@@ -218,12 +218,7 @@ def export(request):
     #################
     Cp = Campain.objects.get(id=4)
     all_outlet = outletInfo.objects.filter(compain=Cp)
-    total_sale = 0
-    total_HNK = 0
-    total_HVB = 0
-    total_other_beer = 0
-    total_table = 0
-    total_consumers_approach =0  
+      
     for outlet in all_outlet:
         count_list_rp_sale = report_sale.objects.filter(campain = Cp, outlet = outlet).count()
         list_rp_table = tableReport.objects.filter(campain = Cp, outlet = outlet)
@@ -232,6 +227,12 @@ def export(request):
         count_list_rp_consumer = consumerApproachReport.objects.filter(campain = Cp, outlet = outlet).count()
         list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet)
         count_list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet).count()
+        total_sale = 0
+        total_HNK = 0
+        total_HVB = 0
+        total_other_beer = 0
+        total_table = 0
+        total_consumers_approach =0
         total_gift1_receive = 0
         total_gift2_receive = 0
         total_gift3_receive = 0
