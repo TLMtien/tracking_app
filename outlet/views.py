@@ -176,7 +176,10 @@ def uploadFile_outlet(request):
             #         a.save()
             #         list_outlet.append(a)
             campain = Campain.objects.get(id=1)
-            filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=None , province=None,  outlet_address=None, outlet_Name=None).delete()
+            filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=None , province=None,  outlet_address=None, outlet_Name=None)
+            for i in filter_outlet:
+                i.delete()
+                
             
                
             return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
