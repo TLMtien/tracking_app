@@ -32,7 +32,7 @@ report.addEventListener('submit', e => {
         },
         error: function(error) {
             //console.log(error)
-            alert('Bạn chưa hoành thành đầy đủ các mục báo cáo')
+            alert('vui long đăng nhập lại')
         }
     });
 
