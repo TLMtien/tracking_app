@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Sent Gift</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+<body>
+    <div class="app">
+        <div class="container homeoutlet">
+                <!-- Header -->
+                <div class="row header">    
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                    </div>
+                    <div class="profile-user"> 
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    </div>
+                </div>
+                <div class="icon-back">
+                    <a href="{% url 'quantity-gift' %}"><i class="ti-angle-double-left"></i></a>
+                </div>
+                <!-- Main -->
+                <div class="row main">
+                    <p class="report_title">quà nhận đầu ca</p>
+                    <form action="#" method=""class="listbox">
+                        <table class="table-list" style="width:100%">
+                            <tr>
+                                <th>Tên quà tặng</th>
+                                <th>Số lượng</th>
+                                
+                            </tr>
+                            <tr>
+                                <td class="td-name">{{gift_name_1}}</td>
+                                <td class="td-total">{{gift1_received}}</td>
+                             
+                            </tr>
+                            <tr>
+                                <td class="td-name">{{gift_name_2}}</td>
+                                <td class="td-total">{{gift2_received}}</td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="td-name">{{gift_name_3}}</td>
+                                <td class="td-total">{{gift3_received}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">{{gift_name_4}}</td>
+                                <td class="td-total">{{gift4_received}}</td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="td-name">{{gift_name_5}}</td>
+                                <td class="td-total">{{gift5_received}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">{{gift_name_6}}</td>
+                                <td class="td-total">{{gift6_received}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-name">{{gift_name_7}}</td>
+                                <td class="td-total">{{gift7_received}}</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="box-center">
+                            <a href="{% url 'quantity-gift' %}" class="btn btn-confirm">Xác nhận</a>
+                        </div>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    
+    <script src="{% static '/js/app.js' %}"></script>
+</body>
+</html>
