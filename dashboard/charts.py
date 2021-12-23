@@ -242,6 +242,7 @@ def gift(campain_id):
     total_gift4_receive = 0
     total_gift5_receive = 0
     total_gift6_receive = 0
+    total_gift7_receive = 0
 
     total_gift1_given = 0
     total_gift2_given = 0
@@ -249,6 +250,7 @@ def gift(campain_id):
     total_gift4_given = 0
     total_gift5_given = 0
     total_gift6_given = 0
+    total_gift7_given = 0
 
     list_gift_rp = giftReport.objects.filter(campain = Cp)
     #all report in 1 outlet
@@ -260,6 +262,7 @@ def gift(campain_id):
         total_gift4_receive = sum(total_gift4_receive, gift.gift4_received)
         total_gift5_receive = sum(total_gift5_receive, gift.gift5_received)
         total_gift6_receive = sum(total_gift6_receive, gift.gift6_received)
+        total_gift7_receive = sum(total_gift7_receive, gift.gift7_received)
 
         total_gift1_given = sum(total_gift1_given, gift.gift1_given)
         total_gift2_given = sum(total_gift2_given, gift.gift2_given)
@@ -267,6 +270,7 @@ def gift(campain_id):
         total_gift4_given = sum(total_gift4_given, gift.gift4_given)
         total_gift5_given = sum(total_gift5_given, gift.gift5_given)
         total_gift6_given = sum(total_gift6_given, gift.gift6_given)
+        total_gift7_given = sum(total_gift7_given, gift.gift7_given)
     
     percent_gift1 =0
     percent_gift2 = 0
@@ -274,6 +278,7 @@ def gift(campain_id):
     percent_gift4 = 0
     percent_gift5 = 0
     percent_gift6 = 0
+    percent_gift7 = 0
 
     if total_gift1_receive != 0:
         percent_gift1 = percent(total_gift1_given, total_gift1_receive)
@@ -285,15 +290,24 @@ def gift(campain_id):
         percent_gift4 = percent(total_gift4_given, total_gift4_receive)
     if total_gift5_receive != 0:
         percent_gift5 = percent(total_gift5_given, total_gift5_receive)
-    if total_gift5_receive != 0:
+    if total_gift6_receive != 0:
         percent_gift6 = percent(total_gift6_given, total_gift6_receive)
+    
+    if total_gift7_receive != 0:
+        percent_gift7 = percent(total_gift7_given, total_gift7_receive)
+
     list = [percent_gift1, percent_gift2, percent_gift3, percent_gift4, percent_gift5, percent_gift6]
     list_4 = [percent_gift1, percent_gift2, percent_gift3, percent_gift4]
+    list_7 = [percent_gift1, percent_gift2, percent_gift3, percent_gift4, percent_gift5, percent_gift6, percent_gift7]
     list_gift = []
 
     if campain_id == 4:
         list_gift = ['Pin sạc', 'Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
         return list, list_gift
+
+    elif campain_id == 2:
+        list_gift = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ', 'Iphone 13']
+        return list_7, list_gift
 
     elif campain_id == 5:
         list_gift = ['Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao']

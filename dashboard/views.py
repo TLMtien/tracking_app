@@ -240,6 +240,9 @@ def export(request, campainID):
     
     if campainID == 1:
         colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Ly 30cl','Ly 33cl 3D','Ly Casablanca', 'Ví', 'Nón Tiger Crystal', 'Voucher Bia', 'Ly 30cl','Ly 33cl 3D','Ly Casablanca', 'Ví', 'Nón Tiger Crystal', 'Voucher Bia']
+    
+    elif campainID == 2:
+        colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Ly 30cl','Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ', 'Iphone 13','Ly 30cl','Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ', 'Iphone 13']
 
     elif campainID == 4:
         colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly', 'Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
@@ -292,6 +295,7 @@ def export(request, campainID):
         total_gift4_receive = 0
         total_gift5_receive = 0
         total_gift6_receive = 0
+        total_gift7_receive = 0
 
         total_gift1_given = 0
         total_gift2_given = 0
@@ -299,6 +303,7 @@ def export(request, campainID):
         total_gift4_given = 0
         total_gift5_given = 0
         total_gift6_given = 0
+        total_gift7_given = 0
         if count_list_rp_sale > 0 or count_list_rp_consumer> 0 or count_list_gift_rp>0:
             for rp_sale in list_rp_sale:
                 total_sale = sum(total_sale, rp_sale.beer_brand)
@@ -324,6 +329,7 @@ def export(request, campainID):
                 total_gift4_receive = sum(total_gift4_receive, gift.gift4_received)
                 total_gift5_receive = sum(total_gift5_receive, gift.gift5_received)
                 total_gift6_receive = sum(total_gift6_receive, gift.gift6_received)
+                total_gift7_receive = sum(total_gift7_receive, gift.gift7_received)
 
                 total_gift1_given = sum(total_gift1_given, gift.gift1_given)
                 total_gift2_given = sum(total_gift2_given, gift.gift2_given)
@@ -331,9 +337,17 @@ def export(request, campainID):
                 total_gift4_given = sum(total_gift4_given, gift.gift4_given)
                 total_gift5_given = sum(total_gift5_given, gift.gift5_given)
                 total_gift6_given = sum(total_gift6_given, gift.gift6_given)
+                total_gift7_given = sum(total_gift7_given, gift.gift7_given)
 
             if campainID == 1 or campainID == 4:
                 list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, HVN_volume, Competitor_volume, total_HNK, total_HVB, other_table, total_other_beer, total_table, total_consumers, total_consumers_approach, total_consumer_bought, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given]
+                
+                row_num +=1
+                for col_num in range(len(list)):
+                    ws.write(row_num, col_num, str(list[col_num]), font_style)
+            
+            elif campainID == 2:
+                list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, HVN_volume, Competitor_volume, total_HNK, total_HVB, other_table, total_other_beer, total_table, total_consumers, total_consumers_approach, total_consumer_bought, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive,total_gift7_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given, total_gift7_given]
                 
                 row_num +=1
                 for col_num in range(len(list)):
