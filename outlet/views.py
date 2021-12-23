@@ -163,19 +163,19 @@ def uploadFile_outlet(request):
             #     a = Message(phone_number = '+84'+ excel_data[i+1][0][1:len(excel_data[i+1][0])], content = excel_data[i+1][1])
             #     a.save()
             list_outlet = []
-            for i in range(350):
-                # campain = Campain.objects.get(id=1)
-                # filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
-                # if filter_outlet <1:
-                if excel_data[i+1][2] != None and excel_data[i+1][3] !=None and excel_data[i+1][6] != None:
-                    campain = Campain.objects.get(id=2)
-                    a = outletInfo.objects.create(created=excel_data[i+1][1], province=excel_data[i+1][2], ouletID=excel_data[i+1][3],
-                        type=excel_data[i+1][4], area=excel_data[i+1][5], outlet_address=excel_data[i+1][6], 
-                        outlet_Name=excel_data[i+1][7], created_by_HVN = True)
+            # for i in range(len(excel_data)-1):
+            #     # campain = Campain.objects.get(id=1)
+            #     # filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
+            #     # if filter_outlet <1:
+            #         campain = Campain.objects.get(id=2)
+            #         a = outletInfo.objects.create(created=excel_data[i+1][1], province=excel_data[i+1][2], ouletID=excel_data[i+1][3],
+            #             type=excel_data[i+1][4], area=excel_data[i+1][5], outlet_address=excel_data[i+1][6], 
+            #             outlet_Name=excel_data[i+1][7], created_by_HVN = True)
                     
-                    a.compain.add(campain)
-                    a.save()
-                    list_outlet.append(a)
+            #         a.compain.add(campain)
+            #         a.save()
+            #         list_outlet.append(a)
+            outlet = outletInfo.objects.delete(province=None, ouletID=None, type=None, outlet_Name=None, outlet_address=None)
             return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
     except:
         return Http404('file is not support')
