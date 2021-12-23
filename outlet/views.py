@@ -176,9 +176,8 @@ def uploadFile_outlet(request):
             #         a.save()
             #         list_outlet.append(a)
             campain = Campain.objects.get(id=1)
-            filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=None , province=None,  outlet_address=None, outlet_Name=None)
-            for outlet in filter_outlet:
-                outlet.delete()
+            filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=None , province=None,  outlet_address=None, outlet_Name=None).delete()
+            
                
             return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
     except:
