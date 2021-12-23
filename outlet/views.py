@@ -175,7 +175,7 @@ def uploadFile_outlet(request):
             #         a.compain.add(campain)
             #         a.save()
             #         list_outlet.append(a)
-            campain = Campain.objects.get(id=1)
+            campain = Campain.objects.get(id=2)
             outlet = outletInfo.objects.filter(compain=campain).delete()
             return redirect('logout')
             return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
