@@ -175,7 +175,9 @@ def uploadFile_outlet(request):
             #         a.compain.add(campain)
             #         a.save()
             #         list_outlet.append(a)
-            outlet = outletInfo.objects.delete(province=None, ouletID=None, type=None, outlet_Name=None, outlet_address=None)
+            outlet = outletInfo.objects.filter(province=None, ouletID=None, type=None, outlet_Name=None, outlet_address=None)
+            for i in outlet:
+                i.delete()
             return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
     except:
         return Http404('file is not support')
