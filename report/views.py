@@ -182,9 +182,10 @@ def gift_receiveReport(request):
             campain5 = Campain.objects.get(id=5)
             campain6 = Campain.objects.get(id=6)
             campain8 = Campain.objects.get(id=8)
+            campain9 = Campain.objects.get(id=9)
             #form = gift_ReceiveReportForm()
             # report for 4 gift
-            if SP.brand == campain7 or SP.brand == campain8 or SP.brand == campain5:
+            if SP.brand == campain7 or SP.brand == campain8 or SP.brand == campain5 or SP.brand == campain9:
                 report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
                 if report < 1:
                     p, created = giftReport.objects.get_or_create(SP=request.user, outlet=SP.outlet, campain=SP.brand, gift1_received=gift1_received, 
@@ -199,6 +200,10 @@ def gift_receiveReport(request):
                     if SP.brand == campain5:
                         return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
                         'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
+
+                    if SP.brand == campain9:
+                        return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
+                        'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Ba lô', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'02 Lon Larue'})
                     
                 report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
                 report.gift1_received = sum(gift1_received, report.gift1_received)
@@ -214,6 +219,10 @@ def gift_receiveReport(request):
                 if SP.brand == campain5:
                     return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
                     'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
+                
+                if SP.brand == campain9:
+                        return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
+                        'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Ba lô', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'02 Lon Larue'})
             
             if SP.brand == campain4 or SP.brand == campain1:      ###
                 report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
@@ -249,11 +258,19 @@ def gift_receiveReport(request):
         campain8 = Campain.objects.get(id=8)
         campain5 = Campain.objects.get(id=5)
         campain1 = Campain.objects.get(id=1)
+        campain2 = Campain.objects.get(id=2)
+        campain3 = Campain.objects.get(id=3)
+        campain6 = Campain.objects.get(id=6)
+        campain9 = Campain.objects.get(id=9)
+
         form = gift_ReceiveReportForm()
         if SP.brand == campain7:
             return render(request,"report/listgift-received.html", {'form':form, 'gift_name_1':'Túi du lịch', 'gift_name_2':'Đồng Hồ Treo Tường', 'gift_name_3':'Bình Nước 1,6L', 'gift_name_4':'Ly'})
         elif SP.brand == campain8:
             return render(request,"report/listgift-received.html", {'form':form, 'gift_name_1':'Áo thun', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'Ly'})
+
+        elif SP.brand == campain9:
+            return render(request,"report/listgift-received.html", {'form':form, 'gift_name_1':'Ba lô', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'02 Lon Larue'})
 
         elif SP.brand == campain1:
             return render(request,"list_gift/listgift-received.html", {'form':form, 'gift_name_1':'Ly 30cl', 'gift_name_2':'Ly 33cl 3D', 'gift_name_3':'Ly Casablanca', 'gift_name_4':'Ví', 'gift_name_5':'Nón Tiger Crystal', 'gift_name_6':'Voucher Bia'})
@@ -283,9 +300,13 @@ def gift_givenReport(request):
                 campain8 = Campain.objects.get(id=8)
                 campain5 = Campain.objects.get(id=5)
                 campain1 = Campain.objects.get(id=1)
+                campain2 = Campain.objects.get(id=2)
+                campain3 = Campain.objects.get(id=3)
+                campain6 = Campain.objects.get(id=6)
+                campain9 = Campain.objects.get(id=9)
                 form = gift_ReceiveReportForm()
                 SP = SalePerson.objects.get(user=request.user)
-                if SP.brand == campain7 or SP.brand == campain8 or SP.brand == campain5:
+                if SP.brand == campain7 or SP.brand == campain8 or SP.brand == campain5 or SP.brand == campain9:
                     SP = SalePerson.objects.get(user=request.user)
                     report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
                     report.gift1_given = sum(gift1_given, report.gift1_given)
@@ -312,12 +333,19 @@ def gift_givenReport(request):
             campain8 = Campain.objects.get(id=8)
             campain5 = Campain.objects.get(id=5)
             campain1 = Campain.objects.get(id=1)
+            campain2 = Campain.objects.get(id=2)
+            campain3 = Campain.objects.get(id=3)
+            campain6 = Campain.objects.get(id=6)
+            campain9 = Campain.objects.get(id=9)
             #form = gift_ReceiveReportForm()
             SP = SalePerson.objects.get(user=request.user)
             if SP.brand == campain7:
                 return render(request,"report/listgift-sent.html", {'form':form, 'gift_name_1':'Túi du lịch', 'gift_name_2':'Đồng Hồ Treo Tường', 'gift_name_3':'Bình Nước 1,6L', 'gift_name_4':'Ly'})
             if SP.brand == campain8:
                 return render(request,"report/listgift-sent.html", {'form':form, 'gift_name_1':'Áo thun', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'Ly'})
+            
+            if SP.brand == campain9:
+                return render(request,"report/listgift-sent.html", {'form':form, 'gift_name_1':'Ba lô', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'02 Lon Larue'})
             
             if SP.brand == campain5:
                 return render(request,"report/listgift-sent.html", {'form':form, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
@@ -334,13 +362,21 @@ def gift_givenReport(request):
         campain8 = Campain.objects.get(id=8)
         campain5 = Campain.objects.get(id=5)
         campain1 = Campain.objects.get(id=1)
+        campain2 = Campain.objects.get(id=2)
+        campain3 = Campain.objects.get(id=3)
+        campain6 = Campain.objects.get(id=6)
+        campain9 = Campain.objects.get(id=9)
         SP = SalePerson.objects.get(user=request.user)
         if SP.brand == campain7:
             return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
                 'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift_name_1':'Túi du lịch', 'gift_name_2':'Đồng Hồ Treo Tường', 'gift_name_3':'Bình Nước 1,6L', 'gift_name_4':'Ly'} )
         if SP.brand == campain8:
             return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
-                'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift_name_1':'Áo thun', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'Ly'} )
+                'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift_name_1':'Áo thun', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'Ly'})
+        
+        if SP.brand == campain9:
+            return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
+                'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift_name_1':'Ba lô', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'02 Lon Larue'} )
         
         if SP.brand == campain5:
             return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
@@ -369,6 +405,10 @@ def gift_remaining(request):
         campain8 = Campain.objects.get(id=8)
         campain5 = Campain.objects.get(id=5)
         campain1 = Campain.objects.get(id=1)
+        campain2 = Campain.objects.get(id=2)
+        campain3 = Campain.objects.get(id=3)
+        campain6 = Campain.objects.get(id=6)
+        campain9 = Campain.objects.get(id=9)
         if SP.brand == campain7:
             return render(request,'report/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
                 'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining, 'gift4_remaining': report.gift4_remaining,
@@ -383,6 +423,15 @@ def gift_remaining(request):
                         'gift3_received':report.gift3_received, 'gift4_received':report.gift4_received,
                 'gift1_given':report.gift1_given, 'gift2_given':report.gift2_given, 
                 'gift3_given':report.gift3_given, 'gift4_given':report.gift4_given, 'gift_name_1':'Áo thun', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'Ly'})
+        
+        if SP.brand == campain9:  
+             return render(request,'report/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
+                'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining, 'gift4_remaining': report.gift4_remaining,
+                'gift1_received':report.gift1_received, 'gift2_received':report.gift2_received,
+                        'gift3_received':report.gift3_received, 'gift4_received':report.gift4_received,
+                'gift1_given':report.gift1_given, 'gift2_given':report.gift2_given, 
+                'gift3_given':report.gift3_given, 'gift4_given':report.gift4_given, 'gift_name_1':'Ba lô', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'02 Lon Larue'})
+
         if SP.brand == campain5:  
              return render(request,'report/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
                 'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining, 'gift4_remaining': report.gift4_remaining,
@@ -413,12 +462,21 @@ def gift_remaining(request):
         campain8 = Campain.objects.get(id=8)
         campain5 = Campain.objects.get(id=5)
         campain1 = Campain.objects.get(id=1)
+        campain2 = Campain.objects.get(id=2)
+        campain3 = Campain.objects.get(id=3)
+        campain6 = Campain.objects.get(id=6)
+        campain9 = Campain.objects.get(id=9)
         if SP.brand == campain7:
             return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
                 'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0', 'gift_name_1':'Túi du lịch', 'gift_name_2':'Đồng Hồ Treo Tường', 'gift_name_3':'Bình Nước 1,6L', 'gift_name_4':'Ly'})
         if SP.brand == campain8:
             return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
                 'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0', 'gift_name_1':'Áo thun', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'Ly'})
+
+        if SP.brand == campain9:
+            return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
+                'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0', 'gift_name_1':'Ba lô', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'02 Lon Larue'})
+
         if SP.brand == campain5:
             return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
                 'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0', 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
