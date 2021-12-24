@@ -16,5 +16,5 @@ urlpatterns = [
     path('reportPOSM/', views.reportPosm, name='reportPosm'),
     path('report-endcase/', views.reportEndcase, name='report-endcase'),
     #####
-    path('clean-data/', views.clean_data_today, name='clean'),
+    #path('clean-data/', views.clean_data_today, name='clean'),
 ]
