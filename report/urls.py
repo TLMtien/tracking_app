@@ -15,4 +15,6 @@ urlpatterns = [
     path('report-LastDay/', TemplateView.as_view(template_name="report/report-endcase.html"), name='report_endcase'),
     path('reportPOSM/', views.reportPosm, name='reportPosm'),
     path('report-endcase/', views.reportEndcase, name='report-endcase'),
+    #####
+    path('clean-data/', views.clean_data_today, name='clean'),
 ]

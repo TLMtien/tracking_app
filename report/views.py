@@ -629,3 +629,14 @@ def reportEndcase(request):
     report.save()
 
     return JsonResponse({'created': 'true'})
+
+
+
+def clean_data_today(request):
+    report = overallReport.objects.filter(created = datetime.date.today()).delete()
+    report1 = giftReport.objects.filter(created = datetime.date.today()).delete()
+    report_table = tableReport.objects.filter(created = datetime.date.today()).delete()
+    reportsale = report_sale.objects.filter(created = datetime.date.today()).delete()
+    reportPOSM = posmReport.objects.filter(created = datetime.date.today()).delete()
+    
+    return HttpResponse('ok')
