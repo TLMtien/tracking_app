@@ -1,7 +1,7 @@
 from django.http import response
 from django.shortcuts import render
 from dateutil.relativedelta import relativedelta
-
+from datetime import datetime, date
 from dashboard.models import KPI
 #from .forms import TimeReportForm, TimeDashBoard
 from outlet.models import posmReport, outletInfo, tableReport, report_sale, consumerApproachReport, giftReport, Campain
@@ -11,7 +11,7 @@ from django.http import JsonResponse
 from .forms import KPIForm
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress
+from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet
 # Create your views here.
 
 # tigerTP 1
@@ -201,23 +201,146 @@ def sum_revenue(request):
 
 ##################################################
 def charts_views(request, campainID):
+    from_date = request.POST.get('from-date')
+    
+    to_date = request.POST.get('to-date')
+    
+    if from_date == '' or from_date==None:
+        from_date = (date(2021,12,20))
+    if to_date == '' or to_date==None:
+        to_date = (date.today())
+
+    print(from_date)
     id = campainID
-    pie=pie_chart(id)
+    Cp = Campain.objects.get(id = campainID)
+    table_rp = tableReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    pie=pie_chart(id, table_rp)
     #print(pie)
-    report_customer = total_consumers_reached(id)
-    Volume_sale = HNK_volume_sale(id)
-    top10 = top10_outlet(id)
-    target_volume_achieved =volume_achieved_byProvince(id)
-    gift_rp = gift(id)
-    volume_per = VOLUME_PERFORMANCE(id)
+    consumers_rp = consumerApproachReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    report_customer = total_consumers_reached(id, consumers_rp)
+    # HNK_volume_sale
+    all_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    Volume_sale = HNK_volume_sale(id, all_report_sale)
+    #VOLUME_PERFORMANCE
+    all_outlet = outletInfo.objects.filter(created__gte=from_date, compain = Cp).filter(created__lte=to_date, compain = Cp)
+    volume_per = VOLUME_PERFORMANCE(id, all_outlet)
     Average_brand_volume = [volume_per[2], volume_per[3]]
-    activation = activation_progress(id)
+    # Top10
+    top10 = top10_outlet(id, all_outlet)
+    # volume_achieved_byProvince
+    target_volume_achieved =volume_achieved_byProvince(id, all_outlet)
+    #gift
+    list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    gift_rp = gift(id, list_gift_rp)
+    # activation
+    activation = activation_progress(id, all_outlet)
+
     top10_sale_reverse = reverse(top10[0])
     top10_table_reverse = reverse(top10[1])
     top10_name_reverse = reverse(top10[2])
     return render(request, 'dashboard/dashboard.html', {'text':pie, 'target_volume_achieved':target_volume_achieved, 
-     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1], 'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'Average_brand_volume': Average_brand_volume, 'activation':activation, 'top10_sale_reverse':top10_sale_reverse, 'top10_table_reverse':top10_table_reverse, 'top10_name_reverse':top10_name_reverse})
+     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1], 'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'Average_brand_volume': Average_brand_volume, 'activation':activation, 'top10_sale_reverse':top10_sale_reverse, 'top10_table_reverse':top10_table_reverse, 'top10_name_reverse':top10_name_reverse, 'list_province':volume_per[4], 'list_name_outlet':volume_per[5], 'list_type':volume_per[6]})
 
+
+######
+#filter_outlet_province
+def filter_outlet_province(request, campainID):
+    if request.is_ajax and request.method == "POST":
+        array_province = request.POST.get('array_province') 
+        #array_type = request.POST.get('array_type')
+        
+        print(array_province)
+        
+        
+        province = array_province.split(',')
+
+        list_outlet_chart = get_outlet_province(campainID, province)
+        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0])
+        pie = pie_chart(campainID, list_rp[0])
+        consumers_charts = total_consumers_reached(campainID, list_rp[1])
+        gift_charts = gift(campainID, list_rp[2])
+        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0])
+        Average_brand_volume = [volume_performance[2], volume_performance[3]]
+        top_10 = top10_outlet(campainID, list_outlet_chart[0])
+        print(province)
+        print(consumers_charts)
+        list_outlet = ''
+        list_type = ''
+
+        for outlet in list_outlet_chart[0]:
+            list_outlet += f'''<tr>
+                            <div class="sidebar-menu_sub">
+                                <label>
+                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet"  value="{outlet.id}">
+                                        <span class="checkmark"></span>
+                                </label>
+                                <p class="sidebar-menu_item">
+                                        {outlet.outlet_Name}
+                                </p>
+                            </div>
+                        </tr>
+                        '''
+        for type in list_outlet_chart[1]:
+            print(type)
+            list_type += f'''<tr>
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox"  class="sidebar-menu_checkbox" name="type_outlet" value = "{{type}}"> 
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                       {type}
+                                    </p>
+                                </div>
+                            </tr>
+                        '''
+        Consumers = f'''
+                <div class="row-1">
+                                    <div class="col-12">
+                                        <div class="col-4">
+                                            <p class="title">
+                                                Total Consumers {consumers_charts[0]}
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="title">
+                                                Total Reached Consumers {consumers_charts[1]}
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="title">
+                                                Total Bought Consumers {consumers_charts[2]}
+                                            </p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="row-2">
+                                    <div class="col-12">
+                                    
+                                        <div class="col-6">
+                                            <span class="number">Average Reach {consumers_charts[3]}%</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="number">Average Conversion {consumers_charts[4]}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                '''
+        volume_per = f'''
+            <p class="chart-title">VOLUME PERFORMANCE</p>
+                    <br>
+                    <p class="desc">(Can/Bottle)</p>
+                    <p class="desc">Actual Volume</p>
+                    <span class="number-one max-size">{volume_performance[0]}</span>
+                    <br>
+                    <p class="desc">Target Volume</p>
+            <span class="number-two">{volume_performance[1]}</span>
+        '''
+        print(pie)
+        print(gift_charts[0])
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet,'list_type':list_type ,'Consumers_charts':Consumers,'volume_performance':volume_per, 'pie_chart': pie, 'gift':gift_charts[0], 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume}) 
+    return JsonResponse({'created': 'ko'}) 
 ######################################
 import datetime
 import xlwt
@@ -268,8 +391,13 @@ def export(request, campainID):
     font_style = xlwt.XFStyle()
     
     from_date = request.POST.get('from-date')
+    
     to_date = request.POST.get('to-date')
-  
+    
+    print(from_date)
+    #a = date.today()
+    a = (date(2021,12,20))
+    print(a) 
     for outlet in all_outlet:
         count_list_rp_sale = report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet).count()
         list_rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet)

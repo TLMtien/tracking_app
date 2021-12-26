@@ -36,15 +36,15 @@ def get_allReport_outlet(outlet, campain_id):
 
     
 
-def pie_chart(campain_id):
+def pie_chart(campain_id, table_rp):
     try:
         total_table = 0
         total_table_HVN = 0
         total_brand_table = 0
         other_table = 0
         other_beer_table = 0
-        Cp = Campain.objects.get(id = campain_id)
-        table_rp = tableReport.objects.filter(campain=Cp)
+        # Cp = Campain.objects.get(id = campain_id)
+        # table_rp = tableReport.objects.filter(campain=Cp)
         for table in table_rp:
             total_table_HVN = sum(total_table_HVN, table.HVN_table)
             total_brand_table = sum(total_brand_table, table.brand_table)
@@ -62,15 +62,16 @@ def pie_chart(campain_id):
     except:
         return [0,0,0,0]
 
-def total_consumers_reached(campain_id):
+def total_consumers_reached(campain_id, consumers_rp):
    
-    Cp = Campain.objects.get(id = campain_id)
+    # Cp = Campain.objects.get(id = campain_id)
+    # consumers_rp = consumerApproachReport.objects.filter(campain=Cp)
     ctm_reached = 0
     total_bought_consumers = 0
     total_consumers = 0
     per_reached = 0
     average_conversion = 0
-    consumers_rp = consumerApproachReport.objects.filter(campain=Cp)
+    
     for customer in consumers_rp:
         ctm_reached = sum(ctm_reached, customer.consumers_approach)
         total_consumers = sum(total_consumers, customer.Total_Consumers)
@@ -82,13 +83,13 @@ def total_consumers_reached(campain_id):
 
     return total_consumers, ctm_reached, total_bought_consumers, per_reached, average_conversion
 
-def HNK_volume_sale(campain_id):
+def HNK_volume_sale(campain_id, all_report_sale):
     try:
-        Cp = Campain.objects.get(id = campain_id)
+        # Cp = Campain.objects.get(id = campain_id)
         total_beer_brand = 0
         total_beer_HVN = 0
         total_beer_other = 0
-        all_report_sale =  report_sale.objects.filter(campain=Cp)
+        # all_report_sale =  report_sale.objects.filter(campain=Cp)
         for volume_sale in all_report_sale:
             total_beer_brand = sum(total_beer_brand, volume_sale.beer_brand)
             total_beer_HVN = sum(total_beer_HVN, volume_sale.beer_HVN)
@@ -98,7 +99,7 @@ def HNK_volume_sale(campain_id):
     except:
         return 0
 
-def VOLUME_PERFORMANCE(campain_id):
+def VOLUME_PERFORMANCE(campain_id, all_outlet):
     if campain_id == 1:
         volume_achieved = 168
     elif campain_id == 2:
@@ -119,28 +120,38 @@ def VOLUME_PERFORMANCE(campain_id):
         volume_achieved = 192
 
     Cp = Campain.objects.get(id = campain_id)
-    all_outlet = outletInfo.objects.filter(compain=Cp)
+    # all_outlet = outletInfo.objects.filter(compain=Cp)
     count = 0
     total_sale = 0
+    list_province = []
+    list_name_outlet = []
+    list_type = []
     for outlet in all_outlet:
         all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet)
         count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
         if count_report_sale > 0:
+            if not outlet.province in list_province:        #filter province
+                list_province.append(outlet.province)
+            if not outlet.outlet_Name in list_name_outlet:        #filter province
+                list_name_outlet.append(outlet.outlet_Name)
+            if not outlet.type in list_type:        #filter province
+                list_type.append(outlet.type)
+
             count = count + 1
             for report_Sale in all_report_sale:
                 total_sale = sum(total_sale, report_Sale.beer_brand)
     
     average_volume = 0
     if count > 0:
-        average_volume = (total_sale)/(count)
+        average_volume = percent(total_sale, count)
     
     total_volume_achieved = volume_achieved * count
 
-    return [total_sale, total_volume_achieved , average_volume, volume_achieved]
+    return [total_sale, total_volume_achieved , average_volume, volume_achieved, list_province, list_name_outlet, list_type]
 
-def activation_progress(campain_id):
+def activation_progress(campain_id, all_outlet):
     Cp = Campain.objects.get(id = campain_id)
-    all_outlet = outletInfo.objects.filter(compain=Cp)
+    # all_outlet = outletInfo.objects.filter(compain=Cp)
     count = 0
     list = []
     for outlet in all_outlet:
@@ -153,7 +164,7 @@ def activation_progress(campain_id):
     return count
 
     
-def top10_outlet(campain_id):
+def top10_outlet(campain_id, all_outlet):
     
         Cp = Campain.objects.get(id = campain_id)
         
@@ -163,7 +174,7 @@ def top10_outlet(campain_id):
         new_list_volume = []
         new_list_table = []
         new_list_name = []
-        all_outlet = outletInfo.objects.filter(compain=Cp)
+        # all_outlet = outletInfo.objects.filter(compain=Cp)
         for outlet in all_outlet:
             all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet)
             
@@ -200,10 +211,10 @@ def top10_outlet(campain_id):
         return new_list_volume, new_list_table, new_list_name
     
     
-def volume_achieved_byProvince(campain_id):
+def volume_achieved_byProvince(campain_id, all_outlet):
     list_province = []
     Cp = Campain.objects.get(id = campain_id)
-    all_outlet = outletInfo.objects.filter(compain=Cp)
+    # all_outlet = outletInfo.objects.filter(compain=Cp)
     
     # filter province
 
@@ -234,7 +245,8 @@ def volume_achieved_byProvince(campain_id):
                 test.append(percent(sale_outlet[i], sum_sale_pro))
     return result
 
-def gift(campain_id):
+# ------------------>>>>>>GIFT
+def gift(campain_id, list_gift_rp):
     Cp = Campain.objects.get(id = campain_id)
     total_gift1_receive = 0
     total_gift2_receive = 0
@@ -252,7 +264,7 @@ def gift(campain_id):
     total_gift6_given = 0
     total_gift7_given = 0
 
-    list_gift_rp = giftReport.objects.filter(campain = Cp)
+    #list_gift_rp = giftReport.objects.filter(campain = Cp)
     #all report in 1 outlet
     
     for gift in list_gift_rp:
@@ -305,12 +317,20 @@ def gift(campain_id):
         list_gift = ['Pin sạc', 'Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
         return list, list_gift
 
+    elif campain_id == 1:
+        list_gift = ['Ly 30cl','Ly 33cl 3D','Ly Casablanca', 'Ví', 'Nón Tiger Crystal', 'Voucher Bia']
+        return list, list_gift
+
     elif campain_id == 2:
         list_gift = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ', 'Iphone 13']
         return list_7, list_gift
 
     elif campain_id == 5:
         list_gift = ['Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao']
+        return list_4, list_gift
+    
+    elif campain_id == 6:
+        list_gift = ['Nón Strongbow', 'Túi Jute Bag', 'Túi Canvas ', 'Dù SB']
         return list_4, list_gift
 
     elif campain_id == 7:
@@ -320,5 +340,51 @@ def gift(campain_id):
     elif campain_id == 8:
         list_gift = ['Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
         return list_4, list_gift
+    else:
+        list_gift = ['Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue']
+        return list_4, list_gift
+    
 
-    return list, list_gift
+# get outlet_province
+def get_outlet_province(campain_id, province):
+    list_outlet = []
+    list_type = []
+    Cp = Campain.objects.get(id = campain_id)
+    for pro in province:
+        all_outlet_province = outletInfo.objects.filter(compain=Cp, province=pro)
+        for outlet in all_outlet_province:
+            count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+            count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+            if count_report_sale > 0 or count_gift > 0:
+                if not outlet.type in list_type: 
+                    list_type.append(outlet.type)
+
+                list_outlet.append(outlet)
+    return list_outlet, list_type
+
+def getAll_report_outlet(campain_id, list_outlet):
+    Cp = Campain.objects.get(id = campain_id)
+    list_table = []
+    list_consumer = []
+    list_gift = []
+    for outlet in list_outlet:
+        table_rp = tableReport.objects.filter(campain=Cp, outlet=outlet)
+        consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=outlet)
+        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet=outlet)
+        for rp in table_rp:
+            list_table.append(rp)
+        for rp in consumers_rp:
+            list_consumer.append(rp)
+        for rp in list_gift_rp:
+            list_gift.append(rp)
+    return list_table, list_consumer, list_gift
+## filter Province
+# def chart_filter_province(campain_id, province):
+#     list_outlet = get_outlet_province(campain_id, province)
+#     list_rp = getAll_report_outlet(campain_id, list_outlet)
+#     pie = pie_chart(campain_id, list_rp[0])
+#     consumers_charts = total_consumers_reached(campain_id, list_rp[1])
+#     gift_charts = gift(campain_id, list_rp[2])
+#     volume_performance = VOLUME_PERFORMANCE(campain_id, list_outlet)
+#     top_10 = top10_outlet(campain_id, list_outlet)
+

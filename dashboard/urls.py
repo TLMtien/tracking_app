@@ -31,6 +31,7 @@ urlpatterns = [
     path('export-report/<int:campainID>/export/', views.export, name ='export'),
 
 
+    path('<int:campainID>/filter-outlet-province/', views.filter_outlet_province, name='filter-outlet-province'),
 
-    path('test-test/', views.charts_views, name='tesstt'),
+    path('<int:campainID>/filter/', views.charts_views, name='filter'),
 ]
