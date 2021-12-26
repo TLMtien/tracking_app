@@ -6,15 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    
-    
+
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- font icons -->
     <link rel="stylesheet" href="{% static '/PC/themify-icons.css' %}">
     <!-- css -->
     <link rel="stylesheet" href="{% static '/PC/css/style.css' %}">
-</head>
 </head>
 <body>
     <div class="app">
@@ -27,30 +25,33 @@
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
                         <li class="nav-list dropdown-nav active">
-                            <a href="#" class="nav-links drop-btn" onclick="openTigerTp()">
+                            <a href="{% url 'dashboard' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
                                 Tiger Table Promotion
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-sub"><a href="">Dashboard</a></li>
                                 <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                                <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
-                                <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
+                                <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
+                                <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
                             </ul>
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Festive Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Hot Zone Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Strongbow Festive</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Table Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Special Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Bivina Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Special Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
-                <div class="profile-user">
-                    <a href="#" class="user-img">
+                <div class="profile-user dropdown-logout">
+                    <a href="#" class="user-img" onclick="openTigerTp()">
                         <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
                     </a>
+                    <ul class="dropdown-menu_logout">
+                        <li class="nav-sub"><a href="{% url 'logoutHVN' %}"><i class="ti-shift-left"></i> Logout</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="row raw-data">
@@ -58,23 +59,24 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Dashboard</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'dashboard' 1%}">Dashboard</a></li>
                         <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                        <li class="nav-sub"><a href="{% url 'management' %}">Management</a></li>
-                        <li class="nav-sub"><a href="{% url 'export-report' %}">Export report</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
                     </ul>
                 </div>
                 <div class="rightbox">
                     <div class="bg-filter">
-                        <form action="#" class="form-filter">
+                        <form action="filter/" method='POST' class="form-filter">
+                            {% csrf_token %} 
                             <div class="filter">
                                 <div class="filter-box">
                                     From
-                                    <input type="date" placeholder="Date">
+                                    <input type="date" placeholder="Date" name="from-date" required>
                                 </div>
                                 <div class="time-box">
                                     To
-                                    <input type="date" placeholder="Date">
+                                    <input type="date" placeholder="Date" name="to-date" required>
                                 </div>
                                 <!-- <div class="range-box">
                                     Range
@@ -111,51 +113,18 @@
                             </div>
                             
                             <div class="sidebar-menu_dropdown-content">
+                                {% for province in list_province %}
                                 <div class="sidebar-menu_sub">
                                     <label>
-                                        <input type="checkbox" class="sidebar-menu_checkbox">
+                                        {% comment %} checked="checked" {% endcomment %}
+                                        <input type="checkbox"  class="sidebar-menu_checkbox" name='province' value="{{province}}">
                                         <span class="checkmark"></span>
                                     </label>
                                     <p class="sidebar-menu_item">
-                                        Cần Thơ
+                                        {{province}}
                                     </p>
                                 </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked"  class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Đà Nẵng
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Hồ Chí Minh
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Khánh Hòa
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Tiền Giang
-                                    </p>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="sidebar-menu">
@@ -164,34 +133,19 @@
                                 <span class="sidebar-menu_title">Outlet Tyle</span>
                                 <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
                             </div>
-                            <div class="sidebar-menu_dropdown-content">
+                            <div class="sidebar-menu_dropdown-content" id="list_type_outlet">
+                               {% for type in list_type %}
                                 <div class="sidebar-menu_sub">
                                     <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        {% comment %} <input type="checkbox"  class="sidebar-menu_checkbox" name="type_outlet" value = "{{type}}">  {% endcomment %}
+                                        <input type="checkbox"  class="sidebar-menu_checkbox" name="type_outlet" value = "{{type}}"> 
                                         <span class="checkmark"></span>
                                     </label>
                                     <p class="sidebar-menu_item">
-                                        GSO
+                                       {{type}}
                                     </p>
                                 </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        QN
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        YSO
-                                    </p>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="sidebar-menu">
@@ -200,71 +154,18 @@
                                 <span class="sidebar-menu_title">Outlet Name</span>
                                 <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
                             </div>
-                            <div class="sidebar-menu_dropdown-content">
+                            <div class="sidebar-menu_dropdown-content content-height" id='list_name_outlet'>
+                                {% for outlet in list_name_outlet%}
                                 <div class="sidebar-menu_sub">
                                     <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet" value="{{outlet}}">
                                         <span class="checkmark"></span>
                                     </label>
                                     <p class="sidebar-menu_item">
-                                        543
+                                        {{outlet}}
                                     </p>
                                 </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        A Việt
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Ẩm Thực Sơn Hà
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Bò Lý Em
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Cát Biển
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Vườn Táo
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Vườn Chuối
-                                    </p>
-                                </div>
-                                
+                                {% endfor %}
                             </div>
                         </div>
                         
@@ -277,30 +178,40 @@
                     <div class="box-left">
                         <div class="col-vertical">
                             <div class="num-active">
-                                <p class="chart-title">VOLUME PROGRESS</p>
-                                <span class="number-one">142</span>
-                                <p class="desc">VS.Taget</p>
-                                <span class="number-two">21%</span>
+                                <p class="chart-title">ACTIVATION PROGRESS</p>
+                                <br>
+                                <p class="desc">Actual Acts</p>
+                                <div id="chart-acti"></div>
+                                <!-- <span class="number-one">142</span> -->
+                                <p class="desc">Total Acts</p>
+                                <span class="number-two">200/100%</span>
                             </div>
                         </div>
                         <div class="col-vertical">
-                            <div class="num-active">
+                            <div class="num-active" id="volume_performance">
                                 <p class="chart-title">VOLUME PERFORMANCE</p>
-                                <p class="desc">(Can/Bottle)</p>
-                                <span class="number-one">142</span>
                                 <br>
-                                <span class="number-two">21%</span>
-                                <div class="icon-color">
+                                <p class="desc">(Can/Bottle)</p>
+                                <p class="desc">Actual Volume</p>
+                                <span class="number-one max-size">{{actual_volume}}</span>
+                                <br>
+                                <p class="desc">Target Volume</p>
+                                <span class="number-two">{{target_volume}}</span>
+                                <!-- <div class="icon-color">
                                     <span class="icon-one"></span> <p class="smart-desc">Actual Achieved</p>
                                     <span class="icon-two"></span> <p class="smart-desc">Volume Target</p>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="col-vertical">
                             <div class="num-active">
-                                <p class="chart-title">VOLUME PERFORMANCE</p>
+                                <p class="chart-title">% Target Volume Achieved
+                                </p>
+                                <br>
                                 
-                                <span class="number-two">21%</span>
+                                <div id="chart-prog"></div>
+                                <p class="desc">Total</p>
+                                <span class="number-two">{{target_volume_achieved}}%</span>
                             </div>
                         </div>
                     </div>
@@ -308,22 +219,22 @@
                         <div class="row">
                             <div class="col-horizontal">
                                 <p class="chart-title">SP PERFORMANCE</p>
-                                <div class="header">
+                                <div class="header" id='Consumers_charts'>
                                     <div class="row-1">
                                         <div class="col-12">
                                             <div class="col-4">
                                                 <p class="title">
-                                                    Total Consumers Reached
+                                                    Total Consumers {{total_consumers}}
                                                 </p>
                                             </div>
                                             <div class="col-4">
                                                 <p class="title">
-                                                    Average Reach per Act
+                                                    Total Reached Consumers {{ctm_reached}}
                                                 </p>
                                             </div>
                                             <div class="col-4">
                                                 <p class="title">
-                                                    Average Reach per Act
+                                                    Total Bought Consumers {{total_bought_consumers}}
                                                 </p>
                                             </div>
                                             
@@ -333,10 +244,10 @@
                                         <div class="col-12">
                                         
                                             <div class="col-6">
-                                                <span class="number">Average Reach 80%</span>
+                                                <span class="number">Average Reach {{per_reached}}%</span>
                                             </div>
                                             <div class="col-6">
-                                                <span class="number">Average Conversion 90%</span>
+                                                <span class="number">Average Conversion {{average_conversion}}%</span>
                                             </div>
                                         </div>
                                     </div>
@@ -355,10 +266,13 @@
                                     </div>
                                 </div> -->
                             </div>
-                            <div class="col-horizontal">
+                            <div class="col-horizontal" id="last-hope">
                                 <div class="col-12">
                                     <p class="chart-title">TABLE SHARE PERFORMANCE</p>
-                                    <div id="chart-share"></div>
+                                    <div id="chart-share">
+            
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="col-horizontal">
@@ -379,24 +293,13 @@
                                     
                                     <div class="row-1">
                                         <div class="col-12">
-                                            <div class="col-2">
-                                                <p class="title"> Glass 30cl</p>
+                                            {% for gift in gift_name%}
+                                            <div >
+                                                <p class="title">{{gift}}</p>
                                             </div>
-                                            <div class="col-2">
-                                                <p class="title">Cup 33cl 3D</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <p class="title">Glass of Casablanca</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <p class="title">Wallet</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <p class="title">Tiger Crystal Hat</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <p class="title">Beer Voucher</p>
-                                            </div>
+                                            
+                                            {% endfor %}
+                                            
                                         </div>
                                     </div>
                                     
@@ -404,18 +307,26 @@
                                 <div class="main">
                                     <div id="chart-product"></div>
                                 </div>
-                                <div class="footer">
+                                <!-- <div class="footer">
                                     <div class="icon-color">
                                         <span class="icon-one"></span> <p class="smart-desc">Actual Achieved</p>
                                         <span class="icon-two"></span> <p class="smart-desc">Volume Target</p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="row">
                             <div class="row-bottom">
                                 <div class="col-12">
                                     <p class="chart-title">TOP 10 OUTLET PERFORMANCE</p>
+                                    <div class="btns">
+                                        <button id="changeText" type = 'button' class="button button-change">Change</button>
+                                        <div class="btn-arrow">
+                                            <button><i class='bx bx-chevrons-up'></i></button> <br>
+                                            <button><i class='bx bx-chevrons-down' ></i></button>
+                                        </div>                                    
+                                    </div>
+
                                     <div id="chart-top"></div>
                                 </div>
                             </div>
@@ -423,15 +334,49 @@
                     </div>
                 </div>
             </div>
-
-            
         </div>
     </div>
+    
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
 
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
 
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "445536889224666");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
 
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v12.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{% static 'PC/js/apexcharts.js' %}"></script>
+    
+    <script>
+        
+       
+        
+    </script>
+
     <script>
         $(document).ready(function(){
             // Show hide popover
@@ -443,6 +388,20 @@
             var $trigger = $(".dropdown-nav");
             if($trigger !== event.target && !$trigger.has(event.target).length){
                 $(".dropdown-menu").slideUp("fast");
+            }            
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown-logout").click(function(){
+                $(this).find(".dropdown-menu_logout").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown-logout");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu_logout").slideUp("fast");
             }            
         });
     </script>
@@ -486,8 +445,310 @@
         $( this ).parent( 'li' ).addClass( 'active' );
     });
     </script> -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="{% static 'PC/js/charttesst.js' %}"></script>
+    
+    {% comment %}  -------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {% endcomment %}
+{% comment %} ------------------------------TOP 10 OUTLET -------------------------------{% endcomment %}
+<script>
+    var top10_name = {{ top10_name| safe}}
+    var top10_sale = {{ top10_sale| safe}}
+    var top10_table = {{ top10_table| safe}}
+    console.log(top10_sale)
+    var options = {
+        series: [{
+            name: 'Total',
+            type: 'column',
+            data: top10_sale,
+        }, {
+            name: 'Top %',
+            type: 'line',
+            data: top10_table,
+        }],
+        chart: {
+            height: 350,
+            type: 'line',
+        },
+        stroke: {
+            width: [0, 4],
+        },
+        title: {
+            text: 'Traffic Sources'
+        },
+        dataLabels: {
+            enabled: true,
+            enabledOnSeries: [1],
+            style: {
+                colors: ['#1C263F']
+            }
+        },
+
+        labels: top10_name,
+        colors: ['#198631', '#1C263F'],
+        yaxis: [{
+            title: {
+                text: 'Top 10',
+            },
+    
+        }, {
+            opposite: true,
+            title: {
+                text: 'Outlet'
+            }
+        }]
+    };
+    
+    var chart = new ApexCharts(document.querySelector("#chart-top"), options);
+    chart.render();
+</script>
+
+{% comment %} AVERAGE PERFORMANCE PER ACT------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {% endcomment %}
+<script>
+   
+    var options = {
+        chart: {
+            height: 200,
+            type: 'bar',
+        },
+        series: [{
+            name: 'ACT',
+            data: {{Average_brand_volume}},
+        }],
+        yaxis: {
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false,
+            },
+            labels: {
+                show: false,
+                formatter: function(val) {
+                    return val + "%";
+                }
+            }
+    
+        },
+        labels: ['Average Brand Volume', 'Average Target Volume'],
+        colors: ['#198631', '#1C263F']
+    }
+    
+    var chart = new ApexCharts(document.querySelector("#chart-act"), options);
+    
+    chart.render();
+    
+</script>
+{% comment %}  pie charts-------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {% endcomment %}
+
+    <script> 
+        
+        var options = {
+            series:  {{text}},
+            chart: {
+                width: 350,
+                type: 'pie',
+            },
+            labels: ['HVN', 'Brand', 'Other', 'Other beer'],
+            colors: ['#198631', '#1C263F', '#000', '#939393'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+
+        };
+        
+        var chart = new ApexCharts(document.querySelector("#chart-share"), options);
+        chart.render();  
+        
+    </script>
+
+
+
+    <script src="https://sp.zalo.me/plugins/sdk.js"></script>
+{% comment %} GIFT------------------------>>>>>>>>>>>>>>>>>>>>>> {% endcomment %}
+
+<script>
+    var gift_rp = {{ gift_rp| safe}}
+    var options = {
+        series: [{
+            name: 'Inflation',
+            data: gift_rp,
+        }],
+        chart: {
+            height: 270,
+            type: 'bar',
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top', // top, center, bottom
+                },
+    
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function(val) {
+                return val + "%";
+            },
+            offsetY: -20,
+            style: {
+                fontSize: '12px',
+                colors: ["#304758"]
+            }
+        },
+        yaxis: {
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false,
+            },
+            labels: {
+                show: false,
+                formatter: function(val) {
+                    return val + "%";
+                }
+            }
+    
+        },
+        title: {
+            text: 'Total',
+            floating: true,
+            offsetY: 240,
+            align: 'center',
+            style: {
+                color: '#444'
+            }
+        },
+        labels: [''],
+        colors: ['#198631', '#1C263F'],
+    
+    
+    };
+    
+    var chart = new ApexCharts(document.querySelector("#chart-product"), options);
+    chart.render();
+    
+</script>
+
+<script>
+    var activation = {{activation|safe}}
+    console.log(activation)
+    var options = {
+        series: [{
+            name: 'Actual Volume',
+            data: activation,
+        }],
+        chart: {
+            type: 'bar',
+            height: 130,
+            stacked: true,
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+            },
+        },
+        stroke: {
+            width: 1,
+            colors: ['#fff']
+        },
+    
+        labels: [''],
+        yaxis: {
+            title: {
+                text: undefined
+            },
+        },
+        tooltip: {
+            y: {
+                formatter: function(val) {
+                    return val + "/21%"
+                }
+            }
+        },
+        colors: ['#198631'],
+        fill: {
+            opacity: 1
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'left',
+            offsetX: 40
+        }
+    };
+    
+    var chart = new ApexCharts(document.querySelector("#chart-acti"), options);
+    chart.render();
+</script>
+    {% comment %} jsssssssssssssssssssssssssssssssssssssssssssssssssss {% endcomment %}
+<script>
+    var change = document.getElementById('changeText')
+    change.addEventListener('click', e => {
+        e.preventDefault()
+
+        var top10_name_reverse = {{ top10_name_reverse| safe}}
+        var top10_sale_reverse = {{ top10_sale_reverse| safe}}
+        var top10_table_reverse = {{ top10_table_reverse| safe}}
+        console.log(top10_sale)
+        var options = {
+            series: [{
+                name: 'Total',
+                type: 'column',
+                data: top10_sale_reverse,
+            }, {
+                name: 'Top %',
+                type: 'line',
+                data: top10_table_reverse,
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+            },
+            stroke: {
+                width: [0, 4],
+            },
+            title: {
+                text: 'Traffic Sources'
+            },
+            dataLabels: {
+                enabled: true,
+                enabledOnSeries: [1],
+                style: {
+                    colors: ['#1C263F']
+                }
+            },
+    
+            labels:top10_name_reverse,
+            colors: ['#198631', '#1C263F'],
+            yaxis: [{
+                title: {
+                    text: 'Top 10',
+                },
+        
+            }, {
+                opposite: true,
+                title: {
+                    text: 'Outlet'
+                }
+            }]
+        };
+        
+        var chart = new ApexCharts(document.querySelector("#chart-top"), options);
+        chart.render();
+    })
+
+</script>
+
+    {% comment %} <script src="{% static 'PC/js/chart.js' %}"></script> {% endcomment %}
+    <script src="{% static 'PC/js/dashboard.js' %}"></script> 
     <script src="{% static 'PC/js/app.js' %}"></script>
 </body>
 </html>

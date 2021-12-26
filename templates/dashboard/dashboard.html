@@ -67,15 +67,16 @@
                 </div>
                 <div class="rightbox">
                     <div class="bg-filter">
-                        <form action="#" class="form-filter">
+                        <form action="#" method='POST' class="form-filter">
+                            {% csrf_token %} 
                             <div class="filter">
                                 <div class="filter-box">
                                     From
-                                    <input type="date" placeholder="Date">
+                                    <input type="date" placeholder="Date" name="from-date" required>
                                 </div>
                                 <div class="time-box">
                                     To
-                                    <input type="date" placeholder="Date">
+                                    <input type="date" placeholder="Date" name="to-date" required>
                                 </div>
                                 <!-- <div class="range-box">
                                     Range
@@ -112,25 +113,18 @@
                             </div>
                             
                             <div class="sidebar-menu_dropdown-content">
+                                {% for province in list_province %}
                                 <div class="sidebar-menu_sub">
                                     <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        {% comment %} checked="checked" {% endcomment %}
+                                        <input type="checkbox"  class="sidebar-menu_checkbox" name='province' value="{{province}}">
                                         <span class="checkmark"></span>
                                     </label>
                                     <p class="sidebar-menu_item">
-                                        Cần Thơ
+                                        {{province}}
                                     </p>
                                 </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        Đà Nẵng
-                                    </p>
-                                </div>
-                                
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="sidebar-menu">
@@ -139,34 +133,19 @@
                                 <span class="sidebar-menu_title">Outlet Tyle</span>
                                 <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
                             </div>
-                            <div class="sidebar-menu_dropdown-content">
+                            <div class="sidebar-menu_dropdown-content" id="list_type_outlet">
+                               {% for type in list_type %}
                                 <div class="sidebar-menu_sub">
                                     <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        {% comment %} <input type="checkbox"  class="sidebar-menu_checkbox" name="type_outlet" value = "{{type}}">  {% endcomment %}
+                                        <input type="checkbox"  class="sidebar-menu_checkbox" name="type_outlet" value = "{{type}}"> 
                                         <span class="checkmark"></span>
                                     </label>
                                     <p class="sidebar-menu_item">
-                                        GSO
+                                       {{type}}
                                     </p>
                                 </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        QN
-                                    </p>
-                                </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        YSO
-                                    </p>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="sidebar-menu">
@@ -175,26 +154,18 @@
                                 <span class="sidebar-menu_title">Outlet Name</span>
                                 <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
                             </div>
-                            <div class="sidebar-menu_dropdown-content content-height">
+                            <div class="sidebar-menu_dropdown-content content-height" id='list_name_outlet'>
+                                {% for outlet in list_name_outlet%}
                                 <div class="sidebar-menu_sub">
                                     <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet" value="{{outlet}}">
                                         <span class="checkmark"></span>
                                     </label>
                                     <p class="sidebar-menu_item">
-                                        543
+                                        {{outlet}}
                                     </p>
                                 </div>
-                                <div class="sidebar-menu_sub">
-                                    <label>
-                                        <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p class="sidebar-menu_item">
-                                        A Việt
-                                    </p>
-                                </div>
-                                
+                                {% endfor %}
                             </div>
                         </div>
                         
@@ -217,7 +188,7 @@
                             </div>
                         </div>
                         <div class="col-vertical">
-                            <div class="num-active">
+                            <div class="num-active" id="volume_performance">
                                 <p class="chart-title">VOLUME PERFORMANCE</p>
                                 <br>
                                 <p class="desc">(Can/Bottle)</p>
@@ -248,7 +219,7 @@
                         <div class="row">
                             <div class="col-horizontal">
                                 <p class="chart-title">SP PERFORMANCE</p>
-                                <div class="header">
+                                <div class="header" id='Consumers_charts'>
                                     <div class="row-1">
                                         <div class="col-12">
                                             <div class="col-4">
@@ -295,10 +266,13 @@
                                     </div>
                                 </div> -->
                             </div>
-                            <div class="col-horizontal">
+                            <div class="col-horizontal" id="last-hope">
                                 <div class="col-12">
                                     <p class="chart-title">TABLE SHARE PERFORMANCE</p>
-                                    <div id="chart-share"></div>
+                                    <div id="chart-share">
+            
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="col-horizontal">
@@ -397,6 +371,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{% static 'PC/js/apexcharts.js' %}"></script>
     
+    <script>
+        
+       
+        
+    </script>
+
     <script>
         $(document).ready(function(){
             // Show hide popover
@@ -557,7 +537,9 @@
     
 </script>
 {% comment %}  pie charts-------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {% endcomment %}
+
     <script> 
+        
         var options = {
             series:  {{text}},
             chart: {
@@ -577,10 +559,15 @@
                     }
                 }
             }]
+
         };
+        
         var chart = new ApexCharts(document.querySelector("#chart-share"), options);
         chart.render();  
+        
     </script>
+
+
 
     <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 {% comment %} GIFT------------------------>>>>>>>>>>>>>>>>>>>>>> {% endcomment %}
@@ -759,7 +746,9 @@
     })
 
 </script>
+
     {% comment %} <script src="{% static 'PC/js/chart.js' %}"></script> {% endcomment %}
+    <script src="{% static 'PC/js/dashboard.js' %}"></script> 
     <script src="{% static 'PC/js/app.js' %}"></script>
 </body>
 </html>
