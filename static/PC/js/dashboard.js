@@ -73,8 +73,8 @@ province.change(function() {
         success: function(response) {
 
             console.log(response)
-            outlet_list.innerHTML = response.list_outlet
-            list_type_outlet.innerHTML = response.list_type
+                //outlet_list.innerHTML = response.list_outlet
+                //list_type_outlet.innerHTML = response.list_type
             Consumers_charts.innerHTML = response.Consumers_charts
             volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
@@ -271,23 +271,23 @@ type.change(function() {
     const csrf = document.getElementsByName('csrfmiddlewaretoken')
     var fd = new FormData();
     fd.append('array_type', array_type);
-    // $.ajax({
-    //     type: 'POST',
-    //     url: 'filter-outlet-province/',
-    //     headers: {
-    //         "X-CSRFToken": csrf[0].value
-    //     },
-    //     data: fd,
+    $.ajax({
+        type: 'POST',
+        url: 'filter-outlet-province/',
+        headers: {
+            "X-CSRFToken": csrf[0].value
+        },
+        data: fd,
 
-    //     processData: false,
-    //     contentType: false,
-    //     success: function(response) {
-    //         console.log(response)
-    //     },
-    //     error: function(error) {
-    //         console.log(error)
-    //     }
-    // })
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            console.log(response)
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    })
     console.log(array_type)
 
 })
