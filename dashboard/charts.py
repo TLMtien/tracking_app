@@ -199,7 +199,7 @@ def top10_outlet(campain_id, all_outlet):
                 list_name.append(outlet.outlet_Name)
             
         #get 10 outlet
-        new_list = sorted(list_volume)[-10:]
+        new_list = sorted(list_volume)
         for i in range(len(new_list)):
             for j in range(len(list_volume)):
                 if(new_list[i] == list_volume[j]):
@@ -355,7 +355,8 @@ def get_outlet_province(campain_id, province):
         for outlet in all_outlet_province:
             count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
             count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
-            if count_report_sale > 0 or count_gift > 0:
+            count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+            if count_report_sale > 0 or count_gift > 0 or count_table > 0:
                 if not outlet.type in list_type: 
                     list_type.append(outlet.type)
 

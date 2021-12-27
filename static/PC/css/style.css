@@ -164,6 +164,14 @@ a {
     z-index: 1;
 }
 
+.field-icon {
+    float: right;
+    margin-left: -35px;
+    margin-top: 25px;
+    position: absolute;
+    z-index: 2;
+}
+
 
 /* Success Page */
 
@@ -1462,6 +1470,13 @@ a {
     padding: 0 5px;
 }
 
+.box-right .col-horizontal .col-12 .desc {
+    text-align: center;
+    color: #5a5a5a;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
 .box-right .col-horizontal .header .col-12 .col-6 {
     padding: 10px;
     text-align: center;
@@ -1525,6 +1540,7 @@ a {
     margin: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     width: 100%;
+    overflow-x: auto;
 }
 
 .box-right .row-bottom .col-12 {
@@ -1591,6 +1607,8 @@ a {
 
 #chart-top {
     margin-top: 70px;
+    width: 100vw;
+    /* overflow-x:auto; */
 }
 
 
