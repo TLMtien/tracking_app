@@ -79,7 +79,7 @@ province.change(function() {
             volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
             console.log(response.pie_chart)
-            var options = {
+            var chart_share = {
                 series: response.pie_chart,
                 chart: {
                     width: 350,
@@ -101,11 +101,11 @@ province.change(function() {
 
             };
 
-            var chart = new ApexCharts(document.querySelector("#chart-share"), options);
+            var chart = new ApexCharts(document.querySelector("#chart-share"), chart_share);
             chart.render();
 
             var gift_rp = response.gift
-            var options = {
+            var chart_product = {
                 series: [{
                     name: 'Inflation',
                     data: gift_rp,
@@ -164,14 +164,14 @@ province.change(function() {
 
             };
 
-            var chart = new ApexCharts(document.querySelector("#chart-product"), options);
+            var chart = new ApexCharts(document.querySelector("#chart-product"), chart_product);
             chart.render();
             //top10
             var top10_name = response.top10_name
             var top10_sale = response.top10_sale
             var top10_table = response.top10_table
             console.log(top10_sale)
-            var options = {
+            var chart_top = {
                 series: [{
                     name: 'Total',
                     type: 'column',
@@ -214,10 +214,10 @@ province.change(function() {
                 }]
             };
 
-            var chart = new ApexCharts(document.querySelector("#chart-top"), options);
+            var chart = new ApexCharts(document.querySelector("#chart-top"), chart_top);
             chart.render();
 
-            var options = {
+            var chart_act = {
                 chart: {
                     height: 200,
                     type: 'bar',
@@ -245,7 +245,7 @@ province.change(function() {
                 colors: ['#198631', '#1C263F']
             }
 
-            var chart = new ApexCharts(document.querySelector("#chart-act"), options);
+            var chart = new ApexCharts(document.querySelector("#chart-act"), chart_act);
 
             chart.render();
         },
