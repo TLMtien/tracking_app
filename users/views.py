@@ -1,11 +1,14 @@
 from django.http import response
 from django.http.response import Http404, HttpResponse
 from django.shortcuts import render, redirect
-from . forms import ChangePasswordForm, SignupForm, LoginForm, LoginHVNForm
+
+from dashboard.views import reverse
+from . forms import ChangePasswordForm, SignupForm, LoginForm, LoginHVNForm, ChangePasswordHVNForm
 from . models import NewUser, SalePerson
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.hashers import check_password, make_password, PBKDF2SHA1PasswordHasher
 from django.contrib.auth.views import LoginView
 import openpyxl
 from django.urls import reverse_lazy
@@ -42,7 +45,35 @@ def PasswordChange(request):
 
 		return render(request, 'users/changepass.html', context)
 
-
+login_required
+def PasswordChangeHVN(request):
+	#user = request.user.is_HVN
+	user = request.user
+	currentpassword = request.user.password
+	print(request.user.password)
+	a = 'pbkdf2_sha256$260000$tUWlkCUc2UxQ3m5dYOMrt9$/Nf8jFH7XpQ7B3jsW0p2E74Kjs1743fsxggsvPSW6YM='
+	check = False
+	if currentpassword == a:
+		check = True
+	
+	#Bluesun2021
+	if check:	
+		if request.method == 'POST':
+			form = ChangePasswordHVNForm(request.POST)
+			if form.is_valid():
+				new_password = form.cleaned_data.get('new_password')
+				confirm_password = form.cleaned_data.get('confirm_password')
+				if new_password == confirm_password:
+					user.set_password(new_password)
+					user.save()
+					update_session_auth_hash(request, user)
+					return redirect("dashboard", campainID = 4)
+				return render(request, 'users/changepassHVN.html', {'form':form})
+		else:
+			form = ChangePasswordHVNForm()
+			return render(request, 'users/changepassHVN.html', {'form':form})
+	else:
+		return redirect("dashboard", campainID = 4)
 
 @unauthenticated_user
 def loginPage(request):

@@ -73,3 +73,18 @@ class ChangePasswordForm(forms.Form):
 		if new_password and new_password!=confirm_password :
 			self._errors['new_password'] =self.error_class(['Passwords do not match.'])
 		return self.cleaned_data 
+
+class ChangePasswordHVNForm(forms.Form):
+	    
+	new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-password new-pass', 'id': 'password-field',
+													'placeholder':"Mật khẩu mới"}), required=True)
+	confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-password', 'id': 'password-change',
+														'placeholder':"Nhập Lại Mật Khẩu"}), required=True)
+
+	def clean(self):
+		new_password=self.cleaned_data.get('new_password')
+		confirm_password=self.cleaned_data.get('confirm_password')
+		#similarly old_password
+		if new_password and new_password!=confirm_password :
+			self._errors['new_password'] =self.error_class(['Passwords do not match.'])
+		return self.cleaned_data 
