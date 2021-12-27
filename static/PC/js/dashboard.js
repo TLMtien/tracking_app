@@ -100,7 +100,7 @@ province.change(function() {
                 }]
 
             };
-
+            $("#chart-share").empty();
             var chart = new ApexCharts(document.querySelector("#chart-share"), chart_share);
             chart.render();
 
@@ -163,7 +163,7 @@ province.change(function() {
 
 
             };
-
+            $("#chart-product").empty();
             var chart = new ApexCharts(document.querySelector("#chart-product"), chart_product);
             chart.render();
             //top10
@@ -213,7 +213,7 @@ province.change(function() {
                     }
                 }]
             };
-
+            $("#chart-top").empty();
             var chart = new ApexCharts(document.querySelector("#chart-top"), chart_top);
             chart.render();
 
@@ -244,7 +244,7 @@ province.change(function() {
                 labels: ['Average Brand Volume', 'Average Target Volume'],
                 colors: ['#198631', '#1C263F']
             }
-
+            $("#chart-act").empty();
             var chart = new ApexCharts(document.querySelector("#chart-act"), chart_act);
 
             chart.render();
