@@ -1,40 +1,5 @@
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
 
-var array = []
-
-var check = $('input[name = "name_outlet"]')
-var ischeck
-
-// check.change(function() {
-
-//     var ischeck = $(this).prop('checked');
-//     if (ischeck) {
-//         array.push((this.value))
-//     } else {
-//         array = array.filter(e => e !== this.value);
-//     }
-//     const csrf = document.getElementsByName('csrfmiddlewaretoken')
-//     var fd = new FormData();
-//     fd.append('array', array);
-//     $.ajax({
-//         type: 'POST',
-//         url: '{% url "outlet_approval_byHVN" %}',
-//         headers: {
-//             "X-CSRFToken": csrf[0].value
-//         },
-//         data: fd,
-
-//         processData: false,
-//         contentType: false,
-//         success: function(response) {
-//             console.log(response)
-//         },
-//         error: function(error) {
-//             console.log(error)
-//         }
-//     })
-//     console.log(array)
-// })
 
 ///////////////
 array_province = []
@@ -79,14 +44,15 @@ province.change(function() {
             volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
             console.log(response.pie_chart)
-            var chart_share = {
+                //////////////////////////
+            var options = {
                 series: response.pie_chart,
                 chart: {
                     width: 350,
                     type: 'pie',
                 },
-                labels: ['HVN', 'Brand', 'Other', 'Other beer'],
-                colors: ['#198631', '#1C263F', '#000', '#939393'],
+                // labels: ['Tiger', 'HNK', 'Orther Beer','Orther'],
+                colors: ['#198631', '#95b79d', '#1C263F', '#939393'],
                 responsive: [{
                     breakpoint: 480,
                     options: {
@@ -98,31 +64,34 @@ province.change(function() {
                         }
                     }
                 }]
-
             };
             $("#chart-share").empty();
-            var chart = new ApexCharts(document.querySelector("#chart-share"), chart_share);
+            var chart = new ApexCharts(document.querySelector("#chart-share"), options);
             chart.render();
-
+            ///////////////////////////
             var gift_rp = response.gift
-            var chart_product = {
+            var options = {
                 series: [{
-                    name: 'Inflation',
-                    data: gift_rp,
+                    data: gift_rp
                 }],
                 chart: {
-                    height: 270,
+                    height: 280,
                     type: 'bar',
+
                 },
+                colors: ['#198631', '#1C263F', '#727170', '#b5f398', '#c4c4c4', '#49566e'],
+
                 plotOptions: {
                     bar: {
+                        columnWidth: '60%',
+                        distributed: true,
                         borderRadius: 5,
                         dataLabels: {
                             position: 'top', // top, center, bottom
                         },
-
                     }
                 },
+
                 dataLabels: {
                     enabled: true,
                     formatter: function(val) {
@@ -147,46 +116,46 @@ province.change(function() {
                             return val + "%";
                         }
                     }
-
                 },
-                title: {
-                    text: 'Total',
-                    floating: true,
-                    offsetY: 240,
-                    align: 'center',
-                    style: {
-                        color: '#444'
-                    }
+                legend: {
+                    show: true
                 },
-                labels: [''],
-                colors: ['#198631', '#1C263F'],
-
-
+                xaxis: {
+                    categories: response.array_gift,
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                },
             };
             $("#chart-product").empty();
-            var chart = new ApexCharts(document.querySelector("#chart-product"), chart_product);
+            var chart = new ApexCharts(document.querySelector("#chart-product"), options);
             chart.render();
+            ////////////////////////////
             //top10
             var top10_name = response.top10_name
             var top10_sale = response.top10_sale
             var top10_table = response.top10_table
             console.log(top10_sale)
-            var chart_top = {
+            var options = {
                 series: [{
-                    name: 'Total',
+                    name: '[Brand] Volume',
                     type: 'column',
                     data: top10_sale,
                 }, {
-                    name: 'Top %',
+                    name: '[Brand] Table Share',
                     type: 'line',
                     data: top10_table,
                 }],
                 chart: {
-                    height: 350,
+                    height: 370,
+                    with: 400,
                     type: 'line',
                 },
                 stroke: {
-                    width: [0, 4],
+                    width: [0, 3],
                 },
                 title: {
                     text: 'Traffic Sources'
@@ -198,7 +167,11 @@ province.change(function() {
                         colors: ['#1C263F']
                     }
                 },
-
+                plotOptions: {
+                    bar: {
+                        borderRadius: 5,
+                    }
+                },
                 labels: top10_name,
                 colors: ['#198631', '#1C263F'],
                 yaxis: [{
@@ -214,10 +187,13 @@ province.change(function() {
                 }]
             };
             $("#chart-top").empty();
-            var chart = new ApexCharts(document.querySelector("#chart-top"), chart_top);
+            var chart = new ApexCharts(document.querySelector("#chart-top"), options);
             chart.render();
 
-            var chart_act = {
+
+            ////////////////////
+
+            var options = {
                 chart: {
                     height: 200,
                     type: 'bar',
@@ -245,9 +221,10 @@ province.change(function() {
                 colors: ['#198631', '#1C263F']
             }
             $("#chart-act").empty();
-            var chart = new ApexCharts(document.querySelector("#chart-act"), chart_act);
+            var chart = new ApexCharts(document.querySelector("#chart-act"), options);
 
             chart.render();
+
         },
         error: function(error) {
             console.log(error)
@@ -273,7 +250,7 @@ type.change(function() {
     fd.append('array_type', array_type);
     $.ajax({
         type: 'POST',
-        url: 'filter-outlet-province/',
+        url: 'filter_outlet_type/',
         headers: {
             "X-CSRFToken": csrf[0].value
         },
@@ -283,6 +260,190 @@ type.change(function() {
         contentType: false,
         success: function(response) {
             console.log(response)
+            Consumers_charts.innerHTML = response.Consumers_charts
+                // volume_performance.innerHTML = response.volume_performance
+                //pie_chart.value
+            console.log(response.pie_chart)
+                //////////////////////////
+            var options = {
+                series: response.pie_chart,
+                chart: {
+                    width: 350,
+                    type: 'pie',
+                },
+                // labels: ['Tiger', 'HNK', 'Orther Beer','Orther'],
+                colors: ['#198631', '#95b79d', '#1C263F', '#939393'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+            $("#chart-share").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-share"), options);
+            chart.render();
+            ///////////////////////////
+            var gift_rp = response.gift
+            var options = {
+                series: [{
+                    data: gift_rp
+                }],
+                chart: {
+                    height: 280,
+                    type: 'bar',
+
+                },
+                colors: ['#198631', '#1C263F', '#727170', '#b5f398', '#c4c4c4', '#49566e'],
+
+                plotOptions: {
+                    bar: {
+                        columnWidth: '60%',
+                        distributed: true,
+                        borderRadius: 5,
+                        dataLabels: {
+                            position: 'top', // top, center, bottom
+                        },
+                    }
+                },
+
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val + "%";
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function(val) {
+                            return val + "%";
+                        }
+                    }
+                },
+                legend: {
+                    show: true
+                },
+                xaxis: {
+                    categories: response.array_gift,
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                },
+            };
+            $("#chart-product").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-product"), options);
+            chart.render();
+            ////////////////////////////
+            //top10
+            var top10_name = response.top10_name
+            var top10_sale = response.top10_sale
+            var top10_table = response.top10_table
+            console.log(top10_sale)
+            var options = {
+                series: [{
+                    name: '[Brand] Volume',
+                    type: 'column',
+                    data: top10_sale,
+                }, {
+                    name: '[Brand] Table Share',
+                    type: 'line',
+                    data: top10_table,
+                }],
+                chart: {
+                    height: 370,
+                    with: 400,
+                    type: 'line',
+                },
+                stroke: {
+                    width: [0, 3],
+                },
+                title: {
+                    text: 'Traffic Sources'
+                },
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1],
+                    style: {
+                        colors: ['#1C263F']
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 5,
+                    }
+                },
+                labels: top10_name,
+                colors: ['#198631', '#1C263F'],
+                yaxis: [{
+                    title: {
+                        text: 'Top 10',
+                    },
+
+                }, {
+                    opposite: true,
+                    title: {
+                        text: 'Outlet'
+                    }
+                }]
+            };
+            $("#chart-top").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-top"), options);
+            chart.render();
+
+
+            ////////////////////
+
+            var options = {
+                chart: {
+                    height: 200,
+                    type: 'bar',
+                },
+                series: [{
+                    name: 'ACT',
+                    data: response.Average_brand_volume,
+                }],
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function(val) {
+                            return val + "%";
+                        }
+                    }
+
+                },
+                labels: ['Average Brand Volume', 'Average Target Volume'],
+                colors: ['#198631', '#1C263F']
+            }
+            $("#chart-act").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-act"), options);
+
+            chart.render();
         },
         error: function(error) {
             console.log(error)
@@ -290,4 +451,227 @@ type.change(function() {
     })
     console.log(array_type)
 
+})
+
+///////////////////////////////////////////////////
+var array = []
+
+var check = $('input[name = "name_outlet"]')
+var ischeck
+
+check.change(function() {
+
+    var ischeck = $(this).prop('checked');
+    if (ischeck) {
+        array.push((this.value))
+    } else {
+        array = array.filter(e => e !== this.value);
+    }
+
+    const csrf = document.getElementsByName('csrfmiddlewaretoken')
+    var fd = new FormData();
+    fd.append('array', array);
+    $.ajax({
+        type: 'POST',
+        url: 'filter_outlet/',
+        headers: {
+            "X-CSRFToken": csrf[0].value
+        },
+        data: fd,
+
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            console.log(response)
+            Consumers_charts.innerHTML = response.Consumers_charts
+                // volume_performance.innerHTML = response.volume_performance
+                //pie_chart.value
+            console.log(response.pie_chart)
+                //////////////////////////
+            var options = {
+                series: response.pie_chart,
+                chart: {
+                    width: 350,
+                    type: 'pie',
+                },
+                // labels: ['Tiger', 'HNK', 'Orther Beer','Orther'],
+                colors: ['#198631', '#95b79d', '#1C263F', '#939393'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+            $("#chart-share").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-share"), options);
+            chart.render();
+            ///////////////////////////
+            var gift_rp = response.gift
+            var options = {
+                series: [{
+                    data: gift_rp
+                }],
+                chart: {
+                    height: 280,
+                    type: 'bar',
+
+                },
+                colors: ['#198631', '#1C263F', '#727170', '#b5f398', '#c4c4c4', '#49566e'],
+
+                plotOptions: {
+                    bar: {
+                        columnWidth: '60%',
+                        distributed: true,
+                        borderRadius: 5,
+                        dataLabels: {
+                            position: 'top', // top, center, bottom
+                        },
+                    }
+                },
+
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val + "%";
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function(val) {
+                            return val + "%";
+                        }
+                    }
+                },
+                legend: {
+                    show: true
+                },
+                xaxis: {
+                    categories: response.array_gift,
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                },
+            };
+            console.log(gift_rp)
+            $("#chart-product").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-product"), options);
+            chart.render();
+            ////////////////////////////
+            //top10
+            var top10_name = response.top10_name
+            var top10_sale = response.top10_sale
+            var top10_table = response.top10_table
+            console.log(top10_sale)
+            var options = {
+                series: [{
+                    name: '[Brand] Volume',
+                    type: 'column',
+                    data: top10_sale,
+                }, {
+                    name: '[Brand] Table Share',
+                    type: 'line',
+                    data: top10_table,
+                }],
+                chart: {
+                    height: 370,
+                    with: 400,
+                    type: 'line',
+                },
+                stroke: {
+                    width: [0, 3],
+                },
+                title: {
+                    text: 'Traffic Sources'
+                },
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1],
+                    style: {
+                        colors: ['#1C263F']
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 5,
+                    }
+                },
+                labels: top10_name,
+                colors: ['#198631', '#1C263F'],
+                yaxis: [{
+                    title: {
+                        text: 'Top 10',
+                    },
+
+                }, {
+                    opposite: true,
+                    title: {
+                        text: 'Outlet'
+                    }
+                }]
+            };
+            $("#chart-top").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-top"), options);
+            chart.render();
+
+
+            ////////////////////
+
+            var options = {
+                chart: {
+                    height: 200,
+                    type: 'bar',
+                },
+                series: [{
+                    name: 'ACT',
+                    data: response.Average_brand_volume,
+                }],
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function(val) {
+                            return val + "%";
+                        }
+                    }
+
+                },
+                labels: ['Average Brand Volume', 'Average Target Volume'],
+                colors: ['#198631', '#1C263F']
+            }
+            $("#chart-act").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-act"), options);
+
+            chart.render();
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    })
+    console.log(array)
 })

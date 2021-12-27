@@ -28,12 +28,7 @@
                             <a href="{% url 'dashboard' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
                                 Tiger Table Promotion
                             </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-sub"><a href="">Dashboard</a></li>
-                                <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                                <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                                <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
-                            </ul>
+                            
                         </li>
                         <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
                         <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
@@ -47,7 +42,7 @@
                 </div>
                 <div class="profile-user dropdown-logout">
                     <a href="#" class="user-img" onclick="openTigerTp()">
-                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                        <img src="{% static '/PC/img/Power-01.ico' %}" alt="avatar" class="avatar-user">
                     </a>
                     <ul class="dropdown-menu_logout">
                         <li class="nav-sub"><a href="{% url 'logoutHVN' %}"><i class="ti-shift-left"></i> Logout</a></li>
@@ -56,7 +51,7 @@
             </div>
             <div class="row raw-data">
                 <div class="leftbox dropdown_raw">
-                    <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
+                    <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bxs-home'></i> </button>
                     <span class="title-menu">Dashboard</span>
                     <ul class="dropdown-menu_raw">
                         <li class="nav-sub"><a href="{% url 'dashboard' 1%}">Dashboard</a></li>
@@ -130,7 +125,7 @@
                         <div class="sidebar-menu">
                             <div class="sidebar-menu_dropdown">
                                 <i class='bx bxs-purchase-tag-alt sidebar-menu_icon' ></i>
-                                <span class="sidebar-menu_title">Outlet Tyle</span>
+                                <span class="sidebar-menu_title">Outlet Type</span>
                                 <button type="button" class="btn-reset"><i class="bx bx-reset"></i></button>
                             </div>
                             <div class="sidebar-menu_dropdown-content" id="list_type_outlet">
@@ -184,7 +179,7 @@
                                 <div id="chart-acti"></div>
                                 <!-- <span class="number-one">142</span> -->
                                 <p class="desc">Total Acts</p>
-                                <span class="number-two">200/100%</span>
+                                <span class="number-two">{{total_activation}}/100%</span>
                             </div>
                         </div>
                         <div class="col-vertical">
@@ -205,13 +200,13 @@
                         </div>
                         <div class="col-vertical">
                             <div class="num-active">
-                                <p class="chart-title">% Target Volume Achieved
+                                <p class="chart-title">VOLUME PROGRESS
                                 </p>
                                 <br>
                                 
                                 <div id="chart-prog"></div>
-                                <p class="desc">Total</p>
-                                <span class="number-two">{{target_volume_achieved}}%</span>
+                                <p class="desc">Total volume</p>
+                                <span class="number-two">{{target_volume}}/100%</span>
                             </div>
                         </div>
                     </div>
@@ -253,7 +248,7 @@
                                     </div>
                                     
                                 </div>
-                                <div class="main">
+                                <div class="main" align="center">
                                     <p class="chart-title">AVERAGE PERFORMANCE PER ACT</p>
                                     <p class="desc">(Can/Bottle)</p>
                                     <div id="chart-act"></div>
@@ -267,12 +262,33 @@
                                 </div> -->
                             </div>
                             <div class="col-horizontal" id="last-hope">
-                                <div class="col-12">
+                                {% comment %} <div class="col-12">
                                     <p class="chart-title">TABLE SHARE PERFORMANCE</p>
                                     <div id="chart-share">
             
                                     </div>
                                     
+                                </div> {% endcomment %}
+                                <div class="col-12">
+                                    <div align="center">
+                                        <p class="chart-title">TABLE SHARE PERFORMANCE</p>
+                                        <div id="chart-share"></div>
+                                        <p class="desc">DURING SHIFT</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="legend">
+                                            <div class="legend-1"></div><span>HVN</span> 
+                                        </div>
+                                        <div class="legend">
+                                            <div class="legend-2"></div><span>Brand</span>
+                                        </div>
+                                        <div class="legend">
+                                            <div class="legend-3"></div><span>Other</span>
+                                        </div>
+                                        <div class="legend">
+                                            <div class="legend-4"></div><span>Other beer</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-horizontal">
@@ -318,7 +334,7 @@
                         <div class="row">
                             <div class="row-bottom">
                                 <div class="col-12">
-                                    <p class="chart-title">TOP 10 OUTLET PERFORMANCE</p>
+                                    <p class="chart-title">TOP OUTLET PERFORMANCE</p>
                                     <div class="btns">
                                         <button id="changeText" type = 'button' class="button button-change">Change</button>
                                         <div class="btn-arrow">
@@ -453,22 +469,24 @@
     var top10_sale = {{ top10_sale| safe}}
     var top10_table = {{ top10_table| safe}}
     console.log(top10_sale)
+    
     var options = {
         series: [{
-            name: 'Total',
+            name: '[Brand] Volume',
             type: 'column',
             data: top10_sale,
         }, {
-            name: 'Top %',
+            name: '[Brand] Table Share',
             type: 'line',
             data: top10_table,
         }],
         chart: {
-            height: 350,
+            height: 370,
+            with: 400,
             type: 'line',
         },
         stroke: {
-            width: [0, 4],
+            width: [0, 3],
         },
         title: {
             text: 'Traffic Sources'
@@ -480,7 +498,11 @@
                 colors: ['#1C263F']
             }
         },
-
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+            }
+        },
         labels: top10_name,
         colors: ['#198631', '#1C263F'],
         yaxis: [{
@@ -541,13 +563,13 @@
     <script> 
         
         var options = {
-            series:  {{text}},
+            series: {{text}},
             chart: {
                 width: 350,
                 type: 'pie',
             },
-            labels: ['HVN', 'Brand', 'Other', 'Other beer'],
-            colors: ['#198631', '#1C263F', '#000', '#939393'],
+            // labels: ['Tiger', 'HNK', 'Orther Beer','Orther'],
+            colors: ['#198631', '#95b79d', '#1C263F', '#939393'],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -559,12 +581,10 @@
                     }
                 }
             }]
-
         };
         
         var chart = new ApexCharts(document.querySelector("#chart-share"), options);
-        chart.render();  
-        
+        chart.render();
     </script>
 
 
@@ -573,25 +593,28 @@
 {% comment %} GIFT------------------------>>>>>>>>>>>>>>>>>>>>>> {% endcomment %}
 
 <script>
-    var gift_rp = {{ gift_rp| safe}}
     var options = {
         series: [{
-            name: 'Inflation',
-            data: gift_rp,
+            data: {{ gift_rp| safe}}
         }],
         chart: {
-            height: 270,
+            height: 280,
             type: 'bar',
+    
         },
+        colors: ['#198631', '#1C263F', '#727170', '#b5f398', '#c4c4c4', '#49566e'],
+    
         plotOptions: {
             bar: {
+                columnWidth: '60%',
+                distributed: true,
                 borderRadius: 5,
                 dataLabels: {
                     position: 'top', // top, center, bottom
                 },
-    
             }
         },
+    
         dataLabels: {
             enabled: true,
             formatter: function(val) {
@@ -616,23 +639,23 @@
                     return val + "%";
                 }
             }
-    
         },
-        title: {
-            text: 'Total',
-            floating: true,
-            offsetY: 240,
-            align: 'center',
-            style: {
-                color: '#444'
-            }
+        legend: {
+            show: true
         },
-        labels: [''],
-        colors: ['#198631', '#1C263F'],
-    
-    
+        xaxis: {
+            categories: 
+                {{array_gift|safe}}
+            ,
+            labels: {
+                style: {
+                    colors: ['#111'],
+                    fontSize: '12px',
+                }
+            },
+        },
     };
-    
+    console.log({{array_gift|safe}})
     var chart = new ApexCharts(document.querySelector("#chart-product"), options);
     chart.render();
     
@@ -644,7 +667,7 @@
     var options = {
         series: [{
             name: 'Actual Volume',
-            data: activation,
+            data: [activation]
         }],
         chart: {
             type: 'bar',
@@ -689,62 +712,59 @@
     chart.render();
 </script>
     {% comment %} jsssssssssssssssssssssssssssssssssssssssssssssssssss {% endcomment %}
+
+
 <script>
-    var change = document.getElementById('changeText')
-    change.addEventListener('click', e => {
-        e.preventDefault()
-
-        var top10_name_reverse = {{ top10_name_reverse| safe}}
-        var top10_sale_reverse = {{ top10_sale_reverse| safe}}
-        var top10_table_reverse = {{ top10_table_reverse| safe}}
-        console.log(top10_sale)
-        var options = {
-            series: [{
-                name: 'Total',
-                type: 'column',
-                data: top10_sale_reverse,
-            }, {
-                name: 'Top %',
-                type: 'line',
-                data: top10_table_reverse,
-            }],
-            chart: {
-                height: 350,
-                type: 'line',
-            },
-            stroke: {
-                width: [0, 4],
-            },
-            title: {
-                text: 'Traffic Sources'
-            },
-            dataLabels: {
-                enabled: true,
-                enabledOnSeries: [1],
-                style: {
-                    colors: ['#1C263F']
-                }
-            },
+    var percent = {{percent_volume|safe}}
+    console.log(percent)
+    var options = {
+        series: [{
+            name: 'Actual Acts',
+            data: [{{actual_volume|safe}}],
     
-            labels:top10_name_reverse,
-            colors: ['#198631', '#1C263F'],
-            yaxis: [{
-                title: {
-                    text: 'Top 10',
-                },
-        
-            }, {
-                opposite: true,
-                title: {
-                    text: 'Outlet'
+        }],
+        chart: {
+            type: 'bar',
+            height: 130,
+            stacked: true,
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+            },
+        },
+        stroke: {
+            width: 1,
+            colors: ['#fff']
+        },
+    
+        labels: [''],
+        yaxis: {
+            title: {
+                text: undefined
+            },
+        },
+    
+        tooltip: {
+            y: {
+                formatter: function(val) {
+                    return val +"/" + percent+"%"
                 }
-            }]
-        };
-        
-        var chart = new ApexCharts(document.querySelector("#chart-top"), options);
-        chart.render();
-    })
-
+            }
+        },
+        colors: ['#198631'],
+        fill: {
+            opacity: 1
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'left',
+            offsetX: 40
+        }
+    };
+    
+    var chart = new ApexCharts(document.querySelector("#chart-prog"), options);
+    chart.render();
 </script>
 
     {% comment %} <script src="{% static 'PC/js/chart.js' %}"></script> {% endcomment %}

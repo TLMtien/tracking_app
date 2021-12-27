@@ -1,7 +1,7 @@
 import json
 from django.db.models import Q
 from outlet.models import tableReport, Campain, consumerApproachReport, report_sale, outletInfo, giftReport
-
+from users.models import SalePerson
 def sum(a, b):
     return int(int(a) + int(b))
 
@@ -129,7 +129,8 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet):
     for outlet in all_outlet:
         all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet)
         count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
-        if count_report_sale > 0:
+        count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+        if count_report_sale > 0 or count_gift>0:
             if not outlet.province in list_province:        #filter province
                 list_province.append(outlet.province)
             if not outlet.outlet_Name in list_name_outlet:        #filter province
@@ -151,17 +152,36 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet):
 
 def activation_progress(campain_id, all_outlet):
     Cp = Campain.objects.get(id = campain_id)
-    # all_outlet = outletInfo.objects.filter(compain=Cp)
+    if campain_id == 1:
+        total_act = 264
+    elif campain_id == 2:
+        total_act = 108
+    elif campain_id == 3:
+        total_act = 60
+    elif campain_id == 4:
+        total_act = 120
+    elif campain_id == 5:
+        total_act = 108
+    elif campain_id == 6:
+        total_act = 120
+    elif campain_id == 7:
+        total_act = 120
+    elif campain_id == 8:
+        total_act = 120
+    else :
+        total_act = 60
+   
     count = 0
     list = []
+    
     for outlet in all_outlet:
         all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet)
         for rp_sale in all_report_sale:
             if rp_sale.SP != list:
-                list.append(rp_sale)
+                list.append(rp_sale.SP)
                 count = count + 1
     
-    return count
+    return count, total_act
 
     
 def top10_outlet(campain_id, all_outlet):
@@ -311,7 +331,7 @@ def gift(campain_id, list_gift_rp):
     list = [percent_gift1, percent_gift2, percent_gift3, percent_gift4, percent_gift5, percent_gift6]
     list_4 = [percent_gift1, percent_gift2, percent_gift3, percent_gift4]
     list_7 = [percent_gift1, percent_gift2, percent_gift3, percent_gift4, percent_gift5, percent_gift6, percent_gift7]
-    list_gift = []
+    
 
     if campain_id == 4:
         list_gift = ['Pin sạc', 'Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
@@ -323,6 +343,9 @@ def gift(campain_id, list_gift_rp):
 
     elif campain_id == 2:
         list_gift = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ', 'Iphone 13']
+        list_gift_1 = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Iphone 13']
+        
+        list_gift_2 = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ']
         return list_7, list_gift
 
     elif campain_id == 5:
@@ -362,6 +385,34 @@ def get_outlet_province(campain_id, province):
 
                 list_outlet.append(outlet)
     return list_outlet, list_type
+
+def get_outlet_type(campain_id, type):
+    list_outlet = []
+    list_province = []
+    Cp = Campain.objects.get(id = campain_id)
+    for tp in type:
+        all_outlet_type = outletInfo.objects.filter(compain=Cp, type=tp)
+        for outlet in all_outlet_type:
+            count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+            count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+            count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+            if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                list_outlet.append(outlet)
+    return list_outlet, list_province
+
+def get_outlet(campain_id, outlet_name):
+    list_outlet = []
+    list_province = []
+    Cp = Campain.objects.get(id = campain_id)
+    for name in outlet_name:
+        all_outlet_type = outletInfo.objects.filter(compain=Cp, outlet_Name=name)
+        for outlet in all_outlet_type:
+            count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+            count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+            count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+            if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                list_outlet.append(outlet)
+    return list_outlet, list_province
 
 def getAll_report_outlet(campain_id, list_outlet):
     Cp = Campain.objects.get(id = campain_id)

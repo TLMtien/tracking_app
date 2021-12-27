@@ -638,10 +638,6 @@ a {
     opacity: 0.8;
 }
 
-#chart-share {
-    margin-top: 30%;
-}
-
 
 /* =======Management Page======= */
 
@@ -1319,6 +1315,10 @@ a {
     min-height: 270px;
 }
 
+.main-right .col-vertical .apexcharts-text tspan {
+    display: none;
+}
+
 .main-right .col-vertical .num-active {
     padding: 20px;
     text-align: center;
@@ -1492,6 +1492,10 @@ a {
     width: 100%;
 }
 
+.box-right .col-horizontal .main .apexcharts-text tspan {
+    display: none;
+}
+
 .box-right .col-horizontal .main .desc {
     text-align: center;
     color: #5a5a5a;
@@ -1599,16 +1603,87 @@ a {
     border-radius: 5px;
 }
 
-#chart-act {}
+#chart-acti,
+#chart-prog {
+    margin-left: -25px;
+}
+
+#chart-act {
+    margin-top: 20px;
+}
+
+#chart-share {
+    margin-top: 20px;
+}
 
 #chart-product {
-    margin-top: 56px;
+    margin-top: 30px;
 }
 
 #chart-top {
-    margin-top: 70px;
+    margin-top: 50px;
     width: 100vw;
     /* overflow-x:auto; */
+}
+
+
+/* Ẩn icon down SVG */
+
+.apexcharts-zoom-icon,
+.apexcharts-zoomin-icon,
+.apexcharts-zoomout-icon,
+.apexcharts-reset-icon,
+.apexcharts-pan-icon,
+.apexcharts-selection-icon,
+.apexcharts-menu-icon,
+.apexcharts-toolbar-custom-icon {
+    display: none;
+}
+
+.apexcharts-legend-series {
+    display: none;
+}
+
+.box-right .col-horizontal .legend span {
+    margin-left: 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.box-right .col-horizontal .legend-1 {
+    width: 25px;
+    height: 25px;
+    background: #198631;
+    margin: 0px 20px;
+    margin-top: 25px;
+    border-radius: 0 50px 0 0;
+}
+
+.box-right .col-horizontal .legend-2 {
+    width: 25px;
+    height: 25px;
+    background: #95b79d;
+    margin: 0px 20px;
+    margin-top: 25px;
+    border-radius: 0 50px 0 0;
+}
+
+.box-right .col-horizontal .legend-3 {
+    width: 25px;
+    height: 25px;
+    background: #1C263F;
+    margin: 0px 20px;
+    margin-top: 25px;
+    border-radius: 0 50px 0 0;
+}
+
+.box-right .col-horizontal .legend-4 {
+    width: 25px;
+    height: 25px;
+    background: #939393;
+    margin: 0px 20px;
+    margin-top: 25px;
+    border-radius: 0 50px 0 0;
 }
 
 
