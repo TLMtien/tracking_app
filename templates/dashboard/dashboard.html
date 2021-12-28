@@ -773,19 +773,19 @@
 
 <script>
     var  decrease = $('#decrease')
-    var top10_name = {{ top10_name| safe}}
-    var top10_sale = {{ top10_sale| safe}}
-    var top10_table = {{ top10_table| safe}}
+    var top10_name_decrease = {{ top10_name| safe}}
+    var top10_sale_decrease = {{ top10_sale| safe}}
+    var top10_table_decrease = {{ top10_table| safe}}
     decrease.click(function() {
     var options = {
         series: [{
             name: '[Brand] Volume',
             type: 'column',
-            data: top10_sale,
+            data: top10_sale_decrease,
         }, {
             name: '[Brand] Table Share',
             type: 'line',
-            data: top10_table,
+            data: top10_table_decrease,
         }],
         chart: {
             height: 370,
@@ -810,7 +810,7 @@
                 borderRadius: 5,
             }
         },
-        labels: top10_name,
+        labels: top10_name_decrease,
         colors: ['#198631', '#1C263F'],
         yaxis: [{
             title: {
@@ -832,19 +832,19 @@
 
 <script>
     var  ascending = $('#ascending')
-    var top10_name = {{ top10_name_reverse| safe}}
-    var top10_sale = {{ top10_sale_reverse| safe}}
-    var top10_table = {{ top10_table_reverse| safe}}
+    var top10_name_ascending = {{ top10_name_reverse| safe}}
+    var top10_sale_ascending = {{ top10_sale_reverse| safe}}
+    var top10_table_ascending = {{ top10_table_reverse| safe}}
     ascending.click(function() {
     var options = {
         series: [{
             name: '[Brand] Volume',
             type: 'column',
-            data: top10_sale,
+            data: top10_sale_ascending,
         }, {
             name: '[Brand] Table Share',
             type: 'line',
-            data: top10_table,
+            data: top10_table_ascending,
         }],
         chart: {
             height: 370,
@@ -869,7 +869,7 @@
                 borderRadius: 5,
             }
         },
-        labels: top10_name,
+        labels: top10_name_ascending,
         colors: ['#198631', '#1C263F'],
         yaxis: [{
             title: {
