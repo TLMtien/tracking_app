@@ -2,6 +2,8 @@ import json
 from django.db.models import Q
 from outlet.models import tableReport, Campain, consumerApproachReport, report_sale, outletInfo, giftReport
 from users.models import SalePerson
+from operator import and_
+from functools import reduce
 def sum(a, b):
     return int(int(a) + int(b))
 
@@ -155,23 +157,23 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet):
 def activation_progress(campain_id, all_outlet):
     Cp = Campain.objects.get(id = campain_id)
     if campain_id == 1:
-        total_act = 264
+        total_act = 8194
     elif campain_id == 2:
-        total_act = 108
+        total_act = 1188
     elif campain_id == 3:
-        total_act = 60
+        total_act = 700
     elif campain_id == 4:
-        total_act = 120
+        total_act = 720
     elif campain_id == 5:
-        total_act = 108
+        total_act = 800
     elif campain_id == 6:
-        total_act = 120
+        total_act = 1500
     elif campain_id == 7:
-        total_act = 120
+        total_act = 2700
     elif campain_id == 8:
-        total_act = 120
+        total_act = 2580
     else :
-        total_act = 60
+        total_act = 660
    
     count = 0
     list = []
@@ -350,7 +352,10 @@ def gift(campain_id, list_gift_rp):
 
     if campain_id == 4:
         list_gift = ['Pin sạc', 'Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
-        return list, list_gift
+        list_gift_1 = [percent_gift1, percent_gift2, percent_gift3, percent_gift4]
+        
+        list_gift_2 = [percent_gift5, percent_gift2, percent_gift3, percent_gift6]
+        return list, list_gift, list_gift_1, list_gift_2
 
     elif campain_id == 1:
         list_gift = ['Ly 30cl','Ly 33cl 3D','Ly Casablanca', 'Ví', 'Nón Tiger Crystal', 'Voucher Bia']
@@ -358,10 +363,10 @@ def gift(campain_id, list_gift_rp):
 
     elif campain_id == 2:
         list_gift = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ', 'Iphone 13']
-        list_gift_1 = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Iphone 13']
+        list_gift_1 = [percent_gift1, percent_gift2, percent_gift3, percent_gift7]
         
-        list_gift_2 = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ']
-        return list_7, list_gift
+        list_gift_2 = [percent_gift1, percent_gift2, percent_gift3, percent_gift4, percent_gift5, percent_gift6]
+        return list_7, list_gift, list_gift_1, list_gift_2
 
     elif campain_id == 5:
         list_gift = ['Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao']
@@ -455,3 +460,50 @@ def getAll_report_outlet(campain_id, list_outlet):
 #     volume_performance = VOLUME_PERFORMANCE(campain_id, list_outlet)
 #     top_10 = top10_outlet(campain_id, list_outlet)
 
+def get_gift_scheme(campain_id):
+    Cp = Campain.objects.get(id = campain_id)
+    if campain_id == 2 :
+        categories = ['Long An', 'Tiền Giang', 'Bạc Liêu', 'Cần Thơ', 'An Giang', 'Kiên Giang']
+        all_outlet_scheme = outletInfo.objects.filter(reduce(and_, [Q(compain = Cp, province =c) for c in categories]))
+        list_gift_name1 = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Iphone 13']
+        list_gift_name2 = ['Ly 30cl', 'Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ']
+        list_gift_rp_scheme = giftReport.objects.filter(reduce(and_, [Q(campain = Cp, outlet=outlet) for outlet in all_outlet_scheme]))
+        list_gift_rp_scheme1 = giftReport.objects.filter(campain = Cp).exclude(reduce(and_, [Q(outlet=outlet) for outlet in all_outlet_scheme]))
+        result_scheme = gift(campain_id, list_gift_rp_scheme)
+        result_scheme1 = gift(campain_id, list_gift_rp_scheme1)
+        return result_scheme[3],list_gift_name2, result_scheme1[2], list_gift_name1
+
+    elif campain_id == 4:
+        categories = ['HCM', 'HN', 'Nha Trang' ,'Đà Nẵng']
+        list_gift_rp_scheme = []
+        list_gift_rp_scheme1 = []
+        for c in categories:
+            all_outlet_scheme = outletInfo.objects.filter(compain = Cp, province =c)
+            for outlet in all_outlet_scheme:
+                count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+                count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+                count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+                if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                    list_gift = giftReport.objects.filter(campain = Cp, outlet=outlet)
+                    for gift_1 in list_gift:
+                        list_gift_rp_scheme.append(gift_1)
+
+        for c in categories:
+            all_outlet_scheme = outletInfo.objects.filter(compain = Cp).exclude(province =c)
+            for outlet in all_outlet_scheme:
+                count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+                count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+                count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+                if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                    list_gift = giftReport.objects.filter(campain = Cp, outlet=outlet)
+                    for gift_1 in list_gift:
+                        list_gift_rp_scheme1.append(gift_1)
+        
+        list_gift_name1 = ['Pin sạc', 'Ba lô', 'Bình Nước', 'Áo thun']
+
+        list_gift_name2 = ['Loa Bluetooth', 'Ba lô', 'Bình Nước', 'Ly']
+        #list_gift_rp_scheme = giftReport.objects.filter(reduce(and_, [Q(campain = Cp, outlet=outlet) for outlet in all_outlet_scheme]))
+        #list_gift_rp_scheme1 = giftReport.objects.filter(campain = Cp).exclude(reduce(and_, [Q(outlet=outlet) for outlet in all_outlet_scheme]))
+        result_scheme = gift(campain_id, list_gift_rp_scheme)
+        result_scheme1 = gift(campain_id, list_gift_rp_scheme1)
+        return result_scheme[2],list_gift_name1, result_scheme1[3], list_gift_name2

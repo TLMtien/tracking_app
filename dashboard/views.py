@@ -14,7 +14,7 @@ from users.models import SalePerson, NewUser
 import json
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_outlet_type, get_outlet
+from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_outlet_type, get_outlet, get_gift_scheme
 # Create your views here.
 
 # tigerTP 1
@@ -510,6 +510,20 @@ def filter_outlet(request, campainID):
         '''
         return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]})
 
+
+
+def list_gift_scheme(request, campainID):
+    list_gift = get_gift_scheme(campainID)
+    list_gift_1 = ""
+    list_gift_2 = ""
+    for gift in list_gift[1]:
+        list_gift_1 += f'''
+                <div >
+                    <p class="title">{gift}</p>
+                </div>
+        '''
+   
+    return JsonResponse({'list_scheme1':list_gift[0], 'list_scheme1_name':list_gift[1], 'list_gift_1':list_gift_1,'list_scheme2':list_gift[2], 'list_scheme2_name':list_gift[3]})
 
 ###############################
 def view_export(request, campainID):
