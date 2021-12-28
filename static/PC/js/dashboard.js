@@ -224,7 +224,58 @@ province.change(function() {
             var chart = new ApexCharts(document.querySelector("#chart-act"), options);
 
             chart.render();
+            //////////////acti
+            var activation = response.activation
+            var options = {
+                series: [{
+                    data: [activation, response.total_activation],
+                }, ],
+                chart: {
+                    height: 200,
+                    type: 'bar',
+                },
+                labels: [''],
+                colors: ['#198631', '#1C263F'],
+                legend: {
+                    show: false,
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '15%',
+                        distributed: true,
+                        borderRadius: 5,
+                        horizontal: true,
+                        dataLabels: {
+                            position: 'center', // top, center, bottom
+                        },
+                    }
+                },
 
+
+                xaxis: {
+                    categories: [''],
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val;
+                    },
+                    style: {
+                        fontSize: '12px',
+                        colors: ["red"]
+                    }
+                },
+
+            };
+            $("#chart-acti").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-acti"), options);
+            chart.render();
         },
         error: function(error) {
             console.log(error)
@@ -443,6 +494,57 @@ type.change(function() {
             $("#chart-act").empty();
             var chart = new ApexCharts(document.querySelector("#chart-act"), options);
 
+            chart.render();
+            var activation = response.activation
+            var options = {
+                series: [{
+                    data: [activation, response.total_activation],
+                }, ],
+                chart: {
+                    height: 200,
+                    type: 'bar',
+                },
+                labels: [''],
+                colors: ['#198631', '#1C263F'],
+                legend: {
+                    show: false,
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '15%',
+                        distributed: true,
+                        borderRadius: 5,
+                        horizontal: true,
+                        dataLabels: {
+                            position: 'center', // top, center, bottom
+                        },
+                    }
+                },
+
+
+                xaxis: {
+                    categories: [''],
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val;
+                    },
+                    style: {
+                        fontSize: '12px',
+                        colors: ["red"]
+                    }
+                },
+
+            };
+            $("#chart-acti").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-acti"), options);
             chart.render();
         },
         error: function(error) {
@@ -667,6 +769,57 @@ check.change(function() {
             $("#chart-act").empty();
             var chart = new ApexCharts(document.querySelector("#chart-act"), options);
 
+            chart.render();
+            var activation = response.activation
+            var options = {
+                series: [{
+                    data: [activation, response.total_activation],
+                }, ],
+                chart: {
+                    height: 200,
+                    type: 'bar',
+                },
+                labels: [''],
+                colors: ['#198631', '#1C263F'],
+                legend: {
+                    show: false,
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '15%',
+                        distributed: true,
+                        borderRadius: 5,
+                        horizontal: true,
+                        dataLabels: {
+                            position: 'center', // top, center, bottom
+                        },
+                    }
+                },
+
+
+                xaxis: {
+                    categories: [''],
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val;
+                    },
+                    style: {
+                        fontSize: '12px',
+                        colors: ["red"]
+                    }
+                },
+
+            };
+            $("#chart-acti").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-acti"), options);
             chart.render();
         },
         error: function(error) {

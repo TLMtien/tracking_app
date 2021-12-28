@@ -1320,7 +1320,7 @@ a {
 }
 
 .main-right .col-vertical .num-active {
-    padding: 20px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -1604,9 +1604,19 @@ a {
 }
 
 #chart-acti,
-#chart-prog {
+#chart-acti__total,
+#chart-prog,
+#chart-prog__total {
     margin-left: -25px;
 }
+
+
+/* #chart-acti__total {
+    width: 250px;
+}
+#chart-prog__total {
+    width: 280px;
+} */
 
 #chart-act {
     margin-top: 20px;
@@ -1640,9 +1650,10 @@ a {
     display: none;
 }
 
-.apexcharts-legend-series {
+
+/* .apexcharts-legend-series {
     display: none;
-}
+} */
 
 .box-right .col-horizontal .legend span {
     margin-left: 20px;
