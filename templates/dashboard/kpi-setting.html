@@ -23,28 +23,60 @@
                     <a href=""><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
                 </div>
                 <div class="navbar" id="topheader">
-                    <ul class="navbar-nav">
-                        <li class="nav-list dropdown-nav active">
-                            <a href="{% url 'kpi' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
-                                Tiger Table Promotion
-                            </a>
-                            <ul class="dropdown-menu">
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
-                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="#">KPI Tracking</a></li>
-                        <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'kpi' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'kpi' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'kpi' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'kpi' 5 %}" class="nav-links">Heineken Special Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'kpi' 6 %}" class="nav-links">Strongbow Festive</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'kpi' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'kpi' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'kpi' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
-              
-                    </ul>
+                    
+                        <ul class="navbar-nav">
+                            <li class="nav-list dropdown-nav 
+                            {% if cam_id == 1%}
+                            active
+                            {% endif %}
+                            ">
+                                <a href="{% url 'kpi' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
+                                    Tiger Table Promotion
+                                </a>
+                                
+                            </li>
+                            <li class="nav-list dropdown-nav
+                            {% if cam_id == 2 %}
+                                active
+                            {% endif %}
+                            "><a href="{% url 'kpi' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                            <li class="nav-list dropdown-nav
+                            {% if cam_id == 3 %}
+                                active
+                            {% endif %}
+                            "><a href="{% url 'kpi' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                            <li class="nav-list dropdown-nav
+                            {% if cam_id == 4 %}
+                                active
+                            {% endif %}
+                            "><a href="{% url 'kpi' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                            <li class="nav-list dropdown-nav 
+                            {% if cam_id == 5 %}
+                                active
+                            {% endif %}
+                            "><a href="{% url 'kpi' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                            <li class="nav-list dropdown-nav 
+                            {% if cam_id == 6 %}
+                                active
+                            {% endif %}
+                            "><a href="{% url 'kpi' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                            <li class="nav-list dropdown-nav 
+                            {% if cam_id == 7 %}
+                                active
+                            {% endif %}
+                            "><a href="{% url 'kpi' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                            <li class="nav-list dropdown-nav
+                            {% if cam_id == 8 %}
+                                active
+                            {% endif %}
+                            "><a href="{% url 'kpi' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                            <li class="nav-list dropdown-nav
+                            {% if cam_id == 9 %}
+                                active
+                            {% endif %}
+                            "><a href="{% url 'kpi' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
+                        </ul>
+                   
                 </div>
                 <div class="profile-user dropdown-logout">
                     <a href="#" class="user-img" onclick="openTigerTp()">

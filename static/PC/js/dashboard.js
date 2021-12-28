@@ -41,7 +41,7 @@ province.change(function() {
                 //outlet_list.innerHTML = response.list_outlet
                 //list_type_outlet.innerHTML = response.list_type
             Consumers_charts.innerHTML = response.Consumers_charts
-            volume_performance.innerHTML = response.volume_performance
+                //volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
             console.log(response.pie_chart)
                 //////////////////////////
@@ -276,6 +276,61 @@ province.change(function() {
             $("#chart-acti").empty();
             var chart = new ApexCharts(document.querySelector("#chart-acti"), options);
             chart.render();
+
+            var options = {
+                series: [{
+                    data: [response.actual_volume, response.target_volume],
+                }, ],
+                chart: {
+                    height: 200,
+                    type: 'bar',
+                },
+                labels: [''],
+                colors: ['#198631', '#1C263F'],
+                legend: {
+                    show: false,
+                },
+                plotOptions: {
+                    bar: {
+
+                        distributed: true,
+                        borderRadius: 5,
+                        horizontal: true,
+                        dataLabels: {
+                            position: 'center', // top, center, bottom
+                        },
+                    }
+                },
+
+
+                dataLabels: {
+                    position: 'center', // top, center, bottom
+                    enabled: true,
+                    formatter: function(val) {
+                        return val + "/" + val / response.target_volume * 100 + "%";
+                    },
+                    style: {
+                        fontSize: '12px',
+                        colors: ["red"],
+
+                    },
+
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 300
+                        },
+                        legend: {
+                            show: false
+                        },
+                    }
+                }]
+            };
+            $("#chart-prog").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-prog"), options);
+            chart.render();
         },
         error: function(error) {
             console.log(error)
@@ -312,7 +367,7 @@ type.change(function() {
         success: function(response) {
             console.log(response)
             Consumers_charts.innerHTML = response.Consumers_charts
-            volume_performance.innerHTML = response.volume_performance
+                //volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
             console.log(response.pie_chart)
                 //////////////////////////
@@ -546,6 +601,61 @@ type.change(function() {
             $("#chart-acti").empty();
             var chart = new ApexCharts(document.querySelector("#chart-acti"), options);
             chart.render();
+
+            var options = {
+                series: [{
+                    data: [response.actual_volume, response.target_volume],
+                }, ],
+                chart: {
+                    height: 200,
+                    type: 'bar',
+                },
+                labels: [''],
+                colors: ['#198631', '#1C263F'],
+                legend: {
+                    show: false,
+                },
+                plotOptions: {
+                    bar: {
+
+                        distributed: true,
+                        borderRadius: 5,
+                        horizontal: true,
+                        dataLabels: {
+                            position: 'center', // top, center, bottom
+                        },
+                    }
+                },
+
+
+                dataLabels: {
+                    position: 'center', // top, center, bottom
+                    enabled: true,
+                    formatter: function(val) {
+                        return val + "/" + val / response.target_volume * 100 + "%";
+                    },
+                    style: {
+                        fontSize: '12px',
+                        colors: ["red"],
+
+                    },
+
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 300
+                        },
+                        legend: {
+                            show: false
+                        },
+                    }
+                }]
+            };
+            $("#chart-prog").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-prog"), options);
+            chart.render();
         },
         error: function(error) {
             console.log(error)
@@ -586,7 +696,7 @@ check.change(function() {
         success: function(response) {
             console.log(response)
             Consumers_charts.innerHTML = response.Consumers_charts
-            volume_performance.innerHTML = response.volume_performance
+                //volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
             console.log(response.pie_chart)
                 //////////////////////////
@@ -820,6 +930,61 @@ check.change(function() {
             };
             $("#chart-acti").empty();
             var chart = new ApexCharts(document.querySelector("#chart-acti"), options);
+            chart.render();
+
+            var options = {
+                series: [{
+                    data: [response.actual_volume, response.target_volume],
+                }, ],
+                chart: {
+                    height: 200,
+                    type: 'bar',
+                },
+                labels: [''],
+                colors: ['#198631', '#1C263F'],
+                legend: {
+                    show: false,
+                },
+                plotOptions: {
+                    bar: {
+
+                        distributed: true,
+                        borderRadius: 5,
+                        horizontal: true,
+                        dataLabels: {
+                            position: 'center', // top, center, bottom
+                        },
+                    }
+                },
+
+
+                dataLabels: {
+                    position: 'center', // top, center, bottom
+                    enabled: true,
+                    formatter: function(val) {
+                        return val + "/" + val / response.target_volume * 100 + "%";
+                    },
+                    style: {
+                        fontSize: '12px',
+                        colors: ["red"],
+
+                    },
+
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 300
+                        },
+                        legend: {
+                            show: false
+                        },
+                    }
+                }]
+            };
+            $("#chart-prog").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-prog"), options);
             chart.render();
         },
         error: function(error) {

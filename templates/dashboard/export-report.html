@@ -24,25 +24,56 @@
                 </div>
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
-                        <li class="nav-list dropdown-nav active">
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 1%}
+                        active
+                        {% endif %}
+                        ">
                             <a href="{% url 'export-report' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
                                 Tiger Table Promotion
                             </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
-                                <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                                <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                                <li class="nav-sub"><a href="">Export report</a></li>
-                            </ul>
+                            
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'export-report' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'export-report' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'export-report' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'export-report' 5 %}" class="nav-links">Heineken Special Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'export-report' 6 %}" class="nav-links">Strongbow Festive</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'export-report' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'export-report' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'export-report' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 2 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'export-report' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 3 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'export-report' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 4 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'export-report' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 5 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'export-report' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 6 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'export-report' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 7 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'export-report' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 8 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'export-report' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 9 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'export-report' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
                 

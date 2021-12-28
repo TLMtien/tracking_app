@@ -9,6 +9,9 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.http import JsonResponse
 from .forms import KPIForm
+
+from users.models import SalePerson, NewUser
+import json
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_outlet_type, get_outlet
@@ -60,14 +63,14 @@ def percent(a,b):
 login_required
 def dash_board_View(request, campainID):
     campain = Campain.objects.get(id=campainID)
-    return render(request,'dashboard/dashboard.html')
+    return render(request,'dashboard/dashboard.html', {"cam_id":campainID})
 
 #HVN
 login_required
 def List_outlet_management(request, campainID):
     campain = Campain.objects.get(id=campainID)
     all_outlet = outletInfo.objects.filter(compain=campain)
-    return render(request,  'dashboard/management.html', {'list_outlet_view':all_outlet})
+    return render(request,  'dashboard/management.html', {'list_outlet_view':all_outlet, "cam_id":campainID})
 
 login_required
 def management_View(request):
@@ -92,6 +95,22 @@ def list_outlet_approval(request, campainID):
     outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
     
     return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet})
+
+login_required
+def ban_sp(request):
+    if request.user.is_HVN:
+        print(json.loads(request.body.decode('UTF-8')))
+        data = json.loads(request.body.decode('UTF-8'))
+        for user_id in data.get("array_id",[]):
+            print(user_id)
+            try:
+                user = NewUser.objects.get(pk=int(user_id))
+                user.is_active = False
+                user.save()
+                print("save")
+            except:
+                pass
+        return JsonResponse({'status': 'okay'})
 
 #HVN
 def outlet_approval_byHVN(request):
@@ -126,7 +145,7 @@ def delete_outlet_byHVN(request):
 def KPI_view(request, campainID):
     campain = Campain.objects.get(id=campainID)
     kpi = KPI.objects.filter(campain=campain)
-    return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi})
+    return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi, "cam_id":campainID})
 
 #HVN  create_KPI
 def create_KPI(request, campainID):
@@ -144,7 +163,7 @@ def create_KPI(request, campainID):
     
             kpi.save()
             all_kpi = KPI.objects.filter(campain=campain)
-            return render(request, "dashboard/kpi-setting.html", {'all_kpi':all_kpi})
+            return render(request, "dashboard/kpi-setting.html", {'all_kpi':all_kpi, "cam_id":campainID})
     else:
         form = KPIForm()
         return render(request,"dashboard/create-kpi.html", {'form':form})
@@ -184,7 +203,23 @@ def sum_revenue(request):
         'sum_Total_Consumers':sum_Total_Consumers,'total_consumers_brough':total_consumers_brough,
         'Average_reach':Average_reach, 'Average_conversion':Average_conversion}) 
         #return render(request,"report/dashboard.html",{ "from_date":from_date,"to_date":to_date,"chart":dump}) 
-
+###############33
+#Block user
+login_required
+def List_sp_management(request,campainID):
+    if request.user.is_HVN:
+        
+        is_campain_owner = False
+        campains = request.user.hvn.brand.all()
+        for c in campains:
+            if c.id == campainID:
+                is_campain_owner = True
+                break
+        sale_person = SalePerson.objects.filter(brand__pk=campainID)
+        
+        
+        print(sale_person)
+        return render(request,  'dashboard/sp-info.html', {'sale_person':sale_person,"is_campain_owner":is_campain_owner, "cam_id":campainID})
 ##################################################
 def charts_views(request, campainID):
     from_date = request.POST.get('from-date')
@@ -228,7 +263,7 @@ def charts_views(request, campainID):
     percent_volume = per
     print(per)
     return render(request, 'dashboard/dashboard.html', {'text':pie, 'target_volume_achieved':target_volume_achieved, 
-     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1],'array_gift': append_array(gift_rp[1]),'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'percent_volume':percent_volume,'Average_brand_volume': Average_brand_volume, 'activation':activation[0],'total_activation':activation[1],  'top10_sale_reverse':top10[3], 'top10_table_reverse': top10[4], 'top10_name_reverse':top10[5], 'list_province':volume_per[4], 'list_name_outlet':volume_per[5], 'list_type':volume_per[6]})
+     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1],'array_gift': append_array(gift_rp[1]),'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'percent_volume':percent_volume,'Average_brand_volume': Average_brand_volume, 'activation':activation[0],'total_activation':activation[1],  'top10_sale_reverse':top10[3], 'top10_table_reverse': top10[4], 'top10_name_reverse':top10[5], 'list_province':volume_per[4], 'list_name_outlet':volume_per[5], 'list_type':volume_per[6], "cam_id":campainID})
 
 
 ######
@@ -330,7 +365,7 @@ def filter_outlet_province(request, campainID):
         print(pie)
         print(gift_charts[0])
         print(consumers_charts)
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers,'volume_performance':volume_per, 'pie_chart': pie, 'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]) ,'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1]}) 
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers,'volume_performance':volume_per, 'pie_chart': pie, 'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]) ,'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]}) 
     return JsonResponse({'created': 'ko'}) 
 
 
@@ -409,7 +444,7 @@ def filter_outlet_type(request, campainID):
                     <p class="desc">Target Volume</p>
             <span class="number-two">{volume_performance[1]}</span>
         '''
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1]})
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]})
 
 def filter_outlet(request, campainID):
     if request.is_ajax and request.method == "POST":
@@ -473,10 +508,12 @@ def filter_outlet(request, campainID):
                     <p class="desc">Target Volume</p>
             <span class="number-two">{volume_performance[1]}</span>
         '''
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1]})
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]})
 
 
-
+###############################
+def view_export(request, campainID):
+    return render(request,'dashboard/export-report.html', {"cam_id":campainID}) 
 ######################################
 import datetime
 import xlwt

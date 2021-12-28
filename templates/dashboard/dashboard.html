@@ -24,20 +24,56 @@
                 </div>
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
-                        <li class="nav-list dropdown-nav active">
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 1%}
+                        active
+                        {% endif %}
+                        ">
                             <a href="{% url 'dashboard' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
                                 Tiger Table Promotion
                             </a>
                             
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 5 %}" class="nav-links">Heineken Special Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 6 %}" class="nav-links">Strongbow Festive</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'dashboard' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 2 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'dashboard' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 3 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'dashboard' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 4 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'dashboard' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 5 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'dashboard' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 6 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'dashboard' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 7 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'dashboard' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 8 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'dashboard' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 9 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'dashboard' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
                 <div class="profile-user dropdown-logout">
@@ -183,19 +219,16 @@
                             </div>
                         </div>
                         <div class="col-vertical">
-                            <div class="num-active" id="volume_performance">
+                            <div class="num-active">
                                 <p class="chart-title">VOLUME PERFORMANCE</p>
                                 <br>
                                 <p class="desc">(Can/Bottle)</p>
                                 <p class="desc">Actual Volume</p>
-                                <span class="number-one max-size">{{actual_volume}}</span>
+                               
+                                <div id="chart-perf"></div>
                                 <br>
                                 <p class="desc">Target Volume</p>
-                                <span class="number-two">{{target_volume}}</span>
-                                <!-- <div class="icon-color">
-                                    <span class="icon-one"></span> <p class="smart-desc">Actual Achieved</p>
-                                    <span class="icon-two"></span> <p class="smart-desc">Volume Target</p>
-                                </div> -->
+                                
                             </div>
                         </div>
                         <div class="col-vertical">
@@ -206,7 +239,7 @@
                                 
                                 <div id="chart-prog"></div>
                                 <p class="desc">Total volume</p>
-                                <span class="number-two">{{target_volume}}/100%</span>
+                                {% comment %} <span class="number-two">{{target_volume}}/100%</span> {% endcomment %}
                             </div>
                         </div>
                     </div>
@@ -578,6 +611,7 @@
                     },
                     legend: {
                         position: 'bottom'
+                        
                     }
                 }
             }]
@@ -719,56 +753,61 @@
 
 
 <script>
-    var percent = {{percent_volume|safe}}
-    console.log(percent)
     var options = {
         series: [{
-            name: 'Actual Acts',
-            data: [{{actual_volume|safe}}],
-    
-        }],
+            data: [{{actual_volume}}, {{target_volume}}],
+        }, ],
         chart: {
+            height: 200,
             type: 'bar',
-            height: 130,
-            stacked: true,
+        },
+        labels: [''],
+        colors: ['#198631', '#1C263F'],
+        legend: {
+            show: false,
         },
         plotOptions: {
             bar: {
+    
+                distributed: true,
+                borderRadius: 5,
                 horizontal: true,
-            },
-        },
-        stroke: {
-            width: 1,
-            colors: ['#fff']
-        },
-    
-        labels: [''],
-        yaxis: {
-            title: {
-                text: undefined
-            },
-        },
-    
-        tooltip: {
-            y: {
-                formatter: function(val) {
-                    return val +"/" + percent+"%"
-                }
+                dataLabels: {
+                    position: 'center', // top, center, bottom
+                },
             }
         },
-        colors: ['#198631'],
-        fill: {
-            opacity: 1
+    
+    
+        dataLabels: {
+            position: 'center', // top, center, bottom
+            enabled: true,
+            formatter: function(val) {
+                return val + "/" + val/{{target_volume}} *100 + "%";
+            },
+            style: {
+                fontSize: '12px',
+                colors: ["red"],
+    
+            },
+    
         },
-        legend: {
-            position: 'top',
-            horizontalAlign: 'left',
-            offsetX: 40
-        }
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 300
+                },
+                legend: {
+                    show: false
+                },
+            }
+        }]
     };
     
     var chart = new ApexCharts(document.querySelector("#chart-prog"), options);
     chart.render();
+    
 </script>
 
 <script>
@@ -887,6 +926,51 @@
     var chart = new ApexCharts(document.querySelector("#chart-top"), options);
     chart.render();
     })
+</script>
+
+<script>
+    var options = {
+        series: [{
+            data: [{{actual_volume}}, {{target_volume}}],
+        }, ],
+        chart: {
+            height: 200,
+            type: 'bar',
+        },
+        labels: [''],
+        colors: ['#198631', '#1C263F'],
+        legend: {
+            show: false,
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: '15%',
+                distributed: true,
+                borderRadius: 5,
+                horizontal: true,
+                dataLabels: {
+                    position: 'center', // top, center, bottom
+                },
+            }
+        },
+    
+        dataLabels: {
+            enabled: true,
+            formatter: function(val) {
+                return val + "";
+            },
+            style: {
+                fontSize: '12px',
+                colors: ["red"]
+            }
+        },
+    
+    };
+    
+    var chart = new ApexCharts(document.querySelector("#chart-perf"), options);
+    chart.render();
+    
+    
 </script>
     {% comment %} <script src="{% static 'PC/js/chart.js' %}"></script> {% endcomment %}
     <script src="{% static 'PC/js/dashboard.js' %}"></script> 

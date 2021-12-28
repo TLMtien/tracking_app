@@ -122,6 +122,7 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet):
     Cp = Campain.objects.get(id = campain_id)
     # all_outlet = outletInfo.objects.filter(compain=Cp)
     count = 0
+    count_volume_achieved = 0
     total_sale = 0
     list_province = []
     list_name_outlet = []
@@ -139,12 +140,13 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet):
                 list_type.append(outlet.type)
 
             count = count + 1
+            count_volume_achieved = count_volume_achieved + volume_achieved
             for report_Sale in all_report_sale:
                 total_sale = sum(total_sale, report_Sale.beer_brand)
     
     average_volume = 0
-    if count > 0:
-        average_volume = percent(total_sale, count)
+    if count_volume_achieved  > 0:
+        average_volume = percent(total_sale, count_volume_achieved )
     
     total_volume_achieved = volume_achieved * count
 
