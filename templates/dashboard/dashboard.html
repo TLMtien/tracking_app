@@ -178,8 +178,8 @@
                                 <p class="desc">Actual Acts</p>
                                 <div id="chart-acti"></div>
                                 <!-- <span class="number-one">142</span> -->
-                                <p class="desc">Total Acts</p>
-                                <span class="number-two">{{total_activation}}/100%</span>
+                                {% comment %} <p class="desc">Total Acts</p>
+                                <span class="number-two">{{total_activation}}/100%</span> {% endcomment %}
                             </div>
                         </div>
                         <div class="col-vertical">
@@ -663,53 +663,57 @@
 
 <script>
     var activation = {{activation|safe}}
-    console.log(activation)
     var options = {
         series: [{
-            name: 'Actual Volume',
-            data: [activation]
-        }],
+            data: [activation, {{total_activation}}],
+        }, ],
         chart: {
+            height: 200,
             type: 'bar',
-            height: 130,
-            stacked: true,
+        },
+        labels: [''],
+        colors: ['#198631', '#1C263F'],
+        legend: {
+            show: false,
         },
         plotOptions: {
             bar: {
+                columnWidth: '15%',
+                distributed: true,
+                borderRadius: 5,
                 horizontal: true,
-            },
-        },
-        stroke: {
-            width: 1,
-            colors: ['#fff']
-        },
-    
-        labels: [''],
-        yaxis: {
-            title: {
-                text: undefined
-            },
-        },
-        tooltip: {
-            y: {
-                formatter: function(val) {
-                    return val + "/21%"
-                }
+                dataLabels: {
+                    position: 'center', // top, center, bottom
+                },
             }
         },
-        colors: ['#198631'],
-        fill: {
-            opacity: 1
+    
+    
+        xaxis: {
+            categories: [''],
+            labels: {
+                style: {
+                    colors: ['#111'],
+                    fontSize: '12px',
+                }
+            },
         },
-        legend: {
-            position: 'top',
-            horizontalAlign: 'left',
-            offsetX: 40
-        }
+        dataLabels: {
+            enabled: true,
+            formatter: function(val) {
+                return val ;
+            },
+            style: {
+                fontSize: '12px',
+                colors: ["red"]
+            }
+        },
+    
     };
     
     var chart = new ApexCharts(document.querySelector("#chart-acti"), options);
     chart.render();
+    
 </script>
     {% comment %} jsssssssssssssssssssssssssssssssssssssssssssssssssss {% endcomment %}
 
