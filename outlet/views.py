@@ -145,8 +145,8 @@ def uploadFile_outlet(request):
             wb = openpyxl.load_workbook(excel_file)
             
             sheets = wb.sheetnames
-            print(sheets[1])
-            worksheet = wb[sheets[1]]   #Trang tính
+            print(sheets[0])
+            worksheet = wb[sheets[0]]   #Trang tính
 
             excel_data = list()
         
@@ -167,7 +167,7 @@ def uploadFile_outlet(request):
                 # campain = Campain.objects.get(id=2)
                 # filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
                 # if filter_outlet <1:
-                    campain = Campain.objects.get(id=2)
+                    campain = Campain.objects.get(id=1)
                     a = outletInfo.objects.create(created=excel_data[i+1][1], province=excel_data[i+1][2], ouletID=excel_data[i+1][3],
                         type=excel_data[i+1][4], area=excel_data[i+1][5], outlet_address=excel_data[i+1][6], 
                         outlet_Name=excel_data[i+1][7], created_by_HVN = True)
