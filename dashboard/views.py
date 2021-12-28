@@ -221,9 +221,6 @@ def charts_views(request, campainID):
     # activation
     activation = activation_progress(id, all_outlet)
 
-    top10_sale_reverse = reverse(top10[0])
-    top10_table_reverse = reverse(top10[1])
-    top10_name_reverse = reverse(top10[2])
     print(list_gift_rp)
     per = 0
     if volume_per[1] != 0:
@@ -231,7 +228,7 @@ def charts_views(request, campainID):
     percent_volume = per
     print(per)
     return render(request, 'dashboard/dashboard.html', {'text':pie, 'target_volume_achieved':target_volume_achieved, 
-     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1],'array_gift': append_array(gift_rp[1]),'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'percent_volume':percent_volume,'Average_brand_volume': Average_brand_volume, 'activation':activation[0],'total_activation':activation[1],  'top10_sale_reverse':top10_sale_reverse, 'top10_table_reverse':top10_table_reverse, 'top10_name_reverse':top10_name_reverse, 'list_province':volume_per[4], 'list_name_outlet':volume_per[5], 'list_type':volume_per[6]})
+     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1],'array_gift': append_array(gift_rp[1]),'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'percent_volume':percent_volume,'Average_brand_volume': Average_brand_volume, 'activation':activation[0],'total_activation':activation[1],  'top10_sale_reverse':top10[3], 'top10_table_reverse': top10[4], 'top10_name_reverse':top10[5], 'list_province':volume_per[4], 'list_name_outlet':volume_per[5], 'list_type':volume_per[6]})
 
 
 ######

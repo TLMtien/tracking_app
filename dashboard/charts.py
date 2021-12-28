@@ -194,6 +194,10 @@ def top10_outlet(campain_id, all_outlet):
         new_list_volume = []
         new_list_table = []
         new_list_name = []
+
+        new_list_volume_reverse = []
+        new_list_table_reverse = []
+        new_list_name_reverse = []
         # all_outlet = outletInfo.objects.filter(compain=Cp)
         for outlet in all_outlet:
             all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet)
@@ -227,8 +231,17 @@ def top10_outlet(campain_id, all_outlet):
                         new_list_volume.append(list_volume[j])
                         new_list_table.append(list_table[j])
                         new_list_name.append(list_name[j])
+        #---------------------------------------------------->>
+        new_list_reverse = sorted(list_volume)    
+        for i in range(len(new_list_reverse)):
+            for j in range(len(list_volume)):
+                if(new_list_reverse[i] == list_volume[j]):
+                    if not  list_name[j] in new_list_name_reverse:
+                        new_list_volume_reverse.append(list_volume[j])
+                        new_list_table_reverse.append(list_table[j])
+                        new_list_name_reverse.append(list_name[j])
 
-        return new_list_volume, new_list_table, new_list_name
+        return new_list_volume, new_list_table, new_list_name, new_list_volume_reverse, new_list_table_reverse, new_list_name_reverse
     
     
 def volume_achieved_byProvince(campain_id, all_outlet):

@@ -261,7 +261,7 @@ type.change(function() {
         success: function(response) {
             console.log(response)
             Consumers_charts.innerHTML = response.Consumers_charts
-                // volume_performance.innerHTML = response.volume_performance
+            volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
             console.log(response.pie_chart)
                 //////////////////////////
@@ -484,7 +484,7 @@ check.change(function() {
         success: function(response) {
             console.log(response)
             Consumers_charts.innerHTML = response.Consumers_charts
-                // volume_performance.innerHTML = response.volume_performance
+            volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
             console.log(response.pie_chart)
                 //////////////////////////

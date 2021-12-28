@@ -338,8 +338,8 @@
                                     <div class="btns">
                                         
                                         <div class="btn-arrow">
-                                            <button><i class='bx bx-chevrons-up'></i></button> <br>
-                                            <button><i class='bx bx-chevrons-down' ></i></button>
+                                            <button id= "ascending" type="button"><i class='bx bx-chevrons-up'></i></button> <br>
+                                            <button id= "decrease" type="button"><i class='bx bx-chevrons-down' ></i></button>
                                         </div>                                    
                                     </div>
 
@@ -767,6 +767,123 @@
     chart.render();
 </script>
 
+<script>
+    var  decrease = $('#decrease')
+    var top10_name = {{ top10_name| safe}}
+    var top10_sale = {{ top10_sale| safe}}
+    var top10_table = {{ top10_table| safe}}
+    decrease.click(function() {
+    var options = {
+        series: [{
+            name: '[Brand] Volume',
+            type: 'column',
+            data: top10_sale,
+        }, {
+            name: '[Brand] Table Share',
+            type: 'line',
+            data: top10_table,
+        }],
+        chart: {
+            height: 370,
+            with: 400,
+            type: 'line',
+        },
+        stroke: {
+            width: [0, 3],
+        },
+        title: {
+            text: 'Traffic Sources'
+        },
+        dataLabels: {
+            enabled: true,
+            enabledOnSeries: [1],
+            style: {
+                colors: ['#1C263F']
+            }
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+            }
+        },
+        labels: top10_name,
+        colors: ['#198631', '#1C263F'],
+        yaxis: [{
+            title: {
+                text: 'Top 10',
+            },
+    
+        }, {
+            opposite: true,
+            title: {
+                text: 'Outlet'
+            }
+        }]
+    };
+    $("#chart-top").empty();
+    var chart = new ApexCharts(document.querySelector("#chart-top"), options);
+    chart.render();
+    })
+</script>
+
+<script>
+    var  ascending = $('#ascending')
+    var top10_name = {{ top10_name_reverse| safe}}
+    var top10_sale = {{ top10_sale_reverse| safe}}
+    var top10_table = {{ top10_table_reverse| safe}}
+    ascending.click(function() {
+    var options = {
+        series: [{
+            name: '[Brand] Volume',
+            type: 'column',
+            data: top10_sale,
+        }, {
+            name: '[Brand] Table Share',
+            type: 'line',
+            data: top10_table,
+        }],
+        chart: {
+            height: 370,
+            with: 400,
+            type: 'line',
+        },
+        stroke: {
+            width: [0, 3],
+        },
+        title: {
+            text: 'Traffic Sources'
+        },
+        dataLabels: {
+            enabled: true,
+            enabledOnSeries: [1],
+            style: {
+                colors: ['#1C263F']
+            }
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+            }
+        },
+        labels: top10_name,
+        colors: ['#198631', '#1C263F'],
+        yaxis: [{
+            title: {
+                text: 'Top 10',
+            },
+    
+        }, {
+            opposite: true,
+            title: {
+                text: 'Outlet'
+            }
+        }]
+    };
+    $("#chart-top").empty();
+    var chart = new ApexCharts(document.querySelector("#chart-top"), options);
+    chart.render();
+    })
+</script>
     {% comment %} <script src="{% static 'PC/js/chart.js' %}"></script> {% endcomment %}
     <script src="{% static 'PC/js/dashboard.js' %}"></script> 
     <script src="{% static 'PC/js/app.js' %}"></script>
