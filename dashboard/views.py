@@ -400,7 +400,17 @@ def filter_outlet_type(request, campainID):
                                     </div>
                                 </div>
                 '''
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume})
+        volume_per = f'''
+            <p class="chart-title">VOLUME PERFORMANCE</p>
+                    <br>
+                    <p class="desc">(Can/Bottle)</p>
+                    <p class="desc">Actual Volume</p>
+                    <span class="number-one max-size">{volume_performance[0]}</span>
+                    <br>
+                    <p class="desc">Target Volume</p>
+            <span class="number-two">{volume_performance[1]}</span>
+        '''
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume})
 
 def filter_outlet(request, campainID):
     if request.is_ajax and request.method == "POST":
@@ -453,7 +463,17 @@ def filter_outlet(request, campainID):
                                     </div>
                                 </div>
                 '''
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume})
+        volume_per = f'''
+            <p class="chart-title">VOLUME PERFORMANCE</p>
+                    <br>
+                    <p class="desc">(Can/Bottle)</p>
+                    <p class="desc">Actual Volume</p>
+                    <span class="number-one max-size">{volume_performance[0]}</span>
+                    <br>
+                    <p class="desc">Target Volume</p>
+            <span class="number-two">{volume_performance[1]}</span>
+        '''
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume})
 
 
 

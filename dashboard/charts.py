@@ -219,7 +219,7 @@ def top10_outlet(campain_id, all_outlet):
                 list_name.append(outlet.outlet_Name)
             
         #get 10 outlet
-        new_list = sorted(list_volume)
+        new_list = sorted(list_volume, reverse=True)
         for i in range(len(new_list)):
             for j in range(len(list_volume)):
                 if(new_list[i] == list_volume[j]):
