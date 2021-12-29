@@ -166,7 +166,7 @@ def create_KPI(request, campainID):
             return render(request, "dashboard/kpi-setting.html", {'all_kpi':all_kpi, "cam_id":campainID})
     else:
         form = KPIForm()
-        return render(request,"dashboard/create-kpi.html", {'form':form})
+        return render(request,"dashboard/create-kpi.html", {'form':form,"cam_id":campainID})
 
 
 def sum_revenue(request):
