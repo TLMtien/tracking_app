@@ -22,7 +22,7 @@ urlpatterns = [
 
 
     ########################################################################
-    #path('1/',TemplateView.as_view(template_name="dashboard/dashboard.html"), name='dashboardforlogin'),
+    path('1/',TemplateView.as_view(template_name="dashboard/dashboard.html"), name='dashboardforlogin'),
     path('<int:campainID>/', views.charts_views, name='dashboard'),
     #path('management/', views.management_View, name='management'),
     path('kpi/<int:campainID>/', views.KPI_view, name='kpi'),
