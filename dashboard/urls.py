@@ -35,6 +35,7 @@ urlpatterns = [
     path('<int:campainID>/filter-outlet-province/', views.filter_outlet_province, name='filter-outlet-province'),
     path('<int:campainID>/filter_outlet_type/', views.filter_outlet_type, name='filter_outlet_type'), 
     path('<int:campainID>/filter_outlet/', views.filter_outlet, name='filter_outlet'),
-    
+    path('<int:campainID>/filter_outlet_type_province/', views.filter_outlet_type_province, name='filter_outlet_type_province'),
+    path('<int:campainID>/filter_outletName_Province_type/', views.filter_outletName_Province_type, name='filter_outletName_Province_type'),
     path('<int:campainID>/filter/', views.charts_views, name='filter'),
 ]

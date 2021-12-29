@@ -14,7 +14,7 @@ from users.models import SalePerson, NewUser
 import json
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_outlet_type, get_outlet, get_gift_scheme
+from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_outlet_type, get_outlet, get_gift_scheme, get_outlet_type_province, get_outletName_type_province
 # Create your views here.
 
 # tigerTP 1
@@ -292,33 +292,32 @@ def filter_outlet_province(request, campainID):
         list_outlet = ''
         list_type = ''
 
-        for outlet in list_outlet_chart[0]:
-            list_outlet += f'''<tr>
+        for outlet in volume_performance[5]:
+            list_outlet += f'''
                             <div class="sidebar-menu_sub">
-                                <label>
-                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet"  value="{outlet.id}">
+                                    <label>
+                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet" value="{outlet}">
                                         <span class="checkmark"></span>
-                                </label>
-                                <p class="sidebar-menu_item">
-                                        {outlet.outlet_Name}
-                                </p>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                        {outlet}
+                                    </p>
                             </div>
-                        </tr>
                         '''
-        # for type in list_outlet_chart[1]:
-        #     print(type)
-        #     list_type += f'''<tr>
-        #                         <div class="sidebar-menu_sub">
-        #                             <label>
-        #                                 <input type="checkbox"  class="sidebar-menu_checkbox" name="type_outlet" value = "{{type}}"> 
-        #                                 <span class="checkmark"></span>
-        #                             </label>
-        #                             <p class="sidebar-menu_item">
-        #                                {type}
-        #                             </p>
-        #                         </div>
-        #                     </tr>
-        #                 '''
+        for type in list_outlet_chart[1]:
+            print(type)
+            list_type += f'''<tr>
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox"  class="sidebar-menu_checkbox" name="type_outlet" value = "{type}"> 
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                       {type}
+                                    </p>
+                                </div>
+                            </tr>
+                        '''
         Consumers = f'''
                 <div class="row-1">
                                     <div class="col-12">
@@ -365,7 +364,7 @@ def filter_outlet_province(request, campainID):
         print(pie)
         print(gift_charts[0])
         print(consumers_charts)
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers,'volume_performance':volume_per, 'pie_chart': pie, 'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]) ,'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]}) 
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'list_type_outlet': list_type,'Consumers_charts':Consumers,'volume_performance':volume_per, 'pie_chart': pie, 'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]) ,'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]}) 
     return JsonResponse({'created': 'ko'}) 
 
 
@@ -392,7 +391,7 @@ def filter_outlet_type(request, campainID):
             list_outlet += f'''<tr>
                             <div class="sidebar-menu_sub">
                                 <label>
-                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet"  value="{outlet.id}">
+                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet"  value="{outlet.outlet_Name}">
                                         <span class="checkmark"></span>
                                 </label>
                                 <p class="sidebar-menu_item">
@@ -445,6 +444,166 @@ def filter_outlet_type(request, campainID):
             <span class="number-two">{volume_performance[1]}</span>
         '''
         return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]})
+
+
+def filter_outlet_type_province(request, campainID):
+    #get_outlet_type_province
+    if request.is_ajax and request.method == "POST":
+        total_array = request.POST.get('total_array')
+
+        list_outlet_typeAndProvince = total_array.split(',')
+        list_outlet_chart = get_outlet_type_province(campainID, list_outlet_typeAndProvince)
+        print(list_outlet_chart)
+        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0])
+        pie = pie_chart(campainID, list_rp[0])
+        consumers_charts = total_consumers_reached(campainID, list_rp[1])
+        gift_charts = gift(campainID, list_rp[2])
+        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0])
+        Average_brand_volume = [volume_performance[2], volume_performance[3]]
+        top_10 = top10_outlet(campainID, list_outlet_chart[0])
+        activation = activation_progress(campainID, list_outlet_chart[0])
+        print(type)
+        print(consumers_charts)
+        print(gift_charts)
+        list_outlet = ''
+        print(list_outlet)
+        for outlet in list_outlet_chart[0]:
+            list_outlet += f'''<tr>
+                            <div class="sidebar-menu_sub">
+                                <label>
+                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet"  value="{outlet.outlet_Name}">
+                                        <span class="checkmark"></span>
+                                </label>
+                                <p class="sidebar-menu_item">
+                                        {outlet.outlet_Name}
+                                </p>
+                            </div>
+                        </tr>
+                        '''
+        Consumers = f'''
+                <div class="row-1">
+                                    <div class="col-12">
+                                        <div class="col-4">
+                                            <p class="title">
+                                                Total Consumers {consumers_charts[0]}
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="title">
+                                                Total Reached Consumers {consumers_charts[1]}
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="title">
+                                                Total Bought Consumers {consumers_charts[2]}
+                                            </p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="row-2">
+                                    <div class="col-12">
+                                    
+                                        <div class="col-6">
+                                            <span class="number">Average Reach {consumers_charts[3]}%</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="number">Average Conversion {consumers_charts[4]}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                '''
+        volume_per = f'''
+            <p class="chart-title">VOLUME PERFORMANCE</p>
+                    <br>
+                    <p class="desc">(Can/Bottle)</p>
+                    <p class="desc">Actual Volume</p>
+                    <span class="number-one max-size">{volume_performance[0]}</span>
+                    <br>
+                    <p class="desc">Target Volume</p>
+            <span class="number-two">{volume_performance[1]}</span>
+        '''
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]})
+
+def filter_outletName_Province_type(request, campainID):
+    # get_outletName_type_province
+    if request.is_ajax and request.method == "POST":
+        total_array = request.POST.get('total_array')
+
+        list_outlet_typeAndProvince = total_array.split(',')
+        list_outlet_chart = get_outletName_type_province(campainID, list_outlet_typeAndProvince)
+        print(list_outlet_chart)
+        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0])
+        pie = pie_chart(campainID, list_rp[0])
+        consumers_charts = total_consumers_reached(campainID, list_rp[1])
+        gift_charts = gift(campainID, list_rp[2])
+        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0])
+        Average_brand_volume = [volume_performance[2], volume_performance[3]]
+        top_10 = top10_outlet(campainID, list_outlet_chart[0])
+        activation = activation_progress(campainID, list_outlet_chart[0])
+        print(type)
+        print(consumers_charts)
+        print(gift_charts)
+        list_outlet = ''
+        print(list_outlet)
+        for outlet in list_outlet_chart[0]:
+            list_outlet += f'''<tr>
+                            <div class="sidebar-menu_sub">
+                                <label>
+                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet"  value="{outlet.outlet_Name}">
+                                        <span class="checkmark"></span>
+                                </label>
+                                <p class="sidebar-menu_item">
+                                        {outlet.outlet_Name}
+                                </p>
+                            </div>
+                        </tr>
+                        '''
+        Consumers = f'''
+                <div class="row-1">
+                                    <div class="col-12">
+                                        <div class="col-4">
+                                            <p class="title">
+                                                Total Consumers {consumers_charts[0]}
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="title">
+                                                Total Reached Consumers {consumers_charts[1]}
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="title">
+                                                Total Bought Consumers {consumers_charts[2]}
+                                            </p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="row-2">
+                                    <div class="col-12">
+                                    
+                                        <div class="col-6">
+                                            <span class="number">Average Reach {consumers_charts[3]}%</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="number">Average Conversion {consumers_charts[4]}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                '''
+        volume_per = f'''
+            <p class="chart-title">VOLUME PERFORMANCE</p>
+                    <br>
+                    <p class="desc">(Can/Bottle)</p>
+                    <p class="desc">Actual Volume</p>
+                    <span class="number-one max-size">{volume_performance[0]}</span>
+                    <br>
+                    <p class="desc">Target Volume</p>
+            <span class="number-two">{volume_performance[1]}</span>
+        '''
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]})
+
 
 def filter_outlet(request, campainID):
     if request.is_ajax and request.method == "POST":
