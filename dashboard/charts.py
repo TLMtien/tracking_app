@@ -428,6 +428,7 @@ def get_outlet_type(campain_id, type):
 def get_outlet_type_province(campain_id, list_province_type):
     Cp = Campain.objects.get(id = campain_id)
     list_outlet = []
+    list_outlet1 = []
     list_province = []
     list_type = []
     for list in list_province_type:
@@ -437,15 +438,18 @@ def get_outlet_type_province(campain_id, list_province_type):
             count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
             count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
             if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                list_outlet1.append(outlet)
                 if outlet.type in list_province_type:    
                     list_outlet.append(outlet)
-        
-    
+    if len(list_outlet) == 0:
+        list_outlet = list_outlet1  
     return list_outlet, list_province
 
 def get_outletName_type_province(campain_id, list_province_type_outletname):
     Cp = Campain.objects.get(id = campain_id)
     list_outlet = []
+    list_outlet1 = []
+    list_outlet2 = []
     list_province = []
     list_type = []
     for list in list_province_type_outletname:
@@ -455,9 +459,16 @@ def get_outletName_type_province(campain_id, list_province_type_outletname):
             count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
             count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
             if count_report_sale > 0 or count_gift > 0 or count_table > 0:
-                if outlet.type in list_province_type_outletname and outlet.outlet_Name in list_province_type_outletname:    
-                    list_outlet.append(outlet)
-        
+                list_outlet2.append(outlet)
+                if outlet.type in list_province_type_outletname: 
+                    list_outlet1.append(outlet)
+                    if outlet.outlet_Name in list_province_type_outletname:    
+                        list_outlet.append(outlet)
+    if len(list_outlet) == 0:
+        if len(list_outlet1) > 0:
+            list_outlet = list_outlet1
+        else:
+            list_outlet = list_outlet2
     
     return list_outlet, list_province
 
