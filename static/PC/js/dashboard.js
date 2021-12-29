@@ -1012,10 +1012,14 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
         if (ischeck) {
             array1.push((this.value))
             total_array.push((this.value))
+
         } else {
             array1 = array1.filter(e => e !== this.value);
             total_array = total_array.filter(e => e !== this.value);
+            console.log(this.value)
+            console.log(total_array)
         }
+        console.log(total_array)
         const csrf = document.getElementsByName('csrfmiddlewaretoken')
         var fd = new FormData();
         fd.append('total_array', total_array);
@@ -1340,7 +1344,7 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
 
 $("#list_name_outlet").on("change", "input:checkbox", function() {
 
-    if (total_array.length > 1) {
+    if (total_array.length > 0) {
         var ischeck = $(this).prop('checked');
         if (ischeck) {
             total_array.push((this.value))
