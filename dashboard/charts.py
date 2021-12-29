@@ -374,7 +374,11 @@ def gift(campain_id, list_gift_rp):
     
     elif campain_id == 6:
         list_gift = ['Nón Strongbow', 'Túi Jute Bag', 'Túi Canvas ', 'Dù SB']
-        return list_4, list_gift
+        list_gift_1 = [percent_gift1, percent_gift2]
+        list_gift_2 = [percent_gift3, percent_gift4]
+        list_gift_3 = [percent_gift3, percent_gift2]
+        list_gift_4 = [percent_gift2]
+        return list_4, list_gift, list_gift_1, list_gift_2, list_gift_3, list_gift_4
 
     elif campain_id == 7:
         list_gift = ['Túi du lịch', 'Đồng Hồ Treo Tường', 'Bình Nước 1,6L', 'Ly']
@@ -506,4 +510,78 @@ def get_gift_scheme(campain_id):
         #list_gift_rp_scheme1 = giftReport.objects.filter(campain = Cp).exclude(reduce(and_, [Q(outlet=outlet) for outlet in all_outlet_scheme]))
         result_scheme = gift(campain_id, list_gift_rp_scheme)
         result_scheme1 = gift(campain_id, list_gift_rp_scheme1)
-        return result_scheme[2],list_gift_name1, result_scheme1[3], list_gift_name2
+        return result_scheme[2],list_gift_name1, result_scheme1[3], list_gift_name2, list_gift_name1, list_gift_name2, list_gift_name1, list_gift_name1, list_gift_name1, list_gift_name1
+       
+    
+    elif campain_id == 6:
+        ['Nón Strongbow', 'Túi Jute Bag', 'Túi Canvas ', 'Dù SB']
+        list_gift_name1 = ['Nón Strongbow', 'Túi Jute Bag']
+        list_gift_name2 = ['Túi Canvas ', 'Dù SB']
+        list_gift_name3 = ['Túi Canvas ', 'Túi Jute Bag']
+        list_gift_name4 = ['Túi Jute Bag']
+
+        categories = ['GSO', 'YSO', 'QN']
+        list_gift_rp_scheme1 = []
+        list_gift_rp_scheme2 = []
+        list_gift_rp_scheme3 = []
+        list_gift_rp_scheme4 = []
+        list_gift_rp_scheme5 = []
+        for c in categories:
+            all_outlet_scheme = outletInfo.objects.filter(compain = Cp, type =c)
+            for outlet in all_outlet_scheme:
+                count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+                count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+                count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+                if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                    list_gift = giftReport.objects.filter(campain = Cp, outlet=outlet)
+                    for gift_1 in list_gift:
+                        list_gift_rp_scheme1.append(gift_1)
+        
+        all_outlet_scheme = outletInfo.objects.filter(compain = Cp, type = 'Hot Zone')
+        for outlet in all_outlet_scheme:
+            count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+            count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+            count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+            if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                list_gift = giftReport.objects.filter(campain = Cp, outlet=outlet)
+                for gift_1 in list_gift:
+                    list_gift_rp_scheme2.append(gift_1)
+
+        all_outlet_scheme = outletInfo.objects.filter(compain = Cp, type = 'Karaoke')
+        for outlet in all_outlet_scheme:
+            count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+            count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+            count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+            if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                list_gift = giftReport.objects.filter(campain = Cp, outlet=outlet)
+                for gift_1 in list_gift:
+                    list_gift_rp_scheme3.append(gift_1)
+        
+        all_outlet_scheme = outletInfo.objects.filter(compain = Cp, type = 'Beer Cafe')
+        for outlet in all_outlet_scheme:
+            count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+            count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+            count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+            if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                list_gift = giftReport.objects.filter(campain = Cp, outlet=outlet)
+                for gift_1 in list_gift:
+                    list_gift_rp_scheme4.append(gift_1)
+
+        all_outlet_scheme = outletInfo.objects.filter(compain = Cp, type = 'Restaurant')
+        for outlet in all_outlet_scheme:
+            count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
+            count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
+            count_table = tableReport.objects.filter(campain = Cp, outlet=outlet).count()
+            if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+                list_gift = giftReport.objects.filter(campain = Cp, outlet=outlet)
+                for gift_1 in list_gift:
+                    list_gift_rp_scheme5.append(gift_1)
+
+        result_scheme1 = gift(campain_id, list_gift_rp_scheme1)
+        result_scheme2 = gift(campain_id, list_gift_rp_scheme2)
+        result_scheme3 = gift(campain_id, list_gift_rp_scheme3)
+        result_scheme4 = gift(campain_id, list_gift_rp_scheme4)
+        result_scheme5 = gift(campain_id, list_gift_rp_scheme5)
+
+        return result_scheme1[2], list_gift_name1, result_scheme2[3], list_gift_name2, result_scheme3[3], list_gift_name2, result_scheme4[4], list_gift_name3, result_scheme5[5], list_gift_name4
+       

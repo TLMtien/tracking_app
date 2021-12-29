@@ -523,7 +523,7 @@ def list_gift_scheme(request, campainID):
                 </div>
         '''
    
-    return JsonResponse({'list_scheme1':list_gift[0], 'list_scheme1_name':list_gift[1], 'list_gift_1':list_gift_1,'list_scheme2':list_gift[2], 'list_scheme2_name':list_gift[3]})
+    return JsonResponse({'list_scheme1':list_gift[0], 'list_scheme1_name':list_gift[1], 'list_gift_1':list_gift_1,'list_scheme2':list_gift[2], 'list_scheme2_name':list_gift[3], 'list_scheme3':list_gift[4], 'list_scheme3_name':list_gift[5], 'list_scheme4':list_gift[6], 'list_scheme4_name':list_gift[7], 'list_scheme5':list_gift[8], 'list_scheme5_name':list_gift[9]})
 
 ###############################
 def view_export(request, campainID):

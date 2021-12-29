@@ -179,3 +179,266 @@ scheme2.click(function() {
         }
     })
 })
+
+
+
+
+var scheme3 = $('#Scheme-3')
+
+scheme3.click(function() {
+    $.ajax({
+        type: 'POST',
+        url: 'list_gift_scheme/',
+        headers: {
+            "X-CSRFToken": csrf[0].value
+        },
+        data: 'ok',
+
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            var options = {
+                series: [{
+                    data: response.list_scheme3
+                }],
+                chart: {
+                    height: 280,
+                    type: 'bar',
+
+                },
+                colors: ['#198631', '#1C263F', '#727170', '#b5f398', '#c4c4c4', '#49566e'],
+
+                plotOptions: {
+                    bar: {
+                        columnWidth: '60%',
+                        distributed: true,
+                        borderRadius: 5,
+                        dataLabels: {
+                            position: 'top', // top, center, bottom
+                        },
+                    }
+                },
+
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val + "%";
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function(val) {
+                            return val + "%";
+                        }
+                    }
+                },
+                legend: {
+                    show: true
+                },
+                xaxis: {
+                    categories: response.list_scheme3_name,
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                },
+            };
+            $("#chart-product").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-product"), options);
+            chart.render();
+            console.log(response)
+
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    })
+})
+
+
+var scheme4 = $('#Scheme-4')
+
+scheme4.click(function() {
+    $.ajax({
+        type: 'POST',
+        url: 'list_gift_scheme/',
+        headers: {
+            "X-CSRFToken": csrf[0].value
+        },
+        data: 'ok',
+
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            var options = {
+                series: [{
+                    data: response.list_scheme4
+                }],
+                chart: {
+                    height: 280,
+                    type: 'bar',
+
+                },
+                colors: ['#198631', '#1C263F', '#727170', '#b5f398', '#c4c4c4', '#49566e'],
+
+                plotOptions: {
+                    bar: {
+                        columnWidth: '60%',
+                        distributed: true,
+                        borderRadius: 5,
+                        dataLabels: {
+                            position: 'top', // top, center, bottom
+                        },
+                    }
+                },
+
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val + "%";
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function(val) {
+                            return val + "%";
+                        }
+                    }
+                },
+                legend: {
+                    show: true
+                },
+                xaxis: {
+                    categories: response.list_scheme4_name,
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                },
+            };
+            $("#chart-product").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-product"), options);
+            chart.render();
+            console.log(response)
+
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    })
+})
+
+
+var scheme5 = $('#Scheme-5')
+
+scheme5.click(function() {
+    $.ajax({
+        type: 'POST',
+        url: 'list_gift_scheme/',
+        headers: {
+            "X-CSRFToken": csrf[0].value
+        },
+        data: 'ok',
+
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            var options = {
+                series: [{
+                    data: response.list_scheme5
+                }],
+                chart: {
+                    height: 280,
+                    type: 'bar',
+
+                },
+                colors: ['#198631', '#1C263F', '#727170', '#b5f398', '#c4c4c4', '#49566e'],
+
+                plotOptions: {
+                    bar: {
+                        columnWidth: '60%',
+                        distributed: true,
+                        borderRadius: 5,
+                        dataLabels: {
+                            position: 'top', // top, center, bottom
+                        },
+                    }
+                },
+
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val + "%";
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function(val) {
+                            return val + "%";
+                        }
+                    }
+                },
+                legend: {
+                    show: true
+                },
+                xaxis: {
+                    categories: response.list_scheme5_name,
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                },
+            };
+            $("#chart-product").empty();
+            var chart = new ApexCharts(document.querySelector("#chart-product"), options);
+            chart.render();
+            console.log(response)
+
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    })
+})

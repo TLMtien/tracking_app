@@ -329,13 +329,29 @@
                                     <div class="row dropdown_table">
                                         <div class="col-12 boxcorlor">
                                             <span class="box-color"></span>
-                                            Scheme 1
+                                            Scheme 
                                         </div>
+                                        
+                                        
                                         <ul class="dropdown-menu_table">
                                             <p class="title_sub">Select Scheme <i class='bx bx-sort-alt-2' ></i></p>
+                                            {% if cam_id == 2 or cam_id == 4  or cam_id == 6 %}
                                             <button class="nav-sub" type='button' id='Scheme-1' value='scheme1'>Scheme 1</button>
                                             <button class="nav-sub" type='button' id='Scheme-2'>Scheme 2</button>
+                                            {% endif %}
+                                            {% if cam_id ==  6 %}
+                                            <button class="nav-sub" type='button' id='Scheme-3'>Scheme 3</button>
+                                            <button class="nav-sub" type='button' id='Scheme-4'>Scheme 4</button>
+                                            <button class="nav-sub" type='button' id='Scheme-5'>Scheme 5</button>
+                                            {% endif %}
                                         </ul>
+                                       
+                                        
+                                        
+                                        
+
+
+
                                     </div>
                                     
                                     <div class="row-1" >
