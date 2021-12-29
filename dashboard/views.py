@@ -298,14 +298,14 @@ def filter_outlet_province(request, campainID):
             all_outlet = outletInfo.objects.filter(compain = Cp)
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
             volume_performance[5] = volume_perf[5]
-            volume_performance[4] = volume_perf[4]
+            volume_performance[6] = volume_perf[6]
 
             list_rp = getAll_report_outlet(campainID, all_outlet)
         
             pie = pie_chart(campainID, list_rp[0])
             consumers_charts = total_consumers_reached(campainID, list_rp[1])
             gift_charts = gift(campainID, list_rp[2])
-            volume_performance = VOLUME_PERFORMANCE(campainID, all_outlet)
+            
             Average_brand_volume = [volume_performance[2], volume_performance[3]]
             top_10 = top10_outlet(campainID, all_outlet)
             activation = activation_progress(campainID, all_outlet)
@@ -321,7 +321,7 @@ def filter_outlet_province(request, campainID):
                                     </p>
                             </div>
                         '''
-        for type in volume_performance[4]:
+        for type in volume_performance[6]:
             print(type)
             list_type += f'''<tr>
                                 <div class="sidebar-menu_sub">
