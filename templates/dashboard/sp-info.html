@@ -25,25 +25,48 @@
                 </div>
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
-                        <li class="nav-list dropdown-nav active">
-                            <a href="#" class="nav-links drop-btn" onclick="openTigerTp()">
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 1 %}
+                            active
+                        {% endif %}">
+                            <a href="{% url 'sp-info' 1 %}" class="nav-links">
                                 Tiger Table Promotion
                             </a>
-                            <ul class="dropdown-menu">
-                            <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
-                        <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                        <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
-                            </ul>
+                            
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Festive Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Hot Zone Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Strongbow Festive</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Table Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Special Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Bivina Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Special Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 2 %}
+                            active
+                        {% endif %}"><a href="{% url 'sp-info' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 3 %}
+                            active
+                        {% endif %}"><a href="{% url 'sp-info' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 4 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'sp-info' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 5 %}
+                            active
+                        {% endif %}"><a href="{% url 'sp-info' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 6 %}
+                            active
+                        {% endif %}"><a href="{% url 'sp-info' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 7 %}
+                            active
+                        {% endif %}"><a href="{% url 'sp-info' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 8 %}
+                            active
+                        {% endif %}"><a href="{% url 'sp-info' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 9 %}
+                            active
+                        {% endif %}"><a href="{% url 'sp-info' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
                 
@@ -62,10 +85,10 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Management</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'dashboard' 1%}">Dashboard</a></li>
-                        <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                        <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
+                        <li class="nav-sub"><a href="{% url 'dashboard' cam_id %}">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'raw-data' cam_id %}">Raw data</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' cam_id %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' cam_id %}">Export report</a></li>
                     </ul>
                 </div>
                 
@@ -74,10 +97,10 @@
                 <div class="leftbox dropdown_raw">
                     <button onclick="openLeftMenu()" class="open-left-menu"><span class="title-menu">SP Information</span> </button>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
-                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="{% url 'kpi' 1 %}">KPI Tracking</a></li>
-                        <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' cam_id %}">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'outlet-approval' cam_id %}">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="{% url 'kpi' cam_id %}">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="{% url 'sp-info' cam_id %}">SP Information</a></li>
                     </ul>
                     
                 </div>
@@ -93,6 +116,7 @@
             
             <div class="main-table_managenment">
                 <div class="table-outlet">
+                    {% csrf_token %}
                     <table style="width:100%" class="table-list">  
                         
                         <tr>  
@@ -142,134 +166,82 @@
                             </th>
                             <th class="th-btns">
                                 <div>
-                                    <button class="th-btn">Ban</button>
+                                    <button class="th-btn" id="ban" 
+                                    {% if not is_campain_owner %}
+                                        disabled
+                                    {% endif %}>Ban</button>
                                 </div>
                                 <div>
-                                    <button class="th-btn_all">Ban All</button>
+                                    <button class="th-btn_all" id="ban_all" 
+                                    {% if not is_campain_owner %}
+                                        disabled
+                                    {% endif %}
+                                        >Ban All</button>
                                 </div>
                             </th>
                             <th class="th-btns">
                                 <div>
-                                    <button class="th-btn">Download</button>
+                                    <button class="th-btn" 
+                                    {% if not is_campain_owner %}
+                                        disabled
+                                    {% endif %}>Download</button>
                                 </div>
                                 <div>
-                                    <button class="th-btn_all">Download All</button>
+                                    <button class="th-btn_all" 
+                                    {% if not is_campain_owner %}
+                                        disabled
+                                    {% endif %}>Download All</button>
                                 </div>
                             </th>
                             
                         </tr>
+                        
+                        {% for sp in sale_person %}
                         <tr>  
-                            <td class="td-desc">1</td>  
+                            <td class="td-desc">{{ forloop.counter }}</td>  
                             <td class="td-desc">Bluesun</td>  
-                            <td class="td-desc ">Nguyen Van A</td>  
+                            <td class="td-desc ">{{ sp.full_name }}</td>  
                             <td class="td-desc ">0928273238</td>  
-                            <td class="td-desc ">TGxTPx0001</td>  
-                            <td class="td-desc ">05.Dec,21</td>  
-                            <td class="td-desc">10.Dec,21</td>   
-                            <td class="td-desc td-color_icon-green">
+                            <td class="td-desc ">{{ sp.user.user_name }}</td>  
+                            <td class="td-desc ">{{ sp.user.start_date }}</td>  
+                            <td class="td-desc">10.Dec,21</td>
+                            
+                            {% if sp.user.is_active %}
+                            <td class="td-desc td-color_icon-green" id="status{{sp.user.id}}">
                                 <a href="#" class="td-icon_user"><i class='bx bxs-user' ></i></a>
-                            </td>  
+                            </td>
+                            {% else %}
+                            <td class="td-desc td-color_icon-red" id="status{{sp.user.id}}">
+                                <a href="#" class="td-icon_user"><i class='bx bxs-user' ></i></a>
+                            </td>
+                            {% endif %}
+                                 
+                             
                             <td class="td-desc">
                                 <a href="#" class="td-icon_edit"><i class='bx bxs-edit'></i></a>
                             </td> 
                             <td class="td-desc">
                                 <label>
-                                    <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
+                                    <input type="checkbox" class="sidebar-menu_checkbox" value="{{sp.user.id}}" name="ban_user" 
+                                    {% if not is_campain_owner %}
+                                        disabled
+                                    {% endif %}>
                                     <span class="checkmark"></span>
                                 </label>
                             </td> 
                             <td class="td-desc">
                                 <label>
-                                    <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                    <span class="checkmark"></span>
+                                    <input type="checkbox" class="sidebar-menu_checkbox" 
+                                    {% if not is_campain_owner %}
+                                        disabled
+                                    {% endif %}>
+                                    <span class="checkmark" ></span>
                                 </label>
                             </td> 
                             
-                        </tr>  
-                        <tr>  
-                            <td class="td-desc">1</td>  
-                            <td class="td-desc">Bluesun</td>  
-                            <td class="td-desc ">Nguyen Van A</td>  
-                            <td class="td-desc ">0928273238</td>  
-                            <td class="td-desc ">TGxTPx0001</td>  
-                            <td class="td-desc ">05.Dec,21</td>  
-                            <td class="td-desc">10.Dec,21</td>   
-                            <td class="td-desc td-color_icon-red">
-                                <a href="#" class="td-icon_user"><i class='bx bxs-user' ></i></a>
-                            </td>  
-                            <td class="td-desc">
-                                <a href="#" class="td-icon_edit"><i class='bx bxs-edit'></i></a>
-                            </td> 
-                            <td class="td-desc">
-                                <label>
-                                    <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td> 
-                            <td class="td-desc">
-                                <label>
-                                    <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td> 
+                        </tr>
+                        {% endfor %}
                             
-                        </tr>  
-                        <tr>  
-                            <td class="td-desc">1</td>  
-                            <td class="td-desc">Bluesun</td>  
-                            <td class="td-desc ">Nguyen Van A</td>  
-                            <td class="td-desc ">0928273238</td>  
-                            <td class="td-desc ">TGxTPx0001</td>  
-                            <td class="td-desc ">05.Dec,21</td>  
-                            <td class="td-desc">10.Dec,21</td>   
-                            <td class="td-desc td-color_icon-green">
-                                <a href="#" class="td-icon_user"><i class='bx bxs-user' ></i></a>
-                            </td>  
-                            <td class="td-desc">
-                                <a href="#" class="td-icon_edit"><i class='bx bxs-edit'></i></a>
-                            </td> 
-                            <td class="td-desc">
-                                <label>
-                                    <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td> 
-                            <td class="td-desc">
-                                <label>
-                                    <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td> 
-                            
-                        </tr>  
-                        <tr>  
-                            <td class="td-desc">1</td>  
-                            <td class="td-desc">Bluesun</td>  
-                            <td class="td-desc ">Nguyen Van A</td>  
-                            <td class="td-desc ">0928273238</td>  
-                            <td class="td-desc ">TGxTPx0001</td>  
-                            <td class="td-desc ">05.Dec,21</td>  
-                            <td class="td-desc">10.Dec,21</td>   
-                            <td class="td-desc td-color_icon-red">
-                                <a href="#" class="td-icon_user"><i class='bx bxs-user' ></i></a>
-                            </td>  
-                            <td class="td-desc">
-                                <a href="#" class="td-icon_edit"><i class='bx bxs-edit'></i></a>
-                            </td> 
-                            <td class="td-desc">
-                                <label>
-                                    <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td> 
-                            <td class="td-desc">
-                                <label>
-                                    <input type="checkbox" checked="checked" class="sidebar-menu_checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td> 
-                            
-                        </tr>  
                         
                         
                     </table> 
@@ -356,6 +328,41 @@
                 $(".dropdown-menu_logout").slideUp("fast");
             }            
         });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#ban").click(function () {
+                var array_id = [];
+                $('input[name = "ban_user"]:checkbox:checked').each(function(i) {
+                    console.log(this);
+                    array_id.push($(this).val());
+                    console.log(array_id);
+                });
+                const csrf = document.getElementsByName('csrfmiddlewaretoken');
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "ban-sp" %}',
+                    headers: {
+                        "X-CSRFToken": csrf[0].value
+                    },
+                    data: JSON.stringify({"array_id":array_id}),
+
+                    processData: false,
+                    contentType: 'application/json',
+                    dataType: "json",
+                    success:function(resp) {
+                        alert("Đã ban thành công!!!")
+                        array_id.forEach(element => {
+                            $("#status"+element).removeClass("td-color_icon-green").addClass("td-color_icon-red");
+                        });
+                    },
+                    error: function(error) {
+                        console.log(error)
+                    }
+                }); // end ajax
+            }); // end click
+        });
+        
     </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="{% static 'PC/js/chart.js' %}"></script>

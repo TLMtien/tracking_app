@@ -24,27 +24,56 @@
                 </div>
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
-                        <li class="nav-list dropdown-nav active">
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 1%}
+                        active
+                        {% endif %}
+                        ">
                             <a href="{% url 'outlet-approval' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
                                 Tiger Table Promotion
                             </a>
-                            <ul class="dropdown-menu">
-                                <ul class="dropdown-menu">
-                                    <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
-                                    <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                                    <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                                    <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
-                                </ul>
-                            </ul>
+                            
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 5 %}" class="nav-links">Heineken Special Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 6 %}" class="nav-links">Strongbow Festive</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="{% url 'outlet-approval' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 2 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'outlet-approval' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 3 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'outlet-approval' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 4 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'outlet-approval' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 5 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'outlet-approval' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 6 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'outlet-approval' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 7 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'outlet-approval' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 8 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'outlet-approval' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 9 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'outlet-approval' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
                 <div class="profile-user dropdown-logout">
@@ -61,10 +90,10 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Management</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'dashboard' 1%}">Dashboard</a></li>
-                        <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                        <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
+                        <li class="nav-sub"><a href="{% url 'dashboard' cam_id %}">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'raw-data' cam_id  %}">Raw data</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' cam_id  %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' cam_id  %}">Export report</a></li>
                     </ul>
                 </div>
                 
@@ -74,10 +103,10 @@
                 <div class="leftbox dropdown_raw">
                     <button onclick="openLeftMenu()" class="open-left-menu"><span class="title-menu">Outlet Approval</span> </button>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
-                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="{% url 'kpi' 1 %}">KPI Tracking</a></li>
-                        <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' cam_id  %}">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'outlet-approval' cam_id  %}">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="{% url 'kpi' cam_id  %}">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="{% url 'sp-info' cam_id  %}">SP Information</a></li>
                     </ul>
                 </div>
                 {% comment %} <div class="rightbox">

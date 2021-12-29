@@ -92,10 +92,10 @@
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
                     <span class="title-menu">Management</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'dashboard' 1%}">Dashboard</a></li>
-                        <li class="nav-sub"><a href="{% url 'raw-data' %}">Raw data</a></li>
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                        <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
+                        <li class="nav-sub"><a href="{% url 'dashboard' cam_id  %}">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'raw-data' cam_id  %}">Raw data</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' cam_id  %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' cam_id  %}">Export report</a></li>
                     </ul>
                 </div>
                 {% comment %} <div class="rightbox">
@@ -110,10 +110,10 @@
                 <div class="leftbox dropdown_raw">
                     <button onclick="openLeftMenu()" class="open-left-menu"><span class="title-menu">KPI Setting</span> </button>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Outlet Information</a></li>
-                        <li class="nav-sub"><a href="{% url 'outlet-approval' 1 %}">Outlet approval</a></li>
-                        <li class="nav-sub"><a href="{% url 'kpi' 1 %}">KPI Tracking</a></li>
-                        <li class="nav-sub"><a href="{% url 'sp-info' %}">SP Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' cam_id  %}">Outlet Information</a></li>
+                        <li class="nav-sub"><a href="{% url 'outlet-approval' cam_id  %}">Outlet approval</a></li>
+                        <li class="nav-sub"><a href="{% url 'kpi' cam_id  %}">KPI Tracking</a></li>
+                        <li class="nav-sub"><a href="{% url 'sp-info' cam_id %}">SP Information</a></li>
                     </ul>
                 </div>
                 <div class="rightbox_kpi">

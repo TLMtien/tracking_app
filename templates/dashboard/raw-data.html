@@ -25,26 +25,56 @@
                 </div>
                 <div class="navbar" id="topheader">
                     <ul class="navbar-nav">
-                        <li class="nav-list dropdown-nav active">
-                            <a href="#" class="nav-links drop-btn" onclick="openTigerTp()">
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 1%}
+                        active
+                        {% endif %}
+                        ">
+                            <a href="{% url 'raw-data' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
                                 Tiger Table Promotion
                             </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
-                                <li class="nav-sub"><a href="#">Raw data</a></li>
-                                <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                                <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
-                            </ul>
                             
                         </li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Festive Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Tiger Hot Zone Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Strongbow Festive</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Table Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Heineken Special Activation</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Bivina Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Festive Promotion</a></li>
-                        <li class="nav-list dropdown-nav"><a href="#" class="nav-links">Larue Special Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 2 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'raw-data' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 3 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'raw-data' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 4 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'raw-data' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 5 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'raw-data' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 6 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'raw-data' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 7 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'raw-data' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 8 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'raw-data' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 9 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'raw-data' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                 </div>
                 <div class="profile-user dropdown-logout">
@@ -63,10 +93,10 @@
                     </button>
                     <span class="title-menu">Raw Data</span>
                     <ul class="dropdown-menu_raw">
-                        <li class="nav-sub"><a href="{% url 'dashboard' 1 %}">Dashboard</a></li>
-                        <li class="nav-sub"><a href="#">Raw data</a></li>
-                        <li class="nav-sub"><a href="{% url 'managementlist' 1 %}">Management</a></li>
-                        <li class="nav-sub"><a href="{% url 'export-report' 1 %}">Export report</a></li>
+                        <li class="nav-sub"><a href="{% url 'dashboard' cam_id %}">Dashboard</a></li>
+                        <li class="nav-sub"><a href="{% url 'raw-data' cam_id %}">Raw data</a></li>
+                        <li class="nav-sub"><a href="{% url 'managementlist' cam_id %}">Management</a></li>
+                        <li class="nav-sub"><a href="{% url 'export-report' cam_id %}">Export report</a></li>
                     </ul>
                 </div>
                 <div class="rightbox">

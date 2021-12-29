@@ -102,7 +102,7 @@ def loginHVN(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("dashboardforlogin")
+            return redirect("passwordchangeHVN")
         else:
             messages.info(request, "usename or password is incorrect")
             return redirect('loginHVN')

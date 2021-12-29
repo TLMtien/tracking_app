@@ -94,7 +94,7 @@ def list_outlet_approval(request, campainID):
     campain = Campain.objects.get(id=campainID)
     outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
     
-    return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet})
+    return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet, "cam_id":campainID})
 
 login_required
 def ban_sp(request):
@@ -219,7 +219,7 @@ def List_sp_management(request,campainID):
         
         
         print(sale_person)
-        return render(request,  'dashboard/sp-info.html', {'sale_person':sale_person,"is_campain_owner":is_campain_owner, "cam_id":campainID})
+        return render(request, "dashboard/sp-info.html", {'sale_person':sale_person,"is_campain_owner":is_campain_owner, "cam_id":campainID})
 ##################################################
 def charts_views(request, campainID):
     from_date = request.POST.get('from-date')
@@ -886,4 +886,5 @@ def export(request, campainID):
     wb.save(response) 
     return response
         
-    
+def raw_data(request, campainID):
+    return render(request,'dashboard/raw-data.html', {"cam_id":campainID})
