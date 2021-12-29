@@ -163,7 +163,7 @@ def uploadFile_outlet(request):
             #     a = Message(phone_number = '+84'+ excel_data[i+1][0][1:len(excel_data[i+1][0])], content = excel_data[i+1][1])
             #     a.save()
             list_outlet = []
-            for i in range(len(excel_data)-1)[:1000]:
+            for i in range(len(excel_data)-1)[1000:]:
                 campain = Campain.objects.get(id=1)
                 filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
                 if filter_outlet <1:
