@@ -484,18 +484,35 @@ def filter_outlet_type_province(request, campainID):
         print(gift_charts)
         list_outlet = ''
         print(list_outlet)
-        for outlet in list_outlet_chart[0]:
-            list_outlet += f'''<tr>
+        if len(list_outlet_chart[0]) == 0:
+            Cp = Campain.objects.get(id = campainID)
+            all_outlet = outletInfo.objects.filter(compain = Cp)
+            volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
+            volume_performance[5] = volume_perf[5]
+            volume_performance[6] = volume_perf[6]
+
+            list_rp = getAll_report_outlet(campainID, all_outlet)
+        
+            pie = pie_chart(campainID, list_rp[0])
+            consumers_charts = total_consumers_reached(campainID, list_rp[1])
+            gift_charts = gift(campainID, list_rp[2])
+            
+            Average_brand_volume = [volume_performance[2], volume_performance[3]]
+            top_10 = top10_outlet(campainID, all_outlet)
+            activation = activation_progress(campainID, all_outlet)
+            
+
+        for outlet in volume_performance[5]:
+            list_outlet += f'''
                             <div class="sidebar-menu_sub">
-                                <label>
-                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet"  value="{outlet.outlet_Name}">
+                                    <label>
+                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet" value="{outlet}">
                                         <span class="checkmark"></span>
-                                </label>
-                                <p class="sidebar-menu_item">
-                                        {outlet.outlet_Name}
-                                </p>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                        {outlet}
+                                    </p>
                             </div>
-                        </tr>
                         '''
         Consumers = f'''
                 <div class="row-1">
@@ -563,18 +580,33 @@ def filter_outletName_Province_type(request, campainID):
         print(gift_charts)
         list_outlet = ''
         print(list_outlet)
-        for outlet in list_outlet_chart[0]:
-            list_outlet += f'''<tr>
+        if len(list_outlet_chart[0]) == 0:
+            Cp = Campain.objects.get(id = campainID)
+            all_outlet = outletInfo.objects.filter(compain = Cp)
+            volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
+            volume_performance[5] = volume_perf[5]
+            volume_performance[6] = volume_perf[6]
+
+            list_rp = getAll_report_outlet(campainID, all_outlet)
+        
+            pie = pie_chart(campainID, list_rp[0])
+            consumers_charts = total_consumers_reached(campainID, list_rp[1])
+            gift_charts = gift(campainID, list_rp[2])
+            
+            Average_brand_volume = [volume_performance[2], volume_performance[3]]
+            top_10 = top10_outlet(campainID, all_outlet)
+            activation = activation_progress(campainID, all_outlet)
+        for outlet in volume_performance[5]:
+            list_outlet += f'''
                             <div class="sidebar-menu_sub">
-                                <label>
-                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet"  value="{outlet.outlet_Name}">
+                                    <label>
+                                        <input type="checkbox" class="sidebar-menu_checkbox" name="name_outlet" value="{outlet}">
                                         <span class="checkmark"></span>
-                                </label>
-                                <p class="sidebar-menu_item">
-                                        {outlet.outlet_Name}
-                                </p>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                        {outlet}
+                                    </p>
                             </div>
-                        </tr>
                         '''
         Consumers = f'''
                 <div class="row-1">

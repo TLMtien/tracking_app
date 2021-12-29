@@ -1007,11 +1007,19 @@ check.change(function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 array1 = []
 $("#list_type_outlet").on("change", "input:checkbox", function() {
-
+    var check_exist = false
     var ischeck = $(this).prop('checked');
     if (ischeck) {
-        array1.push((this.value))
-        total_array.push((this.value))
+        for (let i = 0; i < total_array.length; i++) {
+            if (total_array[i] === this.value) {
+                check_exist = true
+            }
+        }
+        if (check_exist == false) {
+            array1.push((this.value))
+            total_array.push((this.value))
+        }
+
 
     } else {
         array1 = array1.filter(e => e !== this.value);
@@ -1019,6 +1027,7 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
         console.log(this.value)
         console.log(total_array)
     }
+
     console.log(total_array)
     const csrf = document.getElementsByName('csrfmiddlewaretoken')
     var fd = new FormData();
