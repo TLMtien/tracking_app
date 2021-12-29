@@ -1660,7 +1660,7 @@ $("#list_name_outlet").on("change", "input:checkbox", function() {
             }
         })
         console.log(total_array)
-        alert('ok')
+            //alert('ok')
     }
 
 });
