@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 from dashboard.views import reverse
 from . forms import ChangePasswordForm, SignupForm, LoginForm, LoginHVNForm, ChangePasswordHVNForm
-from . models import NewUser, SalePerson
+from . models import NewUser, SalePerson, HVN
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
@@ -133,8 +133,8 @@ def upload_user(request):
 		wb = openpyxl.load_workbook(excel_file)
 		
 		sheets = wb.sheetnames
-		print(sheets[1])
-		worksheet = wb[sheets[1]]   #Trang tính
+		print(sheets[0])
+		worksheet = wb[sheets[0]]   #Trang tính
 
 		excel_data = list()
 	
@@ -149,18 +149,26 @@ def upload_user(request):
 		print(len(excel_data)-2)
 		
 		for i in range(len(excel_data)-1):
-			campain = Campain.objects.get(id=2)
+			campain = Campain.objects.get(id=1)
 			print(excel_data[i+1][2])
 			print(excel_data[i+1][3])
+			#SPPP
+			# outlet = outletInfo.objects.filter(compain = campain)
+			# try:
+			# 	user1 = NewUser.objects.create_user_SP(user_name=excel_data[i+1][2], password=excel_data[i+1][3])
+			# 	sp=SalePerson.objects.create(user=user1, brand = campain, outlet = outlet[1])
+			# 	sp.save()
+			# except:
+			# 	pass
 			
-			outlet = outletInfo.objects.filter(compain = campain)
+			#HVN
 			try:
-				user1 = NewUser.objects.create_user_SP(user_name=excel_data[i+1][2], password=excel_data[i+1][3])
-				sp=SalePerson.objects.create(user=user1, brand = campain, outlet = outlet[1])
+				user1 = NewUser.objects.create_user_HVN(user_name=excel_data[i+1][2] + '@hnk.com', password=excel_data[i+1][3])
+				sp=HVN.objects.create(user=user1)
+				sp.brand.add(campain)
 				sp.save()
-			except:
+			except:	
 				pass
-			
 		return redirect('PasswordChangeDone')
 
 	

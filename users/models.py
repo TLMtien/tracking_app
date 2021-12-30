@@ -85,6 +85,13 @@ class CustomAccountManager(BaseUserManager):
         user.set_password(password)
         user.save()
         return user
+
+    def create_user_HVN(self, user_name,  password, **other_fields):
+        other_fields.setdefault('is_HVN', True)
+        user = self.model(user_name=user_name, **other_fields)
+        user.set_password(password)
+        user.save()
+        return user
         
     
 class NewUser(AbstractBaseUser, PermissionsMixin):
