@@ -921,6 +921,10 @@ def raw_data(request, campainID):
             if not SP.outlet in List_outlet: 
                 List = []
                 list_name_gift = []
+                list_name_gift1 = [] 
+                list_name_gift2 = []
+                list_name_gift3 = []
+                list_name_gift4 = []
                 List_outlet.append(SP.outlet)
                 table_share = Table_share(campainID, rp_table)
                 SaleVolume = sales_volume(campainID, rp_sale)
