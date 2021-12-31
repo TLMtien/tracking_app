@@ -181,7 +181,7 @@ def get_gift_scheme_rawdata(campain_id, outlet_raw, list_gift_of_outlet):
         list_gift_name2 = ['Loa Bluetooth', 'Ba lô', 'Bình Nước', 'Ly']
         result_scheme2 = [0,0,0,0,0,0]
         result_scheme1 = [0,0,0,0,0,0]
-
+        result_scheme = [0,0,0,0,0,0]
         if outlet_raw.province in categories:
             result_scheme = gift_rawdata(campain_id, list_gift_of_outlet)
         else:
