@@ -4,13 +4,13 @@ from .models import outletInfo, tableReport, posmReport, giftReport, report_sale
 
 class outletInfoForm(forms.ModelForm):
     outlet_Name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Tên outlet *"}))
-    type = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Loại outlet *"}))
+    #type = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Loại outlet *"}))
     outlet_address = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Địa chỉ outlet *"}))
     ouletID = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"ID outlet *"}))
 
     class Meta:
         model = outletInfo
-        fields = ("type", "outlet_address", 
+        fields = ("outlet_address", 
                     "outlet_Name", "ouletID",
                  )
 

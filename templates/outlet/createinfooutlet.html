@@ -32,7 +32,7 @@
                         <div class="create-info-outlet__content">
                             <div class="create-info-outlet_body">
                                 
-                                <form action="" class="form-create-info" method='POST'>
+                                <form action="{% url 'outletCreate' outlet_id %}" class="form-create-info" method='POST'>
                                     <p class="form-create-info_title">Thông Tin Outlet</p>
                                     {% csrf_token %} 
                                     <div class="input-create-info">
@@ -44,9 +44,21 @@
                                         {{form.outlet_address}}
                                     </div>
                                     
-                                    <div class="input-create-info">
-                                        {% comment %} <input type="text" placeholder="Loại outlet *"> {% endcomment %}
+                                    {% comment %} <div class="input-create-info">
+                                      
                                         {{form.type}}
+                                    </div> {% endcomment %}
+                                    <div class="input-create-info">
+                                        <select name="type-outlet" id="type" required>
+                                            <option value="">Loại Oulet:</option>
+                                            <option value="QN">QN</option>
+                                            <option value="GSO">GSO</option>
+                                            <option value="YSO">YSO</option>
+                                            <option value="Hot Zone">Hot Zone</option>
+                                            <option value="Karaoke">Karaoke</option>
+                                            <option value="Beer Cafe">Beer Cafe</option>
+                                            <option value="Restaurant">Restaurant</option>
+                                        </select>
                                     </div>
 
                                     <div class="input-create-info">
@@ -71,5 +83,19 @@
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static '/js/app.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#type-outlet").change(function () {
+                var type_outlet = $(this).val();
+                console.log(type_outlet);
+                
+               // var province_filter = encodeURI($("#local-city").val());
+                //var url = $("#url").val();
+                //$("#raw_data_filter_date").attr("href",url + "?date_filter="+date_filter+"&province_filter="+province_filter);
+                //console.log($("#raw_data_filter_date").attr("href"));
+                //$("#raw_data_filter_province").attr("href",url + "?date_filter="+date_filter+"&province_filter="+province_filter);
+            }); // end change type          
+        });
+    </script>
 </body>
 </html>

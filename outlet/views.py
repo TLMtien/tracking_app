@@ -27,7 +27,10 @@ def outlet_create(request, pk):
         form = outletInfoForm(request.POST,is_salePerson=request.user.is_salePerson)
         if form.is_valid():
             outlet_Name = form.cleaned_data.get('outlet_Name')
-            type = form.cleaned_data.get('type')
+            #type = form.cleaned_data.get('type')
+            type = request.POST.get('type-outlet')
+            
+            print(type)
             outlet_address = form.cleaned_data.get('outlet_address')
             ouletID = form.cleaned_data.get('ouletID')
             #create outlet
@@ -40,9 +43,8 @@ def outlet_create(request, pk):
             SP.save()
 
             return redirect('pagereport')
-    else:
-        form = outletInfoForm()
-        return render(request,"outlet/createinfooutlet.html",{'form':form})
+    form = outletInfoForm()
+    return render(request,"outlet/createinfooutlet.html",{'form':form, 'outlet_id':pk})
     
 
 
