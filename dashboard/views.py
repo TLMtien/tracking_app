@@ -917,38 +917,38 @@ def raw_data(request, campainID):
         rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
         consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
         list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
-        if rp_table:
-            if not SP.outlet in List_outlet: 
-                List = []
-                list_name_gift = []
-                List_outlet.append(SP.outlet)
-                table_share = Table_share(campainID, rp_table)
-                SaleVolume = sales_volume(campainID, rp_sale)
-                consumer = consumers_reached_rawdata(campainID, consumers_rp)
-                if campainID == 1 or campainID == 3 or campainID == 5 or campainID == 7 or campainID == 8 or campainID == 9:
-                    gift = gift_rawdata(campainID, list_gift_rp)
-                    List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0]]
-                    
-                if campainID == 2 or campainID == 4 or campainID == 6:
-                    gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
-                    List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2]]
-                    print(gift[0])
-                    print(gift[2])
-                    list_name_gift1.append(gift[3])
+        
+        if not SP.outlet in List_outlet: 
+            List = []
+            list_name_gift = []
+            List_outlet.append(SP.outlet)
+            table_share = Table_share(campainID, rp_table)
+            SaleVolume = sales_volume(campainID, rp_sale)
+            consumer = consumers_reached_rawdata(campainID, consumers_rp)
+            if campainID == 1 or campainID == 3 or campainID == 5 or campainID == 7 or campainID == 8 or campainID == 9:
+                gift = gift_rawdata(campainID, list_gift_rp)
+                List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0]]
                 
-                if campainID == 6:
-                    gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
-                    List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2], gift[4], gift[6], gift[8]]
-                    #print(gift[0])
-                    #print(gift[2])
-                    list_name_gift1.append(gift[3])
-                    list_name_gift2.append(gift[5])
-                    list_name_gift3.append(gift[7])
-                    list_name_gift4.append(gift[9])
+            if campainID == 2 or campainID == 4 or campainID == 6:
+                gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
+                List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2]]
+                print(gift[0])
+                print(gift[2])
+                list_name_gift1.append(gift[3])
+            
+            if campainID == 6:
+                gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
+                List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2], gift[4], gift[6], gift[8]]
+                #print(gift[0])
+                #print(gift[2])
+                list_name_gift1.append(gift[3])
+                list_name_gift2.append(gift[5])
+                list_name_gift3.append(gift[7])
+                list_name_gift4.append(gift[9])
 
-                list_name_gift.append(gift[1])
-                List_raw_data.append(List)
-                #print(List)
-            #print(list_name_gift)
-        return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter})
-    return render(request,'dashboard/raw-data.html', {"cam_id":campainID})
+            list_name_gift.append(gift[1])
+            List_raw_data.append(List)
+            #print(List)
+        #print(list_name_gift)
+    return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter})
+   
