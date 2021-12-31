@@ -917,7 +917,7 @@ def raw_data(request, campainID):
         rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
         consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
         list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
-        if rp_table:
+        if rp_table.exists():
             if not SP.outlet in List_outlet: 
                 List = []
                 list_name_gift = []
@@ -929,7 +929,7 @@ def raw_data(request, campainID):
                     gift = gift_rawdata(campainID, list_gift_rp)
                     List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0]]
                     
-                if campainID == 2 or campainID == 4:
+                if campainID == 2 or campainID == 4 or campainID == 6:
                     gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
                     List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2]]
                     print(gift[0])
@@ -950,5 +950,5 @@ def raw_data(request, campainID):
                 List_raw_data.append(List)
                 #print(List)
             #print(list_name_gift)
-        return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter})
+    return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter})
     return render(request,'dashboard/raw-data.html', {"cam_id":campainID})
