@@ -891,10 +891,13 @@ def raw_data(request, campainID):
     
     date_filter = request.GET.get("date_filter") #
     check = False
-    if not date_filter:
+    try:
+        if not date_filter:
+            date_filter = date.today()
+        else:
+            date_filter = datetime.strptime(date_filter,"%Y-%m-%d")
+    except:
         date_filter = date.today()
-    else:
-        date_filter = datetime.strptime(date_filter,"%Y-%m-%d")
     province_filter = request.GET.get("province_filter")
     if province_filter:
         province = unquote(province_filter)
@@ -919,7 +922,7 @@ def raw_data(request, campainID):
         for SP in sale_person:
             outlet=SP.outlet
             print(type(outlet.province))
-            if outlet.province == province:
+            if outlet.province.lower() == province.lower() or outlet.province.lower() in province.lower() or province.lower() in outlet.province.lower():
                 rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet, created = date_filter)
                 rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
                 consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
