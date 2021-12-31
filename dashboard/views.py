@@ -915,17 +915,12 @@ def raw_data(request, campainID):
     sale_person = SalePerson.objects.filter(brand__pk=campainID)
     for SP in sale_person:
         outlet=SP.outlet
-        if province:
-            if  outlet.province == province:
-                rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet)
-                rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet)
-                consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet)
-                list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet)
-        else:
-            rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet, created = date_filter)
-            rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
-            consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
-            list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
+        
+        rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet, created = date_filter)
+        rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
+        consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
+        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
+    
         if rp_table.exists():
             if not SP.outlet in List_outlet: 
                 List = []
