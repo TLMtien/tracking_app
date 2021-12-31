@@ -151,16 +151,17 @@
                             {% endif %}
                         </tr>  
                         <tr>  
-                            <td class="td-title bg-green">No.</td>  
+                            <td class="td-title bg-green">No.</td>
+                            <input type="hidden" id="url" value="{% url 'raw-data' cam_id %}">
                             <td class="td-title bg-green">
-                                <a href="#">
+                                <a href="{% url 'raw-data' cam_id %}?date_filter={{date_filter}}&province={{province_filter}}" id="raw_data_filter_date">
                                      Date 
                                     <i class='bx bxs-sort-alt'></i>
                                 </a>
-                                    <input type="date" class="td-search_date" value="2021-01-01">
-                            </td>  
+                                    <input type="date" class="td-search_date" value="{{date_filter}}" id="date">
+                            </td>    
                             <td class="td-title bg-green">
-                                <a href="#">
+                                <a href="{% url 'raw-data' cam_id %}?date_filter=date_filter&province=province_filter" id="raw_data_filter_province">
                                     Province
                                 <i class='bx bxs-sort-alt'></i>
                                 </a>
@@ -328,61 +329,74 @@
                             {% endif %}
                             {% endfor %}
                             {% if cam_id == 6 %}
+                            {% for list in list_name_gift2 %}
+                            <td class="td-title bg-green">{{ list.0 }}<i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.1 }} <i class='bx bx-sort-alt-2' ></i></td>   
+                            <td class="td-title bg-green">{{ list.2 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.3 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.4 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.5 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            
+                            <td class="td-title bg-green">{{ list.0 }}<i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.1 }} <i class='bx bx-sort-alt-2' ></i></td>   
+                            <td class="td-title bg-green">{{ list.2 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.3 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.4 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.5 }} <i class='bx bx-sort-alt-2' ></i></td>
 
-                            <td class="td-title bg-green">Class 30cl <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Cup 33cl 3D <i class='bx bx-sort-alt-2' ></i></td>   
-                            <td class="td-title bg-green">Class of Casablanca <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Wallet <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Tiger Crystal Hat <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Beer Voucher <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Class 30cl <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Cup 33cl 3D <i class='bx bx-sort-alt-2' ></i></td>   
-                            <td class="td-title bg-green">Class of Casablanca <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Wallet <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Tiger Crystal Hat <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Beer Voucher <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Class 30cl <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Cup 33cl 3D <i class='bx bx-sort-alt-2' ></i></td>   
-                            <td class="td-title bg-green">Class of Casablanca <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Wallet <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Tiger Crystal Hat <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Beer Voucher <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Class 30cl <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Cup 33cl 3D <i class='bx bx-sort-alt-2' ></i></td>   
-                            <td class="td-title bg-green">Class of Casablanca <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Wallet <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Tiger Crystal Hat <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Beer Voucher <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Class 30cl <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Cup 33cl 3D <i class='bx bx-sort-alt-2' ></i></td>   
-                            <td class="td-title bg-green">Class of Casablanca <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Wallet <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Tiger Crystal Hat <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Beer Voucher <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Class 30cl <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Cup 33cl 3D <i class='bx bx-sort-alt-2' ></i></td>   
-                            <td class="td-title bg-green">Class of Casablanca <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Wallet <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Tiger Crystal Hat <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Beer Voucher <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Class 30cl <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Cup 33cl 3D <i class='bx bx-sort-alt-2' ></i></td>   
-                            <td class="td-title bg-green">Class of Casablanca <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Wallet <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Tiger Crystal Hat <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Beer Voucher <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Class 30cl <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Cup 33cl 3D <i class='bx bx-sort-alt-2' ></i></td>   
-                            <td class="td-title bg-green">Class of Casablanca <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Wallet <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Tiger Crystal Hat <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Beer Voucher <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Class 30cl <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Cup 33cl 3D <i class='bx bx-sort-alt-2' ></i></td>   
-                            <td class="td-title bg-green">Class of Casablanca <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Wallet <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Tiger Crystal Hat <i class='bx bx-sort-alt-2' ></i></td>  
-                            <td class="td-title bg-green">Beer Voucher <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.0 }}<i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.1 }} <i class='bx bx-sort-alt-2' ></i></td>   
+                            <td class="td-title bg-green">{{ list.2 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.3 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.4 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.5 }} <i class='bx bx-sort-alt-2' ></i></td> 
+                            {% endfor %}
+
+                            {% for list in list_name_gift3 %}
+                            <td class="td-title bg-green">{{ list.0 }}<i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.1 }} <i class='bx bx-sort-alt-2' ></i></td>   
+                            <td class="td-title bg-green">{{ list.2 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.3 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.4 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.5 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            
+                            <td class="td-title bg-green">{{ list.0 }}<i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.1 }} <i class='bx bx-sort-alt-2' ></i></td>   
+                            <td class="td-title bg-green">{{ list.2 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.3 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.4 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.5 }} <i class='bx bx-sort-alt-2' ></i></td>
+
+                            <td class="td-title bg-green">{{ list.0 }}<i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.1 }} <i class='bx bx-sort-alt-2' ></i></td>   
+                            <td class="td-title bg-green">{{ list.2 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.3 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.4 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.5 }} <i class='bx bx-sort-alt-2' ></i></td> 
+                            {% endfor %}
+
+                            {% for list in list_name_gift4 %}
+                            <td class="td-title bg-green">{{ list.0 }}<i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.1 }} <i class='bx bx-sort-alt-2' ></i></td>   
+                            <td class="td-title bg-green">{{ list.2 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.3 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.4 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.5 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            
+                            <td class="td-title bg-green">{{ list.0 }}<i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.1 }} <i class='bx bx-sort-alt-2' ></i></td>   
+                            <td class="td-title bg-green">{{ list.2 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.3 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.4 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.5 }} <i class='bx bx-sort-alt-2' ></i></td>
+
+                            <td class="td-title bg-green">{{ list.0 }}<i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.1 }} <i class='bx bx-sort-alt-2' ></i></td>   
+                            <td class="td-title bg-green">{{ list.2 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.3 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.4 }} <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">{{ list.5 }} <i class='bx bx-sort-alt-2' ></i></td> 
+                            {% endfor %}
                             
                             {% endif %}
                             
@@ -452,60 +466,62 @@
                             <td class="td-desc">{{ list.21.17 }}</td>
                             {% endif %}
                             {% if cam_id == 6 %}
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">30</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">30</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">30</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>   
-                            <td class="td-desc">67</td>  
-                            <td class="td-desc">67</td>
+                            <td class="td-desc">{{ list.22.0 }}</td>  
+                            <td class="td-desc">{{ list.22.1 }}</td>   
+                            <td class="td-desc">{{ list.22.2 }}</td>  
+                            <td class="td-desc">{{ list.22.3 }}</td>  
+                            <td class="td-desc">{{ list.22.4 }}</td>  
+                            <td class="td-desc">{{ list.22.5 }}</td>  
+                            <td class="td-desc">{{ list.22.6 }}</td>   
+                            <td class="td-desc">{{ list.22.7 }}</td>  
+                            <td class="td-desc">{{ list.22.8 }}</td>  
+                            <td class="td-desc">{{ list.22.9 }}</td>  
+                            <td class="td-desc">{{ list.22.10 }}</td>  
+                            <td class="td-desc">{{ list.22.11 }}</td>   
+                            <td class="td-desc">{{ list.22.12 }}</td>  
+                            <td class="td-desc">{{ list.22.13 }}</td>  
+                            <td class="td-desc">{{ list.22.14 }}</td>  
+                            <td class="td-desc">{{ list.22.15 }}</td>  
+                            <td class="td-desc">{{ list.22.16 }}</td>  
+                            <td class="td-desc">{{ list.22.17 }}</td>
+
+                            <td class="td-desc">{{ list.23.0 }}</td>  
+                            <td class="td-desc">{{ list.23.1 }}</td>   
+                            <td class="td-desc">{{ list.23.2 }}</td>  
+                            <td class="td-desc">{{ list.23.3 }}</td>  
+                            <td class="td-desc">{{ list.23.4 }}</td>  
+                            <td class="td-desc">{{ list.23.5 }}</td>  
+                            <td class="td-desc">{{ list.23.6 }}</td>   
+                            <td class="td-desc">{{ list.23.7 }}</td>  
+                            <td class="td-desc">{{ list.23.8 }}</td>  
+                            <td class="td-desc">{{ list.23.9 }}</td>  
+                            <td class="td-desc">{{ list.23.10 }}</td>  
+                            <td class="td-desc">{{ list.23.11 }}</td>   
+                            <td class="td-desc">{{ list.23.12 }}</td>  
+                            <td class="td-desc">{{ list.23.13 }}</td>  
+                            <td class="td-desc">{{ list.23.14 }}</td>  
+                            <td class="td-desc">{{ list.23.15 }}</td>  
+                            <td class="td-desc">{{ list.23.16 }}</td>  
+                            <td class="td-desc">{{ list.23.17 }}</td> 
+
+                            <td class="td-desc">{{ list.24.0 }}</td>  
+                            <td class="td-desc">{{ list.24.1 }}</td>   
+                            <td class="td-desc">{{ list.24.2 }}</td>  
+                            <td class="td-desc">{{ list.24.3 }}</td>  
+                            <td class="td-desc">{{ list.24.4 }}</td>  
+                            <td class="td-desc">{{ list.24.5 }}</td>  
+                            <td class="td-desc">{{ list.24.6 }}</td>   
+                            <td class="td-desc">{{ list.24.7 }}</td>  
+                            <td class="td-desc">{{ list.24.8 }}</td>  
+                            <td class="td-desc">{{ list.24.9 }}</td>  
+                            <td class="td-desc">{{ list.24.10 }}</td>  
+                            <td class="td-desc">{{ list.24.11 }}</td>   
+                            <td class="td-desc">{{ list.24.12 }}</td>  
+                            <td class="td-desc">{{ list.24.13 }}</td>  
+                            <td class="td-desc">{{ list.24.14 }}</td>  
+                            <td class="td-desc">{{ list.24.15 }}</td>  
+                            <td class="td-desc">{{ list.24.16 }}</td>  
+                            <td class="td-desc">{{ list.24.17 }}</td>
                             {% endif %}  
                         </tr>  
                         {% endfor %}
@@ -613,6 +629,26 @@
             else
             btn.classList.remove('active');
             });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+          $("#date").change(function () {
+              var date_filter = $(this).val();
+              console.log(date_filter);
+              var province_filter = encodeURI($("#local-city").val());
+              var url = $("#url").val();
+              $("#raw_data_filter_date").attr("href",url + "?date_filter="+date_filter+"&province_filter="+province_filter);
+              console.log($("#raw_data_filter_date").attr("href"));
+              $("#raw_data_filter_province").attr("href",url + "?date_filter="+date_filter+"&province_filter="+province_filter);
+          }); // end change date       
+          $("#local-city").change(function () {
+              var date_filter = $("#date").val();
+              var province_filter = encodeURI($(this).val());
+              var url = $("#url").val();
+              $("#raw_data_filter_date").attr("href",url + "?date_filter="+date_filter+"&province_filter="+province_filter);
+              $("#raw_data_filter_province").attr("href",url + "?date_filter="+date_filter+"&province_filter="+province_filter);
+          }); // end change province       
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
