@@ -917,7 +917,7 @@ def raw_data(request, campainID):
         rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
         consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
         list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
-        if rp_table.exists() or rp_sale.exists():
+        if rp_table.exists():
             if not SP.outlet in List_outlet: 
                 List = []
                 list_name_gift = []
