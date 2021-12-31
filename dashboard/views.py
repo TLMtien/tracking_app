@@ -922,7 +922,7 @@ def raw_data(request, campainID):
         for SP in sale_person:
             outlet=SP.outlet
             print(type(outlet.province))
-            if outlet.province.lower() == province.lower() or outlet.province.lower() in province.lower() or province.lower() in outlet.province.lower():
+            if outlet.province == province or outlet.province in province or province in outlet.province:
                 rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet, created = date_filter)
                 rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
                 consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
