@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.http import JsonResponse
 from .forms import KPIForm
-
+from urllib.parse import unquote
 from users.models import SalePerson, NewUser
 import json
 from django.views.generic import DetailView
@@ -896,12 +896,20 @@ def raw_data(request, campainID):
     list_name_gift2 = []
     list_name_gift3 = []
     list_name_gift4 = []
+    date_filter = request.GET.get("date_filter") # 
+    print(date_filter)
+    # if not date_filter:
+    #     date_filter = date.today()
+    # else:
+    #     date_filter =  datetime.strptime(date_filter, "%Y-%m-%d")
+    date_filter = date.today()
+    
     sale_person = SalePerson.objects.filter(brand__pk=campainID)
     for SP in sale_person:
-        rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet)
-        rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet)
-        consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet)
-        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet)
+        rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet, created = date_filter)
+        rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
+        consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created =date_filter)
+        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
         
         if not SP.outlet in List_outlet: 
             List = []
@@ -924,8 +932,8 @@ def raw_data(request, campainID):
             if campainID == 6:
                 gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
                 List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2], gift[4], gift[6], gift[8]]
-                print(gift[0])
-                print(gift[2])
+                #print(gift[0])
+                #print(gift[2])
                 list_name_gift1.append(gift[3])
                 list_name_gift2.append(gift[5])
                 list_name_gift3.append(gift[7])
@@ -934,5 +942,5 @@ def raw_data(request, campainID):
             list_name_gift.append(gift[1])
             List_raw_data.append(List)
             #print(List)
-        print(list_name_gift)
-    return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1 })
+        #print(list_name_gift)
+    return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4})
