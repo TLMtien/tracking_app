@@ -898,7 +898,8 @@ def raw_data(request, campainID):
     province_filter = request.GET.get("province_filter")
     if province_filter:
         province = unquote(province_filter)
-    
+        print(province)
+        
     print(date_filter)
 
     Cp = Campain.objects.get(id=campainID)
@@ -955,4 +956,4 @@ def raw_data(request, campainID):
                 #print(List)
             #print(list_name_gift)
     return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter})
-    return render(request,'dashboard/raw-data.html', {"cam_id":campainID})
+    
