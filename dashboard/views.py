@@ -929,7 +929,7 @@ def raw_data(request, campainID):
                     gift = gift_rawdata(campainID, list_gift_rp)
                     List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0]]
                     
-                if campainID == 2 or campainID == 4 or campainID == 6:
+                if campainID == 2 or campainID == 4:
                     gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
                     List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2]]
                     print(gift[0])
