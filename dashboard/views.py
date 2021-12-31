@@ -890,7 +890,7 @@ def export(request, campainID):
 def raw_data(request, campainID):
     
     date_filter = request.GET.get("date_filter") #
-   
+    check = False
     if not date_filter:
         date_filter = date.today()
     else:
@@ -898,6 +898,8 @@ def raw_data(request, campainID):
     province_filter = request.GET.get("province_filter")
     if province_filter:
         province = unquote(province_filter)
+        check = True
+    
         print(province)
 
     print(date_filter)
@@ -915,12 +917,18 @@ def raw_data(request, campainID):
     sale_person = SalePerson.objects.filter(brand__pk=campainID)
     for SP in sale_person:
         outlet=SP.outlet
+        if check == True and outlet.province == str(province):
+            rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet, created = date_filter)
+            rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
+            consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
+            list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
+            
+        else:
+            rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet, created = date_filter)
+            rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
+            consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
+            list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
         
-        rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet, created = date_filter)
-        rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
-        consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
-        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
-    
         if rp_table.exists():
             if not SP.outlet in List_outlet: 
                 List = []
