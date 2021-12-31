@@ -915,7 +915,8 @@ def raw_data(request, campainID):
     sale_person = SalePerson.objects.filter(brand__pk=campainID)
     for SP in sale_person:
         outlet=SP.outlet
-        if outlet.province in province:
+        if province:
+            if  outlet.province == province:
                 rp_table = tableReport.objects.filter(campain = Cp, outlet=SP.outlet)
                 rp_sale =  report_sale.objects.filter(campain=Cp, outlet=SP.outlet)
                 consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet)
