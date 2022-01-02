@@ -38,4 +38,7 @@ urlpatterns = [
     path('<int:campainID>/filter_outlet_type_province/', views.filter_outlet_type_province, name='filter_outlet_type_province'),
     path('<int:campainID>/filter_outletName_Province_type/', views.filter_outletName_Province_type, name='filter_outletName_Province_type'),
     path('<int:campainID>/filter/', views.charts_views, name='filter'),
+
+    path('<int:campainID>/edit_rawdata/', views.edit_rawdata, name='edit_rawdata'),
+    path('<int:campainID>/unlock/', views.unlock, name='unlock'),
 ]

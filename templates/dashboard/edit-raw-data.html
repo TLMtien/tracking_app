@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raw Data</title>
+    <title>Edit Raw Data</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- BOXICONS -->
@@ -99,11 +99,11 @@
                         <li class="nav-sub"><a href="{% url 'export-report' cam_id %}">Export report</a></li>
                     </ul>
                 </div>
-                <div class="rightbox" >
+                {% comment %} <div class="rightbox">
                     <div class="lock-icon">
-                        <a href="{% url 'unlock' cam_id %}"><i class='bx bxs-lock-alt' ></i> <span>Unlock to change</span></a>
+                        <a href="./unlock.html"><i class='bx bxs-lock-alt' ></i> <span>Unlock to change</span></a>
                     </div>
-                </div> 
+                </div> {% endcomment %}
             </div>
             <!-- Main Home-->
             
@@ -126,7 +126,7 @@
                             <th colspan="18">SCHEME 4 </th>  
                             <th colspan="18">SCHEME 5 </th>  
                             {% endif %}
-                        </tr>  
+                        </tr>
                         <tr>   
                             <th colspan="6">GIFT - PROVIDED</th>  
                             <th colspan="6">GIFT - DELIVERED</th>  
@@ -152,16 +152,16 @@
                         </tr>  
                         <tr>  
                             <td class="td-title bg-green">No.</td>
-                            <input type="hidden" id="url" value="{% url 'raw-data' cam_id %}">
+                            <input type="hidden" id="url" value="{% url 'edit_rawdata' cam_id %}">
                             <td class="td-title bg-green">
-                                <a href="{% url 'raw-data' cam_id %}?date_filter={{date_filter}}&province={{province_filter}}" id="raw_data_filter_date">
+                                <a href="{% url 'edit_rawdata' cam_id %}?date_filter={{date_filter}}&province={{province_filter}}" id="raw_data_filter_date">
                                      Date 
                                     <i class='bx bxs-sort-alt'></i>
                                 </a>
                                     <input type="date" class="td-search_date" value="{{date_filter}}" id="date">
                             </td>    
                             <td class="td-title bg-green">
-                                <a href="{% url 'raw-data' cam_id %}?date_filter={{date_filter}}&province={{province_filter}}" id="raw_data_filter_province">
+                                <a href="{% url 'edit_rawdata' cam_id %}?date_filter={{date_filter}}&province={{province_filter}}" id="raw_data_filter_province">
                                     Province
                                 <i class='bx bxs-sort-alt'></i>
                                 </a>
@@ -484,6 +484,7 @@
                                         selected
                                     {% endif %}
                                     >Yên Bái</option>
+                                    
                                 </select>
                                 
                             </td>  
@@ -520,7 +521,7 @@
                                 <input type="search" class="td-search"> 
                                 <i class='bx bx-search-alt-2 icon-search' ></i>
                             </td>  
-                            <td class="td-title bg-green">Brand Volume Sales <i class='bx bx-sort-alt-2' ></i></td>  
+                            <td class="td-title bg-green">Tiger Volume Sales <i class='bx bx-sort-alt-2' ></i></td>  
                             <td class="td-title bg-green">HVN Volume Sales <i class='bx bx-sort-alt-2' ></i></td>   
                             <td class="td-title bg-green">Compertion Volume Sales <i class='bx bx-sort-alt-2' ></i></td>  
                             <td class="td-title bg-green">Total Table <i class='bx bx-sort-alt-2' ></i></td>   
@@ -654,8 +655,6 @@
                             {% endfor %}
                             
                             {% endif %}
-                            
-                            
                         </tr>  
                         {% for list in List_raw_data%}
                         <tr>  
@@ -667,128 +666,437 @@
                             <td class="td-desc text-small">{{ list.3}}</td>  
                             <td class="td-desc">{{ list.4 }}</td>   
                             <td class="td-desc">{{ list.5 }}</td>  
-                            <td class="td-desc">{{ list.6 }}</td>  
-                            <td class="td-desc">{{ list.7 }}</td>   
-                            <td class="td-desc">{{ list.8 }}</td>  
-                            <td class="td-desc">{{ list.9 }}</td>   
-                            <td class="td-desc">{{ list.10 }}</td>  
-                            <td class="td-desc">{{ list.11 }}</td>   
-                            <td class="td-desc">{{ list.12 }}</td>   
-                            <td class="td-desc">{{ list.13 }}</td>  
-                            <td class="td-desc">{{ list.14 }}</td>  
-                            <td class="td-desc">{{ list.15 }}</td>  
-                            <td class="td-desc">{{ list.16 }}</td> 
-                            <td class="td-desc">{{ list.17 }}</td>  
-                            <td class="td-desc">{{ list.18 }}</td> 
-                            <td class="td-desc">{{ list.19 }}</td>  
 
-                            <td class="td-desc">{{ list.20.0 }}</td>  
-                            <td class="td-desc">{{ list.20.1 }}</td>   
-                            <td class="td-desc">{{ list.20.2 }}</td>  
-                            <td class="td-desc">{{ list.20.3 }}</td>  
-                            <td class="td-desc">{{ list.20.4 }}</td>  
-                            <td class="td-desc">{{ list.20.5 }}</td>  
-                            <td class="td-desc">{{ list.20.6 }}</td>   
-                            <td class="td-desc">{{ list.20.7 }}</td>  
-                            <td class="td-desc">{{ list.20.8 }}</td>  
-                            <td class="td-desc">{{ list.20.9 }}</td>  
-                            <td class="td-desc">{{ list.20.10 }}</td>  
-                            <td class="td-desc">{{ list.20.11 }}</td>   
-                            <td class="td-desc">{{ list.20.12 }}</td>  
-                            <td class="td-desc">{{ list.20.13 }}</td>  
-                            <td class="td-desc">{{ list.20.14 }}</td>  
-                            <td class="td-desc">{{ list.20.15 }}</td>  
-                            <td class="td-desc">{{ list.20.16 }}</td>  
-                            <td class="td-desc">{{ list.20.17 }}</td>
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>
+
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="" disabled>
+                                {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
+                            </td> 
+
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td> 
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" disabled>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td> 
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" disabled>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
                             {% if cam_id == 2 or cam_id == 4 or cam_id == 6 %}
-                            <td class="td-desc">{{ list.21.0 }}</td>  
-                            <td class="td-desc">{{ list.21.1 }}</td>   
-                            <td class="td-desc">{{ list.21.2 }}</td>  
-                            <td class="td-desc">{{ list.21.3 }}</td>  
-                            <td class="td-desc">{{ list.21.4 }}</td>  
-                            <td class="td-desc">{{ list.21.5 }}</td>  
-                            <td class="td-desc">{{ list.21.6 }}</td>   
-                            <td class="td-desc">{{ list.21.7 }}</td>  
-                            <td class="td-desc">{{ list.21.8 }}</td>  
-                            <td class="td-desc">{{ list.21.9 }}</td>  
-                            <td class="td-desc">{{ list.21.10 }}</td>  
-                            <td class="td-desc">{{ list.21.11 }}</td>   
-                            <td class="td-desc">{{ list.21.12 }}</td>  
-                            <td class="td-desc">{{ list.21.13 }}</td>  
-                            <td class="td-desc">{{ list.21.14 }}</td>  
-                            <td class="td-desc">{{ list.21.15 }}</td>  
-                            <td class="td-desc">{{ list.21.16 }}</td>  
-                            <td class="td-desc">{{ list.21.17 }}</td>
+
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
                             {% endif %}
                             {% if cam_id == 6 %}
-                            <td class="td-desc">{{ list.22.0 }}</td>  
-                            <td class="td-desc">{{ list.22.1 }}</td>   
-                            <td class="td-desc">{{ list.22.2 }}</td>  
-                            <td class="td-desc">{{ list.22.3 }}</td>  
-                            <td class="td-desc">{{ list.22.4 }}</td>  
-                            <td class="td-desc">{{ list.22.5 }}</td>  
-                            <td class="td-desc">{{ list.22.6 }}</td>   
-                            <td class="td-desc">{{ list.22.7 }}</td>  
-                            <td class="td-desc">{{ list.22.8 }}</td>  
-                            <td class="td-desc">{{ list.22.9 }}</td>  
-                            <td class="td-desc">{{ list.22.10 }}</td>  
-                            <td class="td-desc">{{ list.22.11 }}</td>   
-                            <td class="td-desc">{{ list.22.12 }}</td>  
-                            <td class="td-desc">{{ list.22.13 }}</td>  
-                            <td class="td-desc">{{ list.22.14 }}</td>  
-                            <td class="td-desc">{{ list.22.15 }}</td>  
-                            <td class="td-desc">{{ list.22.16 }}</td>  
-                            <td class="td-desc">{{ list.22.17 }}</td>
-
-                            <td class="td-desc">{{ list.23.0 }}</td>  
-                            <td class="td-desc">{{ list.23.1 }}</td>   
-                            <td class="td-desc">{{ list.23.2 }}</td>  
-                            <td class="td-desc">{{ list.23.3 }}</td>  
-                            <td class="td-desc">{{ list.23.4 }}</td>  
-                            <td class="td-desc">{{ list.23.5 }}</td>  
-                            <td class="td-desc">{{ list.23.6 }}</td>   
-                            <td class="td-desc">{{ list.23.7 }}</td>  
-                            <td class="td-desc">{{ list.23.8 }}</td>  
-                            <td class="td-desc">{{ list.23.9 }}</td>  
-                            <td class="td-desc">{{ list.23.10 }}</td>  
-                            <td class="td-desc">{{ list.23.11 }}</td>   
-                            <td class="td-desc">{{ list.23.12 }}</td>  
-                            <td class="td-desc">{{ list.23.13 }}</td>  
-                            <td class="td-desc">{{ list.23.14 }}</td>  
-                            <td class="td-desc">{{ list.23.15 }}</td>  
-                            <td class="td-desc">{{ list.23.16 }}</td>  
-                            <td class="td-desc">{{ list.23.17 }}</td> 
-
-                            <td class="td-desc">{{ list.24.0 }}</td>  
-                            <td class="td-desc">{{ list.24.1 }}</td>   
-                            <td class="td-desc">{{ list.24.2 }}</td>  
-                            <td class="td-desc">{{ list.24.3 }}</td>  
-                            <td class="td-desc">{{ list.24.4 }}</td>  
-                            <td class="td-desc">{{ list.24.5 }}</td>  
-                            <td class="td-desc">{{ list.24.6 }}</td>   
-                            <td class="td-desc">{{ list.24.7 }}</td>  
-                            <td class="td-desc">{{ list.24.8 }}</td>  
-                            <td class="td-desc">{{ list.24.9 }}</td>  
-                            <td class="td-desc">{{ list.24.10 }}</td>  
-                            <td class="td-desc">{{ list.24.11 }}</td>   
-                            <td class="td-desc">{{ list.24.12 }}</td>  
-                            <td class="td-desc">{{ list.24.13 }}</td>  
-                            <td class="td-desc">{{ list.24.14 }}</td>  
-                            <td class="td-desc">{{ list.24.15 }}</td>  
-                            <td class="td-desc">{{ list.24.16 }}</td>  
-                            <td class="td-desc">{{ list.24.17 }}</td>
-                            {% endif %}  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>   
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            <td class="td-desc">
+                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
+                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                            </td>  
+                            {% endif %} 
                         </tr>  
                         {% endfor %}
                         
                     </table> 
-                    {% comment %} <div class="pagin-table">
-                        <a href="#" class="back-page"><i class='bx bxs-chevrons-left' ></i></a>
-                        <a href="#" id="page-1" class="number-page active">1</a>
-                        <span>|</span>
-                        <a href="#" id="page-2" class="number-page">10</a>
-                        <a href="#" class="next-page"><i class='bx bxs-chevrons-right' ></i></a>
-                    </div> {% endcomment %}
+                    
                 </div>
                 
             </div>
@@ -906,6 +1214,7 @@
           }); // end change province       
         });
     </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="{% static 'PC/js/chart.js' %}"></script>
     <script src="{% static 'PC/js/app.js' %}"></script>

@@ -15,3 +15,11 @@ class KPIForm(forms.ModelForm):
         fields = ("volume_achieved", "table_share", 
                     "consumer_reached", "conversion",
                  )
+
+class unlock_password(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'unlock-box', 'name': 'password',
+													'placeholder':"Enter Your Password"}), required=True)
+    class Meta:
+        fields = ("password",
+                 )
+    
