@@ -184,35 +184,101 @@ $(document).on('click', '#consumer', function() {
 }); // end click consumer
 
 
-
+/////////////////////////////////////////////////////////////////////////////////
 //Gift
 
 $(document).on('click', '#gift', function() {
-    alert('ok')
+    //gift receive
     var array_report_sale = [];
-    var array_total_consumers = [];
-    var array_consumers_approached = [];
-    var array_consumers_bought = [];
-    var array_consumer_id = [];
-    $('input[name = "total-consumers"]').each(function(i) {
-        array_total_consumers.push($(this).val());
+    var array_gift_id = [];
+    var array_gift_receive_1 = [];
+    var array_gift_receive_2 = [];
+    var array_gift_receive_3 = [];
+    var array_gift_receive_4 = [];
+    var array_gift_receive_5 = [];
+    var array_gift_receive_6 = [];
+    var array_gift_receive_7 = [];
+    //gift given
+    var array_gift_given_1 = [];
+    var array_gift_given_2 = [];
+    var array_gift_given_3 = [];
+    var array_gift_given_4 = [];
+    var array_gift_given_5 = [];
+    var array_gift_given_6 = [];
+    var array_gift_given_7 = [];
+    //gift received
+    $('input[name = "gift-receive-1"]').each(function(i) {
+        array_gift_receive_1.push($(this).val());
     });
-    $('input[name = "consumers-approached"]').each(function(i) {
-        //console.log(this.value);
-        array_consumers_approached.push($(this).val());
+    $('input[name = "gift-receive-2"]').each(function(i) {
+        array_gift_receive_2.push($(this).val());
     });
-    $('input[name = "consumers-bought"]').each(function(i) {
-        // console.log(this.value);
-        array_consumers_bought.push($(this).val());
+    $('input[name = "gift-receive-3"]').each(function(i) {
+        array_gift_receive_3.push($(this).val());
     });
-    $('input[name = "consumers_id"]').each(function(i) {
-        //console.log(this.value);
-        array_consumer_id.push($(this).val());
+    $('input[name = "gift-receive-4"]').each(function(i) {
+        array_gift_receive_4.push($(this).val());
     });
-    array_report_sale.push(array_consumer_id);
-    array_report_sale.push(array_total_consumers);
-    array_report_sale.push(array_consumers_approached);
-    array_report_sale.push(array_consumers_bought);
+    $('input[name = "gift-receive-5"]').each(function(i) {
+        array_gift_receive_5.push($(this).val());
+    });
+    $('input[name = "gift-receive-6"]').each(function(i) {
+        array_gift_receive_6.push($(this).val());
+    });
+    $('input[name = "gift-receive-7"]').each(function(i) {
+        array_gift_receive_7.push($(this).val());
+    });
+    if (array_gift_receive_1.length > array_gift_receive_7.length) {
+        array_gift_receive_7.push('0');
+    }
+    //Gift given
+    $('input[name = "gift-given-1"]').each(function(i) {
+        array_gift_given_1.push($(this).val());
+    });
+    $('input[name = "gift-given-2"]').each(function(i) {
+        array_gift_given_2.push($(this).val());
+    });
+    $('input[name = "gift-given-3"]').each(function(i) {
+        array_gift_given_3.push($(this).val());
+    });
+    $('input[name = "gift-given-4"]').each(function(i) {
+        array_gift_given_4.push($(this).val());
+    });
+    $('input[name = "gift-given-5"]').each(function(i) {
+        array_gift_given_5.push($(this).val());
+    });
+    $('input[name = "gift-given-6"]').each(function(i) {
+        array_gift_given_6.push($(this).val());
+    });
+    $('input[name = "gift-given-7"]').each(function(i) {
+        array_gift_given_7.push($(this).val());
+    });
+    if (array_gift_given_1.length > array_gift_given_7.length) {
+        array_gift_given_7.push('0');
+    }
+    /////////////////
+    $('input[name = "gift_id"]').each(function(i) {
+        array_gift_id.push($(this).val());
+    });
+    array_report_sale.push(array_gift_id);
+    //array gift receive
+
+    array_report_sale.push(array_gift_receive_1);
+    array_report_sale.push(array_gift_receive_2);
+    array_report_sale.push(array_gift_receive_3);
+    array_report_sale.push(array_gift_receive_4);
+    array_report_sale.push(array_gift_receive_5);
+    array_report_sale.push(array_gift_receive_6);
+    array_report_sale.push(array_gift_receive_7);
+    //array gift given
+    array_report_sale.push(array_gift_given_1);
+    array_report_sale.push(array_gift_given_2);
+    array_report_sale.push(array_gift_given_3);
+    array_report_sale.push(array_gift_given_4);
+    array_report_sale.push(array_gift_given_5);
+    array_report_sale.push(array_gift_given_6);
+    array_report_sale.push(array_gift_given_7);
+
     console.log(array_report_sale)
     const csrf = document.getElementsByName('csrfmiddlewaretoken');
     //const csrf = document.getElementsByName('csrfmiddlewaretoken')
