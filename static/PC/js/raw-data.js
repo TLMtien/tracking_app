@@ -227,11 +227,14 @@ $(document).on('click', '#gift', function() {
     });
     $('input[name = "gift-receive-7"]').each(function(i) {
         array_gift_receive_7.push($(this).val());
+
+    });
+
+    for (let i = 0; i < array_gift_receive_1.length; i++) {
         if (array_gift_receive_1.length > array_gift_receive_7.length) {
             array_gift_receive_7.push('0');
         }
-    });
-
+    }
     //Gift given
     $('input[name = "gift-given-1"]').each(function(i) {
         array_gift_given_1.push($(this).val());
@@ -253,11 +256,13 @@ $(document).on('click', '#gift', function() {
     });
     $('input[name = "gift-given-7"]').each(function(i) {
         array_gift_given_7.push($(this).val());
+
+    });
+    for (let i = 0; i < array_gift_given_1.length; i++) {
         if (array_gift_given_1.length > array_gift_given_7.length) {
             array_gift_given_7.push('0');
         }
-    });
-
+    }
     /////////////////
     $('input[name = "gift_id"]').each(function(i) {
         array_gift_id.push($(this).val());
