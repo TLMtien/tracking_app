@@ -1196,32 +1196,32 @@ def unlock(request, campainID):
     form = unlock_password()
     return render(request,"dashboard/unlock.html",{'form':form, 'cam_id':campainID})
 
-def edit_volume_sale(request, campainID):
-    if request.user.is_HVN:
-        print(json.loads(request.body.decode('UTF-8')))
-        data = json.loads(request.body.decode('UTF-8'))
-        data = data.get("array_report_sale",[])
-        sale_id = data[0][0]
-        date = data[1][0]
-        beer_brand = data[2][0]
-        beer_HVN = data[3][0]
-        beer_other = data[4][0]
-        print(sale_id, beer_brand)
-        Cp = Campain.objects.get(id=campainID)
-        try:
-            rp_sale = report_sale.objects.get(id=sale_id)
-            if beer_brand != '':
-                rp_sale.beer_brand = beer_brand
-                rp_sale.save()
-            if beer_HVN != '':
-                rp_sale.beer_HVN = beer_HVN
-                rp_sale.save()
-            if beer_other != '':
-                rp_sale.beer_other = beer_other
-                rp_sale.save()
-        except:
-            pass
-        return JsonResponse({'status': 'ok'})
+# def edit_volume_sale(request, campainID):
+#     if request.user.is_HVN:
+#         print(json.loads(request.body.decode('UTF-8')))
+#         data = json.loads(request.body.decode('UTF-8'))
+#         data = data.get("array_report_sale",[])
+#         sale_id = data[0][0]
+#         date = data[1][0]
+#         beer_brand = data[2][0]
+#         beer_HVN = data[3][0]
+#         beer_other = data[4][0]
+#         print(sale_id, beer_brand)
+#         Cp = Campain.objects.get(id=campainID)
+#         try:
+#             rp_sale = report_sale.objects.get(id=sale_id)
+#             if beer_brand != '':
+#                 rp_sale.beer_brand = beer_brand
+#                 rp_sale.save()
+#             if beer_HVN != '':
+#                 rp_sale.beer_HVN = beer_HVN
+#                 rp_sale.save()
+#             if beer_other != '':
+#                 rp_sale.beer_other = beer_other
+#                 rp_sale.save()
+#         except:
+#             pass
+#         return JsonResponse({'status': 'ok'})
 
 def edit_table_sale(request, campainID):
     if request.user.is_HVN:
@@ -1284,3 +1284,25 @@ def edit_consumer_rp(request, campainID):
 
 
 
+def edit_volume_sale(request, campainID):
+    if request.user.is_HVN:
+        print(json.loads(request.body.decode('UTF-8')))
+        data = json.loads(request.body.decode('UTF-8'))
+        data = data.get("array_report_sale",[])
+        sale_id = data[0]
+        date = data[1]
+        beer_brand = data[2]
+        beer_HVN = data[3]
+        beer_other = data[4]
+        print(sale_id, beer_brand)
+        print(len(sale_id))
+        try:
+            for i in range(len(sale_id)):
+                rp_sale = report_sale.objects.get(id=sale_id[i])
+                rp_sale.beer_brand = beer_brand[i]
+                rp_sale.beer_HVN = beer_HVN[i]
+                rp_sale.beer_other = beer_other[i]
+                rp_sale.save()
+        except:
+            pass
+        return JsonResponse({'status': 'ok'})
