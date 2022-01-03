@@ -929,7 +929,7 @@ def raw_data(request, campainID):
                 consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
                 list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
                 print(outlet.province)
-                if rp_table.exists():
+                if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
                     if not SP.outlet in List_outlet: 
                         List = []
                         list_name_gift = []
@@ -977,7 +977,7 @@ def raw_data(request, campainID):
             consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
             list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
         
-            if rp_table.exists():
+            if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
                 if not SP.outlet in List_outlet: 
                     List = []
                     list_name_gift = []
@@ -1056,7 +1056,7 @@ def edit_rawdata(request, campainID):
                 consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
                 list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
                 print(outlet.province)
-                if rp_table.exists():
+                if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
                     if not SP.outlet in List_outlet: 
                         List = []
                         list_name_gift = []
@@ -1064,24 +1064,38 @@ def edit_rawdata(request, campainID):
                         list_name_gift2 = []
                         list_name_gift3 = []
                         list_name_gift4 = []
+                        rp_id_sale = 0
+                        rp_id_table = 0
+                        rp_id_consumer = 0
+                        rp_id_gift = 0
+                        ##################################
+                        for rp in rp_sale:
+                            rp_id_sale = rp.id
+                        for rp in rp_table:
+                            rp_id_table = rp.id
+                        for rp in consumers_rp:
+                            rp_id_consumer = rp.id
+                        for rp in list_gift_rp:
+                            rp_id_gift = rp.id
                         List_outlet.append(SP.outlet)
                         table_share = Table_share(campainID, rp_table)
                         SaleVolume = sales_volume(campainID, rp_sale)
+                        
                         consumer = consumers_reached_rawdata(campainID, consumers_rp)
                         if campainID == 1 or campainID == 3 or campainID == 5 or campainID == 7 or campainID == 8 or campainID == 9:
                             gift = gift_rawdata(campainID, list_gift_rp)
-                            List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0]]
+                            List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], rp_id_sale, rp_id_table, rp_id_consumer, rp_id_gift, gift[0]]
                             
                         if campainID == 2 or campainID == 4 or campainID == 6:
                             gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
-                            List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2]]
+                            List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], rp_id_sale, rp_id_table, rp_id_consumer, rp_id_gift, gift[0], gift[2]]
                             print(gift[0])
                             print(gift[2])
                             list_name_gift1.append(gift[3])
                         
                         if campainID == 6:
                             gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
-                            List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2], gift[4], gift[6], gift[8]]
+                            List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4],rp_id_sale, rp_id_table, rp_id_consumer, rp_id_gift, gift[0], gift[2], gift[4], gift[6], gift[8]]
                             #print(gift[0])
                             #print(gift[2])
                             list_name_gift1.append(gift[3])
@@ -1104,7 +1118,7 @@ def edit_rawdata(request, campainID):
             consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=SP.outlet, created = date_filter)
             list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = SP.outlet, created=date_filter)
         
-            if rp_table.exists():
+            if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
                 if not SP.outlet in List_outlet: 
                     List = []
                     list_name_gift = []
@@ -1112,24 +1126,42 @@ def edit_rawdata(request, campainID):
                     list_name_gift2 = []
                     list_name_gift3 = []
                     list_name_gift4 = []
+                    list_id_report = []
+                    rp_id_sale = 0
+                    rp_id_table = 0
+                    rp_id_consumer = 0
+                    rp_id_gift = 0
+                    ##################################
+                    for rp in rp_sale:
+                        rp_id_sale = rp.id
+                    for rp in rp_table:
+                        rp_id_table = rp.id
+                    for rp in consumers_rp:
+                        rp_id_consumer = rp.id
+                    for rp in list_gift_rp:
+                        rp_id_gift = rp.id
+                    
+                    list_id_report = [rp_id_sale, rp_id_table, rp_id_consumer, rp_id_gift]
+                    print(list_id_report)    
+                    ###################################
                     List_outlet.append(SP.outlet)
                     table_share = Table_share(campainID, rp_table)
                     SaleVolume = sales_volume(campainID, rp_sale)
                     consumer = consumers_reached_rawdata(campainID, consumers_rp)
                     if campainID == 1 or campainID == 3 or campainID == 5 or campainID == 7 or campainID == 8 or campainID == 9:
                         gift = gift_rawdata(campainID, list_gift_rp)
-                        List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0]]
+                        List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], rp_id_sale, rp_id_table, rp_id_consumer, rp_id_gift, gift[0]]
                         
                     if campainID == 2 or campainID == 4 or campainID == 6:
                         gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
-                        List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2]]
+                        List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], rp_id_sale, rp_id_table, rp_id_consumer, rp_id_gift, gift[0], gift[2]]
                         print(gift[0])
                         print(gift[2])
                         list_name_gift1.append(gift[3])
                     
                     if campainID == 6:
                         gift = get_gift_scheme_rawdata(campainID, SP.outlet, list_gift_rp)
-                        List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], gift[0], gift[2], gift[4], gift[6], gift[8]]
+                        List = [SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], rp_id_sale, rp_id_table, rp_id_consumer, rp_id_gift, gift[0], gift[2], gift[4], gift[6], gift[8]]
                         #print(gift[0])
                         #print(gift[2])
                         list_name_gift1.append(gift[3])
@@ -1140,7 +1172,7 @@ def edit_rawdata(request, campainID):
                     list_name_gift.append(gift[1])
                     List_raw_data.append(List)
                     #print(List)
-                #print(list_name_gift)
+                #print(list_name_gift) 
         return render(request,'dashboard/edit-raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter})
         
     #return render(request, 'dashboard/edit-raw-data.html', {"cam_id":campainID})
@@ -1163,3 +1195,92 @@ def unlock(request, campainID):
            
     form = unlock_password()
     return render(request,"dashboard/unlock.html",{'form':form, 'cam_id':campainID})
+
+def edit_volume_sale(request, campainID):
+    if request.user.is_HVN:
+        print(json.loads(request.body.decode('UTF-8')))
+        data = json.loads(request.body.decode('UTF-8'))
+        data = data.get("array_report_sale",[])
+        sale_id = data[0][0]
+        date = data[1][0]
+        beer_brand = data[2][0]
+        beer_HVN = data[3][0]
+        beer_other = data[4][0]
+        print(sale_id, beer_brand)
+        Cp = Campain.objects.get(id=campainID)
+        try:
+            rp_sale = report_sale.objects.get(id=sale_id)
+            if beer_brand != '':
+                rp_sale.beer_brand = beer_brand
+                rp_sale.save()
+            if beer_HVN != '':
+                rp_sale.beer_HVN = beer_HVN
+                rp_sale.save()
+            if beer_other != '':
+                rp_sale.beer_other = beer_other
+                rp_sale.save()
+        except:
+            pass
+        return JsonResponse({'status': 'ok'})
+
+def edit_table_sale(request, campainID):
+    if request.user.is_HVN:
+        print(json.loads(request.body.decode('UTF-8')))
+        data = json.loads(request.body.decode('UTF-8'))
+        data = data.get("array_report_sale",[])
+        sale_id = data[0][0]
+        brand_table = data[1][0]
+        HVN_table = data[2][0]
+        other_beer_table = data[3][0]
+        other_table = data[4][0]
+        total_table = 0
+        percent_table_share = 0
+        print(brand_table, HVN_table, other_beer_table, other_table)
+        Cp = Campain.objects.get(id=campainID)
+        try:
+            rp_table = tableReport.objects.get(id=sale_id)
+            rp_table.brand_table = brand_table
+            rp_table.HVN_table = HVN_table
+            rp_table.other_beer_table = other_beer_table
+            rp_table.other_table = other_table
+            rp_table.save()
+            total_table = rp_table.total_table
+            if int(total_table) > 0:
+                percent_table_share =  percent(brand_table, total_table)
+        except:
+            pass
+        
+      
+        print(total_table, percent_table_share)
+        return JsonResponse({'status': 'ok', 'total_table': total_table, 'percent_table_share':percent_table_share, 'id':sale_id})
+
+def edit_consumer_rp(request, campainID):
+    if request.user.is_HVN:
+        print(json.loads(request.body.decode('UTF-8')))
+        data = json.loads(request.body.decode('UTF-8'))
+        data = data.get("array_report_sale",[])
+        sale_id = data[0][0]
+        Total_Consumers = data[1][0]
+        consumers_approach = data[2][0]
+        consumers_brough = data[3][0]
+        consumers_reach = 0
+        conversion = 0
+        print(Total_Consumers, consumers_approach, consumers_brough)
+        try:
+            consumers_rp = consumerApproachReport.objects.get(id=sale_id)
+            consumers_rp.Total_Consumers = Total_Consumers
+            consumers_rp.consumers_approach = consumers_approach
+            consumers_rp.consumers_brough = consumers_brough
+            consumers_rp.save()
+            if int(Total_Consumers) > 0:
+                consumers_reach = percent(consumers_approach, Total_Consumers)
+            if int(consumers_approach) > 0:
+                conversion = percent(consumers_brough, consumers_approach)
+        except:
+            pass
+        
+        print(consumers_reach, conversion)
+        return JsonResponse({'status': 'ok', 'consumers_reach': consumers_reach, 'conversion':conversion, 'id':sale_id})
+
+
+

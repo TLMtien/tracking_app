@@ -60,8 +60,8 @@ class outletInfo(models.Model):
     created_by_HVN = models.BooleanField(default=False, blank=True)
     def __str__(self):
         return "{} - {}".format(self.area, self.outlet_Name)
-    class Meta:
-	    ordering = ["created"]
+    # class Meta:
+	#     ordering = ["created"]
     
     # def get_absolute_url(self):   
     #     return reverse("", kwargs={
@@ -86,6 +86,9 @@ class tableReport(models.Model):
     total_table = models.CharField(max_length=255, default='0', blank=True)
     created = models.DateField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        self.total_table = sum(self.brand_table , self.HVN_table, self.other_beer_table, self.other_table)
+        super(tableReport, self).save(*args, **kwargs)
     
 
 
