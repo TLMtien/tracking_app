@@ -109,10 +109,12 @@ $(document).on('click', '#table-sale', function() {
         dataType: "json",
         success: function(resp) {
             alert("Đã sửa thành công!!!")
-                //document.querySelector('input[name="total-table"]').value = resp.total_table;
-            $("#total-table" + resp.id).val(resp.total_table)
-                //document.querySelector('input[name="table-share"]').value = resp.percent_table_share;
-            $("#table-share" + resp.id).val(resp.percent_table_share)
+            for (let i = 0; i < resp.id.length; i++) {
+
+                $("#total-table" + resp.id[i]).val(resp.list_total_table[i])
+                $("#table-share" + resp.id[i]).val(resp.list_percent_table_share[i])
+            }
+
         },
         error: function(error) {
             console.log(error)

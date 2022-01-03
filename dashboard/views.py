@@ -1223,36 +1223,36 @@ def unlock(request, campainID):
 #             pass
 #         return JsonResponse({'status': 'ok'})
 
-def edit_table_sale(request, campainID):
-    if request.user.is_HVN:
-        print(json.loads(request.body.decode('UTF-8')))
-        data = json.loads(request.body.decode('UTF-8'))
-        data = data.get("array_report_sale",[])
-        sale_id = data[0][0]
-        brand_table = data[1][0]
-        HVN_table = data[2][0]
-        other_beer_table = data[3][0]
-        other_table = data[4][0]
-        total_table = 0
-        percent_table_share = 0
-        print(brand_table, HVN_table, other_beer_table, other_table)
-        Cp = Campain.objects.get(id=campainID)
-        try:
-            rp_table = tableReport.objects.get(id=sale_id)
-            rp_table.brand_table = brand_table
-            rp_table.HVN_table = HVN_table
-            rp_table.other_beer_table = other_beer_table
-            rp_table.other_table = other_table
-            rp_table.save()
-            total_table = rp_table.total_table
-            if int(total_table) > 0:
-                percent_table_share =  percent(brand_table, total_table)
-        except:
-            pass
+# def edit_table_sale(request, campainID):
+#     if request.user.is_HVN:
+#         print(json.loads(request.body.decode('UTF-8')))
+#         data = json.loads(request.body.decode('UTF-8'))
+#         data = data.get("array_report_sale",[])
+#         sale_id = data[0][0]
+#         brand_table = data[1][0]
+#         HVN_table = data[2][0]
+#         other_beer_table = data[3][0]
+#         other_table = data[4][0]
+#         total_table = 0
+#         percent_table_share = 0
+#         print(brand_table, HVN_table, other_beer_table, other_table)
+#         Cp = Campain.objects.get(id=campainID)
+#         try:
+#             rp_table = tableReport.objects.get(id=sale_id)
+#             rp_table.brand_table = brand_table
+#             rp_table.HVN_table = HVN_table
+#             rp_table.other_beer_table = other_beer_table
+#             rp_table.other_table = other_table
+#             rp_table.save()
+#             total_table = rp_table.total_table
+#             if int(total_table) > 0:
+#                 percent_table_share =  percent(brand_table, total_table)
+#         except:
+#             pass
         
       
-        print(total_table, percent_table_share)
-        return JsonResponse({'status': 'ok', 'total_table': total_table, 'percent_table_share':percent_table_share, 'id':sale_id})
+#         print(total_table, percent_table_share)
+#         return JsonResponse({'status': 'ok', 'total_table': total_table, 'percent_table_share':percent_table_share, 'id':sale_id})
 
 def edit_consumer_rp(request, campainID):
     if request.user.is_HVN:
@@ -1306,3 +1306,38 @@ def edit_volume_sale(request, campainID):
         except:
             pass
         return JsonResponse({'status': 'ok'})
+
+def edit_table_sale(request, campainID):
+    if request.user.is_HVN:
+        print(json.loads(request.body.decode('UTF-8')))
+        data = json.loads(request.body.decode('UTF-8'))
+        data = data.get("array_report_sale",[])
+        sale_id = data[0]
+        brand_table = data[1]
+        HVN_table = data[2]
+        other_beer_table = data[3]
+        other_table = data[4]
+        list_total_table = []
+        list_percent_table_share = []
+        print(brand_table, HVN_table, other_beer_table, other_table)
+        Cp = Campain.objects.get(id=campainID)
+        try:
+            for i in range(len(sale_id)):
+                total_table = 0
+                percent_table_share = 0
+                rp_table = tableReport.objects.get(id=sale_id[i])
+                rp_table.brand_table = brand_table[i]
+                rp_table.HVN_table = HVN_table[i]
+                rp_table.other_beer_table = other_beer_table[i]
+                rp_table.other_table = other_table[i]
+                rp_table.save()
+                total_table = rp_table.total_table
+                if int(total_table) > 0:
+                    percent_table_share =  percent(rp_table.brand_table, rp_table.total_table)
+                list_total_table.append(total_table)
+                list_percent_table_share.append(percent_table_share)
+        except:
+            pass
+        
+        print(total_table, percent_table_share)
+        return JsonResponse({'status': 'ok', 'list_total_table': list_total_table, 'list_percent_table_share':list_percent_table_share, 'id':sale_id})
