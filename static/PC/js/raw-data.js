@@ -171,6 +171,11 @@ $(document).on('click', '#consumer', function() {
             $("#percent-consumers-reach" + resp.id).val(resp.consumers_reach)
                 // document.querySelector('input[name="conversion"]').value = resp.conversion;
             $("#conversion" + resp.id).val(resp.conversion)
+
+            for (let i = 0; i < resp.id.length; i++) {
+                $("#percent-consumers-reach" + resp.id[i]).val(resp.list_consumers_reach[i])
+                $("#conversion" + resp.id[i]).val(resp.list_conversion[i])
+            }
         },
         error: function(error) {
             console.log(error)

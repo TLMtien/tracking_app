@@ -1254,33 +1254,33 @@ def unlock(request, campainID):
 #         print(total_table, percent_table_share)
 #         return JsonResponse({'status': 'ok', 'total_table': total_table, 'percent_table_share':percent_table_share, 'id':sale_id})
 
-def edit_consumer_rp(request, campainID):
-    if request.user.is_HVN:
-        print(json.loads(request.body.decode('UTF-8')))
-        data = json.loads(request.body.decode('UTF-8'))
-        data = data.get("array_report_sale",[])
-        sale_id = data[0][0]
-        Total_Consumers = data[1][0]
-        consumers_approach = data[2][0]
-        consumers_brough = data[3][0]
-        consumers_reach = 0
-        conversion = 0
-        print(Total_Consumers, consumers_approach, consumers_brough)
-        try:
-            consumers_rp = consumerApproachReport.objects.get(id=sale_id)
-            consumers_rp.Total_Consumers = Total_Consumers
-            consumers_rp.consumers_approach = consumers_approach
-            consumers_rp.consumers_brough = consumers_brough
-            consumers_rp.save()
-            if int(Total_Consumers) > 0:
-                consumers_reach = percent(consumers_approach, Total_Consumers)
-            if int(consumers_approach) > 0:
-                conversion = percent(consumers_brough, consumers_approach)
-        except:
-            pass
+# def edit_consumer_rp(request, campainID):
+#     if request.user.is_HVN:
+#         print(json.loads(request.body.decode('UTF-8')))
+#         data = json.loads(request.body.decode('UTF-8'))
+#         data = data.get("array_report_sale",[])
+#         sale_id = data[0][0]
+#         Total_Consumers = data[1][0]
+#         consumers_approach = data[2][0]
+#         consumers_brough = data[3][0]
+#         consumers_reach = 0
+#         conversion = 0
+#         print(Total_Consumers, consumers_approach, consumers_brough)
+#         try:
+#             consumers_rp = consumerApproachReport.objects.get(id=sale_id)
+#             consumers_rp.Total_Consumers = Total_Consumers
+#             consumers_rp.consumers_approach = consumers_approach
+#             consumers_rp.consumers_brough = consumers_brough
+#             consumers_rp.save()
+#             if int(Total_Consumers) > 0:
+#                 consumers_reach = percent(consumers_approach, Total_Consumers)
+#             if int(consumers_approach) > 0:
+#                 conversion = percent(consumers_brough, consumers_approach)
+#         except:
+#             pass
         
-        print(consumers_reach, conversion)
-        return JsonResponse({'status': 'ok', 'consumers_reach': consumers_reach, 'conversion':conversion, 'id':sale_id})
+#         print(consumers_reach, conversion)
+#         return JsonResponse({'status': 'ok', 'consumers_reach': consumers_reach, 'conversion':conversion, 'id':sale_id})
 
 
 
@@ -1341,3 +1341,36 @@ def edit_table_sale(request, campainID):
         
         print(total_table, percent_table_share)
         return JsonResponse({'status': 'ok', 'list_total_table': list_total_table, 'list_percent_table_share':list_percent_table_share, 'id':sale_id})
+
+def edit_consumer_rp(request, campainID):
+    if request.user.is_HVN:
+        print(json.loads(request.body.decode('UTF-8')))
+        data = json.loads(request.body.decode('UTF-8'))
+        data = data.get("array_report_sale",[])
+        sale_id = data[0]
+        Total_Consumers = data[1]
+        consumers_approach = data[2]
+        consumers_brough = data[3]
+        list_consumers_reach = []
+        list_conversion = []
+        print(Total_Consumers, consumers_approach, consumers_brough)
+        try:
+            for i in range(len(sale_id)):
+                consumers_reach = 0
+                conversion = 0
+                consumers_rp = consumerApproachReport.objects.get(id=sale_id[i])
+                consumers_rp.Total_Consumers = Total_Consumers[i]
+                consumers_rp.consumers_approach = consumers_approach[i]
+                consumers_rp.consumers_brough = consumers_brough[i]
+                consumers_rp.save()
+                if int(consumers_rp.Total_Consumers) > 0:
+                    consumers_reach = percent(consumers_rp.consumers_approach, consumers_rp.Total_Consumers)
+                if int(consumers_rp.consumers_approach) > 0:
+                    conversion = percent(consumers_rp.consumers_brough, consumers_rp.consumers_approach)
+                list_consumers_reach.append(consumers_reach)
+                list_conversion.append(conversion)
+        except:
+            pass
+        
+        print(consumers_reach, conversion)
+        return JsonResponse({'status': 'ok', 'list_consumers_reach':list_consumers_reach, 'list_conversion':list_conversion, 'id':sale_id})
