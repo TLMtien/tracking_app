@@ -1418,6 +1418,8 @@ def edit_gift_rp(request, campainID):
                 gift_rp.gift6_given = gift_given_6[i]
                 gift_rp.gift7_given = gift_given_7[i]
                 gift_rp.save()
+                if gift_rp.gift1_remaining == '':
+                    gift_rp.gift1_remaining = 0
                 li = [gift_rp.gift1_remaining, gift_rp.gift2_remaining, gift_rp.gift3_remaining, gift_rp.gift4_remaining, gift_rp.gift5_remaining, gift_rp.gift6_remaining, gift_rp.gift7_remaining]
                 list_gift_remain.append(li)
         except:
