@@ -206,6 +206,9 @@ $(document).on('click', '#gift', function() {
     var array_gift_given_5 = [];
     var array_gift_given_6 = [];
     var array_gift_given_7 = [];
+    $('input[name = "gift_id"]').each(function(i) {
+        array_gift_id.push($(this).val());
+    });
     //gift received
     $('input[name = "gift-receive-1"]').each(function(i) {
         array_gift_receive_1.push($(this).val());
@@ -284,7 +287,7 @@ $(document).on('click', '#gift', function() {
     $('input[name = "gift-given-6"]').each(function(i) {
         array_gift_given_6.push($(this).val());
     });
-    $('input[name = "gift-given-7-scheme2"]').each(function(i) {
+    $('input[name = "gift-given-7"]').each(function(i) {
         array_gift_given_7.push($(this).val());
 
     });
@@ -325,9 +328,7 @@ $(document).on('click', '#gift', function() {
     }
 
     /////////////////
-    $('input[name = "gift_id"]').each(function(i) {
-        array_gift_id.push($(this).val());
-    });
+
     array_report_sale.push(array_gift_id);
     //array gift receive
 
