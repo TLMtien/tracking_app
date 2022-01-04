@@ -284,7 +284,7 @@ $(document).on('click', '#gift', function() {
     $('input[name = "gift-given-6"]').each(function(i) {
         array_gift_given_6.push($(this).val());
     });
-    $('input[name = "gift-given-7"]').each(function(i) {
+    $('input[name = "gift-given-7-scheme2"]').each(function(i) {
         array_gift_given_7.push($(this).val());
 
     });
