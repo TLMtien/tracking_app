@@ -1406,51 +1406,52 @@ def edit_gift_rp(request, campainID):
                 gift5_remaining = 0
                 gift6_remaining = 0
                 gift7_remaining = 0
+                try:
+                    gift_rp = giftReport.objects.get(id=sale_id[i])
+                    li = []
+                    gift_rp.gift1_received = gift_receive_1[i]
+                    gift_rp.gift2_received = gift_receive_2[i]
+                    gift_rp.gift3_received = gift_receive_3[i]
+                    gift_rp.gift4_received = gift_receive_4[i]
+                    gift_rp.gift5_received = gift_receive_5[i]
+                    gift_rp.gift6_received = gift_receive_6[i]
+                    gift_rp.gift7_received = gift_receive_7[i]
 
-                gift_rp = giftReport.objects.get(id=sale_id[i])
-                li = []
-                gift_rp.gift1_received = gift_receive_1[i]
-                gift_rp.gift2_received = gift_receive_2[i]
-                gift_rp.gift3_received = gift_receive_3[i]
-                gift_rp.gift4_received = gift_receive_4[i]
-                gift_rp.gift5_received = gift_receive_5[i]
-                gift_rp.gift6_received = gift_receive_6[i]
-                gift_rp.gift7_received = gift_receive_7[i]
-
-                gift_rp.gift1_given = gift_given_1[i]
-                gift_rp.gift2_given = gift_given_2[i]
-                gift_rp.gift3_given = gift_given_3[i]
-                gift_rp.gift4_given = gift_given_4[i]
-                gift_rp.gift5_given = gift_given_5[i]
-                gift_rp.gift6_given = gift_given_6[i]
-                gift_rp.gift7_given = gift_given_7[i]
-                gift_rp.save()
-                if int(gift_rp.gift1_remaining) > 0:
-                    gift1_remaining = gift_rp.gift1_remaining
-                if int(gift_rp.gift2_remaining) > 0:
-                    gift2_remaining = gift_rp.gift2_remaining
-                if int(gift_rp.gift3_remaining) > 0:
-                    gift3_remaining = gift_rp.gift3_remaining
-                if int(gift_rp.gift4_remaining) > 0:
-                    gift4_remaining = gift_rp.gift4_remaining
-                if int(gift_rp.gift5_remaining) > 0:
-                    gift5_remaining = gift_rp.gift5_remaining
-                if int(gift_rp.gift6_remaining) > 0:
-                    gift6_remaining = gift_rp.gift6_remaining
-                if int(gift_rp.gift7_remaining) > 0:
-                    gift7_remaining = gift_rp.gift7_remaining
-                li = [gift1_remaining, gift2_remaining, gift3_remaining, gift4_remaining, gift5_remaining, gift6_remaining, gift7_remaining]
-                list_gift_remain.append(li)
+                    gift_rp.gift1_given = gift_given_1[i]
+                    gift_rp.gift2_given = gift_given_2[i]
+                    gift_rp.gift3_given = gift_given_3[i]
+                    gift_rp.gift4_given = gift_given_4[i]
+                    gift_rp.gift5_given = gift_given_5[i]
+                    gift_rp.gift6_given = gift_given_6[i]
+                    gift_rp.gift7_given = gift_given_7[i]
+                    gift_rp.save()
+                    if int(gift_rp.gift1_remaining) > 0:
+                        gift1_remaining = gift_rp.gift1_remaining
+                    if int(gift_rp.gift2_remaining) > 0:
+                        gift2_remaining = gift_rp.gift2_remaining
+                    if int(gift_rp.gift3_remaining) > 0:
+                        gift3_remaining = gift_rp.gift3_remaining
+                    if int(gift_rp.gift4_remaining) > 0:
+                        gift4_remaining = gift_rp.gift4_remaining
+                    if int(gift_rp.gift5_remaining) > 0:
+                        gift5_remaining = gift_rp.gift5_remaining
+                    if int(gift_rp.gift6_remaining) > 0:
+                        gift6_remaining = gift_rp.gift6_remaining
+                    if int(gift_rp.gift7_remaining) > 0:
+                        gift7_remaining = gift_rp.gift7_remaining
+                    li = [gift1_remaining, gift2_remaining, gift3_remaining, gift4_remaining, gift5_remaining, gift6_remaining, gift7_remaining]
+                    list_gift_remain.append(li)
+                except:
+                    gift1_remaining = 0
+                    gift2_remaining = 0
+                    gift3_remaining = 0
+                    gift4_remaining = 0
+                    gift5_remaining = 0
+                    gift6_remaining = 0
+                    gift7_remaining = 0
+                    li = [gift1_remaining, gift2_remaining, gift3_remaining, gift4_remaining, gift5_remaining, gift6_remaining, gift7_remaining]
+                    list_gift_remain.append(li)
         except:
-            for i in range(len(sale_id)):
-                gift1_remaining = 0
-                gift2_remaining = 0
-                gift3_remaining = 0
-                gift4_remaining = 0
-                gift5_remaining = 0
-                gift6_remaining = 0
-                gift7_remaining = 0
-                li = [gift1_remaining, gift2_remaining, gift3_remaining, gift4_remaining, gift5_remaining, gift6_remaining, gift7_remaining]
-                list_gift_remain.append(li)
+            pass
         
         return JsonResponse({'status': 'ok', 'list_gift_remain':list_gift_remain, 'id':sale_id})
