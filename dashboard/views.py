@@ -1399,8 +1399,9 @@ def edit_gift_rp(request, campainID):
         list_gift_remain = []
         try:
             for i in range(len(sale_id)):
+                
                 gift_rp = giftReport.objects.get(id=sale_id[i])
-
+                li = []
                 gift_rp.gift1_received = gift_receive_1[i]
                 gift_rp.gift2_received = gift_receive_2[i]
                 gift_rp.gift3_received = gift_receive_3[i]
@@ -1417,8 +1418,8 @@ def edit_gift_rp(request, campainID):
                 gift_rp.gift6_given = gift_given_6[i]
                 gift_rp.gift7_given = gift_given_7[i]
                 gift_rp.save()
-                list = [gift_rp.gift1_remaining, gift_rp.gift2_remaining, gift_rp.gift3_remaining, gift_rp.gift4_remaining, gift_rp.gift5_remaining, gift_rp.gift6_remaining, gift_rp.gift7_remaining]
-                list_gift_remain.append(list)
+                li = [gift_rp.gift1_remaining, gift_rp.gift2_remaining, gift_rp.gift3_remaining, gift_rp.gift4_remaining, gift_rp.gift5_remaining, gift_rp.gift6_remaining, gift_rp.gift7_remaining]
+                list_gift_remain.append(li)
         except:
             pass
         
