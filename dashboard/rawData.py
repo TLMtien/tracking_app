@@ -173,7 +173,7 @@ def get_gift_scheme_rawdata(campain_id, outlet_raw, list_gift_of_outlet):
         else:
             result_scheme1 = gift_rawdata(campain_id, list_gift_of_outlet)
         
-        return result_scheme1[0], list_gift_name1, result_scheme2[1],  list_gift_name2
+        return result_scheme2[1],  list_gift_name2, result_scheme1[0], list_gift_name1, 
 
     elif campain_id == 4:
         categories = ['HCM', 'Hà Nội', 'Nha Trang' ,'Đà Nẵng']
