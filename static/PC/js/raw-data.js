@@ -365,6 +365,7 @@ $(document).on('click', '#gift', function() {
         dataType: "json",
         success: function(resp) {
             alert("Đã sửa thành công!!!")
+            console.log(resp.list_gift_remain)
             for (let i = 0; i < resp.id.length; i++) {
                 $("#gift-remain1" + resp.id[i]).val(resp.list_gift_remain[i][0])
                 $("#gift-remain2" + resp.id[i]).val(resp.list_gift_remain[i][1])
