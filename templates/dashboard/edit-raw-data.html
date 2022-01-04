@@ -789,103 +789,144 @@
                             </td>   
                             {% comment %}  {% endcomment %}
                             <td class="td-desc">
-                                <input type="text" class="input-number" value="{{ list.24.12 }}" disabled>
+                                <input type="text" class="input-number" value="{{ list.24.12 }}" id="gift-remain1{{list.23}}" disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" value="{{ list.24.13 }}" disabled>
+                                <input type="text" class="input-number" value="{{ list.24.13 }}" id="gift-remain2{{list.23}}" disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" value="{{ list.24.14 }}" disabled>
+                                <input type="text" class="input-number" value="{{ list.24.14 }}" id="gift-remain3{{list.23}}" disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" value="{{ list.24.15 }}" disabled>
+                                <input type="text" class="input-number" value="{{ list.24.15 }}" id="gift-remain4{{list.23}}" disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" value="{{ list.24.16 }}" disabled>
+                                <input type="text" class="input-number" value="{{ list.24.16 }}" id="gift-remain5{{list.23}}" disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" value="{{ list.24.17 }}" disabled>
+                                <input type="text" class="input-number" value="{{ list.24.17 }}" id="gift-remain6{{list.23}}" disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>   
                             {% if cam_id == 2 or cam_id == 4 or cam_id == 6 %}
 
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number" value="{{ list.25.0 }}" 
+                                {%  if cam_id == 2 %}
+                                name="gift-receive-1"
+                                {% endif %}
+                                {%  if cam_id == 4 %}
+                                name="gift-receive-5"
+                                {% endif %}
+                                required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number" value="{{ list.25.1 }}"  name="gift-receive-2" required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number"  value="{{ list.25.2 }}" name="gift-receive-3"  required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number" value="{{ list.25.3 }}"
+                                {%  if cam_id == 2 %}
+                                name="gift-receive-7"
+                                {% endif %}
+                                {%  if cam_id == 4 %}
+                                name="gift-receive-6"
+                                required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number"  value="{{ list.25.4 }}" required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>   
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number" value="{{ list.25.5 }}" required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             {% comment %}  {% endcomment %}
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number"  value="{{ list.25.6 }}" 
+                                {%  if cam_id == 2 %}
+                                name="gift-given-1"
+                                {% endif %}
+                                {%  if cam_id == 4 %}
+                                name="gift-given-5"
+                                {% endif %}
+                                required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number"  value="{{ list.25.7 }}" name="gift-given-2" required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number" value="{{ list.25.8 }}"  name="gift-given-3" required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number"  value="{{ list.25.9 }}" 
+                                {%  if cam_id == 2 %}
+                                name="gift-given-7"
+                                {% endif %}
+                                {%  if cam_id == 4 %}
+                                name="gift-given-6"
+                                {% endif %}
+                                required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number"  value="{{ list.25.10 }}" required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>   
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" required>
-                                <button class="btn-send"><i class='bx bx-check'></i></button>
+                                <input type="text" class="input-number"  value="{{ list.25.11 }}" required>
+                                <button class="btn-send" id="gift" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             {% comment %}  {% endcomment %}
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" disabled>
+                                <input type="text" class="input-number"  value="{{ list.25.12 }}"
+                                {%  if cam_id == 2 %}
+                                id="gift-remain1{{list.23}}"
+                                {% endif %}
+                                {%  if cam_id == 4 %}
+                                id="gift-remain5{{list.23}}"
+                                {% endif %}
+                                disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" disabled>
+                                <input type="text" class="input-number"  value="{{ list.25.13 }}" id="gift-remain2{{list.23}}" disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" disabled>
+                                <input type="text" class="input-number" value="{{ list.25.14 }}" id="gift-remain3{{list.23}}"  disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" disabled>
+                                <input type="text" class="input-number"  value="{{ list.25.15 }}"
+                                {%  if cam_id == 2 %}
+                                id="gift-remain7{{list.23}}"
+                                {% endif %}
+                                {%  if cam_id == 4 %}
+                                id="gift-remain6{{list.23}}"
+                                {% endif %}
+                                disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>   
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" disabled>
+                                <input type="text" class="input-number" value="{{ list.25.16 }}" disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
-                                <input type="text" class="input-number" placeholder="Nhập số liệu *" disabled>
+                                <input type="text" class="input-number"  value="{{ list.25.17 }}" disabled>
                                 {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             {% endif %}
