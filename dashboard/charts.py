@@ -369,7 +369,7 @@ def gift(campain_id, list_gift_rp):
         return list_7, list_gift, list_gift_1, list_gift_2
 
     elif campain_id == 5:
-        list_gift = ['Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao']
+        list_gift = ['Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Du Lịch']
         return list_4, list_gift
     
     elif campain_id == 6:

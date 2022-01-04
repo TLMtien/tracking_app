@@ -137,7 +137,7 @@ def gift_rawdata(campain_id, gift_rp):
         return list_4, list4_scheme1
 
     elif campain_id == 5:
-        list_gift_name = ['Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao']
+        list_gift_name = ['Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Du Lịch']
         return list_4, list_gift_name
     
     elif campain_id == 6:

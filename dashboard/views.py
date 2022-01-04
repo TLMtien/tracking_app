@@ -769,7 +769,7 @@ def export(request, campainID):
         colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly', 'Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
 
     elif campainID == 5:
-        colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao', 'Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Thể Thao']
+        colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Du Lịch', 'Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Du Lịch']
     
     elif campainID == 6:
         colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought', 'Nón Strongbow', 'Túi Jute Bag', 'Túi Canvas ', 'Dù SB', 'Nón Strongbow', 'Túi Jute Bag', 'Túi Canvas ', 'Dù SB']

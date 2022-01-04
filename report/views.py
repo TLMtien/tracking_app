@@ -201,7 +201,7 @@ def gift_receiveReport(request):
                         'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Áo thun', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'Ly'})
                     if SP.brand == campain5:
                         return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
-                        'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
+                        'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Du Lịch'})
                     if SP.brand == campain6:
                         return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
                         'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Nón Strongbow', 'gift_name_2':'Túi Jute Bag', 'gift_name_3':'Túi Canvas ', 'gift_name_4':'Dù SB'})
@@ -223,7 +223,7 @@ def gift_receiveReport(request):
                         'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Áo thun', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'Ly'})
                 if SP.brand == campain5:
                     return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
-                    'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
+                    'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift4_received':gift4_received, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Du Lịch'})
                 
                 if SP.brand == campain6:
                         return render(request, "report/create-list-gift-receive.html", {'gift1_received':gift1_received, 
@@ -311,7 +311,7 @@ def gift_receiveReport(request):
         elif SP.brand == campain4:
             return render(request,"list_gift/listgift-received.html", {'form':form, 'gift_name_1':'Pin sạc', 'gift_name_2':'Ba lô', 'gift_name_3':'Bình Nước', 'gift_name_4':'Áo thun', 'gift_name_5':'Loa Bluetooth', 'gift_name_6':'Ly'})
         elif SP.brand == campain5:
-            return render(request,"report/listgift-received.html", {'form':form, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
+            return render(request,"report/listgift-received.html", {'form':form, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Du Lịch'})
         elif SP.brand == campain6:
             return render(request,"report/listgift-received.html", {'form':form, 'gift_name_1':'Nón Strongbow', 'gift_name_2':'Túi Jute Bag', 'gift_name_3':'Túi Canvas ', 'gift_name_4':'Dù SB'})
         else:
@@ -396,7 +396,7 @@ def gift_givenReport(request):
                 return render(request,"report/listgift-sent.html", {'form':form, 'gift_name_1':'Ba lô', 'gift_name_2':'Thùng 12 Lon', 'gift_name_3':'Nón', 'gift_name_4':'02 Lon Larue'})
             
             if SP.brand == campain5:
-                return render(request,"report/listgift-sent.html", {'form':form, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
+                return render(request,"report/listgift-sent.html", {'form':form, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Du Lịch'})
             
             if SP.brand == campain6:
                 return render(request,"report/listgift-sent.html", {'form':form, 'gift_name_1':'Nón Strongbow', 'gift_name_2':'Túi Jute Bag', 'gift_name_3':'Túi Canvas ', 'gift_name_4':'Dù SB'})
@@ -434,7 +434,7 @@ def gift_givenReport(request):
         
         if SP.brand == campain5:
             return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
-                'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'} )
+                'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Du Lịch'} )
         
         if SP.brand == campain6:
             return render(request, 'report/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
@@ -500,7 +500,7 @@ def gift_remaining(request):
                 'gift1_received':report.gift1_received, 'gift2_received':report.gift2_received,
                         'gift3_received':report.gift3_received, 'gift4_received':report.gift4_received,
                 'gift1_given':report.gift1_given, 'gift2_given':report.gift2_given, 
-                'gift3_given':report.gift3_given, 'gift4_given':report.gift4_given,  'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
+                'gift3_given':report.gift3_given, 'gift4_given':report.gift4_given,  'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Du Lịch'})
         
         if SP.brand == campain6:  
              return render(request,'report/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
@@ -557,7 +557,7 @@ def gift_remaining(request):
 
         if SP.brand == campain5:
             return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
-                'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0', 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Thể Thao'})
+                'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0', 'gift_name_1':'Heineken Alu', 'gift_name_2':'Ba lô', 'gift_name_3':'Combo Thời Trang', 'gift_name_4':'Combo Du Lịch'})
         
         if SP.brand == campain6:
             return render(request,'report/listgift-remain.html', {'gift1_remaining':'0',
