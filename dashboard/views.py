@@ -1442,6 +1442,15 @@ def edit_gift_rp(request, campainID):
                 li = [gift1_remaining, gift2_remaining, gift3_remaining, gift4_remaining, gift5_remaining, gift6_remaining, gift7_remaining]
                 list_gift_remain.append(li)
         except:
-            pass
+            for i in range(len(sale_id)):
+                gift1_remaining = 0
+                gift2_remaining = 0
+                gift3_remaining = 0
+                gift4_remaining = 0
+                gift5_remaining = 0
+                gift6_remaining = 0
+                gift7_remaining = 0
+                li = [gift1_remaining, gift2_remaining, gift3_remaining, gift4_remaining, gift5_remaining, gift6_remaining, gift7_remaining]
+                list_gift_remain.append(li)
         
         return JsonResponse({'status': 'ok', 'list_gift_remain':list_gift_remain, 'id':sale_id})
