@@ -289,34 +289,34 @@ $(document).on('click', '#gift', function() {
     console.log(array_report_sale)
     const csrf = document.getElementsByName('csrfmiddlewaretoken');
     //const csrf = document.getElementsByName('csrfmiddlewaretoken')
-    // $.ajax({
-    //     type: 'POST',
-    //     url: 'edit_gift_rp/',
-    //     headers: {
-    //         "X-CSRFToken": csrf[0].value
-    //     },
-    //     data: JSON.stringify({ "array_report_sale": array_report_sale }),
+    $.ajax({
+        type: 'POST',
+        url: 'edit_gift_rp/',
+        headers: {
+            "X-CSRFToken": csrf[0].value
+        },
+        data: JSON.stringify({ "array_report_sale": array_report_sale }),
 
-    //     processData: false,
-    //     contentType: false,
-    //     contentType: 'application/json',
-    //     dataType: "json",
-    //     success: function(resp) {
-    //         alert("Đã sửa thành công!!!")
-    //         for (let i = 0; i < resp.id.length; i++) {
-    //             $("#gift-remain1" + resp.id[i]).val(resp.list_gift_remain[i][0])
-    //             $("#gift-remain2" + resp.id[i]).val(resp.list_gift_remain[i][1])
-    //             $("#gift-remain3" + resp.id[i]).val(resp.list_gift_remain[i][2])
-    //             $("#gift-remain4" + resp.id[i]).val(resp.list_gift_remain[i][3])
-    //             $("#gift-remain5" + resp.id[i]).val(resp.list_gift_remain[i][4])
-    //             $("#gift-remain6" + resp.id[i]).val(resp.list_gift_remain[i][5])
-    //             $("#gift-remain7" + resp.id[i]).val(resp.list_gift_remain[i][6])
-    //         }
-    //     },
-    //     error: function(error) {
-    //         console.log(error)
-    //     }
-    // }); // end ajax
+        processData: false,
+        contentType: false,
+        contentType: 'application/json',
+        dataType: "json",
+        success: function(resp) {
+            alert("Đã sửa thành công!!!")
+            for (let i = 0; i < resp.id.length; i++) {
+                $("#gift-remain1" + resp.id[i]).val(resp.list_gift_remain[i][0])
+                $("#gift-remain2" + resp.id[i]).val(resp.list_gift_remain[i][1])
+                $("#gift-remain3" + resp.id[i]).val(resp.list_gift_remain[i][2])
+                $("#gift-remain4" + resp.id[i]).val(resp.list_gift_remain[i][3])
+                $("#gift-remain5" + resp.id[i]).val(resp.list_gift_remain[i][4])
+                $("#gift-remain6" + resp.id[i]).val(resp.list_gift_remain[i][5])
+                $("#gift-remain7" + resp.id[i]).val(resp.list_gift_remain[i][6])
+            }
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    }); // end ajax
 });
 
 
@@ -423,32 +423,32 @@ $(document).on('click', '#gift-scheme1', function() {
     console.log(array_report_sale)
     const csrf = document.getElementsByName('csrfmiddlewaretoken');
     //const csrf = document.getElementsByName('csrfmiddlewaretoken')
-    // $.ajax({
-    //     type: 'POST',
-    //     url: 'edit_gift_rp/',
-    //     headers: {
-    //         "X-CSRFToken": csrf[0].value
-    //     },
-    //     data: JSON.stringify({ "array_report_sale": array_report_sale }),
+    $.ajax({
+        type: 'POST',
+        url: 'edit_gift_rp/',
+        headers: {
+            "X-CSRFToken": csrf[0].value
+        },
+        data: JSON.stringify({ "array_report_sale": array_report_sale }),
 
-    //     processData: false,
-    //     contentType: false,
-    //     contentType: 'application/json',
-    //     dataType: "json",
-    //     success: function(resp) {
-    //         alert("Đã sửa thành công!!!")
-    //         for (let i = 0; i < resp.id.length; i++) {
-    //             $("#gift-remain1-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][0])
-    //             $("#gift-remain2-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][1])
-    //             $("#gift-remain3-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][2])
-    //             $("#gift-remain4-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][3])
-    //             $("#gift-remain5-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][4])
-    //             $("#gift-remain6-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][5])
-    //             $("#gift-remain7-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][6])
-    //         }
-    //     },
-    //     error: function(error) {
-    //         console.log(error)
-    //     }
-    // }); // end ajax
+        processData: false,
+        contentType: false,
+        contentType: 'application/json',
+        dataType: "json",
+        success: function(resp) {
+            alert("Đã sửa thành công!!!")
+            for (let i = 0; i < resp.id.length; i++) {
+                $("#gift-remain1-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][0])
+                $("#gift-remain2-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][1])
+                $("#gift-remain3-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][2])
+                $("#gift-remain4-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][3])
+                $("#gift-remain5-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][4])
+                $("#gift-remain6-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][5])
+                $("#gift-remain7-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][6])
+            }
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    }); // end ajax
 });

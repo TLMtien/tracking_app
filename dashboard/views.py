@@ -1374,3 +1374,52 @@ def edit_consumer_rp(request, campainID):
         
         print(consumers_reach, conversion)
         return JsonResponse({'status': 'ok', 'list_consumers_reach':list_consumers_reach, 'list_conversion':list_conversion, 'id':sale_id})
+
+def edit_gift_rp(request, campainID):
+    if request.user.is_HVN:
+        print(json.loads(request.body.decode('UTF-8')))
+        data = json.loads(request.body.decode('UTF-8'))
+        data = data.get("array_report_sale",[])
+        sale_id = data[0]
+        gift_receive_1 = data[1]
+        gift_receive_2 = data[2]
+        gift_receive_3 = data[3]
+        gift_receive_4 = data[4]
+        gift_receive_5 = data[5]
+        gift_receive_6 = data[6]
+        gift_receive_7 = data[7]
+
+        gift_given_1 = data[8]
+        gift_given_2 = data[9]
+        gift_given_3 = data[10]
+        gift_given_4 = data[11]
+        gift_given_5 = data[12]
+        gift_given_6 = data[13]
+        gift_given_7 = data[14]
+        list_gift_remain = []
+        try:
+            for i in range(len(sale_id)):
+                gift_rp = giftReport.objects.get(id=sale_id[i])
+
+                gift_rp.gift1_received = gift_receive_1[i]
+                gift_rp.gift2_received = gift_receive_2[i]
+                gift_rp.gift3_received = gift_receive_3[i]
+                gift_rp.gift4_received = gift_receive_4[i]
+                gift_rp.gift5_received = gift_receive_5[i]
+                gift_rp.gift6_received = gift_receive_6[i]
+                gift_rp.gift7_received = gift_receive_7[i]
+
+                gift_rp.gift1_given = gift_given_1[i]
+                gift_rp.gift2_given = gift_given_2[i]
+                gift_rp.gift3_given = gift_given_3[i]
+                gift_rp.gift4_given = gift_given_4[i]
+                gift_rp.gift5_given = gift_given_5[i]
+                gift_rp.gift6_given = gift_given_6[i]
+                gift_rp.gift7_given = gift_given_7[i]
+                gift_rp.save()
+                list = [gift_rp.gift1_remaining, gift_rp.gift2_remaining, gift_rp.gift3_remaining, gift_rp.gift4_remaining, gift_rp.gift5_remaining, gift_rp.gift6_remaining, gift_rp.gift7_remaining]
+                list_gift_remain.append(list)
+        except:
+            pass
+        
+        return JsonResponse({'status': 'ok', 'list_gift_remain':list_gift_remain, 'id':sale_id})
