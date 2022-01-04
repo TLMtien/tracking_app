@@ -341,25 +341,25 @@ $(document).on('click', '#gift-scheme1', function() {
     var array_gift_given_6 = [];
     var array_gift_given_7 = [];
     //gift received
-    $('input[name = "gift-receive-1"]').each(function(i) {
+    $('input[name = "gift-receive-1-scheme2"]').each(function(i) {
         array_gift_receive_1.push($(this).val());
     });
-    $('input[name = "gift-receive-2"]').each(function(i) {
+    $('input[name = "gift-receive-2-scheme2"]').each(function(i) {
         array_gift_receive_2.push($(this).val());
     });
-    $('input[name = "gift-receive-3"]').each(function(i) {
+    $('input[name = "gift-receive-3-scheme2"]').each(function(i) {
         array_gift_receive_3.push($(this).val());
     });
-    $('input[name = "gift-receive-4"]').each(function(i) {
+    $('input[name = "gift-receive-4-scheme2"]').each(function(i) {
         array_gift_receive_4.push($(this).val());
     });
-    $('input[name = "gift-receive-5"]').each(function(i) {
+    $('input[name = "gift-receive-5-scheme2"]').each(function(i) {
         array_gift_receive_5.push($(this).val());
     });
-    $('input[name = "gift-receive-6"]').each(function(i) {
+    $('input[name = "gift-receive-6-scheme2"]').each(function(i) {
         array_gift_receive_6.push($(this).val());
     });
-    $('input[name = "gift-receive-7"]').each(function(i) {
+    $('input[name = "gift-receive-7-scheme2"]').each(function(i) {
         array_gift_receive_7.push($(this).val());
 
     });
@@ -370,25 +370,25 @@ $(document).on('click', '#gift-scheme1', function() {
         }
     }
     //Gift given
-    $('input[name = "gift-given-1"]').each(function(i) {
+    $('input[name = "gift-given-1-scheme2"]').each(function(i) {
         array_gift_given_1.push($(this).val());
     });
-    $('input[name = "gift-given-2"]').each(function(i) {
+    $('input[name = "gift-given-2-scheme2"]').each(function(i) {
         array_gift_given_2.push($(this).val());
     });
-    $('input[name = "gift-given-3"]').each(function(i) {
+    $('input[name = "gift-given-3-scheme2"]').each(function(i) {
         array_gift_given_3.push($(this).val());
     });
-    $('input[name = "gift-given-4"]').each(function(i) {
+    $('input[name = "gift-given-4-scheme2"]').each(function(i) {
         array_gift_given_4.push($(this).val());
     });
-    $('input[name = "gift-given-5"]').each(function(i) {
+    $('input[name = "gift-given-5-scheme2"]').each(function(i) {
         array_gift_given_5.push($(this).val());
     });
-    $('input[name = "gift-given-6"]').each(function(i) {
+    $('input[name = "gift-given-6-scheme2"]').each(function(i) {
         array_gift_given_6.push($(this).val());
     });
-    $('input[name = "gift-given-7"]').each(function(i) {
+    $('input[name = "gift-given-7-scheme2"]').each(function(i) {
         array_gift_given_7.push($(this).val());
 
     });
@@ -438,13 +438,13 @@ $(document).on('click', '#gift-scheme1', function() {
     //     success: function(resp) {
     //         alert("Đã sửa thành công!!!")
     //         for (let i = 0; i < resp.id.length; i++) {
-    //             $("#gift-remain1" + resp.id[i]).val(resp.list_gift_remain[i][0])
-    //             $("#gift-remain2" + resp.id[i]).val(resp.list_gift_remain[i][1])
-    //             $("#gift-remain3" + resp.id[i]).val(resp.list_gift_remain[i][2])
-    //             $("#gift-remain4" + resp.id[i]).val(resp.list_gift_remain[i][3])
-    //             $("#gift-remain5" + resp.id[i]).val(resp.list_gift_remain[i][4])
-    //             $("#gift-remain6" + resp.id[i]).val(resp.list_gift_remain[i][5])
-    //             $("#gift-remain7" + resp.id[i]).val(resp.list_gift_remain[i][6])
+    //             $("#gift-remain1-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][0])
+    //             $("#gift-remain2-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][1])
+    //             $("#gift-remain3-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][2])
+    //             $("#gift-remain4-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][3])
+    //             $("#gift-remain5-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][4])
+    //             $("#gift-remain6-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][5])
+    //             $("#gift-remain7-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][6])
     //         }
     //     },
     //     error: function(error) {
