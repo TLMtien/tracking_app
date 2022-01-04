@@ -371,7 +371,7 @@ $(document).on('click', '#gift', function() {
                 $("#gift-remain4" + resp.id[i]).val(resp.list_gift_remain[i][3])
                 $("#gift-remain5" + resp.id[i]).val(resp.list_gift_remain[i][4])
                 $("#gift-remain6" + resp.id[i]).val(resp.list_gift_remain[i][5])
-                $("#gift-remain7" + resp.id[i]).val(resp.list_gift_remain[i][6])
+                    // $("#gift-remain7" + resp.id[i]).val(resp.list_gift_remain[i][6])
             }
         },
         error: function(error) {
