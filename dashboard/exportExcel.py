@@ -9,28 +9,33 @@ from openpyxl.chart import (
     Reference,
     BarChart, Series, Reference,
 )
-
+from outlet.models import tableReport, Campain
+from . charts import pie_chart, VOLUME_PERFORMANCE, activation_progress, top10_outlet
 from openpyxl.chart.series import DataPoint
 from openpyxl.writer.excel import save_virtual_workbook
-
-def export_chart():
+from .rawData import Table_share
+def export_chart(campainID, all_outlet, from_date, to_date):
    
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
     response['Content-Disposition'] = 'attachment;filename={}.xlsx'.format(str(datetime.now()))
     wb = Workbook(write_only=True)
+    #wb.remove(wb.active)
     ws = wb.create_sheet()
 
-    w = wb.active
-
     ##activation
-
+    Cp = Campain.objects.get(id = campainID)
+    table_rp = tableReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    pie=pie_chart(campainID, table_rp)
+    volume_per = VOLUME_PERFORMANCE(campainID, all_outlet)
+    activation = activation_progress(campainID, all_outlet)
+    top10 = top10_outlet(campainID, all_outlet)
     ## Volume
     rows = [
         ('Title', 'Average Brand Volume', 'Average Target Volume'),
-        ('Average Brand Volume', 150, 0),
-        ('Average Target Volume', 2500, 0),
+        ('Average Brand Volume', volume_per[2], 0),
+        ('Average Target Volume', volume_per[3], 0),
     ]
 
     for row1 in rows:
@@ -56,10 +61,10 @@ def export_chart():
     ###############################
     data = [
         ['Pie', 'Sold'],
-        ['HVN', 50],
-        ['Brand', 30],
-        ['Other', 10],
-        ['Other beer', 40],
+        ['HVN', pie[0]],
+        ['Brand', pie[1]],
+        ['Other', pie[2]],
+        ['Other beer', pie[3]],
     ]
 
     for row in data:
@@ -78,8 +83,8 @@ def export_chart():
     #ACtual
     rows = [
         ('Title', 'Actual Acts', 'Total Acts'),
-        ('Total Acts', 2500, 0),
-        ('Actual Acts', 150, 0),
+        ('Total Acts', activation[1], 0),
+        ('Actual Acts', activation[0], 0),
     ]
 
     for row1 in rows:
@@ -119,7 +124,7 @@ def export_chart():
     #chart2.title = "AVERAGE PERFORMANCE PER ACT"
 
     data2 = Reference(ws, min_col=2, min_row=12, max_row=20, max_col=3)
-    cats = Reference(ws, min_col=1, min_row=13, max_row=20)
+    cats = Reference(ws, min_col=1, min_row=13, max_row=19)
     chart2.add_data(data2, titles_from_data=True)
     chart2.set_categories(cats)
     #chart1.shape = 4
@@ -132,8 +137,8 @@ def export_chart():
     #VOLUME PERFORMANCE
     rows = [
         ('Title', 'ActualVolume', 'Target Volume'),
-        ('Target Volume', 180, 0),
-        ('ActualVolume', 170, 0),
+        ('Target Volume', volume_per[1], 0),
+        ('ActualVolume', volume_per[0], 0),
     ]
 
     for row1 in rows:
@@ -152,9 +157,47 @@ def export_chart():
     chart4.grouping = "stacked"
     #chart1.overlap = 100
     ws.add_chart(chart4, "A16")
+    # TOP 10
+
+    rows = [
+       
+    ]
+    # ('Title', ),
+        
+    # ('Gift1', 50, 0),
+    # ('Gift2', 25, 0),
+    # ('Gift3', 35, 0),
+    # ('Gift4', 45, 0),
+    # ('Gift5', 55, 0),
+    # ('Gift6', 65, 0),
+    # ('Gift7', 65, 0),
+    for i in range(len(top10[2])):
+        rows.append((top10[2][i],top10[0][i],0))
+
+    for row1 in rows:
+        ws.append(row1)
+
+    chart7 = BarChart()
+    chart7.type = "col"
+    chart7.style = 10
+    #chart2.title = "AVERAGE PERFORMANCE PER ACT"
+
+    data2 = Reference(ws, min_col=2, min_row=23, max_row=100, max_col=3)
+    cats = Reference(ws, min_col=1, min_row=23, max_row=100)
+    chart7.add_data(data2, titles_from_data=True)
+    chart7.set_categories(cats)
+    #chart1.shape = 4
+    chart7.type = "col"
+    chart7.style = 5
+    chart7.grouping = "stacked"
+    chart7.overlap = 100
+    chart7.width = 500
+    chart7.height = 30
+    ws.add_chart(chart7, "A31")
+
 
     #wb.save("chart5.xlsx")
     wb.save(response) 
     return response
 
-export_chart()
+#export_chart()
