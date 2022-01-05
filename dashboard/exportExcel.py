@@ -192,7 +192,7 @@ def export_chart(campainID, all_outlet, from_date, to_date):
     chart7.grouping = "stacked"
     chart7.overlap = 100
     chart7.width = 500
-    chart7.height = 30
+    chart7.height = 100
     ws.add_chart(chart7, "A31")
 
 
