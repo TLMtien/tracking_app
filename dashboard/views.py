@@ -18,6 +18,7 @@ from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_outlet_type, get_outlet, get_gift_scheme, get_outlet_type_province, get_outletName_type_province
 from .rawData import Table_share, sales_volume, consumers_reached_rawdata, gift_rawdata, get_gift_scheme_rawdata
+from .exportExcel import export_chart
 # Create your views here.
 
 # tigerTP 1
@@ -747,6 +748,9 @@ from datetime import datetime
 from django.http import HttpResponse
 
 def export(request, campainID):
+    from_date = request.POST.get('from-date')
+    
+    to_date = request.POST.get('to-date')
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment;filename={}.xls'.format(str(datetime.now()))
     wb = xlwt.Workbook(encoding='utf-8') 
@@ -756,7 +760,7 @@ def export(request, campainID):
     font_style.font.bold = True
 
     Cp = Campain.objects.get(id=campainID)
-    all_outlet = outletInfo.objects.filter(compain=Cp)
+    all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = False)
     
     
     if campainID == 1:
@@ -788,9 +792,7 @@ def export(request, campainID):
 
     font_style = xlwt.XFStyle()
     
-    from_date = request.POST.get('from-date')
     
-    to_date = request.POST.get('to-date')
     
     print(from_date)
     #a = date.today()
@@ -887,7 +889,10 @@ def export(request, campainID):
                     ws.write(row_num, col_num, str(list[col_num]), font_style)
                 
     wb.save(response) 
+    ######################################
+    a = export_chart
     return response
+    
         
 def raw_data(request, campainID):
     
@@ -1455,3 +1460,5 @@ def edit_gift_rp(request, campainID):
             pass
         
         return JsonResponse({'status': 'ok', 'list_gift_remain':list_gift_remain, 'id':sale_id})
+
+
