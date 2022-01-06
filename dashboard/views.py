@@ -769,7 +769,7 @@ def export(request, campainID):
     sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
     for SP in sale_person:
         outlet=SP.outlet
-        if not outlet in all_outlet:
+        if not outlet in all_outlet and outlet.created_by_HVN:
             all_outlet.append(outlet)
     
     Cp = Campain.objects.get(id=campainID)
