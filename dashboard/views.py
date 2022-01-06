@@ -773,7 +773,7 @@ def export(request, campainID):
             all_outlet.append(outlet)
     
     Cp = Campain.objects.get(id=campainID)
-    #all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = True)
+    all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = True)
    
     return export_chart(campainID, all_outlet, from_date, to_date)
     
