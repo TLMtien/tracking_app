@@ -399,7 +399,7 @@ def get_outlet_province(campain_id, province):
     Cp = Campain.objects.get(id = campain_id)
 
     for pro in province:
-        all_outlet_province = outletInfo.objects.filter(compain=Cp, province=pro)
+        all_outlet_province = outletInfo.objects.filter(compain=Cp, province=pro, created_by_HVN=True)
         for outlet in all_outlet_province:
             count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
             count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
@@ -418,7 +418,7 @@ def get_outlet_type(campain_id, type):
     list_province = []
     Cp = Campain.objects.get(id = campain_id)
     for tp in type:
-        all_outlet_type = outletInfo.objects.filter(compain=Cp, type=tp)
+        all_outlet_type = outletInfo.objects.filter(compain=Cp, type=tp, created_by_HVN=True)
         for outlet in all_outlet_type:
             count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
             count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
@@ -441,7 +441,7 @@ def get_outlet_type_province(campain_id, list_province_type1):
 
             
     for list in list_province_type:
-        all_outlet_province = outletInfo.objects.filter(compain=Cp, province=list)
+        all_outlet_province = outletInfo.objects.filter(compain=Cp, province=list, created_by_HVN=True)
         for outlet in all_outlet_province:
             count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
             count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
@@ -454,7 +454,7 @@ def get_outlet_type_province(campain_id, list_province_type1):
         list_outlet = list_outlet1
     if len(list_outlet1) == 0:
         for tp in list_province_type:
-            all_outlet_type = outletInfo.objects.filter(compain=Cp, type=tp)
+            all_outlet_type = outletInfo.objects.filter(compain=Cp, type=tp, created_by_HVN=True)
             for outlet in all_outlet_type:
                 count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
                 count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
@@ -471,7 +471,7 @@ def get_outletName_type_province(campain_id, list_province_type_outletname):
     list_province = []
     list_type = []
     for list in list_province_type_outletname:
-        all_outlet_province = outletInfo.objects.filter(compain=Cp, province=list)
+        all_outlet_province = outletInfo.objects.filter(compain=Cp, province=list, created_by_HVN=True)
         for outlet in all_outlet_province:
             count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
             count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
@@ -490,7 +490,7 @@ def get_outletName_type_province(campain_id, list_province_type_outletname):
 
     if len(list_outlet) == 0:
         for name in list_province_type_outletname:
-            all_outlet_type = outletInfo.objects.filter(compain=Cp, outlet_Name=name)
+            all_outlet_type = outletInfo.objects.filter(compain=Cp, outlet_Name=name, created_by_HVN=True)
             for outlet in all_outlet_type:
                 count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
                 count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
@@ -504,7 +504,7 @@ def get_outlet(campain_id, outlet_name):
     list_province = []
     Cp = Campain.objects.get(id = campain_id)
     for name in outlet_name:
-        all_outlet_type = outletInfo.objects.filter(compain=Cp, outlet_Name=name)
+        all_outlet_type = outletInfo.objects.filter(compain=Cp, outlet_Name=name, created_by_HVN=True)
         for outlet in all_outlet_type:
             count_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet).count()  #report of outlet
             count_gift =  giftReport.objects.filter(campain = Cp, outlet=outlet).count()
