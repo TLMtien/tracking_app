@@ -1046,6 +1046,7 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
             console.log(response)
             outlet_list.innerHTML = response.list_outlet
             Consumers_charts.innerHTML = response.Consumers_charts
+            list_type_outlet.innerHTML = response.list_type_outlet
                 //volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
             console.log(response.pie_chart)

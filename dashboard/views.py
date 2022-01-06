@@ -483,7 +483,7 @@ def filter_outlet_type_province(request, campainID):
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
         activation = activation_progress(campainID, list_outlet_chart[0])
-        print(type)
+        #print(type)
         print(consumers_charts)
         print(gift_charts)
         list_outlet = ''
@@ -517,6 +517,21 @@ def filter_outlet_type_province(request, campainID):
                                         {outlet}
                                     </p>
                             </div>
+                        '''
+        list_type = ''
+        for type in volume_performance[6]:
+            print(type)
+            list_type += f'''<tr>
+                                <div class="sidebar-menu_sub">
+                                    <label>
+                                        <input type="checkbox"  class="sidebar-menu_checkbox" name="type_outlet" value = "{type}"> 
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p class="sidebar-menu_item">
+                                       {type}
+                                    </p>
+                                </div>
+                            </tr>
                         '''
         Consumers = f'''
                 <div class="row-1">
@@ -561,7 +576,7 @@ def filter_outlet_type_province(request, campainID):
                     <p class="desc">Target Volume</p>
             <span class="number-two">{volume_performance[1]}</span>
         '''
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]})
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1], 'list_type_outlet': list_type})
 
 def filter_outletName_Province_type(request, campainID):
     # get_outletName_type_province
