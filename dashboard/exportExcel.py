@@ -164,7 +164,7 @@ def export_chart(campainID, all_outlet, from_date, to_date):
     chart4.style = 10
     chart4.title = "VOLUME PERFORMANCE"
 
-    data1 = Reference(ws, min_col=2, min_row=20, max_row=23, max_col=3)
+    data1 = Reference(ws, min_col=2, min_row=20, max_row=22, max_col=3)
     cats = Reference(ws, min_col=1, min_row=21, max_row=22)
     chart4.add_data(data1, titles_from_data=True)
     chart4.set_categories(cats)
@@ -198,7 +198,7 @@ def export_chart(campainID, all_outlet, from_date, to_date):
     chart7.style = 10
     #chart2.title = "AVERAGE PERFORMANCE PER ACT"
 
-    data2 = Reference(ws, min_col=2, min_row=23, max_row=100, max_col=3)
+    data2 = Reference(ws, min_col=2, min_row=22, max_row=100, max_col=3)
     cats = Reference(ws, min_col=1, min_row=23, max_row=100)
     chart7.add_data(data2, titles_from_data=True)
     chart7.set_categories(cats)
