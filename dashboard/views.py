@@ -299,7 +299,7 @@ def filter_outlet_province(request, campainID):
         list_type = ''
         if len(list_outlet_chart[0]) == 0:
             Cp = Campain.objects.get(id = campainID)
-            all_outlet = outletInfo.objects.filter(compain = Cp)
+            all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]
@@ -467,7 +467,7 @@ def filter_outlet_type(request, campainID):
         return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]})
 
 
-def filter_outlet_type_province(request, campainID):
+def filter_outlet_type_province(request, campainID): 
     #get_outlet_type_province
     if request.is_ajax and request.method == "POST":
         total_array = request.POST.get('total_array')
@@ -490,7 +490,7 @@ def filter_outlet_type_province(request, campainID):
         print(list_outlet)
         if len(list_outlet_chart[0]) == 0:
             Cp = Campain.objects.get(id = campainID)
-            all_outlet = outletInfo.objects.filter(compain = Cp)
+            all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]
@@ -601,7 +601,7 @@ def filter_outletName_Province_type(request, campainID):
         print(list_outlet)
         if len(list_outlet_chart[0]) == 0:
             Cp = Campain.objects.get(id = campainID)
-            all_outlet = outletInfo.objects.filter(compain = Cp)
+            all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]
