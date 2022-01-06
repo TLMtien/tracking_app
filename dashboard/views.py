@@ -247,7 +247,7 @@ def charts_views(request, campainID):
     all_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
     Volume_sale = HNK_volume_sale(id, all_report_sale)
     #VOLUME_PERFORMANCE
-    all_outlet = outletInfo.objects.filter(created__gte=from_date, compain = Cp, created_by_HVN=True).filter(created__lte=to_date, compain = Cp, created_by_HVN=True)
+    all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True).filter(compain = Cp, created_by_HVN=True)
     volume_per = VOLUME_PERFORMANCE(id, all_outlet)
     Average_brand_volume = [volume_per[2], volume_per[3]]
     # Top10
