@@ -764,150 +764,17 @@ from django.http import HttpResponse
 
 def export(request, campainID):
     from_date = request.POST.get('from-date')
-    
     to_date = request.POST.get('to-date')
-    response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment;filename={}.xls'.format(str(datetime.now()))
-    wb = xlwt.Workbook(encoding='utf-8') 
-    ws=wb.add_sheet('Expenses')
-    row_num = 0
-    font_style = xlwt.XFStyle()
-    font_style.font.bold = True
-
-    Cp = Campain.objects.get(id=campainID)
-    all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = True)
-    a = False
-    if a:
+    all_outlet = []
+    sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
+    for SP in sale_person:
+        outlet=SP.outlet
+        if not outlet in all_outlet:
+            all_outlet.append(outlet)
     
-        if campainID == 1:
-            colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Ly 30cl','Ly 33cl 3D','Ly Casablanca', 'Ví', 'Nón Tiger Crystal', 'Voucher Bia', 'Ly 30cl','Ly 33cl 3D','Ly Casablanca', 'Ví', 'Nón Tiger Crystal', 'Voucher Bia']
-        
-        elif campainID == 2:
-            colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Ly 30cl','Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ', 'Iphone 13','Ly 30cl','Voucher beer', 'Festive Box', 'Túi du lịch Tiger', 'Loa Tiger', 'Ví Tiger ', 'Iphone 13']
-
-        elif campainID == 4:
-            colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly', 'Pin sạc','Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
-
-        elif campainID == 5:
-            colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Du Lịch', 'Heineken Alu', 'Ba lô', 'Combo Thời Trang', 'Combo Du Lịch']
-        
-        elif campainID == 6:
-            colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought', 'Nón Strongbow', 'Túi Jute Bag', 'Túi Canvas ', 'Dù SB', 'Nón Strongbow', 'Túi Jute Bag', 'Túi Canvas ', 'Dù SB']
-
-        elif campainID == 7:
-            colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Túi du lịch', 'Đồng Hồ Treo Tường', 'Bình Nước 1,6L', 'Ly', 'Túi du lịch', 'Đồng Hồ Treo Tường', 'Bình Nước 1,6L', 'Ly']
-        
-        elif campainID == 8:
-            colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly', 'Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
-        
-        else:
-            colums = ['Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'HNK Volume Sales', 'HVN_volume', 'Competitor_volume','Brand Tables', 'HVB Table Share', 'other table','Other Beer Table', 'Total Tables','Total Consumers', 'Consumers Approached', 'Consumer Bought','Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue', 'Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue']
-        
-        for col_num in range(len(colums)):
-            ws.write(row_num, col_num, colums[col_num], font_style)
-
-        font_style = xlwt.XFStyle()
-        
-        
-        
-        print(from_date)
-        #a = date.today()
-        a = (date(2021,12,20))
-        print(a) 
-        for outlet in all_outlet:
-            count_list_rp_sale = report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet).count()
-            list_rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet)
-            list_rp_sale = report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet)
-            list_rp_consumer = consumerApproachReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet)
-            count_list_rp_consumer = consumerApproachReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet).count()
-            list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet)
-            count_list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet = outlet).filter(created__lte=to_date, campain = Cp, outlet = outlet).count()
-            total_sale = 0
-            HVN_volume = 0
-            Competitor_volume = 0
-            total_HNK = 0
-            total_HVB = 0
-            total_other_beer = 0
-            other_table = 0
-            total_table = 0
-            total_consumers_approach =0
-            total_consumers = 0
-            total_consumer_bought = 0
-            total_gift1_receive = 0
-            total_gift2_receive = 0
-            total_gift3_receive = 0
-            total_gift4_receive = 0
-            total_gift5_receive = 0
-            total_gift6_receive = 0
-            total_gift7_receive = 0
-
-            total_gift1_given = 0
-            total_gift2_given = 0
-            total_gift3_given = 0
-            total_gift4_given = 0
-            total_gift5_given = 0
-            total_gift6_given = 0
-            total_gift7_given = 0
-            if count_list_rp_sale > 0 or count_list_rp_consumer> 0 or count_list_gift_rp>0:
-                for rp_sale in list_rp_sale:
-                    total_sale = sum(total_sale, rp_sale.beer_brand)
-                    HVN_volume = sum(HVN_volume, rp_sale.beer_HVN)
-                    Competitor_volume = sum(Competitor_volume, rp_sale.beer_other)
-                for rp_table in list_rp_table:
-                    total_HNK = sum(total_HNK, rp_table.brand_table)
-                    total_HVB = sum(total_HVB, rp_table.HVN_table)
-                    other_table = sum(other_table,  rp_table.other_table)
-                    total_other_beer = sum(total_other_beer, rp_table.other_beer_table)
-                    total_table = sum(total_table, rp_table.total_table)
-
-                for consumer in list_rp_consumer:
-                    total_consumers_approach = sum(total_consumers_approach, consumer.consumers_approach)
-                    total_consumers = sum(total_consumers, consumer.Total_Consumers)
-                    total_consumer_bought = sum(total_consumer_bought, consumer.consumers_brough)
-
-                    
-                for gift in list_gift_rp:
-                    total_gift1_receive = sum(total_gift1_receive, gift.gift1_received)
-                    total_gift2_receive = sum(total_gift2_receive, gift.gift2_received)
-                    total_gift3_receive = sum(total_gift3_receive, gift.gift3_received)
-                    total_gift4_receive = sum(total_gift4_receive, gift.gift4_received)
-                    total_gift5_receive = sum(total_gift5_receive, gift.gift5_received)
-                    total_gift6_receive = sum(total_gift6_receive, gift.gift6_received)
-                    total_gift7_receive = sum(total_gift7_receive, gift.gift7_received)
-
-                    total_gift1_given = sum(total_gift1_given, gift.gift1_given)
-                    total_gift2_given = sum(total_gift2_given, gift.gift2_given)
-                    total_gift3_given = sum(total_gift3_given, gift.gift3_given)
-                    total_gift4_given = sum(total_gift4_given, gift.gift4_given)
-                    total_gift5_given = sum(total_gift5_given, gift.gift5_given)
-                    total_gift6_given = sum(total_gift6_given, gift.gift6_given)
-                    total_gift7_given = sum(total_gift7_given, gift.gift7_given)
-
-                if campainID == 1 or campainID == 4:
-                    list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, HVN_volume, Competitor_volume, total_HNK, total_HVB, other_table, total_other_beer, total_table, total_consumers, total_consumers_approach, total_consumer_bought, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given]
-                    
-                    row_num +=1
-                    for col_num in range(len(list)):
-                        ws.write(row_num, col_num, str(list[col_num]), font_style)
-                
-                elif campainID == 2:
-                    list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, HVN_volume, Competitor_volume, total_HNK, total_HVB, other_table, total_other_beer, total_table, total_consumers, total_consumers_approach, total_consumer_bought, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive,total_gift7_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given, total_gift7_given]
-                    
-                    row_num +=1
-                    for col_num in range(len(list)):
-                        ws.write(row_num, col_num, str(list[col_num]), font_style)
-                
-                else:
-                    list = [outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, total_sale, HVN_volume, Competitor_volume, total_HNK, total_HVB, other_table, total_other_beer, total_table, total_consumers, total_consumers_approach, total_consumer_bought, total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given]
-                    row_num +=1
-                    
-                    for col_num in range(len(list)):
-                        ws.write(row_num, col_num, str(list[col_num]), font_style)
-                    
-        wb.save(response) 
-        
-        ######################################
-        return response
+    Cp = Campain.objects.get(id=campainID)
+    #all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = True)
+   
     return export_chart(campainID, all_outlet, from_date, to_date)
     
         
