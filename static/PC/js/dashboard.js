@@ -41,7 +41,7 @@ province.change(function() {
 
             console.log(response)
             outlet_list.innerHTML = response.list_outlet
-            list_type_outlet.innerHTML = response.list_type_outlet
+                //list_type_outlet.innerHTML = response.list_type_outlet
             Consumers_charts.innerHTML = response.Consumers_charts
                 //volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
