@@ -506,7 +506,7 @@ def zip_file(array_image, array_outlet, array_created):
                 #str_absname = str(absname)
                 num_count = 0
                 for image in array_image:
-                    num_count+=1
+                    
                     if str(arcname) in image:
                         print(arcname)
                         arcname = str(array_outlet[num_count]) + '-' + str(array_created[num_count]) + '.png'
@@ -514,6 +514,7 @@ def zip_file(array_image, array_outlet, array_created):
                         print(absname)
                         print(arcname)
                         ivzip.write(absname,arcname)
+                    num_count+=1
                 
     return outfile
 
