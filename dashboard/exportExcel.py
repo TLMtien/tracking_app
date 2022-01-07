@@ -491,7 +491,8 @@ from django.http import HttpResponse
 def zip_file(array_image, array_outlet, array_created):
 
     #pathfolder = 'D:/Django_project_API/HNK_project/trackingAPP_project/media/salePerson/'
-    pathfolder = 'https://bluesungroup.vn/media/salePerson/'
+    #pathfolder = 'https:/bluesungroup.vn/media/salePerson/'
+    pathfolder = '/root/tracking_app_project/tracking_app/media/salePerson/'
     #'https://bluesungroup.vn/media/salePerson/'
     abs_src = os.path.abspath(pathfolder)
     outfile = io.BytesIO()
