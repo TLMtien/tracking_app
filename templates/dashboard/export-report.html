@@ -89,7 +89,7 @@
             <div class="row raw-data">
                 <div class="leftbox dropdown_raw">
                     <button onclick="openLeftMenu()" class="open-left-menu"><i class='bx bx-menu'></i> </button>
-                    <span class="title-menu">Management</span>
+                    <span class="title-menu">Export Report</span>
                     <ul class="dropdown-menu_raw">
                         <li class="nav-sub"><a href="{% url 'dashboard' cam_id  %}">Dashboard</a></li>
                         <li class="nav-sub"><a href="{% url 'raw-data' cam_id  %}">Raw data</a></li>
@@ -160,16 +160,17 @@
                                     
                                 </ul>
                             {% comment %} </li>  {% endcomment %}
-                            {% comment %} <li>
+                         
                                 
                                 <div class="type-report_main-item">
                                     <label for="" class="type-report_container">
-                                        <input type="checkbox"  class="report_checkbox">
+                                        <input type="checkbox"  class="report_checkbox" name='Photo Report' value='4'>
                                         <span class="checkmark"></span>
                                     </label>
                                     <div class="desc">Photo Report</div>
                                     
                                 </div>
+                               {% comment %} <li>
                                 <ul class="type-report_sub">
                                     <li>
                                         <div class="type-report_sub-item">
@@ -194,9 +195,9 @@
                         </ul> {% endcomment %}
                         <div class="row raw-data-sub">
                             <div class="leftbox">
-                                <span class="title-menu">Export Report</span>
+                                {% comment %} <span class="title-menu">Export Report</span> {% endcomment %}
                                 
-                            </div>
+                            </div> 
                             <div class="rightbox_kpi">
                                 <button class="btn-kpi" id='export' type='submit'>Export</button>
                             </div>

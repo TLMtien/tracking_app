@@ -768,15 +768,28 @@ def export(request, campainID):
     Full_Report = request.POST.get('Full Report')
     Dashboard = request.POST.get('Dashboard')
     Raw_Data = request.POST.get('Raw Data')
+    Photo_Report = request.POST.get('Photo Report')
     # all_outlet = []
-    # sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
+    sale_person = SalePerson.objects.all()#filter(brand__pk=campainID)  # all_SP
     # for SP in sale_person:
     #     outlet=SP.outlet
-    #     if not outlet in all_outlet and outlet.created_by_HVN:
-    #         all_outlet.append(outlet)
+        #if not outlet in all_outlet and outlet.created_by_HVN:
+            #all_outlet.append(outlet)
+    Cp = Campain.objects.get(id=campainID)
+    array_image = [] 
+    array_outlet = [] 
+    array_created = []
+    picture = posmReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    if picture.exists():
+        for i in picture:
+            array_image.append(str(i.image)) 
+            array_outlet.append(i.outlet) 
+            array_created.append(i.created) 
+            print(i.image)
+    print(array_image)
     #for user_id in data.get("array_id",[]):
     
-    Cp = Campain.objects.get(id=campainID)
+    
     all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = True)
     
     # a = export_chart(campainID, all_outlet, from_date, to_date)
@@ -788,8 +801,10 @@ def export(request, campainID):
         value = '2'
     elif Raw_Data == '3':
         value = '3'
-    
-    return export_chart(campainID, all_outlet, from_date, to_date, value)
+    elif Photo_Report == '4':
+        value = '4'
+    print(value)
+    return export_chart(campainID, all_outlet, from_date, to_date, value, array_image, array_outlet, array_created)
     
         
 def raw_data(request, campainID):

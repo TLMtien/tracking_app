@@ -16,13 +16,19 @@ from openpyxl.writer.excel import save_virtual_workbook
 from .rawData import Table_share, sales_volume, consumers_reached_rawdata, gift_rawdata
 from users.models import SalePerson
 
-def export_chart(campainID, all_outlet, from_date, to_date, value):  #rawdate = 3, DB =2, full=1
+def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, array_outlet, array_created):  #rawdate = 3, DB =2, full=1
     if value == '3':
         return export_rawdata(campainID, all_outlet, from_date, to_date)
+    if value == '4':
+        #return export_rawdata(campainID, all_outlet, from_date, to_date)
+        return download_files(array_image, array_outlet, array_created, campainID, from_date, to_date)
+
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
-    response['Content-Disposition'] = 'attachment;filename={}.xlsx'.format(str(datetime.now()))
+    #response['Content-Disposition'] = 'attachment;filename={}.xlsx'.format(str(datetime.now()))
+    Cp = Campain.objects.get(id = campainID)
+    response['Content-Disposition'] = 'attachment;filename={}-{}-{}.xlsx'.format(Cp, from_date, to_date)
     wb = Workbook()
     wb.remove(wb.active)
     ws = wb.create_sheet(index = 1 , title = "export-chart")
@@ -221,6 +227,7 @@ def export_chart(campainID, all_outlet, from_date, to_date, value):  #rawdate = 
     ws.add_chart(chart7, "A31")
     #--------------------------------------------------------> check value
     if value == '2':
+        response['Content-Disposition'] = 'attachment;filename={}-DB-{}-{}.xlsx'.format(Cp, from_date, to_date)
         wb.save(response) 
         return response
     #######################------------------------------------------------------------------------------->>>>>>>>>>>>>>>
@@ -348,14 +355,15 @@ def export_chart(campainID, all_outlet, from_date, to_date, value):  #rawdate = 
 #export_chart()
 
 def export_rawdata(campainID, all_outlet, from_date, to_date):
+    Cp = Campain.objects.get(id = campainID)
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
-    response['Content-Disposition'] = 'attachment;filename={}.xlsx'.format(str(datetime.now()))
+    response['Content-Disposition'] = 'attachment;filename={}-RD-{}-{}.xlsx'.format(Cp, from_date, to_date)
     wb = Workbook()
     wb.remove(wb.active)
     ws1 = wb.create_sheet(index = 0 , title = "raw-data")
-    Cp = Campain.objects.get(id = campainID)
+    
     if campainID == 1:
         colums = ['Null', 'Date', 'Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'Brand Volume Sales', 'HVN Volume Sales', 'Compertion Volume Sales', 'Total Table', 'Brand Table', 'HVN Table', 'Other Beer Table','Other Table', '%Table Share', 'Total Consumers', 'No.Consumers Approached', '% Consumers Reach', 'No. Consumers Bought', '%Conversion', 'Ly 30cl','Ly 33cl 3D','Ly Casablanca', 'Ví', 'Nón Tiger Crystal', 'Voucher Bia', 'Ly 30cl','Ly 33cl 3D','Ly Casablanca', 'Ví', 'Nón Tiger Crystal', 'Voucher Bia']
 
@@ -471,4 +479,49 @@ def export_rawdata(campainID, all_outlet, from_date, to_date):
 
     
     wb.save(response) 
+    return response
+
+
+
+from zipfile import ZipFile
+import os,io,re, magic
+from django.http import HttpResponse
+
+# zip folder
+def zip_file(array_image, array_outlet, array_created):
+
+    #pathfolder = 'D:/Django_project_API/HNK_project/trackingAPP_project/media/salePerson/'
+    pathfolder = 'https://bluesungroup.vn/media/salePerson/'
+    #'https://bluesungroup.vn/media/salePerson/'
+    abs_src = os.path.abspath(pathfolder)
+    outfile = io.BytesIO()
+    with ZipFile(outfile,'w') as ivzip:
+        for root,subs,files in os.walk(pathfolder):
+            for file in files:
+                
+                filePath = os.path.join(root,file)
+                absname = os.path.abspath(filePath)
+                arcname = absname[len(abs_src)+1 :] 
+                #str_absname = str(absname)
+                num_count = 0
+                for image in array_image:
+                    num_count+=1
+                    if str(arcname) in image:
+                        print(arcname)
+                        arcname = str(array_outlet[num_count]) + '-' + str(array_created[num_count]) + '.png'
+                        #arcname = str('ok') + '-' + str('ok') + '.png'
+                        print(absname)
+                        print(arcname)
+                        ivzip.write(absname,arcname)
+                
+    return outfile
+
+def download_files(array_image, array_outlet, array_created, campainID, from_date, to_date):
+
+    Cp = Campain.objects.get(id = campainID)
+    # path  = os.path.join(settings.MEDIA_ROOT+r"\\invoices\\" + contract_id + "\\",year)
+    file = zip_file(array_image, array_outlet, array_created)
+    response = HttpResponse(file.getvalue(), content_type="application/x-zip-compressed")
+    response['Content-Disposition'] = 'attachment;filename={}-PT-{}-{}'.format(Cp,from_date, to_date)+".zip"
+    
     return response
