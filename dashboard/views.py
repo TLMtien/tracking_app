@@ -765,17 +765,31 @@ from django.http import HttpResponse
 def export(request, campainID):
     from_date = request.POST.get('from-date')
     to_date = request.POST.get('to-date')
+    Full_Report = request.POST.get('Full Report')
+    Dashboard = request.POST.get('Dashboard')
+    Raw_Data = request.POST.get('Raw Data')
     # all_outlet = []
     # sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
     # for SP in sale_person:
     #     outlet=SP.outlet
     #     if not outlet in all_outlet and outlet.created_by_HVN:
     #         all_outlet.append(outlet)
+    #for user_id in data.get("array_id",[]):
     
     Cp = Campain.objects.get(id=campainID)
     all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = True)
-   
-    return export_chart(campainID, all_outlet, from_date, to_date)
+    
+    # a = export_chart(campainID, all_outlet, from_date, to_date)
+    #return JsonResponse({'status': 'ok'})
+    value = '1'
+    if Full_Report == '1':
+        value = '1'
+    elif Dashboard == '2':
+        value = '2'
+    elif Raw_Data == '3':
+        value = '3'
+    
+    return export_chart(campainID, all_outlet, from_date, to_date, value)
     
         
 def raw_data(request, campainID):

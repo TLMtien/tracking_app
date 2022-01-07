@@ -105,7 +105,7 @@
             <!-- Main Home-->
             
             <div class="main-table_managenment">
-                <form action="export/" method="post">
+                <form  action="export/" method="post">
                     {% csrf_token %} 
                     <div class="filter-day">
                         <div class="col-6">
@@ -123,26 +123,26 @@
                             <li>
                                 <div class="type-report_main-item">
                                     <label for="" class="type-report_container">
-                                        <input type="checkbox" checked="checked" class="report_checkbox">
+                                        <input type="checkbox"  class="report_checkbox" name='Full Report' value = "1">
                                         <span class="checkmark"></span>
                                     </label>
                                     <div class="desc">Full Report</div>
                                 </div>
                             </li>
-                            {% comment %} <li>
-                                <div class="type-report_main-item">
+                            {% comment %} <li> {% endcomment %}
+                                {% comment %} <div class="type-report_main-item">
                                     <label for="" class="type-report_container">
                                         <input type="checkbox" class="report_checkbox">
                                         <span class="checkmark"></span>
                                     </label>
                                     <div class="desc">Performance Report</div>
                                     
-                                </div>
+                                </div> {% endcomment %}
                                 <ul class="type-report_sub">
                                     <li>
                                         <div class="type-report_sub-item">
                                             <label for="" class="type-report_container">
-                                                <input type="checkbox" class="report_checkbox">
+                                                <input type="checkbox" class="report_checkbox" name='Dashboard' value="2">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <div class="desc_sub">Dashboard</div>
@@ -151,7 +151,7 @@
                                     <li>
                                         <div class="type-report_sub-item">
                                             <label for="" class="type-report_container">
-                                                <input type="checkbox"  class="report_checkbox">
+                                                <input type="checkbox"  class="report_checkbox" name='Raw Data' value='3'>
                                                 <span class="checkmark"></span>
                                             </label>
                                             <div class="desc_sub">Raw Data</div>
@@ -159,7 +159,7 @@
                                     </li>
                                     
                                 </ul>
-                            </li> {% endcomment %}
+                            {% comment %} </li>  {% endcomment %}
                             {% comment %} <li>
                                 
                                 <div class="type-report_main-item">
@@ -198,7 +198,7 @@
                                 
                             </div>
                             <div class="rightbox_kpi">
-                                <button class="btn-kpi">Export</button>
+                                <button class="btn-kpi" id='export' type='submit'>Export</button>
                             </div>
                         </div>
                            
@@ -284,6 +284,8 @@
             });
         });
     </script>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="{% static 'PC/js/chart.js' %}"></script>
     <script src="{% static 'PC/js/app.js' %}"></script>
