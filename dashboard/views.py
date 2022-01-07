@@ -765,12 +765,12 @@ from django.http import HttpResponse
 def export(request, campainID):
     from_date = request.POST.get('from-date')
     to_date = request.POST.get('to-date')
-    all_outlet = []
-    sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
-    for SP in sale_person:
-        outlet=SP.outlet
-        if not outlet in all_outlet and outlet.created_by_HVN:
-            all_outlet.append(outlet)
+    # all_outlet = []
+    # sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
+    # for SP in sale_person:
+    #     outlet=SP.outlet
+    #     if not outlet in all_outlet and outlet.created_by_HVN:
+    #         all_outlet.append(outlet)
     
     Cp = Campain.objects.get(id=campainID)
     all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = True)
