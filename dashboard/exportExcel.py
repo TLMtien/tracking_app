@@ -484,7 +484,7 @@ def export_rawdata(campainID, all_outlet, from_date, to_date):
 
 
 from zipfile import ZipFile
-import os,io,re, magic
+import os,io
 from django.http import HttpResponse
 
 # zip folder
