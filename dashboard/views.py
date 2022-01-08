@@ -770,12 +770,19 @@ def export(request, campainID):
     Raw_Data = request.POST.get('Raw Data')
     Photo_Report = request.POST.get('Photo Report')
     all_outlet = []
+    Cp = Campain.objects.get(id=campainID)
     sale_person = SalePerson.objects.all()#filter(brand__pk=campainID)  # all_SP
     for SP in sale_person:
         outlet=SP.outlet
-        if not outlet in all_outlet: #and outlet.created_by_HVN:
-            all_outlet.append(outlet)
-    Cp = Campain.objects.get(id=campainID)
+        rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+        rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+        list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+    
+        if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
+            
+            if not outlet in all_outlet: #and outlet.created_by_HVN:
+                all_outlet.append(outlet)
+    
     array_image = [] 
     array_outlet = [] 
     array_created = []
