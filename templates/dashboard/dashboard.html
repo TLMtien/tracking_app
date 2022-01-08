@@ -98,7 +98,7 @@
                 </div>
                 <div class="rightbox">
                     <div class="bg-filter">
-                        <form action="#" method='POST' class="form-filter">
+                        <form action="{% url 'dashboard' cam_id %}" method='POST' class="form-filter">
                             {% csrf_token %} 
                             <div class="filter">
                                 <div class="filter-box">
