@@ -238,14 +238,7 @@ def charts_views(request, campainID):
     print(from_date)
     id = campainID
     Cp = Campain.objects.get(id = campainID)
-    table_rp = tableReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
-    pie=pie_chart(id, table_rp)
-    #print(pie)
-    consumers_rp = consumerApproachReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
-    report_customer = total_consumers_reached(id, consumers_rp)
-    # HNK_volume_sale
-    all_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
-    Volume_sale = HNK_volume_sale(id, all_report_sale)
+    
     #VOLUME_PERFORMANCE
     #all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True).filter(compain = Cp, created_by_HVN=True)
     all_outlet = []
@@ -262,19 +255,29 @@ def charts_views(request, campainID):
             if not outlet in all_outlet and outlet.created_by_HVN:
                 all_outlet.append(outlet)
     # volumperformance
-    volume_per = VOLUME_PERFORMANCE(id, all_outlet)
+    volume_per = VOLUME_PERFORMANCE(id, all_outlet, from_date, to_date)
     Average_brand_volume = [volume_per[2], volume_per[3]]
     # Top10
     top10 = top10_outlet(id, all_outlet)
     # volume_achieved_byProvince
     target_volume_achieved =volume_achieved_byProvince(id, all_outlet)
+    #all_rp
+    list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
     #gift
-    list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
-    gift_rp = gift(id, list_gift_rp)
+    #list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    gift_rp = gift(id, list_rp[2])
+    #table_rp = tableReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    pie=pie_chart(id, list_rp[0])
+    #print(pie)
+    #consumers_rp = consumerApproachReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    report_customer = total_consumers_reached(id, list_rp[1])
+    # HNK_volume_sale
+    #all_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    Volume_sale = HNK_volume_sale(id, list_rp[3])
     # activation
     activation = activation_progress(id, all_outlet)
 
-    print(list_gift_rp)
+    #print(list_gift_rp)
     per = 0
     if volume_per[1] != 0:
         per= percent(volume_per[0], volume_per[1])
@@ -301,13 +304,13 @@ def filter_outlet_province(request, campainID):
         province = array_province.split(',')
 
         list_outlet_chart = get_outlet_province(campainID, province, from_date, to_date)
-        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0])
+        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0], from_date, to_date)
         
             
         pie = pie_chart(campainID, list_rp[0])
         consumers_charts = total_consumers_reached(campainID, list_rp[1])
         gift_charts = gift(campainID, list_rp[2])
-        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0])
+        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
         activation = activation_progress(campainID, list_outlet_chart[0])
@@ -317,7 +320,6 @@ def filter_outlet_province(request, campainID):
         list_outlet = ''
         list_type = ''
         if len(list_outlet_chart[0]) == 0:
-            Cp = Campain.objects.get(id = campainID)
             #all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
             #all__outlet
             all_outlet = []
@@ -334,17 +336,17 @@ def filter_outlet_province(request, campainID):
                     if not outlet in all_outlet and outlet.created_by_HVN:
                         all_outlet.append(outlet)
             #end all_outlet
-            volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
+            volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]
 
-            list_rp = getAll_report_outlet(campainID, all_outlet)
+            list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
         
             pie = pie_chart(campainID, list_rp[0])
             consumers_charts = total_consumers_reached(campainID, list_rp[1])
             gift_charts = gift(campainID, list_rp[2])
             
-            Average_brand_volume = [volume_performance[2], volume_performance[3]]
+            Average_brand_volume = [volume_perf[2], volume_perf[3]]
             top_10 = top10_outlet(campainID, all_outlet)
             activation = activation_progress(campainID, all_outlet)
         for outlet in volume_performance[5]:
@@ -426,14 +428,22 @@ def filter_outlet_province(request, campainID):
 def filter_outlet_type(request, campainID):
     if request.is_ajax and request.method == "POST":
         array_type = request.POST.get('array_type')
-
+        from_date = request.POST.get('from_date') 
+        to_date = request.POST.get('to_date') 
+        print(from_date)
+        print(to_date)
+        if from_date == '' or from_date==None:
+            from_date = (date(2021,12,20))
+        if to_date == '' or to_date==None:
+            to_date = (date.today())
         type = array_type.split(',')
-        list_outlet_chart = get_outlet_type(campainID, type)
-        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0])
+        # endcall ajax
+        list_outlet_chart = get_outlet_type(campainID, type, from_date, to_date)
+        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0], from_date, to_date)
         pie = pie_chart(campainID, list_rp[0])
         consumers_charts = total_consumers_reached(campainID, list_rp[1])
         gift_charts = gift(campainID, list_rp[2])
-        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0])
+        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
         activation = activation_progress(campainID, list_outlet_chart[0])
@@ -505,15 +515,23 @@ def filter_outlet_type_province(request, campainID):
     #get_outlet_type_province
     if request.is_ajax and request.method == "POST":
         total_array = request.POST.get('total_array')
-
+        from_date = request.POST.get('from_date') 
+        to_date = request.POST.get('to_date') 
+        print(from_date)
+        print(to_date)
+        if from_date == '' or from_date==None:
+            from_date = (date(2021,12,20))
+        if to_date == '' or to_date==None:
+            to_date = (date.today())
+        # endcall ajax
         list_outlet_typeAndProvince = total_array.split(',')
-        list_outlet_chart = get_outlet_type_province(campainID, list_outlet_typeAndProvince)
+        list_outlet_chart = get_outlet_type_province(campainID, list_outlet_typeAndProvince, from_date, to_date)
         print(list_outlet_chart)
-        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0])
+        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0], from_date, to_date)
         pie = pie_chart(campainID, list_rp[0])
         consumers_charts = total_consumers_reached(campainID, list_rp[1])
         gift_charts = gift(campainID, list_rp[2])
-        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0])
+        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
         activation = activation_progress(campainID, list_outlet_chart[0])
@@ -523,19 +541,34 @@ def filter_outlet_type_province(request, campainID):
         list_outlet = ''
         print(list_outlet)
         if len(list_outlet_chart[0]) == 0:
-            Cp = Campain.objects.get(id = campainID)
-            all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
-            volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
+            #Cp = Campain.objects.get(id = campainID)
+            #all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
+            # filter outlet
+            all_outlet = []
+            Cp = Campain.objects.get(id=campainID)
+            sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
+            for SP in sale_person:
+                outlet=SP.outlet
+                rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+                rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+                gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+            
+                if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
+                    
+                    if not outlet in all_outlet and outlet.created_by_HVN:
+                        all_outlet.append(outlet)
+            # end filter outlet
+            volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]
 
-            list_rp = getAll_report_outlet(campainID, all_outlet)
+            list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
         
             pie = pie_chart(campainID, list_rp[0])
             consumers_charts = total_consumers_reached(campainID, list_rp[1])
             gift_charts = gift(campainID, list_rp[2])
             
-            Average_brand_volume = [volume_performance[2], volume_performance[3]]
+            Average_brand_volume = [volume_perf[2], volume_perf[3]]
             top_10 = top10_outlet(campainID, all_outlet)
             activation = activation_progress(campainID, all_outlet)
             
@@ -616,15 +649,23 @@ def filter_outletName_Province_type(request, campainID):
     # get_outletName_type_province
     if request.is_ajax and request.method == "POST":
         total_array = request.POST.get('total_array')
-
+        from_date = request.POST.get('from_date') 
+        to_date = request.POST.get('to_date') 
+        print(from_date)
+        print(to_date)
+        if from_date == '' or from_date==None:
+            from_date = (date(2021,12,20))
+        if to_date == '' or to_date==None:
+            to_date = (date.today())
         list_outlet_typeAndProvince = total_array.split(',')
+        #endcall ajax
         list_outlet_chart = get_outletName_type_province(campainID, list_outlet_typeAndProvince)
         print(list_outlet_chart)
-        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0])
+        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0], from_date, to_date)
         pie = pie_chart(campainID, list_rp[0])
         consumers_charts = total_consumers_reached(campainID, list_rp[1])
         gift_charts = gift(campainID, list_rp[2])
-        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0])
+        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
         activation = activation_progress(campainID, list_outlet_chart[0])
@@ -635,18 +676,33 @@ def filter_outletName_Province_type(request, campainID):
         print(list_outlet)
         if len(list_outlet_chart[0]) == 0:
             Cp = Campain.objects.get(id = campainID)
-            all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
-            volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
+            #all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
+            # filter outlet
+            all_outlet = []
+            #Cp = Campain.objects.get(id=campainID)
+            sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
+            for SP in sale_person:
+                outlet=SP.outlet
+                rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+                rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+                gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+            
+                if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
+                    
+                    if not outlet in all_outlet and outlet.created_by_HVN:
+                        all_outlet.append(outlet)
+                #end filter outlet
+            volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]
 
-            list_rp = getAll_report_outlet(campainID, all_outlet)
+            list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
         
             pie = pie_chart(campainID, list_rp[0])
             consumers_charts = total_consumers_reached(campainID, list_rp[1])
             gift_charts = gift(campainID, list_rp[2])
             
-            Average_brand_volume = [volume_performance[2], volume_performance[3]]
+            Average_brand_volume = [volume_perf[2], volume_perf[3]]
             top_10 = top10_outlet(campainID, all_outlet)
             activation = activation_progress(campainID, all_outlet)
         for outlet in volume_performance[5]:
@@ -710,14 +766,22 @@ def filter_outletName_Province_type(request, campainID):
 def filter_outlet(request, campainID):
     if request.is_ajax and request.method == "POST":
         array = request.POST.get('array')
-
+        from_date = request.POST.get('from_date') 
+        to_date = request.POST.get('to_date') 
+        print(from_date)
+        print(to_date)
+        if from_date == '' or from_date==None:
+            from_date = (date(2021,12,20))
+        if to_date == '' or to_date==None:
+            to_date = (date.today())
         list_outlet = array.split(',')
+        #endcall ajax
         list_outlet_chart = get_outlet(campainID, list_outlet)
-        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0])
+        list_rp = getAll_report_outlet(campainID, list_outlet_chart[0], from_date, to_date)
         pie = pie_chart(campainID, list_rp[0])
         consumers_charts = total_consumers_reached(campainID, list_rp[1])
         gift_charts = gift(campainID, list_rp[2])
-        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0])
+        volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
         activation = activation_progress(campainID, list_outlet_chart[0])
