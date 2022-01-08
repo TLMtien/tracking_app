@@ -378,17 +378,17 @@ def filter_outlet_province(request, campainID):
                                     <div class="col-12">
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Consumers {consumers_charts[0]}
+                                                Total Consumers <br> {consumers_charts[0]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Reached Consumers {consumers_charts[1]}
+                                                Total Reached Consumers <br> {consumers_charts[1]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Bought Consumers {consumers_charts[2]}
+                                                Total Bought Consumers <br> {consumers_charts[2]}
                                             </p>
                                         </div>
                                         
@@ -398,10 +398,10 @@ def filter_outlet_province(request, campainID):
                                     <div class="col-12">
                                     
                                         <div class="col-6">
-                                            <span class="number">Average Reach {consumers_charts[3]}%</span>
+                                            <span class="number">Average Reach <br> {consumers_charts[3]}%</span>
                                         </div>
                                         <div class="col-6">
-                                            <span class="number">Average Conversion {consumers_charts[4]}%</span>
+                                            <span class="number">Average Conversion <br> {consumers_charts[4]}%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -460,17 +460,17 @@ def filter_outlet_type(request, campainID):
                                     <div class="col-12">
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Consumers {consumers_charts[0]}
+                                                Total Consumers <br> {consumers_charts[0]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Reached Consumers {consumers_charts[1]}
+                                                Total Reached Consumers <br> {consumers_charts[1]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Bought Consumers {consumers_charts[2]}
+                                                Total Bought Consumers <br> {consumers_charts[2]}
                                             </p>
                                         </div>
                                         
@@ -480,10 +480,10 @@ def filter_outlet_type(request, campainID):
                                     <div class="col-12">
                                     
                                         <div class="col-6">
-                                            <span class="number">Average Reach {consumers_charts[3]}%</span>
+                                            <span class="number">Average Reach <br> {consumers_charts[3]}%</span>
                                         </div>
                                         <div class="col-6">
-                                            <span class="number">Average Conversion {consumers_charts[4]}%</span>
+                                            <span class="number">Average Conversion <br> {consumers_charts[4]}%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -572,17 +572,17 @@ def filter_outlet_type_province(request, campainID):
                                     <div class="col-12">
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Consumers {consumers_charts[0]}
+                                                Total Consumers <br> {consumers_charts[0]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Reached Consumers {consumers_charts[1]}
+                                                Total Reached Consumers <br> {consumers_charts[1]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Bought Consumers {consumers_charts[2]}
+                                                Total Bought Consumers <br> {consumers_charts[2]}
                                             </p>
                                         </div>
                                         
@@ -592,10 +592,10 @@ def filter_outlet_type_province(request, campainID):
                                     <div class="col-12">
                                     
                                         <div class="col-6">
-                                            <span class="number">Average Reach {consumers_charts[3]}%</span>
+                                            <span class="number">Average Reach <br> {consumers_charts[3]}%</span>
                                         </div>
                                         <div class="col-6">
-                                            <span class="number">Average Conversion {consumers_charts[4]}%</span>
+                                            <span class="number">Average Conversion <br> {consumers_charts[4]}%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -666,17 +666,17 @@ def filter_outletName_Province_type(request, campainID):
                                     <div class="col-12">
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Consumers {consumers_charts[0]}
+                                                Total Consumers <br> {consumers_charts[0]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Reached Consumers {consumers_charts[1]}
+                                                Total Reached Consumers <br> {consumers_charts[1]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Bought Consumers {consumers_charts[2]}
+                                                Total Bought Consumers <br> {consumers_charts[2]}
                                             </p>
                                         </div>
                                         
@@ -686,10 +686,10 @@ def filter_outletName_Province_type(request, campainID):
                                     <div class="col-12">
                                     
                                         <div class="col-6">
-                                            <span class="number">Average Reach {consumers_charts[3]}%</span>
+                                            <span class="number">Average Reach <br> {consumers_charts[3]}%</span>
                                         </div>
                                         <div class="col-6">
-                                            <span class="number">Average Conversion {consumers_charts[4]}%</span>
+                                            <span class="number">Average Conversion <br> {consumers_charts[4]}%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -731,17 +731,17 @@ def filter_outlet(request, campainID):
                                     <div class="col-12">
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Consumers {consumers_charts[0]}
+                                                Total Consumers <br> {consumers_charts[0]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Reached Consumers {consumers_charts[1]}
+                                                Total Reached Consumers <br> {consumers_charts[1]}
                                             </p>
                                         </div>
                                         <div class="col-4">
                                             <p class="title">
-                                                Total Bought Consumers {consumers_charts[2]}
+                                                Total Bought Consumers <br> {consumers_charts[2]}
                                             </p>
                                         </div>
                                         
@@ -751,10 +751,10 @@ def filter_outlet(request, campainID):
                                     <div class="col-12">
                                     
                                         <div class="col-6">
-                                            <span class="number">Average Reach {consumers_charts[3]}%</span>
+                                            <span class="number">Average Reach <br> {consumers_charts[3]}%</span>
                                         </div>
                                         <div class="col-6">
-                                            <span class="number">Average Conversion {consumers_charts[4]}%</span>
+                                            <span class="number">Average Conversion  <br> {consumers_charts[4]}%</span>
                                         </div>
                                     </div>
                                 </div>
