@@ -339,7 +339,8 @@ def filter_outlet_province(request, campainID):
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]
-
+            volume_performance[0] = volume_perf[0]
+            volume_performance[1] = volume_perf[1]
             list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
         
             pie = pie_chart(campainID, list_rp[0])
@@ -561,7 +562,8 @@ def filter_outlet_type_province(request, campainID):
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]
-
+            volume_performance[0] = volume_perf[0]
+            volume_performance[1] = volume_perf[1]
             list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
         
             pie = pie_chart(campainID, list_rp[0])
@@ -695,7 +697,8 @@ def filter_outletName_Province_type(request, campainID):
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]
-
+            volume_performance[0] = volume_perf[0]
+            volume_performance[1] = volume_perf[1]
             list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
         
             pie = pie_chart(campainID, list_rp[0])
