@@ -275,7 +275,7 @@ def charts_views(request, campainID):
     #all_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
     Volume_sale = HNK_volume_sale(id, list_rp[3])
     # activation
-    activation = activation_progress(id, all_outlet)
+    activation = activation_progress(id, all_outlet, from_date, to_date)
 
     #print(list_gift_rp)
     per = 0
@@ -313,7 +313,7 @@ def filter_outlet_province(request, campainID):
         volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
-        activation = activation_progress(campainID, list_outlet_chart[0])
+        activation = activation_progress(campainID, list_outlet_chart[0], from_date, to_date)
         #print(province)
         #print(consumers_charts)
         #print(gift_charts)
@@ -348,7 +348,7 @@ def filter_outlet_province(request, campainID):
             
             Average_brand_volume = [volume_perf[2], volume_perf[3]]
             top_10 = top10_outlet(campainID, all_outlet)
-            activation = activation_progress(campainID, all_outlet)
+            activation = activation_progress(campainID, all_outlet, from_date, to_date)
         for outlet in volume_performance[5]:
             list_outlet += f'''
                             <div class="sidebar-menu_sub">
@@ -446,7 +446,7 @@ def filter_outlet_type(request, campainID):
         volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
-        activation = activation_progress(campainID, list_outlet_chart[0])
+        activation = activation_progress(campainID, list_outlet_chart[0], from_date, to_date)
         print(type)
         print(consumers_charts)
         print(gift_charts)
@@ -534,7 +534,7 @@ def filter_outlet_type_province(request, campainID):
         volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
-        activation = activation_progress(campainID, list_outlet_chart[0])
+        activation = activation_progress(campainID, list_outlet_chart[0], from_date, to_date)
         #print(type)
         print(consumers_charts)
         print(gift_charts)
@@ -570,7 +570,7 @@ def filter_outlet_type_province(request, campainID):
             
             Average_brand_volume = [volume_perf[2], volume_perf[3]]
             top_10 = top10_outlet(campainID, all_outlet)
-            activation = activation_progress(campainID, all_outlet)
+            activation = activation_progress(campainID, all_outlet, from_date, to_date)
             
 
         for outlet in volume_performance[5]:
@@ -668,7 +668,7 @@ def filter_outletName_Province_type(request, campainID):
         volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
-        activation = activation_progress(campainID, list_outlet_chart[0])
+        activation = activation_progress(campainID, list_outlet_chart[0], from_date, to_date)
         print(type)
         print(consumers_charts)
         print(gift_charts)
@@ -704,7 +704,7 @@ def filter_outletName_Province_type(request, campainID):
             
             Average_brand_volume = [volume_perf[2], volume_perf[3]]
             top_10 = top10_outlet(campainID, all_outlet)
-            activation = activation_progress(campainID, all_outlet)
+            activation = activation_progress(campainID, all_outlet, from_date, to_date)
         for outlet in volume_performance[5]:
             list_outlet += f'''
                             <div class="sidebar-menu_sub">
@@ -784,7 +784,7 @@ def filter_outlet(request, campainID):
         volume_performance = VOLUME_PERFORMANCE(campainID, list_outlet_chart[0], from_date, to_date)
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
-        activation = activation_progress(campainID, list_outlet_chart[0])
+        activation = activation_progress(campainID, list_outlet_chart[0], from_date, to_date)
         print(type)
         print(consumers_charts)
         print(gift_charts)
