@@ -320,7 +320,7 @@ province.change(function() {
                     position: 'center', // top, center, bottom
                     enabled: true,
                     formatter: function(val) {
-                        return val + "/" + val / response.target_volume * 100 + "%";
+                        return val + "/" + Math.round(val / response.target_volume * 100) + "%";
                     },
                     style: {
                         fontSize: '12px',
@@ -1353,7 +1353,7 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
                     position: 'center', // top, center, bottom
                     enabled: true,
                     formatter: function(val) {
-                        return val + "/" + val / response.target_volume * 100 + "%";
+                        return val + Math.round(val / response.target_volume * 100) + "%";
                     },
                     style: {
                         fontSize: '12px',
@@ -1694,7 +1694,7 @@ $("#list_name_outlet").on("change", "input:checkbox", function() {
                     position: 'center', // top, center, bottom
                     enabled: true,
                     formatter: function(val) {
-                        return val + "/" + val / response.target_volume * 100 + "%";
+                        return val + "/" + Math.round(val / response.target_volume * 100) + "%";
                     },
                     style: {
                         fontSize: '12px',
