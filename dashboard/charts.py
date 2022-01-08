@@ -261,7 +261,11 @@ def volume_achieved_byProvince(campain_id, all_outlet):
     result = 0
     test = []
     for pro in range(len(list_province)):
-        list_outlet_province = all_outlet.filter(province=list_province[pro])  #filter outlet in province
+        list_outlet_province = []
+        for outlet in all_outlet:
+            if outlet.province in list_province[pro]:
+                #list_outlet_province = all_outlet.filter(province=list_province[pro])  #filter outlet in province
+                list_outlet_province.append(outlet)
         sale_outlet = []
         sum_sale_pro = 0
         for outlet in list_outlet_province:
