@@ -19,10 +19,13 @@ from users.models import SalePerson
 def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, array_outlet, array_created):  #rawdate = 3, DB =2, full=1
     if value == '3':
         return export_rawdata(campainID, all_outlet, from_date, to_date)
-    if value == '4':
+    if value == '4': 
         #return export_rawdata(campainID, all_outlet, from_date, to_date)
         return download_files(array_image, array_outlet, array_created, campainID, from_date, to_date)
-
+    if value == '5': 
+        #return export_rawdata(campainID, all_outlet, from_date, to_date)
+        return download_files_encase(array_image, array_outlet, array_created, campainID, from_date, to_date)
+        
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
@@ -37,8 +40,8 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
     Cp = Campain.objects.get(id = campainID)
     table_rp = tableReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
     pie=pie_chart(campainID, table_rp)
-    volume_per = VOLUME_PERFORMANCE(campainID, all_outlet)
-    activation = activation_progress(campainID, all_outlet)
+    volume_per = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
+    activation = activation_progress(campainID, all_outlet, from_date, to_date)
     top10 = top10_outlet(campainID, all_outlet)
     list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
     gift_rp = gift(campainID, list_gift_rp)
@@ -524,6 +527,46 @@ def download_files(array_image, array_outlet, array_created, campainID, from_dat
     # path  = os.path.join(settings.MEDIA_ROOT+r"\\invoices\\" + contract_id + "\\",year)
     file = zip_file(array_image, array_outlet, array_created)
     response = HttpResponse(file.getvalue(), content_type="application/x-zip-compressed")
-    response['Content-Disposition'] = 'attachment;filename={}-PT-{}-{}'.format(Cp,from_date, to_date)+".zip"
+    response['Content-Disposition'] = 'attachment;filename={}-Vis-{}-{}'.format(Cp,from_date, to_date)+".zip"
+    
+    return response
+
+def zip_file_encase(array_image, array_outlet, array_created):
+
+    #pathfolder = 'D:/Django_project_API/HNK_project/trackingAPP_project/media/salePerson/'
+    #pathfolder = 'https:/bluesungroup.vn/media/salePerson/'
+    pathfolder = '/root/tracking_app_project/tracking_app/media/report/'
+    #'https://bluesungroup.vn/media/salePerson/'
+    abs_src = os.path.abspath(pathfolder)
+    outfile = io.BytesIO()
+    with ZipFile(outfile,'w') as ivzip:
+        for root,subs,files in os.walk(pathfolder):
+            for file in files:
+                
+                filePath = os.path.join(root,file)
+                absname = os.path.abspath(filePath)
+                arcname = absname[len(abs_src)+1 :] 
+                #str_absname = str(absname)
+                num_count = 0
+                for image in array_image:
+                    
+                    if str(arcname) in image:
+                        print(arcname)
+                        arcname = str(array_outlet[num_count]) + '-' + str(array_created[num_count]) + '.png'
+                        #arcname = str('ok') + '-' + str('ok') + '.png'
+                        print(absname)
+                        print(arcname)
+                        ivzip.write(absname,arcname)
+                    num_count+=1
+                
+    return outfile
+
+def download_files_encase(array_image, array_outlet, array_created, campainID, from_date, to_date):
+
+    Cp = Campain.objects.get(id = campainID)
+    # path  = os.path.join(settings.MEDIA_ROOT+r"\\invoices\\" + contract_id + "\\",year)
+    file = zip_file_encase(array_image, array_outlet, array_created)
+    response = HttpResponse(file.getvalue(), content_type="application/x-zip-compressed")
+    response['Content-Disposition'] = 'attachment;filename={}-PR-{}-{}'.format(Cp,from_date, to_date)+".zip"
     
     return response

@@ -154,7 +154,7 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
 
     return [total_sale, total_volume_achieved , average_volume, volume_achieved, list_province, list_name_outlet, list_type]
 
-def activation_progress(campain_id, all_outlet):
+def activation_progress(campain_id, all_outlet, from_date, to_date):
     Cp = Campain.objects.get(id = campain_id)
     if campain_id == 1:
         total_act = 8194
@@ -179,8 +179,11 @@ def activation_progress(campain_id, all_outlet):
     list = []
     
     for outlet in all_outlet:
-        all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet)
-        for rp_sale in all_report_sale:
+        all_report_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+        rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+        all_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+    
+        for rp_sale in all_report_table:
             if rp_sale.SP != list:
                 list.append(rp_sale.SP)
                 count = count + 1
