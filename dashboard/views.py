@@ -769,12 +769,12 @@ def export(request, campainID):
     Dashboard = request.POST.get('Dashboard')
     Raw_Data = request.POST.get('Raw Data')
     Photo_Report = request.POST.get('Photo Report')
-    # all_outlet = []
+    all_outlet = []
     sale_person = SalePerson.objects.all()#filter(brand__pk=campainID)  # all_SP
-    # for SP in sale_person:
-    #     outlet=SP.outlet
-        #if not outlet in all_outlet and outlet.created_by_HVN:
-            #all_outlet.append(outlet)
+    for SP in sale_person:
+        outlet=SP.outlet
+        if not outlet in all_outlet: #and outlet.created_by_HVN:
+            all_outlet.append(outlet)
     Cp = Campain.objects.get(id=campainID)
     array_image = [] 
     array_outlet = [] 
@@ -790,7 +790,7 @@ def export(request, campainID):
     #for user_id in data.get("array_id",[]):
     
     
-    all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = True)
+    #all_outlet = outletInfo.objects.filter(compain=Cp, created_by_HVN = True)
     
     # a = export_chart(campainID, all_outlet, from_date, to_date)
     #return JsonResponse({'status': 'ok'})
