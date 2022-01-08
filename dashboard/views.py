@@ -247,20 +247,21 @@ def charts_views(request, campainID):
     all_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
     Volume_sale = HNK_volume_sale(id, all_report_sale)
     #VOLUME_PERFORMANCE
-    #all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True).filter(compain = Cp, created_by_HVN=True)
-    all_outlet = []
-    Cp = Campain.objects.get(id=campainID)
-    sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
-    for SP in sale_person:
-        outlet=SP.outlet
-        rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-        rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-        gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+    all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True).filter(compain = Cp, created_by_HVN=True)
+    # all_outlet = []
+    # Cp = Campain.objects.get(id=campainID)
+    # sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
+    # for SP in sale_person:
+    #     outlet=SP.outlet
+    #     rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+    #     rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+    #     gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
     
-        if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
+    #     if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
             
-            if not outlet in all_outlet and outlet.created_by_HVN:
-                all_outlet.append(outlet)
+    #         if not outlet in all_outlet and outlet.created_by_HVN:
+    #             all_outlet.append(outlet)
+    # volumperformance
     volume_per = VOLUME_PERFORMANCE(id, all_outlet)
     Average_brand_volume = [volume_per[2], volume_per[3]]
     # Top10
