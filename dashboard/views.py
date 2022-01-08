@@ -293,6 +293,11 @@ def filter_outlet_province(request, campainID):
         to_date = request.POST.get('to_date') 
         print(from_date)
         print(to_date)
+        if from_date == '' or from_date==None:
+            from_date = (date(2021,12,20))
+        if to_date == '' or to_date==None:
+            to_date = (date.today())
+        # fromdate-todate
         province = array_province.split(',')
 
         list_outlet_chart = get_outlet_province(campainID, province, from_date, to_date)
