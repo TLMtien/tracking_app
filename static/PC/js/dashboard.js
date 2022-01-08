@@ -281,7 +281,7 @@ province.change(function() {
                     },
                     style: {
                         fontSize: '12px',
-                        colors: ["red"]
+                        //colors: ["red"]
                     }
                 },
 
@@ -324,7 +324,7 @@ province.change(function() {
                     },
                     style: {
                         fontSize: '12px',
-                        colors: ["red"],
+                        //colors: ["red"],
 
                     },
 
@@ -1314,7 +1314,7 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
                     },
                     style: {
                         fontSize: '12px',
-                        colors: ["red"]
+                        //colors: ["red"]
                     }
                 },
 
@@ -1357,7 +1357,7 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
                     },
                     style: {
                         fontSize: '12px',
-                        colors: ["red"],
+                        //colors: ["red"],
 
                     },
 
@@ -1655,7 +1655,7 @@ $("#list_name_outlet").on("change", "input:checkbox", function() {
                     },
                     style: {
                         fontSize: '12px',
-                        colors: ["red"]
+                        // colors: ["red"]
                     }
                 },
 
@@ -1698,7 +1698,7 @@ $("#list_name_outlet").on("change", "input:checkbox", function() {
                     },
                     style: {
                         fontSize: '12px',
-                        colors: ["red"],
+                        //colors: ["red"],
 
                     },
 
