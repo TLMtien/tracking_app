@@ -281,7 +281,7 @@ def charts_views(request, campainID):
     percent_volume = per
     print(per)
     return render(request, 'dashboard/dashboard.html', {'text':pie, 'target_volume_achieved':target_volume_achieved, 
-     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1],'array_gift': append_array(gift_rp[1]),'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'percent_volume':percent_volume,'Average_brand_volume': Average_brand_volume, 'activation':activation[0],'total_activation':activation[1],  'top10_sale_reverse':top10[3], 'top10_table_reverse': top10[4], 'top10_name_reverse':top10[5], 'list_province':volume_per[4], 'list_name_outlet':volume_per[5], 'list_type':volume_per[6], "cam_id":campainID})
+     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1],'array_gift': append_array(gift_rp[1]),'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'percent_volume':percent_volume,'Average_brand_volume': Average_brand_volume, 'activation':activation[0],'total_activation':activation[1],  'top10_sale_reverse':top10[3], 'top10_table_reverse': top10[4], 'top10_name_reverse':top10[5], 'list_province':volume_per[4], 'list_name_outlet':volume_per[5], 'list_type':volume_per[6], "cam_id":campainID, 'from_date':from_date,'to_date':to_date})
 
 
 ######
@@ -289,13 +289,13 @@ def charts_views(request, campainID):
 def filter_outlet_province(request, campainID):
     if request.is_ajax and request.method == "POST":
         array_province = request.POST.get('array_province') 
-        
-        
-        print(array_province)
-         
+        from_date = request.POST.get('from_date') 
+        to_date = request.POST.get('to_date') 
+        print(from_date)
+        print(to_date)
         province = array_province.split(',')
 
-        list_outlet_chart = get_outlet_province(campainID, province)
+        list_outlet_chart = get_outlet_province(campainID, province, from_date, to_date)
         list_rp = getAll_report_outlet(campainID, list_outlet_chart[0])
         
             
@@ -306,14 +306,29 @@ def filter_outlet_province(request, campainID):
         Average_brand_volume = [volume_performance[2], volume_performance[3]]
         top_10 = top10_outlet(campainID, list_outlet_chart[0])
         activation = activation_progress(campainID, list_outlet_chart[0])
-        print(province)
-        print(consumers_charts)
-        print(gift_charts)
+        #print(province)
+        #print(consumers_charts)
+        #print(gift_charts)
         list_outlet = ''
         list_type = ''
         if len(list_outlet_chart[0]) == 0:
             Cp = Campain.objects.get(id = campainID)
-            all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
+            #all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
+            #all__outlet
+            all_outlet = []
+            Cp = Campain.objects.get(id=campainID)
+            sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
+            for SP in sale_person:
+                outlet=SP.outlet
+                rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+                rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+                gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+            
+                if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
+                    
+                    if not outlet in all_outlet and outlet.created_by_HVN:
+                        all_outlet.append(outlet)
+            #end all_outlet
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet)
             volume_performance[5] = volume_perf[5]
             volume_performance[6] = volume_perf[6]

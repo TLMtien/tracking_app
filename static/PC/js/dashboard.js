@@ -22,11 +22,20 @@ province.change(function() {
         array_province = array_province.filter(e => e !== this.value);
         total_array = total_array.filter(e => e !== this.value);
     }
-
-
+    from_date = []
+    to_date = []
+    $('[name = "from-date"]').each(function(i) {
+        from_date.push($(this).val());
+    });
+    $('[name = "to-date"]').each(function(i) {
+        to_date.push($(this).val());
+    });
+    console.log(from_date)
     const csrf = document.getElementsByName('csrfmiddlewaretoken')
     var fd = new FormData();
     fd.append('array_province', array_province);
+    fd.append('from_date', from_date);
+    fd.append('to_date', to_date);
     $.ajax({
         type: 'POST',
         url: 'filter-outlet-province/',
@@ -34,6 +43,7 @@ province.change(function() {
             "X-CSRFToken": csrf[0].value
         },
         data: fd,
+
 
         processData: false,
         contentType: false,
