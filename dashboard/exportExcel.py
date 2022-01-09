@@ -574,7 +574,7 @@ def download_files_encase(array_image, array_outlet, array_created, campainID, f
     return response
 
 def zip_file_all_rp(array_image, array_outlet, array_created, array_image1, array_outlet1, array_created1):
-    pathfolder = '/root/tracking_app_project/tracking_app/media/salePerson/'
+    pathfolder = '/root/tracking_app_project/tracking_app/media/'
     #'https://bluesungroup.vn/media/salePerson/'
     abs_src = os.path.abspath(pathfolder)
     outfile = io.BytesIO()
@@ -597,30 +597,41 @@ def zip_file_all_rp(array_image, array_outlet, array_created, array_image1, arra
                         print(arcname)
                         ivzip.write(absname,arcname)
                     num_count+=1
-    # rp encase
-    pathfolder = '/root/tracking_app_project/tracking_app/media/report/'
-    #'https://bluesungroup.vn/media/salePerson/'
-    abs_src = os.path.abspath(pathfolder)
-    #outfile = io.BytesIO()
-    with ZipFile(outfile,'w') as ivzip:
-        for root,subs,files in os.walk(pathfolder):
-            for file in files:
-                
-                filePath = os.path.join(root,file)
-                absname = os.path.abspath(filePath)
-                arcname = absname[len(abs_src)+1 :] 
-                #str_absname = str(absname)
+                #endcase
                 num_count = 0
                 for image in array_image1:
-                    
                     if str(arcname) in image:
                         print(arcname)
                         arcname = str(array_outlet1[num_count].province) + '_' + str(array_outlet1[num_count].ouletID) + '_' + str(array_outlet1[num_count].outlet_Name) + '_' + str(array_created1[num_count]) + '.png'
-                        #arcname = str('ok') + '-' + str('ok') + '.png'
+                        
                         print(absname)
                         print(arcname)
                         ivzip.write(absname,arcname)
                     num_count+=1
+    # rp encase
+    # pathfolder = '/root/tracking_app_project/tracking_app/media/report/'
+    # #'https://bluesungroup.vn/media/salePerson/'
+    # abs_src = os.path.abspath(pathfolder)
+    # #outfile = io.BytesIO()
+    # with ZipFile(outfile,'w') as ivzip:
+    #     for root,subs,files in os.walk(pathfolder):
+    #         for file in files:
+                
+    #             filePath = os.path.join(root,file)
+    #             absname = os.path.abspath(filePath)
+    #             arcname = absname[len(abs_src)+1 :] 
+    #             #str_absname = str(absname)
+    #             num_count = 0
+    #             for image in array_image1:
+                    
+    #                 if str(arcname) in image:
+    #                     print(arcname)
+    #                     arcname = str(array_outlet1[num_count].province) + '_' + str(array_outlet1[num_count].ouletID) + '_' + str(array_outlet1[num_count].outlet_Name) + '_' + str(array_created1[num_count]) + '.png'
+    #                     #arcname = str('ok') + '-' + str('ok') + '.png'
+    #                     print(absname)
+    #                     print(arcname)
+    #                     ivzip.write(absname,arcname)
+    #                 num_count+=1
     return outfile
 
 def download_files_all_rp(array_image, array_outlet, array_created, array_image1, array_outlet1, array_created1, campainID, from_date, to_date):
