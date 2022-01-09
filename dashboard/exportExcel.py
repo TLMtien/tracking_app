@@ -615,7 +615,7 @@ def zip_file_all_rp(array_image, array_outlet, array_created, array_image1, arra
                     
                     if str(arcname) in image:
                         print(arcname)
-                        arcname = str(array_outlet1[num_count].province) + '-' + str(array_outlet1[num_count].ouletID) + '-' + str(array_outlet1[num_count].outlet_Name) + '-' + str(array_created1[num_count]) + '.png'
+                        arcname = str(array_outlet1[num_count].province) + '_' + str(array_outlet1[num_count].ouletID) + '_' + str(array_outlet1[num_count].outlet_Name) + '_' + str(array_created1[num_count]) + '.png'
                         #arcname = str('ok') + '-' + str('ok') + '.png'
                         print(absname)
                         print(arcname)
