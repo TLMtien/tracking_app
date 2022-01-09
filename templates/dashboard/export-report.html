@@ -123,10 +123,10 @@
                             <li>
                                 <div class="type-report_main-item">
                                     <label for="" class="type-report_container">
-                                        <input type="checkbox"  class="report_checkbox" name='Full Report' value = "1">
+                                        <input type="checkbox"  class="report_checkbox" name='Full Report' value = "1" id="all-raw-db">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <div class="desc">Full Report</div>
+                                    <div class="desc">Performance Report</div>
                                 </div>
                             </li>
                             {% comment %} <li> {% endcomment %}
@@ -164,35 +164,35 @@
                                 
                                 <div class="type-report_main-item">
                                     <label for="" class="type-report_container">
-                                        <input type="checkbox"  class="report_checkbox" name='Photo Report' value='4'>
+                                        <input type="checkbox"  class="report_checkbox" name='Photo Report' value='6' id ="all-photo-rp" >
                                         <span class="checkmark"></span>
                                     </label>
                                     <div class="desc">Photo Report</div>
                                     
                                 </div>
-                               {% comment %} <li>
-                                <ul class="type-report_sub">
-                                    <li>
-                                        <div class="type-report_sub-item">
-                                            <label for="" class="type-report_container">
-                                                <input type="checkbox"  class="report_checkbox">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                            <div class="desc_sub">Visibilities</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="type-report_sub-item">
-                                            <label for="" class="type-report_container">
-                                                <input type="checkbox"  class="report_checkbox">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                            <div class="desc_sub">Paper report</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul> {% endcomment %}
+                                <li>
+                                    <ul class="type-report_sub">
+                                        <li>
+                                            <div class="type-report_sub-item">
+                                                <label for="" class="type-report_container">
+                                                    <input type="checkbox"  class="report_checkbox" value='4' name="Visibilities">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <div class="desc_sub">Visibilities</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="type-report_sub-item">
+                                                <label for="" class="type-report_container">
+                                                    <input type="checkbox"  class="report_checkbox" value='5' name="Paper report">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <div class="desc_sub">Paper report</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                        {% comment %}</ul> {% endcomment %}
                         <div class="row raw-data-sub">
                             <div class="leftbox">
                                 {% comment %} <span class="title-menu">Export Report</span> {% endcomment %}
@@ -285,8 +285,37 @@
             });
         });
     </script>
+        
+    <script> //checked RP or image
+        //var Dashboard = $('name=Dashboard')
+        $(document).ready(function(){ 
+            $("#all-raw-db").change(function(){   
+                //console.log(Raw_Data)
+                var is_checked_all = $(this).prop('checked');
+                //$('[name="Raw Data"]').prop('checked', is_checked_all);
+                //$('[name="Dashboard"]').prop('checked', is_checked_all);
+                if(is_checked_all) {
+                    $("#all-photo-rp").prop('checked', false);
+                }
+                
+                //Dashboard.prop('checked', true);
+                //Raw_Data.prop('checked', false);
+                console.log(is_checked_all);
+            });
 
-    
+            $("#all-photo-rp").change(function(){   
+                //console.log(Raw_Data)
+                var is_checked_all = $(this).prop('checked');
+                if (is_checked_all) {
+                    $("#all-raw-db").prop('checked', ! is_checked_all);
+                }
+                
+                //Dashboard.prop('checked', true);
+                //Raw_Data.prop('checked', false);
+                console.log(is_checked_all);
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="{% static 'PC/js/chart.js' %}"></script>
     <script src="{% static 'PC/js/app.js' %}"></script>

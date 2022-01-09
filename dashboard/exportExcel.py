@@ -16,7 +16,7 @@ from openpyxl.writer.excel import save_virtual_workbook
 from .rawData import Table_share, sales_volume, consumers_reached_rawdata, gift_rawdata
 from users.models import SalePerson
 
-def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, array_outlet, array_created):  #rawdate = 3, DB =2, full=1
+def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, array_outlet, array_created, array_image1, array_outlet1, array_created1):  #rawdate = 3, DB =2, full=1
     if value == '3':
         return export_rawdata(campainID, all_outlet, from_date, to_date)
     if value == '4': 
@@ -24,8 +24,10 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
         return download_files(array_image, array_outlet, array_created, campainID, from_date, to_date)
     if value == '5': 
         #return export_rawdata(campainID, all_outlet, from_date, to_date)
-        return download_files_encase(array_image, array_outlet, array_created, campainID, from_date, to_date)
-        
+        return download_files_encase(array_image1, array_outlet1, array_created1, campainID, from_date, to_date)
+    if value == '6': 
+        #return export_rawdata(campainID, all_outlet, from_date, to_date)
+        return download_files_all_rp(array_image, array_outlet, array_created, array_image1, array_outlet1, array_created1, campainID, from_date, to_date)
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
@@ -552,7 +554,7 @@ def zip_file_encase(array_image, array_outlet, array_created):
                     
                     if str(arcname) in image:
                         print(arcname)
-                        arcname = str(array_outlet[num_count]) + '-' + str(array_created[num_count]) + '.png'
+                        arcname = str(array_outlet[num_count].province) + '-' + str(array_outlet[num_count].ouletID) + '-' + str(array_outlet[num_count].outlet_Name) + '-' + str(array_created[num_count]) + '.png'
                         #arcname = str('ok') + '-' + str('ok') + '.png'
                         print(absname)
                         print(arcname)
@@ -566,6 +568,66 @@ def download_files_encase(array_image, array_outlet, array_created, campainID, f
     Cp = Campain.objects.get(id = campainID)
     # path  = os.path.join(settings.MEDIA_ROOT+r"\\invoices\\" + contract_id + "\\",year)
     file = zip_file_encase(array_image, array_outlet, array_created)
+    response = HttpResponse(file.getvalue(), content_type="application/x-zip-compressed")
+    response['Content-Disposition'] = 'attachment;filename={}-paper-{}-{}'.format(Cp,from_date, to_date)+".zip"
+    
+    return response
+
+def zip_file_all_rp(array_image, array_outlet, array_created, array_image1, array_outlet1, array_created1):
+    pathfolder = '/root/tracking_app_project/tracking_app/media/salePerson/'
+    #'https://bluesungroup.vn/media/salePerson/'
+    abs_src = os.path.abspath(pathfolder)
+    outfile = io.BytesIO()
+    with ZipFile(outfile,'w') as ivzip:
+        for root,subs,files in os.walk(pathfolder):
+            for file in files:
+                
+                filePath = os.path.join(root,file)
+                absname = os.path.abspath(filePath)
+                arcname = absname[len(abs_src)+1 :] 
+                #str_absname = str(absname)
+                num_count = 0
+                for image in array_image:
+                    
+                    if str(arcname) in image:
+                        print(arcname)
+                        arcname = str(array_outlet[num_count].province) + '-' + str(array_outlet[num_count].ouletID) + '-' + str(array_outlet[num_count].outlet_Name) + '-' + str(array_created[num_count]) + '.png'
+                        #arcname = str('ok') + '-' + str('ok') + '.png' province-outletid-name
+                        print(absname)
+                        print(arcname)
+                        ivzip.write(absname,arcname)
+                    num_count+=1
+    # rp encase
+    pathfolder = '/root/tracking_app_project/tracking_app/media/report/'
+    #'https://bluesungroup.vn/media/salePerson/'
+    abs_src = os.path.abspath(pathfolder)
+    outfile = io.BytesIO()
+    with ZipFile(outfile,'w') as ivzip:
+        for root,subs,files in os.walk(pathfolder):
+            for file in files:
+                
+                filePath = os.path.join(root,file)
+                absname = os.path.abspath(filePath)
+                arcname = absname[len(abs_src)+1 :] 
+                #str_absname = str(absname)
+                num_count = 0
+                for image in array_image1:
+                    
+                    if str(arcname) in image:
+                        print(arcname)
+                        arcname = str(array_outlet1[num_count].province) + '-' + str(array_outlet1[num_count].ouletID) + '-' + str(array_outlet1[num_count].outlet_Name) + '-' + str(array_created1[num_count]) + '.png'
+                        #arcname = str('ok') + '-' + str('ok') + '.png'
+                        print(absname)
+                        print(arcname)
+                        ivzip.write(absname,arcname)
+                    num_count+=1
+    return outfile
+
+def download_files_all_rp(array_image, array_outlet, array_created, array_image1, array_outlet1, array_created1, campainID, from_date, to_date):
+
+    Cp = Campain.objects.get(id = campainID)
+    # path  = os.path.join(settings.MEDIA_ROOT+r"\\invoices\\" + contract_id + "\\",year)
+    file = zip_file_all_rp(array_image, array_outlet, array_created, array_image1, array_outlet1, array_created1)
     response = HttpResponse(file.getvalue(), content_type="application/x-zip-compressed")
     response['Content-Disposition'] = 'attachment;filename={}-PR-{}-{}'.format(Cp,from_date, to_date)+".zip"
     

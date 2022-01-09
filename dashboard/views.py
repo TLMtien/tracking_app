@@ -4,7 +4,7 @@ from dateutil.relativedelta import relativedelta
 from datetime import datetime, date
 from dashboard.models import KPI
 #from .forms import TimeReportForm, TimeDashBoard
-from outlet.models import posmReport, outletInfo, tableReport, report_sale, consumerApproachReport, giftReport, Campain
+from outlet.models import posmReport, outletInfo, tableReport, report_sale, consumerApproachReport, giftReport, Campain, overallReport
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.hashers import check_password
 from django.views.generic import DetailView, ListView
@@ -869,7 +869,25 @@ def export(request, campainID):
     Full_Report = request.POST.get('Full Report')
     Dashboard = request.POST.get('Dashboard')
     Raw_Data = request.POST.get('Raw Data')
+    Visibilities = request.POST.get('Visibilities')
     Photo_Report = request.POST.get('Photo Report')
+    Paper_report = request.POST.get('Paper report')
+    #value
+    value = '1'
+    if Full_Report == '1':
+        value = '1'
+    elif Dashboard == '2':
+        value = '2'
+    elif Raw_Data == '3':
+        value = '3'
+    elif Photo_Report == '6':
+        value = '6'
+    elif Visibilities == '4':
+        value = '4'
+    elif Paper_report == '5':
+        value = '5'
+    print(value)
+    #filter outlet
     all_outlet = []
     Cp = Campain.objects.get(id=campainID)
     sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
@@ -887,6 +905,7 @@ def export(request, campainID):
     array_image = [] 
     array_outlet = [] 
     array_created = []
+    
     picture = posmReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
     if picture.exists():
         for i in picture:
@@ -894,6 +913,19 @@ def export(request, campainID):
             array_outlet.append(i.outlet) 
             array_created.append(i.created) 
             print(i.image)
+    #rp encase
+    array_image1 = [] 
+    array_outlet1 = [] 
+    array_created1 = []
+    
+    picture = overallReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
+    if picture.exists():
+        for i in picture:
+            array_image1.append(str(i.image)) 
+            array_outlet1.append(i.outlet) 
+            array_created1.append(i.created) 
+            print(i.image)
+
     print(array_image)
     #for user_id in data.get("array_id",[]):
     
@@ -902,17 +934,8 @@ def export(request, campainID):
     
     # a = export_chart(campainID, all_outlet, from_date, to_date)
     #return JsonResponse({'status': 'ok'})
-    value = '1'
-    if Full_Report == '1':
-        value = '1'
-    elif Dashboard == '2':
-        value = '2'
-    elif Raw_Data == '3':
-        value = '3'
-    elif Photo_Report == '4':
-        value = '4'
-    print(value)
-    return export_chart(campainID, all_outlet, from_date, to_date, value, array_image, array_outlet, array_created)
+    
+    return export_chart(campainID, all_outlet, from_date, to_date, value, array_image, array_outlet, array_created, array_image1, array_outlet1, array_created1)
     
         
 def raw_data(request, campainID):
