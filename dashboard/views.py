@@ -921,7 +921,7 @@ def export(request, campainID):
     picture = overallReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
     if picture.exists():
         for i in picture:
-            array_image1.append(str(i.image)) 
+            array_image1.append(str(i.confirm)) 
             array_outlet1.append(i.outlet) 
             array_created1.append(i.created) 
             print(i.image)
