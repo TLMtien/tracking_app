@@ -512,7 +512,7 @@ def zip_file(array_image, array_outlet, array_created):
                     
                     if str(arcname) in image:
                         print(arcname)
-                        arcname = str(array_outlet[num_count].province) + '-'+  str(array_outlet[num_count].province) + '-' + str(array_created[num_count].ouletID) + '-' + str(array_created[num_count].outlet_Name) + '.png'
+                        arcname = str(array_outlet[num_count].province) + '-' + str(array_outlet[num_count].ouletID) + '-' + str(array_outlet[num_count].outlet_Name) + '-' + str(array_created[num_count]) + '.png'
                         #arcname = str('ok') + '-' + str('ok') + '.png' province-outletid-name
                         print(absname)
                         print(arcname)
