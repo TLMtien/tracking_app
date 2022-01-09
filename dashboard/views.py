@@ -924,9 +924,9 @@ def export(request, campainID):
             array_image1.append(str(i.confirm)) 
             array_outlet1.append(i.outlet) 
             array_created1.append(i.created) 
-            print(i.image)
+            #print(i.image)
 
-    print(array_image)
+    #print(array_image)
     #for user_id in data.get("array_id",[]):
     
     
