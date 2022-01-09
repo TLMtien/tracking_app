@@ -601,7 +601,7 @@ def zip_file_all_rp(array_image, array_outlet, array_created, array_image1, arra
     pathfolder = '/root/tracking_app_project/tracking_app/media/report/'
     #'https://bluesungroup.vn/media/salePerson/'
     abs_src = os.path.abspath(pathfolder)
-    outfile = io.BytesIO()
+    #outfile = io.BytesIO()
     with ZipFile(outfile,'w') as ivzip:
         for root,subs,files in os.walk(pathfolder):
             for file in files:
