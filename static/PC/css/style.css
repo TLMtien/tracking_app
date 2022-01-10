@@ -410,8 +410,9 @@ a {
 
 .sidebar {
     overflow-y: auto;
-    height: 130vh;
+    height: 125vh;
     margin-bottom: 20px;
+    margin-top: 60px;
 }
 
 .sidebar .sidebar-menu {
@@ -421,8 +422,21 @@ a {
     margin: 10px;
 }
 
-.sidebar .sidebar-menu_main {
-    padding: 30px 0;
+.sidebar-menu_main {
+    padding: 0;
+    margin-top: -5px;
+}
+
+.sidebar-menu_main .sidebar-menu_title {
+    position: fixed;
+    background: #198631;
+    color: #fff;
+    z-index: 111111111111111111;
+    width: 228px;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #fff;
+    text-align: center;
 }
 
 .sidebar .sidebar-menu:nth-child(4) {
@@ -555,6 +569,7 @@ a {
     width: 80%;
     border-radius: 5px;
     color: #fff;
+    font-size: 14px;
 }
 
 
@@ -981,7 +996,7 @@ a {
     border: 1px solid #1A5D1F;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     width: 400px;
-    min-height: 200px;
+    min-height: 220px;
     border-radius: 10px;
     margin: auto;
     position: relative;
@@ -995,8 +1010,26 @@ a {
     z-index: 4;
 }
 
-#unlock .container-unlock .unlock-box {
+#unlock .content-unlock .icon-close {
     position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+#unlock .content-unlock .icon-close .fa-window-close {
+    color: red;
+    font-size: 20px;
+}
+
+#unlock .content-unlock .icon-close .fa-window-close:hover {
+    opacity: 0.8;
+}
+
+#unlock .container-unlock .unlock-box {
+    position: relative;
     z-index: 1;
     top: 10px;
     left: 0;
@@ -1018,7 +1051,7 @@ a {
 
 #unlock .btns {
     text-align: center;
-    margin-top: 130px;
+    margin-top: 10px;
 }
 
 #unlock .btns .btn-cancel {
@@ -1315,6 +1348,7 @@ a {
 .main-right .col-vertical .num-active {
     padding: 10px;
     text-align: center;
+    position: relative;
 }
 
 .main-right .col-vertical .num-active .title {
@@ -1327,6 +1361,28 @@ a {
     color: #5a5a5a;
     font-size: 14px;
     margin-bottom: 15px;
+}
+
+.main-right .col-vertical .num-active .desc-1 {
+    color: #5a5a5a;
+    font-size: 14px;
+    margin-bottom: 15px;
+    position: absolute;
+    top: 53%;
+    left: 30%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 11111111111111;
+}
+
+.main-right .col-vertical .num-active .desc-2 {
+    color: #5a5a5a;
+    font-size: 14px;
+    margin-bottom: 15px;
+    position: absolute;
+    top: 75%;
+    left: 30%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 11111111111111;
 }
 
 .main-right .col-vertical .num-active .number-one {
@@ -1599,7 +1655,7 @@ a {
 #chart-acti,
 #chart-prog,
 #chart-perf {
-    margin-left: -25px;
+    margin-left: -80px;
 }
 
 #chart-act {

@@ -81,7 +81,7 @@
                         <img src="{% static '/PC/img/Power-01.ico' %}" alt="avatar" class="avatar-user">
                     </a>
                     <ul class="dropdown-menu_logout">
-                        {% comment %} <li class="nav-sub"><a href="{% url 'logoutHVN' %}">Đổi mật khẩu</a></li> {% endcomment %}
+                        {% comment %} <li class="nav-sub"><a href="{% url 'passwordchangeHVN' cam_id %}">Đổi mật khẩu</a></li> {% endcomment %}
                         <li class="nav-sub"><a href="{% url 'logoutHVN' %}"><i class="ti-shift-left"></i> Đăng xuất</a></li>
                     </ul>
                 </div>
@@ -131,11 +131,11 @@
                 <!-- Sidebar left menu -->
 
                 <div class="sidebar-left" id="leftMenu">
-                    
+                    <div class="sidebar-menu_main">
+                        <span class="sidebar-menu_title">SELECT ACTIVATION</span>
+                    </div>
                     <div class="sidebar">
-                        <div class="sidebar-menu sidebar-menu_main">
-                            <span class="sidebar-menu_title">SELECT ACTIVATION</span>
-                        </div>
+                        
                     
                         <div class="sidebar-menu">
                             <div class="sidebar-menu_dropdown">
@@ -212,10 +212,10 @@
                             <div class="num-active">
                                 <p class="chart-title">ACTIVATION PROGRESS</p>
                                 <br>
-                                <p class="desc">Actual Acts</p>
+                                <p class="desc-1">Actual Acts</p>
                                 <div id="chart-acti"></div>
                                 <!-- <span class="number-one">142</span> -->
-                                <p class="desc">Total Acts</p>
+                                <p class="desc-2">Total Acts</p>
                                 {% comment %} <span class="number-two">{{total_activation}}/100%</span> {% endcomment %}
                             </div>
                         </div>
@@ -224,11 +224,11 @@
                                 <p class="chart-title">VOLUME PERFORMANCE</p>
                                 <br>
                                 <p class="desc">(Can/Bottle)</p>
-                                <p class="desc">Actual Volume</p>
+                                <p class="desc-1">Actual Volume</p>
                                
                                 <div id="chart-perf"></div>
-                                <br>
-                                <p class="desc">Target Volume</p>
+                    
+                                <p class="desc-2">Target Volume</p>
                                 
                             </div>
                         </div>
@@ -237,9 +237,9 @@
                                 <p class="chart-title">VOLUME PROGRESS
                                 </p>
                                 <br>
-                                <p class="desc">Actual Volume</p>
+                                <p class="desc-1">Actual Volume</p>
                                 <div id="chart-prog"></div>
-                                <p class="desc">Total volume</p>
+                                <p class="desc-2">Total volume</p>
                                 {% comment %} <span class="number-two">{{target_volume}}/100%</span> {% endcomment %}
                             </div>
                         </div>
