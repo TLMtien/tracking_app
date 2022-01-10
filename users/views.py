@@ -49,31 +49,32 @@ login_required
 def PasswordChangeHVN(request):
 	#user = request.user.is_HVN
 	user = request.user
-	currentpassword = request.user.password
-	print(request.user.password)
-	a = 'pbkdf2_sha256$260000$tUWlkCUc2UxQ3m5dYOMrt9$/Nf8jFH7XpQ7B3jsW0p2E74Kjs1743fsxggsvPSW6YM='
-	check = False
-	if currentpassword == a:
-		check = True
 	
 	#Bluesun2021
-	if check:	
-		if request.method == 'POST':
-			form = ChangePasswordHVNForm(request.POST)
-			if form.is_valid():
-				new_password = form.cleaned_data.get('new_password')
-				confirm_password = form.cleaned_data.get('confirm_password')
-				if new_password == confirm_password:
-					user.set_password(new_password)
-					user.save()
-					update_session_auth_hash(request, user)
-					return redirect("dashboard", campainID = 4)
+	
+	if request.method == 'POST':
+		form = ChangePasswordHVNForm(request.POST)
+		if form.is_valid():
+			new_password = form.cleaned_data.get('new_password')
+			confirm_password = form.cleaned_data.get('confirm_password')
+			if new_password == confirm_password:
+				user.set_password(new_password)
+				user.save()
+				update_session_auth_hash(request, user)
+				return redirect("dashboard", campainID = request.user.hvn.brand.all()[0].id)
+			else:
+				messages.info(request, "Passwords do not match")
+				form = ChangePasswordHVNForm()
 				return render(request, 'users/changepassHVN.html', {'form':form})
 		else:
+			messages.info(request, "Passwords do not match")
 			form = ChangePasswordHVNForm()
 			return render(request, 'users/changepassHVN.html', {'form':form})
+
 	else:
-		return redirect("dashboard", campainID = 4)
+		form = ChangePasswordHVNForm()
+		return render(request, 'users/changepassHVN.html', {'form':form})
+	
 
 @unauthenticated_user
 def loginPage(request):
