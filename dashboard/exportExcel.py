@@ -584,7 +584,7 @@ def zip_file_all_rp(array_image, array_outlet, array_created, array_image1, arra
                 
                 filePath = os.path.join(root,file)
                 absname = os.path.abspath(filePath)
-                arcname = absname[len(abs_src)+1 :] 
+                arcname = absname[len(abs_src) :] 
                 #str_absname = str(absname)
                 num_count = 0
                 for image in array_image:
