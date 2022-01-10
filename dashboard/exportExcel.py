@@ -33,7 +33,14 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
     )
     #response['Content-Disposition'] = 'attachment;filename={}.xlsx'.format(str(datetime.now()))
     Cp = Campain.objects.get(id = campainID)
-    response['Content-Disposition'] = 'attachment;filename={}-{}-{}.xlsx'.format(Cp, from_date, to_date)
+    camp = Cp
+    if campainID == 4:
+        camp = 'Heineken_TAB'
+    if campainID == 5:
+        camp = 'Heineken_SPE'
+    if campainID == 8:
+        camp = 'Larue_SPE'
+    response['Content-Disposition'] = 'attachment;filename={}-{}-{}.xlsx'.format(camp, from_date, to_date)
     wb = Workbook()
     wb.remove(wb.active)
     ws = wb.create_sheet(index = 1 , title = "export-chart")
@@ -232,7 +239,7 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
     ws.add_chart(chart7, "A31")
     #--------------------------------------------------------> check value
     if value == '2':
-        response['Content-Disposition'] = 'attachment;filename={}-DB-{}-{}.xlsx'.format(Cp, from_date, to_date)
+        response['Content-Disposition'] = 'attachment;filename={}-DB-{}-{}.xlsx'.format(camp, from_date, to_date)
         wb.save(response) 
         return response
     #######################------------------------------------------------------------------------------->>>>>>>>>>>>>>>
@@ -361,10 +368,17 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
 
 def export_rawdata(campainID, all_outlet, from_date, to_date):
     Cp = Campain.objects.get(id = campainID)
+    camp = Cp
+    if campainID == 4:
+        camp = 'Heineken_TAB'
+    if campainID == 5:
+        camp = 'Heineken_SPE'
+    if campainID == 8:
+        camp = 'Larue_SPE'
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
-    response['Content-Disposition'] = 'attachment;filename={}-RD-{}-{}.xlsx'.format(Cp, from_date, to_date)
+    response['Content-Disposition'] = 'attachment;filename={}-RD-{}-{}.xlsx'.format(camp, from_date, to_date)
     wb = Workbook()
     wb.remove(wb.active)
     ws1 = wb.create_sheet(index = 0 , title = "raw-data")
@@ -526,10 +540,17 @@ def zip_file(array_image, array_outlet, array_created):
 def download_files(array_image, array_outlet, array_created, campainID, from_date, to_date):
 
     Cp = Campain.objects.get(id = campainID)
+    camp = Cp
+    if campainID == 4:
+        camp = 'Heineken_TAB'
+    if campainID == 5:
+        camp = 'Heineken_SPE'
+    if campainID == 8:
+        camp = 'Larue_SPE'
     # path  = os.path.join(settings.MEDIA_ROOT+r"\\invoices\\" + contract_id + "\\",year)
     file = zip_file(array_image, array_outlet, array_created)
     response = HttpResponse(file.getvalue(), content_type="application/x-zip-compressed")
-    response['Content-Disposition'] = 'attachment;filename={}-Vis-{}-{}'.format(Cp,from_date, to_date)+".zip"
+    response['Content-Disposition'] = 'attachment;filename={}-Vis-{}-{}'.format(camp,from_date, to_date)+".zip"
     
     return response
 
@@ -566,10 +587,17 @@ def zip_file_encase(array_image, array_outlet, array_created):
 def download_files_encase(array_image, array_outlet, array_created, campainID, from_date, to_date):
 
     Cp = Campain.objects.get(id = campainID)
+    camp = Cp
+    if campainID == 4:
+        camp = 'Heineken_TAB'
+    if campainID == 5:
+        camp = 'Heineken_SPE'
+    if campainID == 8:
+        camp = 'Larue_SPE'
     # path  = os.path.join(settings.MEDIA_ROOT+r"\\invoices\\" + contract_id + "\\",year)
     file = zip_file_encase(array_image, array_outlet, array_created)
     response = HttpResponse(file.getvalue(), content_type="application/x-zip-compressed")
-    response['Content-Disposition'] = 'attachment;filename={}-paper-{}-{}'.format(Cp,from_date, to_date)+".zip"
+    response['Content-Disposition'] = 'attachment;filename={}-paper-{}-{}'.format(camp,from_date, to_date)+".zip"
     
     return response
 
