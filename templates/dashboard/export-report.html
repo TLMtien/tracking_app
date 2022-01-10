@@ -296,6 +296,8 @@
                 //$('[name="Dashboard"]').prop('checked', is_checked_all);
                 if(is_checked_all) {
                     $("#all-photo-rp").prop('checked', false);
+                    $('[name="Visibilities"]').prop('checked', ! is_checked_all);
+                    $('[name="Paper report"]').prop('checked', ! is_checked_all);
                 }
                 
                 //Dashboard.prop('checked', true);
@@ -308,12 +310,47 @@
                 var is_checked_all = $(this).prop('checked');
                 if (is_checked_all) {
                     $("#all-raw-db").prop('checked', ! is_checked_all);
+                    $('[name="Dashboard"]').prop('checked', ! is_checked_all);
+                    $('[name="Raw Data"]').prop('checked', ! is_checked_all);
                 }
                 
                 //Dashboard.prop('checked', true);
                 //Raw_Data.prop('checked', false);
                 console.log(is_checked_all);
             });
+            $('[name="Raw Data"]').change(function(){
+                var is_checked_all = $(this).prop('checked');
+                if (is_checked_all) {
+                    $('[name="Visibilities"]').prop('checked', ! is_checked_all);
+                    $('[name="Paper report"]').prop('checked', ! is_checked_all);
+                    $("#all-photo-rp").prop('checked', ! is_checked_all);
+                }
+            })
+            $('[name="Dashboard"]').change(function(){
+                var is_checked_all = $(this).prop('checked');
+                if (is_checked_all) {
+                    $('[name="Visibilities"]').prop('checked', ! is_checked_all);
+                    $('[name="Paper report"]').prop('checked', ! is_checked_all);
+                    $("#all-photo-rp").prop('checked', ! is_checked_all);
+                }
+            })
+            $('[name="Visibilities"]').change(function(){
+                var is_checked_all = $(this).prop('checked');
+                if (is_checked_all) {
+                    $('[name="Dashboard"]').prop('checked', ! is_checked_all);
+                    $('[name="Raw Data"]').prop('checked', ! is_checked_all);
+                    $("#all-raw-db").prop('checked', ! is_checked_all);
+                }
+            })
+            $('[name="Paper report"]').change(function(){
+                var is_checked_all = $(this).prop('checked');
+                if (is_checked_all) {
+                    $('[name="Dashboard"]').prop('checked', ! is_checked_all);
+                    $('[name="Raw Data"]').prop('checked', ! is_checked_all);
+                    $("#all-raw-db").prop('checked', ! is_checked_all);
+                }
+            })
+
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
