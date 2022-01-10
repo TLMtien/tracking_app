@@ -207,32 +207,47 @@ province.change(function() {
             ////////////////////
 
             var options = {
+                series: [{
+                    data: response.Average_brand_volume
+                }],
                 chart: {
                     height: 200,
+                    // width: 200,
                     type: 'bar',
                 },
-                series: [{
-                    name: 'ACT',
-                    data: response.Average_brand_volume,
-                }],
-                yaxis: {
-                    axisBorder: {
-                        show: false
-                    },
-                    axisTicks: {
-                        show: false,
-                    },
-                    labels: {
-                        show: false,
-                        formatter: function(val) {
-                            return val + "%";
-                        }
-                    }
-
-                },
                 labels: ['Average Brand Volume', 'Average Target Volume'],
-                colors: ['#198631', '#1C263F']
-            }
+                colors: ['#198631', '#1C263F'],
+                plotOptions: {
+                    bar: {
+                        columnWidth: '30%',
+                        distributed: true,
+                        borderRadius: 5,
+                    }
+                },
+                legend: {
+                    show: true
+                },
+                lines: {
+                    show: false,
+                },
+                xaxis: {
+                    categories: ['Average Brand Volume', 'Average Target Volume'],
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                    lines: {
+                        show: false,
+                    }
+                },
+                yaxis: {
+                    lines: {
+                        show: false,
+                    }
+                }
+            };
             $("#chart-act").empty();
             var chart = new ApexCharts(document.querySelector("#chart-act"), options);
 
@@ -1241,32 +1256,47 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
             ////////////////////
 
             var options = {
+                series: [{
+                    data: response.Average_brand_volume
+                }],
                 chart: {
                     height: 200,
+                    // width: 200,
                     type: 'bar',
                 },
-                series: [{
-                    name: 'ACT',
-                    data: response.Average_brand_volume,
-                }],
-                yaxis: {
-                    axisBorder: {
-                        show: false
-                    },
-                    axisTicks: {
-                        show: false,
-                    },
-                    labels: {
-                        show: false,
-                        formatter: function(val) {
-                            return val + "%";
-                        }
-                    }
-
-                },
                 labels: ['Average Brand Volume', 'Average Target Volume'],
-                colors: ['#198631', '#1C263F']
-            }
+                colors: ['#198631', '#1C263F'],
+                plotOptions: {
+                    bar: {
+                        columnWidth: '30%',
+                        distributed: true,
+                        borderRadius: 5,
+                    }
+                },
+                legend: {
+                    show: true
+                },
+                lines: {
+                    show: false,
+                },
+                xaxis: {
+                    categories: ['Average Brand Volume', 'Average Target Volume'],
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                    lines: {
+                        show: false,
+                    }
+                },
+                yaxis: {
+                    lines: {
+                        show: false,
+                    }
+                }
+            };
             $("#chart-act").empty();
             var chart = new ApexCharts(document.querySelector("#chart-act"), options);
 
@@ -1581,33 +1611,77 @@ $("#list_name_outlet").on("change", "input:checkbox", function() {
 
             ////////////////////
 
+            // var options = {
+            //     chart: {
+            //         height: 200,
+            //         type: 'bar',
+            //     },
+            //     series: [{
+            //         name: 'ACT',
+            //         data: response.Average_brand_volume,
+            //     }],
+            //     yaxis: {
+            //         axisBorder: {
+            //             show: false
+            //         },
+            //         axisTicks: {
+            //             show: false,
+            //         },
+            //         labels: {
+            //             show: false,
+            //             formatter: function(val) {
+            //                 return val + "%";
+            //             }
+            //         }
+
+            //     },
+            //     labels: ['Average Brand Volume', 'Average Target Volume'],
+            //     colors: ['#198631', '#1C263F']
+            // }
+            //
             var options = {
+                series: [{
+                    data: response.Average_brand_volume
+                }],
                 chart: {
                     height: 200,
+                    // width: 200,
                     type: 'bar',
                 },
-                series: [{
-                    name: 'ACT',
-                    data: response.Average_brand_volume,
-                }],
-                yaxis: {
-                    axisBorder: {
-                        show: false
-                    },
-                    axisTicks: {
-                        show: false,
-                    },
-                    labels: {
-                        show: false,
-                        formatter: function(val) {
-                            return val + "%";
-                        }
-                    }
-
-                },
                 labels: ['Average Brand Volume', 'Average Target Volume'],
-                colors: ['#198631', '#1C263F']
-            }
+                colors: ['#198631', '#1C263F'],
+                plotOptions: {
+                    bar: {
+                        columnWidth: '30%',
+                        distributed: true,
+                        borderRadius: 5,
+                    }
+                },
+                legend: {
+                    show: true
+                },
+                lines: {
+                    show: false,
+                },
+                xaxis: {
+                    categories: ['Average Brand Volume', 'Average Target Volume'],
+                    labels: {
+                        style: {
+                            colors: ['#111'],
+                            fontSize: '12px',
+                        }
+                    },
+                    lines: {
+                        show: false,
+                    }
+                },
+                yaxis: {
+                    lines: {
+                        show: false,
+                    }
+                }
+            };
+
             $("#chart-act").empty();
             var chart = new ApexCharts(document.querySelector("#chart-act"), options);
 
