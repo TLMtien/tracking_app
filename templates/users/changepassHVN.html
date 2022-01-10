@@ -39,7 +39,10 @@
                         <i class="ti-reload"></i>
                         <span toggle="#password-change" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                     </div>
+                    {% for mess in messages%}
+                    <div style="color:red">{{mess|safe}}</div>
                     
+                    {% endfor %}
                     <input type="submit" class="input-submit" value="Change Password" />
                 </form>
             </div>
