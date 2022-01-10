@@ -164,6 +164,22 @@
                                 
                                 <div class="type-report_main-item">
                                     <label for="" class="type-report_container">
+                                        <input type="checkbox"  class="report_checkbox" value='4' name="Visibilities" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="desc">Visibilities</div>
+                                    
+                                </div>
+                                <div class="type-report_main-item">
+                                    <label for="" class="type-report_container">
+                                        <input type="checkbox"  class="report_checkbox" value='5' name="Paper report" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="desc">Paper report</div>
+                                    
+                                </div>
+                                {% comment %} <div class="type-report_main-item">
+                                    <label for="" class="type-report_container">
                                         <input type="checkbox"  class="report_checkbox" name='Photo Report' value='6' id ="all-photo-rp" >
                                         <span class="checkmark"></span>
                                     </label>
@@ -191,7 +207,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> {% endcomment %}
                         {% comment %}</ul> {% endcomment %}
                         <div class="row raw-data-sub">
                             <div class="leftbox">
@@ -324,6 +340,7 @@
                     $('[name="Visibilities"]').prop('checked', ! is_checked_all);
                     $('[name="Paper report"]').prop('checked', ! is_checked_all);
                     $("#all-photo-rp").prop('checked', ! is_checked_all);
+                    $("#all-raw-db").prop('checked', ! is_checked_all);
                 }
             })
             $('[name="Dashboard"]').change(function(){
@@ -332,6 +349,7 @@
                     $('[name="Visibilities"]').prop('checked', ! is_checked_all);
                     $('[name="Paper report"]').prop('checked', ! is_checked_all);
                     $("#all-photo-rp").prop('checked', ! is_checked_all);
+                    $("#all-raw-db").prop('checked', ! is_checked_all);
                 }
             })
             $('[name="Visibilities"]').change(function(){
@@ -340,6 +358,7 @@
                     $('[name="Dashboard"]').prop('checked', ! is_checked_all);
                     $('[name="Raw Data"]').prop('checked', ! is_checked_all);
                     $("#all-raw-db").prop('checked', ! is_checked_all);
+                    $('[name="Paper report"]').prop('checked', ! is_checked_all);
                 }
             })
             $('[name="Paper report"]').change(function(){
@@ -348,6 +367,7 @@
                     $('[name="Dashboard"]').prop('checked', ! is_checked_all);
                     $('[name="Raw Data"]').prop('checked', ! is_checked_all);
                     $("#all-raw-db").prop('checked', ! is_checked_all);
+                    $('[name="Visibilities"]').prop('checked', ! is_checked_all);
                 }
             })
 
