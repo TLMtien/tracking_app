@@ -252,11 +252,11 @@
                                 <div class="btns">
                                     {% if messages %}
                                     {% for message in messages %}
-                                   <div class="{{ message.tags }}">{{ message }}</div> 
+                                   <div style="color:red">{{ message|safe }}</div> 
                                     {% endfor %}
                            
                                     {% endif %}
-                                    {% comment %} <a href="{% url 'raw-data' cam_id %}"><button class="btn-cancel">Return</button></a> {% endcomment %}
+                                    <a href="{% url 'raw-data' cam_id %}"  class="btn-cancel">Cancel</a>
                                     <button class="btn-upload" type='submit' >Unlock</button>
                                 </div>
                         </div>
