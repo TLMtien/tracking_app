@@ -495,14 +495,61 @@
                                 <input type="search" class="td-search" value='{{outlet_id}}' id='outlet-id'>
                                 
                             </td>
-                            <td class="td-title bg-green dropdown">
-                                Type 
-                                <i class='bx bxs-sort-alt dropbtn' onclick="openType()">
-                                </i>
-                                <div id="dropDownType" class="dropdown-content">
-                                    <a href="#">QN</a>
-                                    <a href="#">GSO</a>
-                                    <a href="#">YSO</a>
+                            <td class="td-title bg-green">
+                                <a href="{% url 'raw-data' cam_id %}?date_filter={{date_filter}}&type={{type_filter}}" id="raw_data_filter_type">
+                                    Type
+                                <i class='bx bxs-sort-alt'></i>
+                                </a>
+                                    <select name="" id="type-outlet" >
+                                        <option value="">Loại Oulet:</option>
+                                        <option value="QN"
+                                        {% if type == "QN" %}
+                                        selected
+                                        {% endif %}
+                                        >QN</option>
+                                        <option value="GSO"
+                                        {% if type == "GSO" %}
+                                        selected
+                                        {% endif %}
+                                        >GSO</option>
+                                        <option value="YSO"
+                                        {% if type == "YSO" %}
+                                        selected
+                                        {% endif %}
+                                        >YSO</option>
+                                        <option value="QA"
+                                        {% if type == "QA" %}
+                                        selected
+                                        {% endif %}
+                                        >QA</option>
+
+                                        <option value="HZ"
+                                        {% if type == "HZ" %}
+                                        selected
+                                        {% endif %}
+                                        >HZ</option>
+
+                                        <option value="KRK"
+                                        {% if type == "KRK" %}
+                                        selected
+                                        {% endif %}
+                                        >KRK</option>
+                                        <option value="BC"
+                                        {% if type == "BC" %}
+                                        selected
+                                        {% endif %}
+                                        >BC</option>
+                                        <option value="SB"
+                                        {% if type == "SB" %}
+                                        selected
+                                        {% endif %}
+                                        >SB</option>
+                                        <option value="RTR"
+                                        {% if type == "RTR" %}
+                                        selected
+                                        {% endif %}
+                                        >RTR</option>
+                                    </select>
                                 </div>
                             </td>  
                             <td class="td-title bg-green dropdown">
@@ -919,6 +966,12 @@
                 var url = $("#url").val();
                 $("#outlet_name_filter").attr("href",url + "?date_filter="+date_filter+"&outlet_name="+outlet_name);
             }); // end change outlet-name  
+            $("#type-outlet").change(function () {
+                var date_filter = $("#date").val();
+                var outlet_type = $(this).val();
+                var url = $("#url").val();
+                $("#raw_data_filter_type").attr("href",url + "?date_filter="+date_filter+"&type="+outlet_type);
+            }); // end change outlet-type 
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
