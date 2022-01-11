@@ -105,7 +105,8 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     is_salePerson = models.BooleanField(default=False)
     is_HVN = models.BooleanField(default=False)
     is_HVNVip = models.BooleanField(default=False)
-
+    is_region = models.BooleanField(default=False)
+    is_agency = models.BooleanField(default=False)
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'user_name'
