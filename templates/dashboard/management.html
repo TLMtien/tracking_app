@@ -109,9 +109,9 @@
                         <li class="nav-sub"><a href="{% url 'sp-info'  cam_id  %}">SP Information</a></li>
                     </ul>
                 </div>
+                {% if is_campain_owner %}
                 <div class="rightbox">
                     <span class="date-menu"></span>
-                    
                     <a href="{% url 'upload' cam_id %}"><button class="btn-upload">UPLOAD NEW OUTLET LIST</button></a>
                     <!-- <div class="update-file-outlet">
                         <span class="label">
@@ -121,7 +121,7 @@
                     </div> -->
 
                 </div>
-                
+                {% endif %}
             </div>
 
             <!-- Main Home-->

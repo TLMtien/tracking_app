@@ -99,11 +99,13 @@
                         <li class="nav-sub"><a href="{% url 'export-report' cam_id %}">Export report</a></li>
                     </ul>
                 </div>
+                {% if is_campain_owner%}
                 <div class="rightbox" >
                     <div class="lock-icon">
                         <a href="{% url 'unlock' cam_id %}"><i class='bx bxs-lock-alt' ></i> <span>Unlock to change</span></a>
                     </div>
                 </div> 
+                {% endif %}
             </div>
             <!-- Main Home-->
             
