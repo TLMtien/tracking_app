@@ -107,10 +107,17 @@ def listOutletInformation(request, campainID):
     return render(request, 'dashboard/management.html', {'list_outlet_view' : list_outlet})
 
 def list_outlet_approval(request, campainID):
-    campain = Campain.objects.get(id=campainID)
-    outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
-    
-    return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet, "cam_id":campainID})
+    if request.user.is_HVN:
+        is_campain_owner = False
+        campains = request.user.hvn.brand.all()
+        for c in campains:
+            if c.id == campainID:
+                is_campain_owner = True
+                break
+        campain = Campain.objects.get(id=campainID)
+        outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
+        
+        return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet, "cam_id":campainID, 'is_campain_owner':is_campain_owner})
 
 login_required
 def ban_sp(request):
@@ -159,9 +166,16 @@ def delete_outlet_byHVN(request):
 
 
 def KPI_view(request, campainID):
-    campain = Campain.objects.get(id=campainID)
-    kpi = KPI.objects.filter(campain=campain)
-    return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi, "cam_id":campainID})
+    if request.user.is_HVN:
+        is_campain_owner = False
+        campains = request.user.hvn.brand.all()
+        for c in campains:
+            if c.id == campainID:
+                is_campain_owner = True
+                break
+        campain = Campain.objects.get(id=campainID)
+        kpi = KPI.objects.filter(campain=campain)
+        return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi, "cam_id":campainID, 'is_campain_owner':is_campain_owner})
 
 #HVN  create_KPI
 def create_KPI(request, campainID):

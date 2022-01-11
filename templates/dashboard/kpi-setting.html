@@ -116,6 +116,7 @@
                         <li class="nav-sub"><a href="{% url 'sp-info' cam_id %}">SP Information</a></li>
                     </ul>
                 </div>
+                {% if is_campain_owner%}
                 <div class="rightbox_kpi">
                     {% comment %} <button class="btn-kpi">SET NEW KPI</button> {% endcomment %}
                     <a class="btn-kpi" href="create_KPI/">SET NEW KPI</a>
@@ -127,7 +128,7 @@
                     </div> -->
 
                 </div>
-                
+                {% endif %}
             </div>
 
             <!-- Main Home-->
