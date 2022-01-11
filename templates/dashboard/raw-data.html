@@ -518,9 +518,10 @@
                                 <i class='bx bx-search-alt-2 icon-search' ></i> {% endcomment %}
                             </td>   
                             <td class="td-title bg-green">
+                                <a href="{% url 'raw-data' cam_id %}?date_filter={{date_filter}}&outlet_name={{outlet_name_filter}}" id="outlet_name_filter"><i class='bx bx-search-alt-2 icon-search' ></i></a>
                                 Outlet name <br>
-                                <input type="search" class="td-search"> 
-                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                                <input type="search" class="td-search" value='{{outletName}}' id='outlet-name'> 
+                                {% comment %} <i class='bx bx-search-alt-2 icon-search' ></i> {% endcomment %}
                             </td>  
                             <td class="td-title bg-green">Brand Volume Sales <i class='bx bx-sort-alt-2' ></i></td>  
                             <td class="td-title bg-green">HVN Volume Sales <i class='bx bx-sort-alt-2' ></i></td>   
@@ -911,7 +912,13 @@
                 var outletID = $(this).val();
                 var url = $("#url").val();
                 $("#outlet_id_filter").attr("href",url + "?date_filter="+date_filter+"&outlet_id="+outletID);
-            }); // end change province   
+            }); // end change outlet-id  outlet-name  
+            $("#outlet-name").change(function () {
+                var date_filter = $("#date").val();
+                var outlet_name = encodeURI($(this).val());
+                var url = $("#url").val();
+                $("#outlet_name_filter").attr("href",url + "?date_filter="+date_filter+"&outlet_name="+outlet_name);
+            }); // end change outlet-name  
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
