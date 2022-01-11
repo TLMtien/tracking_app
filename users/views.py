@@ -88,7 +88,7 @@ def loginPage(request):
             login(request, user)
             return redirect('page')
         else:
-            messages.info(request, "usename or password is incorrect")
+            messages.info(request, "Sai Tài Khoản hoặc Sai Mật Khẩu")
             return redirect('loginPage')
     form = LoginForm()
     return render(request, 'users/login.html', {'form':form})
@@ -105,7 +105,7 @@ def loginHVN(request):
             login(request, user)
             return redirect("dashboard", campainID = request.user.hvn.brand.all()[0].id)
         else:
-            messages.info(request, "usename or password is incorrect")
+            messages.info(request, "Sai Tài Khoản hoặc Sai Mật Khẩu")
             return redirect('loginHVN')
     form = LoginHVNForm()
     return render(request, 'users/loginHVN.html', {'form':form})
