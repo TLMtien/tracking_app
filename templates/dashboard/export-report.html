@@ -214,9 +214,11 @@
                                 {% comment %} <span class="title-menu">Export Report</span> {% endcomment %}
                                 
                             </div> 
+                            {% if is_campain_owner or is_hvn_vip %}
                             <div class="rightbox_kpi">
                                 <button class="btn-kpi" id='export' type='submit'>Export</button>
                             </div>
+                            {% endif %}
                         </div>
                            
                         

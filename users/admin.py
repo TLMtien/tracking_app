@@ -12,7 +12,7 @@ class UserAdminConfig(UserAdmin):
     ordering = ('-start_date',)
     fieldsets = (
         (None, {'fields': ('user_name',)}),
-        ('Permissions', {'fields': ('is_staff', 'is_active')}),
+        ('Permissions', {'fields': ('is_staff', 'is_active', 'is_salePerson', 'is_HVN', 'is_HVNVip')}),
     )
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 20, 'cols': 60})},

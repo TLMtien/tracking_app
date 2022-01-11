@@ -73,7 +73,9 @@ def dash_board_View(request, campainID):
 login_required
 def List_outlet_management(request, campainID):
     if request.user.is_HVN:
-        
+        is_hvn_vip = False
+        if request.user.is_HVNVip:
+            is_hvn_vip = True
         is_campain_owner = False
         campains = request.user.hvn.brand.all()
         for c in campains:
@@ -82,7 +84,7 @@ def List_outlet_management(request, campainID):
                 break
         campain = Campain.objects.get(id=campainID)
         all_outlet = outletInfo.objects.filter(compain=campain)
-        return render(request,  'dashboard/management.html', {'list_outlet_view':all_outlet, "cam_id":campainID, 'is_campain_owner':is_campain_owner})
+        return render(request,  'dashboard/management.html', {'list_outlet_view':all_outlet, "cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
 
 login_required
 def management_View(request):
@@ -108,6 +110,9 @@ def listOutletInformation(request, campainID):
 
 def list_outlet_approval(request, campainID):
     if request.user.is_HVN:
+        is_hvn_vip = False
+        if request.user.is_HVNVip:
+            is_hvn_vip = True
         is_campain_owner = False
         campains = request.user.hvn.brand.all()
         for c in campains:
@@ -117,7 +122,7 @@ def list_outlet_approval(request, campainID):
         campain = Campain.objects.get(id=campainID)
         outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
         
-        return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet, "cam_id":campainID, 'is_campain_owner':is_campain_owner})
+        return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet, "cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
 
 login_required
 def ban_sp(request):
@@ -167,6 +172,9 @@ def delete_outlet_byHVN(request):
 
 def KPI_view(request, campainID):
     if request.user.is_HVN:
+        is_hvn_vip = False
+        if request.user.is_HVNVip:
+            is_hvn_vip = True
         is_campain_owner = False
         campains = request.user.hvn.brand.all()
         for c in campains:
@@ -175,7 +183,7 @@ def KPI_view(request, campainID):
                 break
         campain = Campain.objects.get(id=campainID)
         kpi = KPI.objects.filter(campain=campain)
-        return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi, "cam_id":campainID, 'is_campain_owner':is_campain_owner})
+        return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi, "cam_id":campainID, 'is_campain_owner':is_campain_owner,'is_hvn_vip':is_hvn_vip})
 
 #HVN  create_KPI
 def create_KPI(request, campainID):
@@ -238,7 +246,11 @@ def sum_revenue(request):
 login_required
 def List_sp_management(request,campainID):
     if request.user.is_HVN:
-        
+   
+        is_hvn_vip = False
+        if request.user.is_HVNVip:
+            is_hvn_vip = True
+        print(is_hvn_vip)
         is_campain_owner = False
         campains = request.user.hvn.brand.all()
         for c in campains:
@@ -249,7 +261,7 @@ def List_sp_management(request,campainID):
         
         
         print(sale_person)
-        return render(request, "dashboard/sp-info.html", {'sale_person':sale_person,"is_campain_owner":is_campain_owner, "cam_id":campainID})
+        return render(request, "dashboard/sp-info.html", {'sale_person':sale_person,"is_campain_owner":is_campain_owner, "cam_id":campainID, 'is_hvn_vip':is_hvn_vip})
 ##################################################
 def charts_views(request, campainID):
     from_date = request.POST.get('from-date')
@@ -881,7 +893,17 @@ def list_gift_scheme(request, campainID):
 
 ###############################
 def view_export(request, campainID):
-    return render(request,'dashboard/export-report.html', {"cam_id":campainID}) 
+    if request.user.is_HVN:
+        is_hvn_vip = False
+        if request.user.is_HVNVip:
+            is_hvn_vip = True
+        print(is_hvn_vip)
+        is_campain_owner = False
+        campains = request.user.hvn.brand.all()
+        for c in campains:
+            if c.id == campainID:
+                is_campain_owner = True
+    return render(request,'dashboard/export-report.html', {"cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip}) 
 ######################################
 import datetime
 import xlwt
@@ -966,7 +988,9 @@ def export(request, campainID):
         
 def raw_data(request, campainID):
     if request.user.is_HVN:
-        
+        is_hvn_vip = False
+        if request.user.is_HVNVip:
+            is_hvn_vip = True
         is_campain_owner = False
         campains = request.user.hvn.brand.all()
         for c in campains:
@@ -1048,7 +1072,7 @@ def raw_data(request, campainID):
                         List_raw_data.append(List)
                         #print(List)
                     #print(list_name_gift)
-            return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter, 'province':province, 'is_campain_owner':is_campain_owner})
+            return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter, 'province':province, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
         else:
             sale_person = SalePerson.objects.filter(brand__pk=campainID)
             for SP in sale_person:
@@ -1096,7 +1120,7 @@ def raw_data(request, campainID):
                         List_raw_data.append(List)
                         #print(List)
                     #print(list_name_gift)
-            return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter, 'is_campain_owner':is_campain_owner})
+            return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
             
 
 def edit_rawdata(request, campainID):

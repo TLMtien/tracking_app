@@ -193,24 +193,24 @@
                         <tr>
                             <th class="th-btns">
                                 <div>
-                                    {% if is_campain_owner %}
+                                    {% if is_campain_owner and not is_hvn_vip %}
                                     <button type="button" class="th-btn" id='approval'>Confirm</button>
                                     {% endif %}
                                 </div>
                                 <div>
-                                    {% if is_campain_owner %}
+                                    {% if is_campain_owner and not is_hvn_vip %}
                                     <button class="th-btn_all" >Confirm All</button>
                                     {% endif %}
                                 </div>
                             </th>
                             <th class="th-btns">
                                 <div>
-                                    {% if is_campain_owner %}
+                                    {% if is_campain_owner and not is_hvn_vip %}
                                     <button class="th-btn" type="button" id='delete'>Delete</button>
                                     {% endif %}
                                 </div>
                                 <div>
-                                    {% if is_campain_owner %}
+                                    {% if is_campain_owner and not is_hvn_vip %}
                                     <button class="th-btn_all">Delete All</button>
                                     {% endif %}
                                 </div>
@@ -241,7 +241,7 @@
 
                             <td class="td-desc">
                                 <label>
-                                    {% if is_campain_owner %}
+                                    {% if is_campain_owner and not is_hvn_vip %}
                                     <input type="checkbox"  class="sidebar-menu_checkbox" name = 'approvalOutlet' value={{outlet.id}}>
                                     <span class="checkmark" ></span>
                                     {% endif %}
@@ -249,7 +249,7 @@
                             </td> 
                             <td class="td-desc">
                                 <label>
-                                    {% if is_campain_owner %}
+                                    {% if is_campain_owner and not is_hvn_vip %}
                                     <input type="checkbox"  name ='outlet' class="sidebar-menu_checkbox" value={{outlet.id}}>
                                     <span class="checkmark"></span>
                                     {% endif %}
