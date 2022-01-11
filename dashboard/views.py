@@ -1123,7 +1123,7 @@ def raw_data(request, campainID):
                             List_raw_data.append(List)
                         #print(List)
                     #print(list_name_gift)
-            return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter, 'province':province, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
+            return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter, 'outlet_id':outlet_id, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
             
             #end filter outlet_id
         else:
