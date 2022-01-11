@@ -11,7 +11,7 @@ urlpatterns = [
    
     #path('input-outlet-approval/', TemplateView.as_view(template_name="dashboard/input-outlet-approval.html"), name='input-outlet-approval'),
     #path('lock-outlet-approval/', TemplateView.as_view(template_name="dashboard/lock-outlet-approval.html"), name='lock-outlet-approval'),
-    path('upload/', TemplateView.as_view(template_name="dashboard/upload-file.html"), name='upload'),
+    path('upload/<int:campainID>/', views.upload_outlet, name='upload'),
     #path('kpi/', TemplateView.as_view(template_name="dashboard/kpi-setting.html"), name='kpi'),
     path('delete_outlet_byHVN/', views.delete_outlet_byHVN, name='delete_outlet_byHVN'),
     path('<int:campainID>/sp-info/', views.List_sp_management, name='sp-info'),

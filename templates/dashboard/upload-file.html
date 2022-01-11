@@ -160,7 +160,7 @@
 
     <div id="uploadFile">
         <div class="content-upload">
-        <form action="{% url 'uploadFile_outlet' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'uploadFile_outlet' cam_id %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="input-upload">
                 <div class="update-file-outlet">
@@ -171,7 +171,7 @@
                 </div>
             </div>
             <div class="btns">
-                <a class="btn-cancel" href="{% url 'managementlist' 7 %}">Cancel</a>
+                <a class="btn-cancel" href="{% url 'managementlist' cam_id %}">Cancel</a>
                 <button class="btn-upload">Upload</button>
             </div>
         </form>

@@ -138,7 +138,7 @@ def come_back(request, pk):
     return redirect('https://bluesungroup.vn/outlet/listoutlet/'+pk+'/')
 
 #HVN
-def uploadFile_outlet(request):
+def uploadFile_outlet(request, campainID):
     try:
         if "GET" == request.method:
             return render(request, 'dashboard/upload-file.html', {})
@@ -147,8 +147,8 @@ def uploadFile_outlet(request):
             wb = openpyxl.load_workbook(excel_file)
             
             sheets = wb.sheetnames
-            print(sheets[1])
-            worksheet = wb[sheets[1]]   #Trang tính
+            print(sheets[0])
+            worksheet = wb[sheets[0]]   #Trang tính
 
             excel_data = list()
         
@@ -166,10 +166,10 @@ def uploadFile_outlet(request):
             #     a.save()
             list_outlet = []
             for i in range(len(excel_data)-1):
-                campain = Campain.objects.get(id=2)
+                campain = Campain.objects.get(id=campainID)
                 filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
                 if filter_outlet <1:
-                    campain = Campain.objects.get(id=2)
+                    campain = Campain.objects.get(id=campainID)
                     a = outletInfo.objects.create(created=excel_data[i+1][1], province=excel_data[i+1][2], ouletID=excel_data[i+1][3],
                         type=excel_data[i+1][4], area=excel_data[i+1][5], outlet_address=excel_data[i+1][6], 
                         outlet_Name=excel_data[i+1][7], created_by_HVN = True)
@@ -178,7 +178,7 @@ def uploadFile_outlet(request):
                     a.save()
                     list_outlet.append(a)
            
-            return render(request, "dashboard/management.html", {'list_outlet':list_outlet})
+            return render(request, "dashboard/management.html", {'list_outlet':list_outlet, "cam_id":campainID})
     except:
         return Http404('file is not support')
 

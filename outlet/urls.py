@@ -16,5 +16,5 @@ urlpatterns = [
     path('create/', TemplateView.as_view(template_name="outlet/createoutlet.html"), name='create'),
     path('search/', views.searchView, name='search'),
     path('listoutlet/<int:pk>/outletCreate/back/', views.come_back,name='comeback'),
-    path('upload/', views.uploadFile_outlet, name='uploadFile_outlet'),
+    path('upload/<int:campainID>/', views.uploadFile_outlet, name='uploadFile_outlet'),
 ]

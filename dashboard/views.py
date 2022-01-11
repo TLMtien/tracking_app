@@ -87,6 +87,10 @@ def management_View(request):
 #     context_object_name = 'list_outlet_view'
 #     paginate_by = 25
 #     template_name = 'dashboard/management.html'
+#upload outlet
+login_required
+def upload_outlet(request, campainID):
+    return render(request,  'dashboard/upload-file.html', {"cam_id":campainID})
 
 def listOutletInformation(request, campainID):
     campain = Campain.objects.get(id=campainID)
