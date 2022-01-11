@@ -314,6 +314,8 @@
                     $("#all-photo-rp").prop('checked', false);
                     $('[name="Visibilities"]').prop('checked', ! is_checked_all);
                     $('[name="Paper report"]').prop('checked', ! is_checked_all);
+                    $('[name="Dashboard"]').prop('checked', ! is_checked_all);
+                    $('[name="Raw Data"]').prop('checked', ! is_checked_all);
                 }
                 
                 //Dashboard.prop('checked', true);
@@ -341,6 +343,7 @@
                     $('[name="Paper report"]').prop('checked', ! is_checked_all);
                     $("#all-photo-rp").prop('checked', ! is_checked_all);
                     $("#all-raw-db").prop('checked', ! is_checked_all);
+                    $('[name="Dashboard"]').prop('checked', ! is_checked_all);
                 }
             })
             $('[name="Dashboard"]').change(function(){
@@ -350,6 +353,7 @@
                     $('[name="Paper report"]').prop('checked', ! is_checked_all);
                     $("#all-photo-rp").prop('checked', ! is_checked_all);
                     $("#all-raw-db").prop('checked', ! is_checked_all);
+                    $('[name="Raw Data"]').prop('checked', ! is_checked_all);
                 }
             })
             $('[name="Visibilities"]').change(function(){

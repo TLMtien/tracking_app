@@ -34,12 +34,24 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
     #response['Content-Disposition'] = 'attachment;filename={}.xlsx'.format(str(datetime.now()))
     Cp = Campain.objects.get(id = campainID)
     camp = Cp
+    if campainID == 1:
+        camp = 'TGR TAB'
+    if campainID == 2:
+        camp = 'TGR FES'
+    if campainID == 3:
+        camp = 'TGR HOT'
     if campainID == 4:
-        camp = 'Heineken_TAB'
+        camp = 'HNK TAB'
     if campainID == 5:
-        camp = 'Heineken_SPE'
+        camp = 'HNK SPE'
+    if campainID == 6:
+        camp = 'SBW FES'
+    if campainID == 7:
+        camp = 'BVN FES'
     if campainID == 8:
-        camp = 'Larue_SPE'
+        camp = 'LRE FES'
+    if campainID == 9:
+        camp = 'LRS FES'
     response['Content-Disposition'] = 'attachment;filename={}-{}-{}.xlsx'.format(camp, from_date, to_date)
     wb = Workbook()
     wb.remove(wb.active)
@@ -369,12 +381,24 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
 def export_rawdata(campainID, all_outlet, from_date, to_date):
     Cp = Campain.objects.get(id = campainID)
     camp = Cp
+    if campainID == 1:
+        camp = 'TGR TAB'
+    if campainID == 2:
+        camp = 'TGR FES'
+    if campainID == 3:
+        camp = 'TGR HOT'
     if campainID == 4:
-        camp = 'Heineken_TAB'
+        camp = 'HNK TAB'
     if campainID == 5:
-        camp = 'Heineken_SPE'
+        camp = 'HNK SPE'
+    if campainID == 6:
+        camp = 'SBW FES'
+    if campainID == 7:
+        camp = 'BVN FES'
     if campainID == 8:
-        camp = 'Larue_SPE'
+        camp = 'LRE FES'
+    if campainID == 9:
+        camp = 'LRS FES'
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
@@ -541,12 +565,24 @@ def download_files(array_image, array_outlet, array_created, campainID, from_dat
 
     Cp = Campain.objects.get(id = campainID)
     camp = Cp
+    if campainID == 1:
+        camp = 'TGR TAB'
+    if campainID == 2:
+        camp = 'TGR FES'
+    if campainID == 3:
+        camp = 'TGR HOT'
     if campainID == 4:
-        camp = 'Heineken_TAB'
+        camp = 'HNK TAB'
     if campainID == 5:
-        camp = 'Heineken_SPE'
+        camp = 'HNK SPE'
+    if campainID == 6:
+        camp = 'SBW FES'
+    if campainID == 7:
+        camp = 'BVN FES'
     if campainID == 8:
-        camp = 'Larue_SPE'
+        camp = 'LRE FES'
+    if campainID == 9:
+        camp = 'LRS FES'
     # path  = os.path.join(settings.MEDIA_ROOT+r"\\invoices\\" + contract_id + "\\",year)
     file = zip_file(array_image, array_outlet, array_created)
     response = HttpResponse(file.getvalue(), content_type="application/x-zip-compressed")
@@ -588,12 +624,24 @@ def download_files_encase(array_image, array_outlet, array_created, campainID, f
 
     Cp = Campain.objects.get(id = campainID)
     camp = Cp
+    if campainID == 1:
+        camp = 'TGR TAB'
+    if campainID == 2:
+        camp = 'TGR FES'
+    if campainID == 3:
+        camp = 'TGR HOT'
     if campainID == 4:
-        camp = 'Heineken_TAB'
+        camp = 'HNK TAB'
     if campainID == 5:
-        camp = 'Heineken_SPE'
+        camp = 'HNK SPE'
+    if campainID == 6:
+        camp = 'SBW FES'
+    if campainID == 7:
+        camp = 'BVN FES'
     if campainID == 8:
-        camp = 'Larue_SPE'
+        camp = 'LRE FES'
+    if campainID == 9:
+        camp = 'LRS FES'
     # path  = os.path.join(settings.MEDIA_ROOT+r"\\invoices\\" + contract_id + "\\",year)
     file = zip_file_encase(array_image, array_outlet, array_created)
     response = HttpResponse(file.getvalue(), content_type="application/x-zip-compressed")
