@@ -177,9 +177,10 @@ def list_outlet_approval(request, campainID):
             ave_table_volume = str(ave_table_volume) + '%'
             ave_sale_volume  = str(ave_sale_volume) + '%' 
             sale_person = SalePerson.objects.filter(outlet=outlet)
+            list = [outlet, ave_sale_volume, ave_table_volume]
             if sale_person.exists():
                 list = [outlet, ave_sale_volume, ave_table_volume, sale_person[0]]
-            list = [outlet, ave_sale_volume, ave_table_volume]
+            
             list_outlet_view.append(list)
         
         return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':list_outlet_view, "cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
