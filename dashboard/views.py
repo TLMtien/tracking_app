@@ -161,10 +161,28 @@ def list_outlet_approval(request, campainID):
             if c.id == campainID:
                 is_campain_owner = True
                 break
+        list_outlet_view = []
         campain = Campain.objects.get(id=campainID)
-        outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
+        all_outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
+        for outlet in all_outlet:
+            rp_table = tableReport.objects.filter(campain = campain, outlet=outlet)
+            rp_sale =  report_sale.objects.filter(campain = campain, outlet=outlet)
+            ave_sale_volume = 0
+            ave_table_volume = 0
         
-        return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':outlet, "cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
+            if rp_sale.exists():
+                ave_sale_volume = Average_Sale_volume(rp_sale)
+            if rp_table.exists():
+                ave_table_volume = Average_table_share(rp_table)
+            ave_table_volume = str(ave_table_volume) + '%'
+            ave_sale_volume  = str(ave_sale_volume) + '%' 
+            sale_person = SalePerson.objects.filter(outlet=outlet)
+            if sale_person.exists():
+                list = [outlet, ave_sale_volume, ave_table_volume, sale_person[0]]
+            list = [outlet, ave_sale_volume, ave_table_volume]
+            list_outlet_view.append(list)
+        
+        return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':list_outlet_view, "cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
 
 login_required
 def ban_sp(request):

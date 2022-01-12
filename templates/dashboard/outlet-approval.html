@@ -125,64 +125,422 @@
                         
                         <tr>  
                             <th rowspan="2" class="td-title ">No.</th>  
+                            <th rowspan="2" class="td-title ">Created</th>  
                             <th rowspan="2"  class="td-title ">
-                                PROVINCE<br>
-                                <select name="" id="">
-                                    <option value="">Chosse</option>
-                                    <option value="An Giang">An Giang</option>
-                                    <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu</option>
-                                    <option value="Bạc Liêu">Bạc Liêu</option>
-                                    <option value="Bắc Kạn">Bắc Kạn</option>
-                                    <option value="Bắc Giang">Bắc Giang</option>
+                                <input type="hidden" id="url" value="{% url 'managementlist' cam_id %}">
+                                <a href="{% url 'managementlist' cam_id %}?province_filter={{province_filter}}" id="filter_province">
+                                    PROVINCE
+                                <i class='bx bxs-sort-alt'></i>
+                                </a>
+                                <br>
+                                <select name="" id="local-city">
+                                    <option value="">Tỉnh/Thành</option>
+                                    <option value="An Giang"
+                                    {% if province == "An Giang" %}
+                                        selected
+                                    {% endif %}
+                                    >An Giang</option>
+                                    <option value="Bà Rịa - Vũng Tàu"
+                                    {% if province == "Bà Rịa - Vũng Tàu" %}
+                                        selected
+                                    {% endif %}
+                                    >Bà Rịa - Vũng Tàu</option>
+                                    <option value="Bạc Liêu"
+                                    {% if province == "Bạc Liêu" %}
+                                        selected
+                                    {% endif %}
+                                    >Bạc Liêu</option>
+                                    <option value="Bắc Kạn"
+                                    {% if province == "Bắc Kạn" %}
+                                        selected
+                                    {% endif %}
+                                    >Bắc Kạn</option>
+                                    <option value="Bắc Giang"
+                                    {% if province == "Bắc Giang" %}
+                                        selected
+                                    {% endif %}
+                                    >Bắc Giang</option>
+                                    <option value="Bắc Ninh"
+                                    {% if province == "Bắc Ninh" %}
+                                        selected
+                                    {% endif %}
+                                    >Bắc Ninh</option>
+                                    <option value="Bến Tre"
+                                    {% if province == "Bến Tre" %}
+                                        selected
+                                    {% endif %}
+                                    >Bến Tre</option>
+                                    <option value="Bình Dương"
+                                    {% if province == "Bình Dương" %}
+                                        selected
+                                    {% endif %}
+                                    >Bình Dương</option>
+                                    <option value="Bình Định"
+                                    {% if province == "Bình Định" %}
+                                        selected
+                                    {% endif %}
+                                    >Bình Định</option>
+                                    <option value="Bình Phước"
+                                    {% if province == "Bình Phước" %}
+                                        selected
+                                    {% endif %}
+                                    >Bình Phước</option>
+                                    <option value="Bình Thuận"
+                                    {% if province == "Bình Thuận" %}
+                                        selected
+                                    {% endif %}
+                                    >Bình Thuận</option>
+                                    <option value="Cà Mau"
+                                    {% if province == "Cà Mau" %}
+                                        selected
+                                    {% endif %}
+                                    >Cà Mau</option>
+                                    <option value="Cao Bằng"
+                                    {% if province == "Cao Bằng" %}
+                                        selected
+                                    {% endif %}
+                                    >Cao Bằng</option>
+                                    <option value="Cần Thơ"
+                                    {% if province == "Cần Thơ" %}
+                                        selected
+                                    {% endif %}
+                                    >Cần Thơ</option>
+                                    <option value="Đà Nẵng"
+                                    {% if province == "Đà Nẵng" %}
+                                        selected
+                                    {% endif %}
+                                    >Đà Nẵng</option>
+                                    <option value="Đắk Lắk"
+                                    {% if province == "Đắk Lắk" %}
+                                        selected
+                                    {% endif %}
+                                    >Đắk Lắk</option>
+                                    <option value="Đắk Nông"
+                                    {% if province == "Đắk Nông" %}
+                                        selected
+                                    {% endif %}
+                                    >Đắk Nông</option>
+                                    <option value="Đồng Nai"
+                                    {% if province == "Đồng Nai" %}
+                                        selected
+                                    {% endif %}
+                                    >Đồng Nai</option>
+                                    <option value="Đồng Tháp"
+                                    {% if province == "Đồng Tháp" %}
+                                        selected
+                                    {% endif %}
+                                    >Đồng Tháp</option>
+                                    <option value="Điện Biên"
+                                    {% if province == "Điện Biên" %}
+                                        selected
+                                    {% endif %}
+                                    >Điện Biên</option>
+                                    <option value="Gia Lai"
+                                    {% if province == "Gia Lai" %}
+                                        selected
+                                    {% endif %}
+                                    >Gia Lai</option>
+                                    <option value="Hà Giang"
+                                    {% if province == "Hà Giang" %}
+                                        selected
+                                    {% endif %}
+                                    >Hà Giang</option>
+                                    <option value="Hà Nam"
+                                    {% if province == "Hà Nam" %}
+                                        selected
+                                    {% endif %}
+                                    >Hà Nam</option>
+                                    <option value="Hà Nội"
+                                    {% if province == "Hà Nội" %}
+                                        selected
+                                    {% endif %}
+                                    >Hà Nội</option>
+                                    <option value="Hà Tĩnh"
+                                    {% if province == "Hà Tĩnh" %}
+                                        selected
+                                    {% endif %}
+                                    >Hà Tĩnh</option>
+                                    <option value="Hải Dương"
+                                    {% if province == "Hải Dương" %}
+                                        selected
+                                    {% endif %}
+                                    >Hải Dương</option>
+                                    <option value="Hải Phòng"
+                                    {% if province == "Hải Phòng" %}
+                                        selected
+                                    {% endif %}
+                                    >Hải Phòng</option>
+                                    <option value="Hòa Bình"
+                                    {% if province == "Hòa Bình" %}
+                                        selected
+                                    {% endif %}
+                                    >Hòa Bình</option>
+                                    <option value="Hậu Giang"
+                                    {% if province == "Hậu Giang" %}
+                                        selected
+                                    {% endif %}
+                                    >Hậu Giang</option>
+                                    <option value="Hưng Yên"
+                                    {% if province == "Hưng Yên" %}
+                                        selected
+                                    {% endif %}
+                                    >Hưng Yên</option>
+                                    <option value="Hồ Chí Minh"
+                                    {% if province == "Hồ Chí Minh" %}
+                                        selected
+                                    {% endif %}
+                                    >Hồ Chí Minh</option>
+                                    <option value="Khánh Hòa"
+                                    {% if province == "Khánh Hòa" %}
+                                        selected
+                                    {% endif %}
+                                    >Khánh Hòa</option>
+                                    <option value="Kiên Giang"
+                                    {% if province == "Kiên Giang" %}
+                                        selected
+                                    {% endif %}
+                                    >Kiên Giang</option>
+                                    <option value="Kon Tum"
+                                    {% if province == "Kon Tum" %}
+                                        selected
+                                    {% endif %}
+                                    >Kon Tum</option>
+                                    <option value="Lai Châu"
+                                    {% if province == "Lai Châu" %}
+                                        selected
+                                    {% endif %}
+                                    >Lai Châu</option>
+                                    <option value="Lào Cai"
+                                    {% if province == "Lào Cai" %}
+                                        selected
+                                    {% endif %}
+                                    >Lào Cai</option>
+                                    <option value="Lạng Sơn"
+                                    {% if province == "Lạng Sơn" %}
+                                        selected
+                                    {% endif %}
+                                    >Lạng Sơn</option>
+                                    <option value="Lâm Đồng"
+                                    {% if province == "Lâm Đồng" %}
+                                        selected
+                                    {% endif %}
+                                    >Lâm Đồng</option>
+                                    <option value="Long An"
+                                    {% if province == "Long An" %}
+                                        selected
+                                    {% endif %}
+                                    >Long An</option>
+                                    <option value="Nam Định"
+                                    {% if province == "Nam Định" %}
+                                        selected
+                                    {% endif %}
+                                    >Nam Định</option>
+                                    <option value="Nghệ An"
+                                    {% if province == "Nghệ An" %}
+                                        selected
+                                    {% endif %}
+                                    >Nghệ An</option>
+                                    <option value="Ninh Bình"
+                                    {% if province == "Ninh Bình" %}
+                                        selected
+                                    {% endif %}
+                                    >Ninh Bình</option>
+                                    <option value="Ninh Thuận"
+                                    {% if province == "Ninh Thuận" %}
+                                        selected
+                                    {% endif %}
+                                    >Ninh Thuận</option>
+                                    <option value="Phú Thọ"
+                                    {% if province == "Phú Thọ" %}
+                                        selected
+                                    {% endif %}
+                                    >Phú Thọ</option>
+                                    <option value="Phú Yên"
+                                    {% if province == "Phú Yên" %}
+                                        selected
+                                    {% endif %}
+                                    >Phú Yên</option>
+                                    <option value="Quảng Bình"
+                                    {% if province == "Quảng Bình" %}
+                                        selected
+                                    {% endif %}
+                                    >Quảng Bình</option>
+                                    <option value="Quảng Nam"
+                                    {% if province == "Quảng Nam" %}
+                                        selected
+                                    {% endif %}
+                                    >Quảng Nam</option>
+                                    <option value="Quảng Ngãi"
+                                    {% if province == "Quảng Ngãi" %}
+                                        selected
+                                    {% endif %}
+                                    >Quảng Ngãi</option>
+                                    <option value="Quảng Ninh"
+                                    {% if province == "Quảng Ninh" %}
+                                        selected
+                                    {% endif %}
+                                    >Quảng Ninh</option>
+                                    <option value="Quảng Trị"
+                                    {% if province == "Quảng Trị" %}
+                                        selected
+                                    {% endif %}
+                                    >Quảng Trị</option>
+                                    <option value="Sóc Trăng"
+                                    {% if province == "Sóc Trăng" %}
+                                        selected
+                                    {% endif %}
+                                    >Sóc Trăng</option>
+                                    <option value="Sơn La"
+                                    {% if province == "Sơn La" %}
+                                        selected
+                                    {% endif %}
+                                    >Sơn La</option>
+                                    <option value="Tây Ninh"
+                                    {% if province == "Tây Ninh" %}
+                                        selected
+                                    {% endif %}
+                                    >Tây Ninh</option>
+                                    <option value="Thái Bình"
+                                    {% if province == "Thái Bình" %}
+                                        selected
+                                    {% endif %}
+                                    >Thái Bình</option>
+                                    <option value="Thái Nguyên"
+                                    {% if province == "Thái Nguyên" %}
+                                        selected
+                                    {% endif %}
+                                    >Thái Nguyên</option>
+                                    <option value="Thanh Hóa"
+                                    {% if province == "Thanh Hóa" %}
+                                        selected
+                                    {% endif %}
+                                    >Thanh Hóa</option>
+                                    <option value="Huế"
+                                    {% if province == "Huế" %}
+                                        selected
+                                    {% endif %}
+                                    >Huế</option>
+                                    <option value="Tiền Giang"
+                                    {% if province == "Tiền Giang" %}
+                                        selected
+                                    {% endif %}
+                                    >Tiền Giang</option>
+                                    <option value="Trà Vinh"
+                                    {% if province == "Trà Vinh" %}
+                                        selected
+                                    {% endif %}
+                                    >Trà Vinh</option>
+                                    <option value="Tuyên Quang"
+                                    {% if province == "Tuyên Quang" %}
+                                        selected
+                                    {% endif %}
+                                    >Tuyên Quang</option>
+                                    <option value="Vĩnh Long"
+                                    {% if province == "Vĩnh Long" %}
+                                        selected
+                                    {% endif %}
+                                    >Vĩnh Long</option>
+                                    <option value="Vĩnh Phúc"
+                                    {% if province == "Vĩnh Phúc" %}
+                                        selected
+                                    {% endif %}
+                                    >Vĩnh Phúc</option>
+                                    <option value="Yên Bái"
+                                    {% if province == "Yên Bái" %}
+                                        selected
+                                    {% endif %}
+                                    >Yên Bái</option>
                                 </select>
-                            </th>  
+                                {% comment %} <i class='bx bx-search-alt-2 icon-search' ></i> {% endcomment %}
+                            </th> 
                             <th rowspan="2"  class="td-title ">
+                                <a href="{% url 'managementlist' cam_id %}?outlet_id={{outletid_filter}}" id="outlet_id_filter"><i class='bx bx-search-alt-2 icon-search' ></i></a>
+
                                 OUTLET ID <br>
-                                <input type="search" class="td-search"> 
-                                <i class='bx bx-search-alt-2 icon-search' ></i>
-                            </th>  
+                                <input class="td-search" value='{{outlet_id}}' id='outlet-id'> 
+                                
+                            </th>   
                             <th rowspan="2"  class="td-title ">
-                                TYPE <br>
-                                <select name="" id="">
-                                    <option value="">Chosse</option>
-                                    <option value="QN">QN</option>
-                                    <option value="GSO">GSO</option>
-                                    <option value="YSO">YSO</option>
-                                </select>
+                                <a href="{% url 'managementlist' cam_id %}?type={{type_filter}}" id="filter_type">
+                                    Type
+                                <i class='bx bxs-sort-alt'></i>
+                                </a>
+                                <br>
+                                    <select name="" id="type-outlet" >
+                                        <option value="">Loại Oulet:</option>
+                                        <option value="QN"
+                                        {% if type == "QN" %}
+                                        selected
+                                        {% endif %}
+                                        >QN</option>
+                                        <option value="GSO"
+                                        {% if type == "GSO" %}
+                                        selected
+                                        {% endif %}
+                                        >GSO</option>
+                                        <option value="YSO"
+                                        {% if type == "YSO" %}
+                                        selected
+                                        {% endif %}
+                                        >YSO</option>
+                                        <option value="QA"
+                                        {% if type == "QA" %}
+                                        selected
+                                        {% endif %}
+                                        >QA</option>
+
+                                        <option value="HZ"
+                                        {% if type == "HZ" %}
+                                        selected
+                                        {% endif %}
+                                        >HZ</option>
+
+                                        <option value="KRK"
+                                        {% if type == "KRK" %}
+                                        selected
+                                        {% endif %}
+                                        >KRK</option>
+                                        <option value="BC"
+                                        {% if type == "BC" %}
+                                        selected
+                                        {% endif %}
+                                        >BC</option>
+                                        <option value="SB"
+                                        {% if type == "SB" %}
+                                        selected
+                                        {% endif %}
+                                        >SB</option>
+                                        <option value="RTR"
+                                        {% if type == "RTR" %}
+                                        selected
+                                        {% endif %}
+                                        >RTR</option>
+                                    </select>
                             </th>
                             <th rowspan="2"  class="td-title  dropdown">
                                 AREA<br>
-                                <select name="" id="">
-                                    <option value="">Chosse</option>
-                                    <option value="All">All</option>
-                                    <option value="Centra">Central</option>
-                                    <option value="HCM 2">HCM 2</option>
-                                </select>
+                                
                             </th>  
                             <th rowspan="2"  class="td-title  dropdown">
+                                <a href="{% url 'managementlist' cam_id %}?outlet_name={{outlet_name_filter}}" id="outlet_name_filter"><i class='bx bx-search-alt-2 icon-search' ></i></a>
                                 OUTLET NAME<br>
-                                <input type="search" class="td-search">
-                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                                <input  class="td-search" value='{{outletName}}' id='outlet-name'> 
                             </th>
                             <th rowspan="2"  class="td-title  dropdown">
                                 ADDRESS<br>
-                                <input type="search" class="td-search">
-                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                                
                             </th>  
                             <th rowspan="2"  class="td-title ">
                                 SALES VOLUME<br>
-                                <input type="search" class="td-search"> 
-                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                                
                             </th>   
                             <th rowspan="2"  class="td-title ">
                                 TABLE SHARE<br>
-                                <input type="search" class="td-search"> 
-                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                               
                             </th>   
                             <th rowspan="2"  class="td-title ">
                                 CREATED BY SP ID<br>
-                                <input type="search" class="td-search"> 
-                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                                
                             </th>   
                             <th colspan="3"  class="td-title">
                                 ACTION
@@ -229,15 +587,16 @@
                         
                         <tr id={{outlet.id}}>  
                             <td class="td-desc">{{ forloop.counter }}</td>  
-                            <td class="td-desc">{{outlet.province}}</td>  
-                            <td class="td-desc text-red"></td>  
-                            <td class="td-desc text-red">{{outlet.type}}</td>  
-                            <td class="td-desc text-red"></td> 
-                            <td class="td-desc text-small ">{{outlet.outlet_Name}}</td> 
-                            <td class="td-desc text-small ">{{outlet.outlet_address}}</td>  
-                            <td class="td-desc"></td>   
-                            <td class="td-desc"></td>  
-                            <td class="td-desc"></td> 
+                            <td class="td-desc">{{outlet.0.created}}</td>
+                            <td class="td-desc">{{outlet.0.province}}</td>  
+                            <td class="td-desc text-red">{{outlet.0.ouletID}}</td>  
+                            <td class="td-desc text-red">{{outlet.0.type}}</td>  
+                            <td class="td-desc text-red">{{outlet.0.area}}</td> 
+                            <td class="td-desc text-small ">{{outlet.0.outlet_Name}}</td> 
+                            <td class="td-desc text-small ">{{outlet.0.outlet_address}}</td>  
+                            <td class="td-desc">{{outlet.1}}</td>   
+                            <td class="td-desc">{{outlet.2}}</td>  
+                            <td class="td-desc">{{outlet.3}}</td> 
 
                             <td class="td-desc">
                                 <label>
