@@ -16,7 +16,7 @@ import json
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_outlet_type, get_outlet, get_gift_scheme, get_outlet_type_province, get_outletName_type_province
+from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_outlet_type, get_outlet, get_gift_scheme, get_outlet_type_province, get_outletName_type_province, Average_Sale_volume, Average_table_share
 from .rawData import Table_share, sales_volume, consumers_reached_rawdata, gift_rawdata, get_gift_scheme_rawdata
 from .exportExcel import export_chart
 # Create your views here.
@@ -83,8 +83,50 @@ def List_outlet_management(request, campainID):
                 is_campain_owner = True
                 break
         campain = Campain.objects.get(id=campainID)
-        all_outlet = outletInfo.objects.filter(compain=campain)
-        return render(request,  'dashboard/management.html', {'list_outlet_view':all_outlet, "cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
+        list_province = []
+        list_outlet_view = []
+        province = ''
+        outletName = ''
+        
+        province_filter = request.GET.get("province_filter")
+        outlet_id = request.GET.get("outlet_id")
+        outlet_name = request.GET.get("outlet_name")
+        
+        type = request.GET.get("type")
+        print(outlet_name)
+        if province_filter:
+            province = unquote(province_filter)
+            
+        if outlet_name:
+            outletName = unquote(outlet_name)
+        if province:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True, province=province)
+        elif type:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True, type=type)
+        elif outlet_id:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True, ouletID__contains = outlet_id)
+        elif outletName:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True, outlet_Name__contains = outletName)    
+        else:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True) 
+        for outlet in all_outlet:
+            rp_table = tableReport.objects.filter(campain = campain, outlet=outlet)
+            rp_sale =  report_sale.objects.filter(campain = campain, outlet=outlet)
+            ave_sale_volume = 0
+            ave_table_volume = 0
+            if not outlet.province in list_province and outlet.province != None and outlet.province != '':
+                list_province.append(outlet.province)
+            if rp_sale.exists():
+                ave_sale_volume = Average_Sale_volume(rp_sale)
+            if rp_table.exists():
+                ave_table_volume = Average_table_share(rp_table)
+            ave_table_volume = str(ave_table_volume) + '%'
+            ave_sale_volume  = str(ave_sale_volume) + '%' 
+            list = [outlet, ave_sale_volume, ave_table_volume]
+            list_outlet_view.append(list)
+        if outlet_id == None:
+            outlet_id = ''
+        return render(request,  'dashboard/management.html', {'list_outlet_view':list_outlet_view, 'province':province,'type':type,'outlet_id':outlet_id,"cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip, 'outletName':outletName})
 
 login_required
 def management_View(request):

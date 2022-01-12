@@ -36,7 +36,29 @@ def get_allReport_outlet(outlet, campain_id):
     
     
 
-    
+def Average_Sale_volume(all_sale_report):
+    result = 0
+    beer_brand = 0
+    beer_HVN = 0
+    beer_other = 0
+    for rp in all_sale_report:
+        beer_brand = sum(beer_brand, rp.beer_brand)
+        beer_HVN = sum(beer_HVN, rp.beer_HVN)
+        beer_other = sum(beer_other, rp.beer_other)
+    total_Sale = sum_sale(beer_brand, beer_HVN, beer_other)
+    result = percent(beer_brand, total_Sale)
+    return result
+
+def Average_table_share(all_table_report):
+    result = 0
+    brand_table = 0
+    total_table = 0
+
+    for rp in all_table_report:
+        brand_table = sum(brand_table, rp.brand_table)
+        total_table = sum(total_table, rp.total_table)
+    result = percent(brand_table, total_table)
+    return result
 
 def pie_chart(campain_id, table_rp):
     try:
