@@ -176,7 +176,7 @@ def list_outlet_approval(request, campainID):
                 ave_table_volume = Average_table_share(rp_table)
             ave_table_volume = str(ave_table_volume) + '%'
             ave_sale_volume  = str(ave_sale_volume) + '%' 
-            sale_person = SalePerson.objects.filter(outlet=outlet)
+            sale_person = SalePerson.objects.filter(outlet=outlet, brand__pk=campainID)
             list = [outlet, ave_sale_volume, ave_table_volume]
             if sale_person.exists():
                 list = [outlet, ave_sale_volume, ave_table_volume, sale_person[0]]
