@@ -79,10 +79,11 @@
                 </div>
                 <div class="profile-user dropdown-logout">
                     <a href="#" class="user-img" onclick="openTigerTp()">
-                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                        <img src="{% static '/PC/img/Power-01.ico' %}" alt="avatar" class="avatar-user">
                     </a>
                     <ul class="dropdown-menu_logout">
-                        <li class="nav-sub"><a href="{% url 'logoutHVN' %}"><i class="ti-shift-left"></i> Logout</a></li>
+                        <li class="nav-sub"><a href="{% url 'passwordchangeHVN' %}">Đổi mật khẩu</a></li>
+                        <li class="nav-sub"><a href="{% url 'logoutHVN' %}"><i class="ti-shift-left"></i> Đăng xuất</a></li>
                     </ul>
                 </div>
             </div>
@@ -728,12 +729,12 @@
                          
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.6 }}"  name="brand-volume" required>
-                                <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button>
+                                {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                            
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.7 }}" name="HVN-volume" required>
-                                <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button>
+                                {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>   
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.8 }}" name="compertion-volume" required>
@@ -746,15 +747,15 @@
                             </td>   
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.10 }}" name="brand-table" required>
-                                <button class="btn-send" id="table-sale" type='button'><i class='bx bx-check'></i></button>
+                                {% comment %} <button class="btn-send" id="table-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.11 }}" name="HVN-table" required>
-                                <button class="btn-send" id="table-sale" type='button'><i class='bx bx-check'></i></button>
+                                {% comment %} <button class="btn-send" id="table-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>   
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.12 }}" name="other-beer-table" required>
-                                <button class="btn-send" id="table-sale" type='button'><i class='bx bx-check'></i></button>
+                                {% comment %} <button class="btn-send" id="table-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>   
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.13 }}" name="other-table" required>
