@@ -6,7 +6,7 @@ class outletInfoForm(forms.ModelForm):
     outlet_Name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Tên outlet *"}))
     #type = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Loại outlet *"}))
     outlet_address = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Địa chỉ outlet *"}))
-    ouletID = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"ID outlet *"}))
+    ouletID = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"ID outlet *"}), required=False)
 
     class Meta:
         model = outletInfo

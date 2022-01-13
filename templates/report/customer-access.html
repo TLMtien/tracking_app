@@ -19,8 +19,13 @@
                     <div class="logo">
                         <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
                     </div>
-                    <div class="profile-user"> 
-                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    <div class="profile-user dropdown-nav">
+                        <a href="#" class="user-img" onclick="openTigerTp()">
+                            <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-sub"><a href="{% url 'logout' %}"><i class="ti-shift-left"></i> Đăng xuất</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="icon-back">
@@ -36,7 +41,7 @@
                             <tr>
                                 <th>Danh mục</th>
                                 <th>Số lượng</th>
-                                {% comment %} <th>Tổng cộng</th> {% endcomment %}
+                                <th>Tổng cộng</th>
                             </tr>
                             <tr>
                                 <td class="td-name">Khách tại quán</td>
@@ -44,7 +49,7 @@
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.Total_Consumers}}
                                 </td>
-                                {% comment %} <td class="td-total"></td> {% endcomment %}
+                                <td class="td-total">{{Total_Consumers}}</td> 
                             </tr>
                             <tr>
                                 <td class="td-name">Khách đã tiếp cận</td>
@@ -52,7 +57,7 @@
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.consumers_approach}}
                                 </td>
-                                {% comment %} <td class="td-total"></td> {% endcomment %}
+                                <td class="td-total">{{consumers_approach}}</td> 
                             </tr>
                             <tr>
                                 <td class="td-name">Khách đã mua</td>
@@ -60,7 +65,7 @@
                                     {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
                                     {{form.consumers_brough}}
                                 </td>
-                                {% comment %} <td class="td-total"></td> {% endcomment %}
+                                <td class="td-total">{{consumers_brough}}</td> 
                             </tr>
                             
                         </table>
@@ -75,7 +80,24 @@
     </div>
 
     <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown-nav").click(function(){
+                $(this).find(".dropdown-menu").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown-nav");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu").slideUp("fast");
+            }            
+        });
+    </script>
     
     <script src="{% static '/js/app.js' %}"></script>
+    
 </body>
 </html>

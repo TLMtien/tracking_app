@@ -19,8 +19,13 @@
                     <div class="logo">
                         <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
                     </div>
-                    <div class="profile-user"> 
-                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    <div class="profile-user dropdown-nav">
+                        <a href="#" class="user-img" onclick="openTigerTp()">
+                            <img src="{% static '/img/img_avatar3.png' %}" alt="avatar" class="avatar-user">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-sub"><a href="{% url 'logout' %}"><i class="ti-shift-left"></i> Đăng xuất</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="icon-back">
@@ -45,6 +50,53 @@
     </div>
 
     <!-- JS -->
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "445536889224666");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v12.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown-nav").click(function(){
+                $(this).find(".dropdown-menu").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown-nav");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu").slideUp("fast");
+            }            
+        });
+    </script>
     <script>/* ============Active Report============= */
         const room  = document.querySelector('.box-report');
         const btns = document.querySelectorAll('.btn-report'); 
