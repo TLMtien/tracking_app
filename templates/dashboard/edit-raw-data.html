@@ -100,18 +100,12 @@
                         <li class="nav-sub"><a href="{% url 'export-report' cam_id %}">Export report</a></li>
                     </ul>
                 </div>
-                
-                <div class="row raw-data-sub">
-                    <div class="leftbox">
-                        {% comment %} <span class="title-menu">Export Report</span> {% endcomment %}
-                        
-                    </div> 
-                    
+                <div class="rightbox">
                     <div class="rightbox_kpi">
-                        <button class="btn-kpi" id='export' type='submit'>Done</button>
+                        <a href="{% url 'raw-data' cam_id %}" class="btn-kpi" id='export'><span>Done</span></a>
                     </div>
-                    
                 </div>
+                
             </div>
             <!-- Main Home-->
             
