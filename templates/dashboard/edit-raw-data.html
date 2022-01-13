@@ -759,20 +759,20 @@
                             </td>   
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.13 }}" name="other-table" required>
-                                <button class="btn-send" id="table-sale" type='button'><i class='bx bx-check'></i></button>
+                                {% comment %} <button class="btn-send" id="table-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.14 }}" id="table-share{{list.21}}" disabled>
-                                {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
+                                <button class="btn-send" id="table-sale" type='button'><i class='bx bx-check'></i></button>
                             </td> 
                             {% comment %} Consumer {% endcomment %}
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.15 }}" name="total-consumers" required>
-                                <button class="btn-send" id="consumer" type='button'><i class='bx bx-check'></i></button>
+                                {% comment %} <button class="btn-send" id="consumer" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                             </td>  
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.16 }}" name="consumers-approached" required>
-                                <button class="btn-send" id="consumer" type='button'><i class='bx bx-check'></i></button>
+                                {% comment %} <button class="btn-send" id="consumer" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                             </td> 
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.17 }}" id="percent-consumers-reach{{list.22}}" disabled>
@@ -780,11 +780,11 @@
                             </td>  
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.18 }}" name="consumers-bought" required>
-                                <button class="btn-send" id="consumer" type='button'><i class='bx bx-check'></i></button>
+                                {% comment %} <button class="btn-send" id="consumer" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                             </td> 
                             <td class="td-desc">
                                 <input type="text" class="input-number" value="{{ list.19 }}" id="conversion{{list.22}}" disabled>
-                                {% comment %} <button class="btn-send"><i class='bx bx-check'></i></button> {% endcomment %}
+                                <button class="btn-send" id="consumer" type='button'><i class='bx bx-check'></i></button>
                             </td>  
                             {% comment %} ID report {% endcomment %}
                             <input class="input-number" name="sale_id" type = "hidden" value="{{list.20}}" id='user_id'>
