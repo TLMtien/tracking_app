@@ -100,11 +100,11 @@
                         <li class="nav-sub"><a href="{% url 'export-report' cam_id %}">Export report</a></li>
                     </ul>
                 </div>
-                {% comment %} <div class="rightbox">
+                <div class="rightbox">
                     <div class="lock-icon">
-                        <a href="./unlock.html"><i class='bx bxs-lock-alt' ></i> <span>Unlock to change</span></a>
+                        <a href="{% url 'raw-data' cam_id %}" class="btn-kpi" id='export'><span>Unlock to change</span></a>
                     </div>
-                </div> {% endcomment %}
+                </div>
             </div>
             <!-- Main Home-->
             
