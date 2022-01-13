@@ -93,13 +93,20 @@ def List_outlet_management(request, campainID):
         outlet_name = request.GET.get("outlet_name")
         
         type = request.GET.get("type")
-        print(outlet_name)
+        
         if province_filter:
             province = unquote(province_filter)
             
+        print(province)
+        print(type)
+
         if outlet_name:
             outletName = unquote(outlet_name)
-        if province:
+
+        
+        if type and province:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True, province=province, type=type)
+        elif province:
             all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True, province=province)
         elif type:
             all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True, type=type)
@@ -179,6 +186,7 @@ def list_outlet_approval(request, campainID):
             sale_person = SalePerson.objects.filter(outlet=outlet, brand__pk=campainID)
             list = [outlet, ave_sale_volume, ave_table_volume]
             if sale_person.exists():
+                
                 list = [outlet, ave_sale_volume, ave_table_volume, sale_person[0]]
             
             list_outlet_view.append(list)

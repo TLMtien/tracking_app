@@ -468,8 +468,8 @@
                                 
                             </th>  
                             <th rowspan="2"  class="td-title ">
-                                <a href="{% url 'managementlist' cam_id %}?type={{type_filter}}" id="filter_type">
-                                    Type
+                                <a href="{% url 'managementlist' cam_id %}?province_filter={{province_filter}}&type={{outlet_type}}" id="filter_type">
+                                    Type 
                                 <i class='bx bxs-sort-alt'></i>
                                 </a>
                                 <br>
@@ -678,8 +678,10 @@
             }); // end change province       
             $("#type-outlet").change(function () {
                 var outlet_type = $(this).val();
+                var province_filter = encodeURI($("#local-city").val());
                 var url = $("#url").val();
-                $("#filter_type").attr("href",url + "?type="+outlet_type);
+               // $("#filter_province").attr("href",url + "?province_filter="+province_filter+"&type="+outlet_type);
+                $("#filter_type").attr("href",url + "?province_filter="+province_filter+"&type="+outlet_type);
             }); // end change outlet-type 
             $("#outlet-id").change(function () {
                 var date_filter = $("#date").val();
