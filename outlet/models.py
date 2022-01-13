@@ -178,7 +178,7 @@ class overallReport(models.Model):
     table_Report = models.ForeignKey(tableReport, on_delete=models.CASCADE, null=True, blank=True)
     gift_report = models.ForeignKey(giftReport, on_delete=models.CASCADE, null=True, blank=True)
     consumer_report = models.ForeignKey(consumerApproachReport, on_delete=models.CASCADE, null=True, blank=True)
-    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE, null=True, blank=True)
     confirm = models.ImageField(upload_to=report)  
     created = models.DateField(auto_now_add=True)
 
