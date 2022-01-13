@@ -73,7 +73,7 @@ class posmReport(models.Model):
     outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=upload_to)
     created = models.DateField(auto_now_add=True)
-    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE, null=True, blank=True)
     #modified = models.DateTimeField(auto_now=True)
 
 class tableReport(models.Model):
@@ -81,7 +81,7 @@ class tableReport(models.Model):
     outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     other_table = models.CharField(max_length=255, default='0')
     other_beer_table = models.CharField(max_length=255, default='0')
-    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE, null=True, blank=True)
     brand_table = models.CharField(max_length=255, default='0')
     HVN_table = models.CharField(max_length=255, default='0')
     total_table = models.CharField(max_length=255, default='0', blank=True)
@@ -99,7 +99,7 @@ class consumerApproachReport(models.Model):
     consumers_approach = models.CharField(max_length=255)
     consumers_brough = models.CharField(max_length=255)
     Total_Consumers =  models.CharField(max_length=255)
-    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE, null=True, blank=True)
     created = models.DateField(auto_now_add=True)
     
 class report_sale(models.Model):
@@ -109,11 +109,11 @@ class report_sale(models.Model):
     beer_HVN = models.CharField(max_length=255, default='0')
     beer_other = models.CharField(max_length=255, default='0')
     created = models.DateField(auto_now_add=True)
-    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE, null=True, blank=True)
 
 class giftReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    campain = models.ForeignKey(Campain, on_delete=models.CASCADE, default='STB')
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE, null=True, blank=True)
 
     outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     gift1_received =  models.CharField(max_length=255, default='0')
