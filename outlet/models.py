@@ -58,6 +58,7 @@ class outletInfo(models.Model):
     created = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now=True)
     created_by_HVN = models.BooleanField(default=False, blank=True)
+    created_by_SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return "{} - {}".format(self.area, self.outlet_Name)
     # class Meta:
@@ -112,7 +113,7 @@ class report_sale(models.Model):
 
 class giftReport(models.Model):
     SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    campain = models.ForeignKey(Campain, on_delete=models.CASCADE)
+    campain = models.ForeignKey(Campain, on_delete=models.CASCADE, default='STB')
 
     outlet = models.ForeignKey(outletInfo, on_delete=models.CASCADE)
     gift1_received =  models.CharField(max_length=255, default='0')
