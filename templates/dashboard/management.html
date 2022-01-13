@@ -554,7 +554,7 @@
                             <th>Average Table share
                                 (Can/bottle)</th>
                         </tr>
-                        {% comment %} {% for outlet in list_outlet %}
+                        {% for outlet in list_outlet %}
                         <tr>  
                             <td class="td-desc">{{ forloop.counter }}</td>  
                             <td class="td-desc">{{outlet.province}}</td>  
@@ -566,8 +566,7 @@
                             <td class="td-desc"></td>  
                             <td class="td-desc"></td> 
                         </tr>  
-                        {% endfor %} {% endcomment %}
-
+                        {% endfor %}
                         {% for outlet in list_outlet_view %}
                         <tr>  
                             <td class="td-desc">{{ forloop.counter }}</td>  
