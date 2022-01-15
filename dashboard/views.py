@@ -360,6 +360,8 @@ def edit_outlet_approval(request):
                 rp_table = tableReport.objects.filter(outlet=outlet_info)
                 count_rp_table = tableReport.objects.filter(outlet=outlet_info).count()
                 count_rp_sale =  report_sale.objects.filter(outlet=outlet_info).count()
+                count_rp_gift = giftReport.objects.filter(outlet=outlet_info).count()
+                count_posmReport = posmReport.objects.filter(outlet=outlet_info).count()
                 if count_rp_table > 0:
                     rp_table = tableReport.objects.filter(outlet=outlet_info)
                     for rp in rp_table:
@@ -372,7 +374,21 @@ def edit_outlet_approval(request):
                         
                             outlet_info.created_by_SP = rp.SP 
                             break
+                elif count_rp_gift > 0:
+                    rp_gift =  giftReport.objects.filter(outlet=outlet_info)
+                    for rp in rp_gift:
+                        
+                            outlet_info.created_by_SP = rp.SP 
+                            break
+                elif count_posmReport > 0:
+                    rp_posmReport = posmReport.objects.filter(outlet=outlet_info)
+                    for rp in rp_posmReport:
+                        
+                            outlet_info.created_by_SP = rp.SP 
+                            break
                 outlet_info.save()
+                
+
         except:
             pass
         return JsonResponse({'status': 'ok'})
