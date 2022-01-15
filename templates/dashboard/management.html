@@ -80,7 +80,8 @@
                         "><a href="{% url 'managementlist' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
                     {% endif %}
-                    {% if request.user.is_agency  %}
+
+                    {% if request.user.is_agency  and is_agency %}
                     <ul class="navbar-nav">
                         {% if cam_id == 1%}
                         <li class="nav-list dropdown-nav 
