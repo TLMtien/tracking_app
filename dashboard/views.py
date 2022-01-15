@@ -143,7 +143,7 @@ class PostJsonListView(View):
     def get(self, *args, **kwargs):
         print(kwargs)
         upper = kwargs.get('num_posts')
-        lower = upper - 5000
+        lower = upper - 100
         campainID = kwargs.get('campainID')
         print(campainID)
         posts = []
