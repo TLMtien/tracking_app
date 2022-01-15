@@ -220,59 +220,86 @@
                             {% for kpi in all_kpi %}
                                 <th class="th-kpi"><div><span>{{ forloop.counter }}</span> <span class="small">nd</span>KPI</div></th>
                             {% endfor %}
+                            {% if check %}
+                            
+                            <th class="th-kpi"><div><span>{{ count_kpi }}</span> <span class="small">nd</span>KPI</div></th>
+                            {% endif %}
                             {% comment %} <th>Input</th>   {% endcomment %}
                         </tr>  
                         
                         <tr>  
                             <td class="td-desc bg-green">Start date</td>  
-                            {% comment %} <td class="td-desc bg-gray">10 Dec</td>   {% endcomment %}
+                            
                             {% for kpi in all_kpi %}
                                 <td class="td-desc bg-green">{{kpi.start_day}}</td>  
                             {% endfor %}
-                            {% comment %} <td class="td-desc bg-green">15 Dec</td>   {% endcomment %}
-                            {% comment %} <td class="td-desc bg-green">
-                                <input type="date" name="" id="input-date_kpi">
-                                <i class='bx bxs-sort-alt'></i>
-                            </td>  {% endcomment %}
+
+                            {% if check %}
+                            {% for kpi in new_kpi %}
+                            <td class="td-desc bg-green">{{kpi.start_day}}</td>
+                            {% endfor %}
+                            {% endif %}
                         </tr>  
                         <tr>  
-                            <td class="td-desc">Volume Achieved (Can/Bottle)</td>  
+                            <td class="td-desc " >Volume Achieved (Can/Bottle)</td>  
                             {% comment %} <td class="td-desc bg-gray">120</td>   {% endcomment %}
                             {% for kpi in all_kpi %}
-                                <td class="td-desc">{{kpi.volume_achieved}}</td>   
+                                <td class="td-desc bg-green">{{kpi.volume_achieved}}</td>   
                             {% endfor %}
+                            {% comment %}   {% endcomment %}
+                            {% if check %}
+                            {% for kpi in new_kpi %}
+                            <td class="td-desc ">{{kpi.volume_achieved}}</td>
+                            {% endfor %}
+                            {% endif %}
                             
-                            {% comment %} <td class="td-desc text-red">input</td>  {% endcomment %}
                         </tr>  
                         <tr>  
-                            <td class="td-desc">Table Share</td>  
+                            <td class="td-desc ">Table Share</td>  
                             {% comment %} <td class="td-desc bg-gray">80%</td>  
                             <td class="td-desc">90%</td>   {% endcomment %}
                             {% for kpi in all_kpi %}
-                            <td class="td-desc">{{kpi.table_share}}</td>   
+                            <td class="td-desc bg-green">{{kpi.table_share}}</td>   
                             {% endfor %}
                             {% comment %} <td class="td-desc text-red">input</td>  {% endcomment %}
+                            {% comment %}   {% endcomment %}
+                            {% if check %}
+                            {% for kpi in new_kpi %}
+                            <td class="td-desc ">{{kpi.table_share}}</td>
+                            {% endfor %}
+                            {% endif %}
                         </tr>  
                         <tr>  
-                            <td class="td-desc">% Consumer Reached</td>  
+                            <td class="td-desc ">% Consumer Reached</td>  
                             {% comment %} <td class="td-desc bg-gray">100%</td>  
                             <td class="td-desc">90%</td>   {% endcomment %}
                             {% for kpi in all_kpi %}
-                            <td class="td-desc">{{kpi.consumer_reached}}</td>   
+                            <td class="td-desc bg-green">{{kpi.consumer_reached}}</td>   
                             {% endfor %}
                             {% comment %} <td class="td-desc text-red">input</td>  {% endcomment %}
+                            {% if check %}
+                            {% for kpi in new_kpi %}
+                            <td class="td-desc ">{{kpi.consumer_reached}}</td>
+                            {% endfor %}
+                            {% endif %}
                         </tr>  
                         <tr>  
-                            <td class="td-desc">% Conversion</td>  
+                            <td class="td-desc ">% Conversion</td>  
                             {% comment %} <td class="td-desc bg-gray">80%</td>  
                             <td class="td-desc">70%</td>   {% endcomment %}
                             {% for kpi in all_kpi %}
-                            <td class="td-desc">{{kpi.conversion}}</td>   
+                            <td class="td-desc bg-green">{{kpi.conversion}}</td>   
                             {% endfor %}
                             {% comment %} <td class="td-desc text-red">input</td>  {% endcomment %}
+                            {% if check %}
+                            {% for kpi in new_kpi %}
+                            <td class="td-desc ">{{kpi.conversion}}</td>
+                            {% endfor %}
+                            {% endif %}
                         </tr>  
                         
                     </table> 
+                    
                     {% comment %} <div class="btn-box">
                         <button class="btn-create">CREATE</button>
                     </div> {% endcomment %}

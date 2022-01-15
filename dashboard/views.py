@@ -457,8 +457,16 @@ def KPI_view(request, campainID):
                 is_campain_owner = True
                 break
         campain = Campain.objects.get(id=campainID)
+        count_kpi = KPI.objects.filter(campain=campain).count()
+        new_kpi = ''
         kpi = KPI.objects.filter(campain=campain)
-        return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi, "cam_id":campainID, 'is_campain_owner':is_campain_owner,'is_hvn_vip':is_hvn_vip})
+        check = False
+        if count_kpi > 0:
+            kpi = KPI.objects.filter(campain=campain)[:count_kpi-1]
+            new_kpi =  KPI.objects.filter(campain=campain)[count_kpi-1:]
+            
+            check = True
+        return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi, "cam_id":campainID, 'is_campain_owner':is_campain_owner,'is_hvn_vip':is_hvn_vip, 'new_kpi':new_kpi, 'check':check, 'count_kpi':count_kpi})
 
 #HVN  create_KPI
 def create_KPI(request, campainID):
@@ -471,15 +479,22 @@ def create_KPI(request, campainID):
             consumer_reached = form.cleaned_data.get('consumer_reached')
             conversion = form.cleaned_data.get('conversion')
             start_day = request.POST.get('start_day')
+            check_percent = True
+            if not '%' in table_share:
+                check_percent = False
+                return render(request,"dashboard/create-kpi.html", {'form':form,"cam_id":campainID,'check_percent':check_percent, 'date_filter':start_day})
+            
             kpi = KPI.objects.create(user=request.user, campain=campain, volume_achieved=volume_achieved,
             table_share=table_share, consumer_reached=consumer_reached, conversion=conversion, start_day=start_day)
     
             kpi.save()
-            all_kpi = KPI.objects.filter(campain=campain)
-            return render(request, "dashboard/kpi-setting.html", {'all_kpi':all_kpi, "cam_id":campainID})
+            #all_kpi = KPI.objects.filter(campain=campain)
+            return redirect('kpi', campainID=campainID)
+            
     else:
         form = KPIForm()
-        return render(request,"dashboard/create-kpi.html", {'form':form,"cam_id":campainID})
+        check_percent = True
+        return render(request,"dashboard/create-kpi.html", {'form':form,"cam_id":campainID, 'check_percent':check_percent})
 
 
 def sum_revenue(request):

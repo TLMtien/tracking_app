@@ -198,7 +198,7 @@
                         
                         <tr>  
                             <th rowspan="2" class="td-title ">No.</th>  
-                            <th rowspan="2"  class="td-title ">
+                            {% comment %} <th rowspan="2"  class="td-title ">
                                 AGENCY NAME<br>
                                 <input type="search" class="td-search"> 
                                 <i class='bx bx-search-alt-2 icon-search' ></i>
@@ -212,9 +212,9 @@
                                 SP’ID  <br>
                                 <input type="search" class="td-search"> 
                                 <i class='bx bx-search-alt-2 icon-search' ></i>
-                            </th>
+                            </th> {% endcomment %}
                             <th rowspan="2"  class="td-title ">
-                                USER ID  <br>
+                                SP ID  <br>
                                 <input type="search" class="td-search"> 
                                 <i class='bx bx-search-alt-2 icon-search' ></i>
                             </th>
@@ -276,11 +276,11 @@
                         {% for sp in sale_person %}
                         <tr>  
                             <td class="td-desc">{{ forloop.counter }}</td>  
-                            <td class="td-desc">Bluesun</td>  
+                            {% comment %} <td class="td-desc">Bluesun</td>  
                             <td class="td-desc ">{{ sp.full_name }}</td>  
-                            <td class="td-desc "></td>  
+                            <td class="td-desc "></td>   {% endcomment %}
                             <td class="td-desc ">{{ sp.user.user_name }}</td>  
-                            <td class="td-desc ">{{ sp.user.start_date }}</td>  
+                            <td class="td-desc ">{{ sp.joined }}</td>  
                             <td class="td-desc"></td>
                             
                             {% if sp.user.is_active %}
