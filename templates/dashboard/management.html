@@ -678,8 +678,9 @@
         $(document).ready(function(){
             $("#local-city").change(function () {
                 var province_filter = encodeURI($(this).val());
+                var outlet_type = $("#type-outlet").val();
                 var url = $("#url").val();
-                $("#filter_province").attr("href",url + "?province_filter="+province_filter);
+                $("#filter_province").attr("href",url + "?province_filter="+province_filter +"&type="+outlet_type);
             }); // end change province       
             $("#type-outlet").change(function () {
                 var outlet_type = $(this).val();
