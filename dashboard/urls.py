@@ -45,4 +45,6 @@ urlpatterns = [
     path('<int:campainID>/edit_rawdata/edit_table_sale/', views.edit_table_sale, name='edit_table_sale'),
     path('<int:campainID>/edit_rawdata/edit_consumer_rp/', views.edit_consumer_rp, name='edit_consumer_rp'),
     path('<int:campainID>/edit_rawdata/edit_gift_rp/', views.edit_gift_rp, name='edit_gift_rp'),
+    #test
+    path('management/<int:campainID>/posts-json/<int:num_posts>/', views.PostJsonListView.as_view(), name='posts-json-view'),
 ]

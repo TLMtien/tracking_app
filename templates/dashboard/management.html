@@ -129,7 +129,7 @@
             
             <div class="main-table_managenment">
                 <div class="table-outlet">
-                    <table style="width:100%" class="table-list">  
+                    <table style="width:100%" class="table-list" id='posts-box'>  
                         
                         <tr>  
                             <th rowspan="2" class="td-title ">No.</th>  
@@ -569,6 +569,7 @@
                         </tr>  
                         {% endfor %}
                         {% for outlet in list_outlet_view %}
+                        
                         <tr>  
                             <td class="td-desc">{{ forloop.counter }}</td>  
                             <td class="td-desc">{{outlet.0.province}}</td>  
@@ -580,15 +581,19 @@
                             <td class="td-desc">{{outlet.1}}</td>  
                             <td class="td-desc">{{outlet.2}}</td> 
                         </tr>  
+                        
                         {% endfor %}
                     </table> 
-                    {% comment %} <div class="pagin-table">
-                        <a href="#" class="back-page"><i class='bx bxs-chevrons-left' ></i></a>
-                        <a href="#" id="page-1" class="number-page active">1</a>
-                        <span>|</span>
+                    {% if check and cam_id == 1 or cam_id == 2 or cam_id == 8 or cam_id == 9  %}
+                    <div class="pagin-table" id="loading-box">
+                        <button id="load-btn">Load more</button>
+                        {% comment %} <a href="#" class="back-page"><i class='bx bxs-chevrons-left' ></i></a>
+                        <a href="#" id="page-1" class="number-page active">Load more</a> {% endcomment %}
+                        {% comment %} <span>|</span>
                         <a href="#" id="page-2" class="number-page">10</a>
-                        <a href="#" class="next-page"><i class='bx bxs-chevrons-right' ></i></a>
-                    </div> {% endcomment %}
+                        <a href="#" class="next-page"><i class='bx bxs-chevrons-right' ></i></a> {% endcomment %}
+                    </div> 
+                    {% endif %}
                 </div>
                 
             </div>
@@ -696,6 +701,60 @@
                 $("#outlet_name_filter").attr("href",url + "?outlet_name="+outlet_name);
             }); // end change outlet-name  
         });
+    </script>
+    <script>
+        const postsBox = document.getElementById('posts-box')
+        //console.log(postsBox)
+        const spinnerBox = document.getElementById('spinner-box')
+        const loadBtn = document.getElementById('load-btn')
+        const loadBox = document.getElementById('loading-box')
+        let visible = 5000
+
+        const handleGetData = () => {
+            $.ajax({
+                type: 'GET',
+                url: `posts-json/${visible}/`,
+                
+                success: function(response){
+                    maxSize = response.max
+                    const data = response.data
+                    console.log(response.data)
+                    var count = visible
+                    data.map(post=>{
+                        //console.log(post.id)
+                        count = count + 1
+                        postsBox.innerHTML += `
+                                                <tr>  
+                                                    
+                                                    <td class="td-desc">${count}</td>  
+                                                    <td class="td-desc">${post[0].province}</td>  
+                                                    <td class="td-desc">${post[0].ouletID}</td>  
+                                                    <td class="td-desc">${post[0].type}</td>  
+                                                    <td class="td-desc">${post[0].area}</td>  
+                                                    <td class="td-desc">${post[0].outlet_address}</td>  
+                                                    <td class="td-desc">${post[0].outlet_Name}</td>   
+                                                    <td class="td-desc">${post[1]}</td>  
+                                                    <td class="td-desc">${post[2]}</td>
+                                                    
+                                                </tr> 
+                                                    
+                                                `
+                    })
+                    if(maxSize){
+                        loadBox.innerHTML = ''
+                    }
+                },
+                error: function(error){
+                    console.log(error)
+                }
+            })
+        }
+
+        //handleGetData()
+        loadBtn.addEventListener('click', ()=>{
+            visible += 100
+            handleGetData()
+        })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="{% static 'PC/js/chart.js' %}"></script>

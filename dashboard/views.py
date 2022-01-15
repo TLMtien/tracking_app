@@ -87,7 +87,7 @@ def List_outlet_management(request, campainID):
         list_outlet_view = []
         province = ''
         outletName = ''
-        
+        check = False
         province_filter = request.GET.get("province_filter")
         outlet_id = request.GET.get("outlet_id")
         outlet_name = request.GET.get("outlet_name")
@@ -115,7 +115,8 @@ def List_outlet_management(request, campainID):
         elif outletName:
             all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True, outlet_Name__contains = outletName)    
         else:
-            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True) 
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = True)[0:5000] 
+            check = True
         for outlet in all_outlet:
             rp_table = tableReport.objects.filter(campain = campain, outlet=outlet)
             rp_sale =  report_sale.objects.filter(campain = campain, outlet=outlet)
@@ -133,7 +134,44 @@ def List_outlet_management(request, campainID):
             list_outlet_view.append(list)
         if outlet_id == None:
             outlet_id = ''
-        return render(request,  'dashboard/management.html', {'list_outlet_view':list_outlet_view, 'province':province,'type':type,'outlet_id':outlet_id,"cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip, 'outletName':outletName})
+        return render(request,  'dashboard/management.html', {'list_outlet_view':list_outlet_view, 'province':province,'type':type,'outlet_id':outlet_id,"cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip, 'outletName':outletName, 'check':check})
+#####################
+# test
+from django.views.generic import View
+from django.core import serializers
+class PostJsonListView(View):
+    def get(self, *args, **kwargs):
+        print(kwargs)
+        upper = kwargs.get('num_posts')
+        lower = upper - 5000
+        campainID = kwargs.get('campainID')
+        print(campainID)
+        posts = []
+        campain = Campain.objects.get(id=campainID)
+        #all_outlet = outletInfo.objects.filter(compain = campain).values()[lower:upper]
+        all_outlet = outletInfo.objects.filter(compain = campain)[lower:upper]
+        
+        for outlet in all_outlet:
+            rp_table = tableReport.objects.filter(campain = campain, outlet=outlet)
+            rp_sale =  report_sale.objects.filter(campain = campain, outlet=outlet)
+            ave_sale_volume = 0
+            ave_table_volume = 0
+    
+            if rp_sale.exists():
+                ave_sale_volume = Average_Sale_volume(rp_sale)
+            if rp_table.exists():
+                ave_table_volume = Average_table_share(rp_table)
+            ave_table_volume = str(ave_table_volume) + '%'
+            ave_sale_volume  = str(ave_sale_volume) + '%' 
+            
+            list = [outlet.to_json(), ave_sale_volume, ave_table_volume]
+            posts.append(list)
+        posts_size = len(outletInfo.objects.filter(compain = campain))
+        max_size = True if upper >= posts_size else False
+        return JsonResponse({'data': posts, 'max': max_size}, safe=False)
+    
+    
+###################
 
 login_required
 def management_View(request):

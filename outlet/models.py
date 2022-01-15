@@ -61,6 +61,16 @@ class outletInfo(models.Model):
     created_by_SP = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return "{} - {}".format(self.area, self.outlet_Name)
+    def to_json(self):
+        return {
+            'id': self.id,
+            'province': self.province,
+            'type': self.type,
+            'area': self.area,
+            'outlet_address': self.outlet_address,
+            'outlet_Name': self.outlet_Name,
+            'ouletID': self.ouletID,
+        }
     # class Meta:
 	#     ordering = ["created"]
     
