@@ -80,10 +80,12 @@ def List_outlet_management(request, campainID):
         if request.user.is_region:
             is_region = True
         is_campain_owner = False
+        is_agency = False
         campains = request.user.hvn.brand.all()
         for c in campains:
             if c.id == campainID:
                 is_campain_owner = True
+                is_agency = True
                 break
         campain = Campain.objects.get(id=campainID)
         list_province = []
@@ -137,7 +139,7 @@ def List_outlet_management(request, campainID):
             list_outlet_view.append(list)
         if outlet_id == None:
             outlet_id = ''
-        return render(request,  'dashboard/management.html', {'list_outlet_view':list_outlet_view, 'province':province,'type':type,'outlet_id':outlet_id,"cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip, 'outletName':outletName, 'check':check, 'is_region':is_region })
+        return render(request,  'dashboard/management.html', {'list_outlet_view':list_outlet_view, 'province':province,'type':type,'outlet_id':outlet_id,"cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip, 'outletName':outletName, 'check':check, 'is_region':is_region, 'is_agency':is_agency})
 #####################
 # test
 from django.views.generic import View

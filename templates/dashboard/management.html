@@ -34,12 +34,14 @@
                             </a>
                             
                         </li>
-                        {% if not request.user.is_agency%}
+                        {% if not request.user.is_agency  or is_agency %}
                         <li class="nav-list dropdown-nav
                         {% if cam_id == 2 %}
                             active
                         {% endif %}
                         "><a href="{% url 'managementlist' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        {% endif %}
+                        {% if not request.user.is_agency  or is_agency %}
                         <li class="nav-list dropdown-nav
                         {% if cam_id == 3 %}
                             active
