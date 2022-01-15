@@ -358,15 +358,20 @@ def edit_outlet_approval(request):
                 outlet_info.outlet_Name = outlet_Name[i]
                 outlet_info.outlet_address = outlet_address[i]
                 rp_table = tableReport.objects.filter(outlet=outlet_info)
-                rp_sale =  report_sale.objects.filter(outlet=outlet_info)
-                if rp_table.exists():
-                    if rp_table[0].campain == outlet_info.compain:
-                        outlet_info.created_by_SP = rp_table[0].SP 
-                        print(rp_table)
-                if rp_sale.exists():
-                    if rp_table[0].campain == outlet_info.compain:
-                        outlet_info.created_by_SP = rp_sale[0].SP 
-                        print(rp_sale)
+                count_rp_table = tableReport.objects.filter(outlet=outlet_info).count()
+                count_rp_sale =  report_sale.objects.filter(outlet=outlet_info).count()
+                if count_rp_table > 0:
+                    rp_table = tableReport.objects.filter(outlet=outlet_info)
+                    for rp in rp_table:
+                        if rp.campain == outlet_info.compain:
+                            outlet_info.created_by_SP = rp.SP 
+                            break
+                elif count_rp_sale > 0:
+                    rp_sale =  report_sale.objects.filter(outlet=outlet_info)
+                    for rp in rp_sale:
+                        if rp.campain == outlet_info.compain:
+                            outlet_info.created_by_SP = rp.SP 
+                            break
                 outlet_info.save()
         except:
             pass
