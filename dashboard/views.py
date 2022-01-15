@@ -1336,10 +1336,10 @@ def raw_data(request, campainID):
                 outlet=SP.outlet
                 #print(type(outlet.province))
                 if outlet.province == province :
-                    rp_table = tableReport.objects.filter(campain = Cp, SP=SP, created = date_filter)
-                    rp_sale =  report_sale.objects.filter(campain=Cp, SP=SP, created = date_filter)
-                    consumers_rp = consumerApproachReport.objects.filter(campain=Cp, SP=SP, created = date_filter)
-                    list_gift_rp = giftReport.objects.filter(campain = Cp, SP=SP, created=date_filter)
+                    rp_table = tableReport.objects.filter(campain = Cp, SP=SP.user, created = date_filter)
+                    rp_sale =  report_sale.objects.filter(campain=Cp, SP=SP.user, created = date_filter)
+                    consumers_rp = consumerApproachReport.objects.filter(campain=Cp, SP=SP.user, created = date_filter)
+                    list_gift_rp = giftReport.objects.filter(campain = Cp, SP=SP.user, created=date_filter)
                     print(outlet.province)
                     if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
                         if rp_table.exists():
@@ -1540,10 +1540,10 @@ def raw_data(request, campainID):
             for SP in sale_person:
                 outlet=SP.outlet
                 #print(type(outlet.province))
-                rp_table = tableReport.objects.filter(campain = Cp, SP = SP, created = date_filter)
-                rp_sale =  report_sale.objects.filter(campain=Cp, SP = SP, created = date_filter)
-                consumers_rp = consumerApproachReport.objects.filter(campain=Cp, SP = SP, created = date_filter)
-                list_gift_rp = giftReport.objects.filter(campain = Cp, SP = SP, created=date_filter)
+                rp_table = tableReport.objects.filter(campain = Cp, SP = SP.user, created = date_filter)
+                rp_sale =  report_sale.objects.filter(campain=Cp, SP = SP.user, created = date_filter)
+                consumers_rp = consumerApproachReport.objects.filter(campain=Cp, SP = SP.user, created = date_filter)
+                list_gift_rp = giftReport.objects.filter(campain = Cp, SP = SP.user, created=date_filter)
             
                 if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
                     if not SP.outlet in List_outlet: 
