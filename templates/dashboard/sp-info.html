@@ -24,6 +24,7 @@
                     "><img src="{% static '/PC/img/logo_hnk.png' %}" alt="logo"></a>
                 </div>
                 <div class="navbar" id="topheader">
+                    {% if not request.user.is_agency  %}
                     <ul class="navbar-nav">
                         <li class="nav-list dropdown-nav 
                         {% if cam_id == 1 %}
@@ -68,6 +69,81 @@
                             active
                         {% endif %}"><a href="{% url 'sp-info' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
                     </ul>
+                    {% endif %}
+                    
+                    {% if request.user.is_agency  %}
+                    <ul class="navbar-nav">
+                        {% if cam_id == 1%}
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 1%}
+                        active
+                        {% endif %}
+                        ">
+                            <a href="{% url 'sp-info' 1 %}" class="nav-links drop-btn" onclick="openTigerTp()">
+                                Tiger Table Promotion
+                            </a>
+                            
+                        </li>
+                        {% endif %}
+                        {% if cam_id == 2 %}
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 2 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'sp-info' 2 %}" class="nav-links">Tiger Festive Activation</a></li>
+                        {% endif %}
+                        {% if cam_id == 3 %}
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 3 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'sp-info' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        {% endif %}
+                        {% if cam_id == 4 %}
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 4 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'sp-info' 4 %}" class="nav-links">Heineken Table Promotion</a></li>
+                        {% endif %}
+                        {% if cam_id == 5 %}
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 5 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'sp-info' 5 %}" class="nav-links">Heineken Special Activation</a></li>
+                        {% endif %}
+                        {% if cam_id == 6 %}
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 6 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'sp-info' 6 %}" class="nav-links">Strongbow Festive</a></li>
+                        {% endif %}
+                        {% if cam_id == 7 %}
+                        <li class="nav-list dropdown-nav 
+                        {% if cam_id == 7 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'sp-info' 7 %}" class="nav-links">Bivina Festive Promotion</a></li>
+                        {% endif %}
+                        {% if cam_id == 8 %}
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 8 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'sp-info' 8 %}" class="nav-links">Larue Festive Promotion</a></li>
+                        {% endif %}
+                        {% if cam_id == 9 %}
+                        <li class="nav-list dropdown-nav
+                        {% if cam_id == 9 %}
+                            active
+                        {% endif %}
+                        "><a href="{% url 'sp-info' 9 %}" class="nav-links">Larue Special Festive Promotion</a></li>
+                        {% endif %}
+                        
+                    </ul>
+                    {% endif %}
                 </div>
                 
                 <div class="profile-user dropdown-logout">
