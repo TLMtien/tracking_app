@@ -85,7 +85,8 @@ def List_outlet_management(request, campainID):
         for c in campains:
             if c.id == campainID:
                 is_campain_owner = True
-                is_agency = True
+                if request.user.is_agency:
+                    is_agency = True
                 break
         campain = Campain.objects.get(id=campainID)
         list_province = []
