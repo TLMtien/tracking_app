@@ -214,20 +214,33 @@
                                 <i class='bx bx-search-alt-2 icon-search' ></i>
                             </th> {% endcomment %}
                             <th rowspan="2"  class="td-title ">
+                                <a href="{% url 'sp-info' cam_id %}?sp_id={{spid_filter}}" id="sp_id_filter"><i class='bx bx-search-alt-2 icon-search' ></i></a>
                                 SP ID  <br>
-                                <input type="search" class="td-search"> 
-                                <i class='bx bx-search-alt-2 icon-search' ></i>
+                                <input  class="td-search" value='{{sp_id}}' id='sp-id'> 
+                                
                             </th>
+                            <input type="hidden" id="url" value="{% url 'sp-info' cam_id %}">
                             
                             <th rowspan="2"  class="td-title">
-                                START DAY<br>
-                                <input type="date" class="td-date">
-                                <i class='bx bxs-sort-alt'>
+                                <a href="{% url 'sp-info' cam_id %}?date_filter={{date_filter}}" id="raw_data_filter_date">
+                                START DAY
+                               
+                                <i class='bx bxs-sort-alt'></i>
+                                </a>
+                                <br>
+                                <input type="date" class="td-date" id="date" value="{{date_filter}}">
+                                
                             </th>  
+                             
+                              
                             <th rowspan="2"  class="td-title">
-                                END DAY<br>
+                                <a href="{% url 'sp-info' cam_id %}?date_filter={{date_filter}}" id="raw_data_filter_date">
+                                END DAY
+                                
+                                <i class='bx bxs-sort-alt'></i>
+                                </a>
+                                <br>
                                 <input type="date" class="td-date">
-                                <i class='bx bxs-sort-alt'>
                             </th>   
                             <th rowspan="2"  class="td-title">
                                 STATUS
@@ -280,7 +293,7 @@
                             <td class="td-desc ">{{ sp.full_name }}</td>  
                             <td class="td-desc "></td>   {% endcomment %}
                             <td class="td-desc ">{{ sp.user.user_name }}</td>  
-                            <td class="td-desc ">{{ sp.joined }}</td>  
+                            <td class="td-desc ">{{ sp.joined.date }}</td>  
                             <td class="td-desc"></td>
                             
                             {% if sp.user.is_active %}
@@ -440,6 +453,27 @@
             }); // end click
         });
         
+    </script>
+    <script>
+        $(document).ready(function(){
+          $("#date").change(function () {
+              var date_filter = $(this).val();
+              console.log(date_filter);
+              
+              var url = $("#url").val();
+              $("#raw_data_filter_date").attr("href",url + "?date_filter="+date_filter);
+              
+          }); // end change date       
+                
+            $("#sp-id").change(function () {
+                var date_filter = $("#date").val();
+                var spID = $(this).val();
+                var url = $("#url").val();
+                $("#sp_id_filter").attr("href",url + "?sp_id="+spID);
+            }); // end change outlet-id  outlet-name  
+            
+            
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="{% static 'PC/js/chart.js' %}"></script>

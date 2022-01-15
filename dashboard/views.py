@@ -547,11 +547,20 @@ def List_sp_management(request,campainID):
             if c.id == campainID:
                 is_campain_owner = True
                 break
-        sale_person = SalePerson.objects.filter(brand__pk=campainID)
         
-        
-        print(sale_person)
-        return render(request, "dashboard/sp-info.html", {'sale_person':sale_person,"is_campain_owner":is_campain_owner, "cam_id":campainID, 'is_hvn_vip':is_hvn_vip})
+        sp_id = request.GET.get("sp_id")
+        date_filter = request.GET.get("date_filter")
+        if date_filter:
+            sale_person = SalePerson.objects.filter(brand__pk=campainID, joined__date = date_filter)
+        elif sp_id:
+            sale_person = SalePerson.objects.filter(brand__pk=campainID, user__user_name__contains = sp_id)
+        else:
+            sale_person = SalePerson.objects.filter(brand__pk=campainID)
+        print(sp_id)
+        print(date_filter)
+        if sp_id == None:
+            sp_id=''
+        return render(request, "dashboard/sp-info.html", {'sale_person':sale_person,"is_campain_owner":is_campain_owner, "cam_id":campainID, 'is_hvn_vip':is_hvn_vip, 'sp_id':sp_id, 'date_filter':date_filter})
 ##################################################
 def charts_views(request, campainID):
     from_date = request.POST.get('from-date')
