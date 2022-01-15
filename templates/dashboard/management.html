@@ -34,6 +34,7 @@
                             </a>
                             
                         </li>
+                        {% if not request.user.is_agency%}
                         <li class="nav-list dropdown-nav
                         {% if cam_id == 2 %}
                             active
@@ -44,6 +45,7 @@
                             active
                         {% endif %}
                         "><a href="{% url 'managementlist' 3 %}" class="nav-links">Tiger Hot Zone Activation</a></li>
+                        {% end if%}
                         <li class="nav-list dropdown-nav
                         {% if cam_id == 4 %}
                             active
