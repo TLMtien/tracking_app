@@ -213,8 +213,37 @@ def list_outlet_approval(request, campainID):
                 is_campain_owner = True
                 break
         list_outlet_view = []
+        province = ''
+        outletName = ''
+        check = False
+        province_filter = request.GET.get("province_filter")
+        outlet_id = request.GET.get("outlet_id")
+        outlet_name = request.GET.get("outlet_name")
+        
+        type = request.GET.get("type")
+        
+        if province_filter:
+            province = unquote(province_filter)
+            
+        print(province)
+        print(type)
+        print(outlet_id)
+        if outlet_name:
+            outletName = unquote(outlet_name)
+        print(outletName)
         campain = Campain.objects.get(id=campainID)
-        all_outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
+        if type and province:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, province=province, type=type)
+        elif province:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, province=province)
+        elif type:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, type=type)
+        elif outlet_id:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, ouletID__contains = outlet_id)
+        elif outletName:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, outlet_Name__contains = outletName)    
+        else:
+            all_outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
         for outlet in all_outlet:
             rp_table = tableReport.objects.filter(campain = campain, outlet=outlet)
             rp_sale =  report_sale.objects.filter(campain = campain, outlet=outlet)
@@ -234,9 +263,117 @@ def list_outlet_approval(request, campainID):
                 list = [outlet, ave_sale_volume, ave_table_volume, sale_person[0]]
             
             list_outlet_view.append(list)
-        
-        return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':list_outlet_view, "cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
+        if outlet_id == None:
+            outlet_id = ''
+        return render(request, 'dashboard/outlet-approval.html', {'list_outlet_False':list_outlet_view, "cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip, 'outletName':outletName, 'outlet_id':outlet_id, 'province':province,'type':type})
 
+# view edit outlet approval
+login_required
+def view_edit_outlet_approval(request, campainID):
+    if request.user.is_HVN:
+        is_hvn_vip = False
+        if request.user.is_HVNVip:
+            is_hvn_vip = True
+        is_campain_owner = False
+        campains = request.user.hvn.brand.all()
+        for c in campains:
+            if c.id == campainID:
+                is_campain_owner = True
+                break
+        list_outlet_view = []
+        province = ''
+        outletName = ''
+        check = False
+        province_filter = request.GET.get("province_filter")
+        outlet_id = request.GET.get("outlet_id")
+        outlet_name = request.GET.get("outlet_name")
+        
+        type = request.GET.get("type")
+        
+        if province_filter:
+            province = unquote(province_filter)
+            
+        print(province)
+        print(type)
+        print(outlet_id)
+        if outlet_name:
+            outletName = unquote(outlet_name)
+        print(outletName)
+        campain = Campain.objects.get(id=campainID)
+        if type and province:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, province=province, type=type)
+        elif province:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, province=province)
+        elif type:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, type=type)
+        elif outlet_id:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, ouletID__contains = outlet_id)
+        elif outletName:
+            all_outlet = outletInfo.objects.filter(compain=campain, created_by_HVN = False, outlet_Name__contains = outletName)    
+        else:
+            all_outlet = outletInfo.objects.filter(created_by_HVN = False, compain = campain)
+        for outlet in all_outlet:
+            rp_table = tableReport.objects.filter(campain = campain, outlet=outlet)
+            rp_sale =  report_sale.objects.filter(campain = campain, outlet=outlet)
+            ave_sale_volume = 0
+            ave_table_volume = 0
+        
+            if rp_sale.exists():
+                ave_sale_volume = Average_Sale_volume(rp_sale)
+            if rp_table.exists():
+                ave_table_volume = Average_table_share(rp_table)
+            ave_table_volume = str(ave_table_volume) + '%'
+            ave_sale_volume  = str(ave_sale_volume) + '%' 
+            sale_person = SalePerson.objects.filter(outlet=outlet, brand__pk=campainID)
+            list = [outlet, ave_sale_volume, ave_table_volume]
+            if sale_person.exists():
+                
+                list = [outlet, ave_sale_volume, ave_table_volume, sale_person[0]]
+            
+            list_outlet_view.append(list)
+        if outlet_id == None:
+            outlet_id = ''
+        return render(request, 'dashboard/edit-outlet-approval.html', {'list_outlet_False':list_outlet_view, "cam_id":campainID, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip, 'outletName':outletName, 'outlet_id':outlet_id, 'province':province,'type':type})
+#edit approval
+def edit_outlet_approval(request):
+    if request.user.is_HVN:
+        print(json.loads(request.body.decode('UTF-8')))
+        data = json.loads(request.body.decode('UTF-8'))
+        data = data.get("array_outlet",[])
+            #print(data)
+        pk = data[0]
+        province = data[1]
+        outlet_id = data[2]
+        type = data[3]
+        area = data[4]
+        outlet_Name = data[5]
+        outlet_address = data[6]
+        try:
+            for i in range(len(pk)):
+                outlet_info =  outletInfo.objects.get(id=pk[i])
+                outlet_info.province = province[i]
+                outlet_info.ouletID = outlet_id[i]
+                outlet_info.type = type[i]
+                outlet_info.area = area[i]
+                outlet_info.outlet_Name = outlet_Name[i]
+                outlet_info.outlet_address = outlet_address[i]
+                rp_table = tableReport.objects.filter(outlet=outlet_info)
+                rp_sale =  report_sale.objects.filter(outlet=outlet_info)
+                if rp_table.exists():
+                    if rp_table[0].campain == outlet_info.compain:
+                        outlet_info.created_by_SP = rp_table[0].SP 
+                        print(rp_table)
+                if rp_sale.exists():
+                    if rp_table[0].campain == outlet_info.compain:
+                        outlet_info.created_by_SP = rp_sale[0].SP 
+                        print(rp_sale)
+                outlet_info.save()
+        except:
+            pass
+        return JsonResponse({'status': 'ok'})
+        
+
+#ban account sp 
 login_required
 def ban_sp(request):
     if request.user.is_HVN:
@@ -257,16 +394,18 @@ def ban_sp(request):
 def outlet_approval_byHVN(request):
     if request.is_ajax and request.method == "POST":
         arr = request.POST.get('arr')
+        print(arr)
         a = arr.split(',')
         for i in a:
-            print(int(i))
+            print(i)
             outlet = outletInfo.objects.get(id=i)
+            print(outlet)
             outlet.created_by_HVN = True
             outlet.save()
 
         campain = Campain.objects.all()
-        for i in campain:
-            print(i.program, i.id)
+        # for i in campain:
+        #     print(i.program, i.id)
         return JsonResponse({'created': 'success'})
 
 #HVN
@@ -279,6 +418,7 @@ def delete_outlet_byHVN(request):
             print(int(i))
             outlet = outletInfo.objects.get(id=i)
             outlet.delete()
+            
 
         return JsonResponse({'created': 'success'})
 

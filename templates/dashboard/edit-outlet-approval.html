@@ -204,8 +204,8 @@
                             <th rowspan="2" class="td-title ">No.</th>  
                             <th rowspan="2" class="td-title ">Created</th>  
                             <th rowspan="2"  class="td-title ">
-                                <input type="hidden" id="url" value="{% url 'outlet-approval' cam_id %}">
-                                <a href="{% url 'outlet-approval' cam_id %}?province_filter={{province_filter}}" id="filter_province">
+                                <input type="hidden" id="url" value="{% url 'edit_outlet_approval' cam_id %}">
+                                <a href="{% url 'edit_outlet_approval' cam_id %}?province_filter={{province_filter}}" id="filter_province">
                                     PROVINCE
                                 <i class='bx bxs-sort-alt'></i>
                                 </a>
@@ -531,14 +531,14 @@
                                 {% comment %} <i class='bx bx-search-alt-2 icon-search' ></i> {% endcomment %}
                             </th> 
                             <th rowspan="2"  class="td-title ">
-                                <a href="{% url 'outlet-approval' cam_id %}?outlet_id={{outletid_filter}}" id="outlet_id_filter"><i class='bx bx-search-alt-2 icon-search' ></i></a>
+                                <a href="{% url 'edit_outlet_approval' cam_id %}?outlet_id={{outletid_filter}}" id="outlet_id_filter"><i class='bx bx-search-alt-2 icon-search' ></i></a>
 
                                 OUTLET ID <br>
                                 <input class="td-search" value='{{outlet_id}}' id='outlet-id'> 
                                 
                             </th>   
                             <th rowspan="2"  class="td-title ">
-                                <a href="{% url 'outlet-approval' cam_id %}?type={{type_filter}}" id="filter_type">
+                                <a href="{% url 'edit_outlet_approval' cam_id %}?type={{type_filter}}" id="filter_type">
                                     Type
                                 <i class='bx bxs-sort-alt'></i>
                                 </a>
@@ -604,7 +604,7 @@
                                 
                             </th>  
                             <th rowspan="2"  class="td-title  dropdown">
-                                <a href="{% url 'outlet-approval' cam_id %}?outlet_name={{outlet_name_filter}}" id="outlet_name_filter"><i class='bx bx-search-alt-2 icon-search' ></i></a>
+                                <a href="{% url 'edit_outlet_approval' cam_id %}?outlet_name={{outlet_name_filter}}" id="outlet_name_filter"><i class='bx bx-search-alt-2 icon-search' ></i></a>
                                 OUTLET NAME<br>
                                 <input  class="td-search" value='{{outletName}}' id='outlet-name'> 
                             </th>
@@ -625,36 +625,14 @@
                                 
                             </th>   
                             <th colspan="3"  class="td-title">
-                                ACTION
+                                SUBMIT
                             </th> 
                         </tr>  
                     <form>
                         {% csrf_token %} 
                         <tr>
-                            <th class="th-btns">
-                                <div>
-                                    {% if is_campain_owner and not is_hvn_vip %}
-                                    <button type="button" class="th-btn" id='approval'>Confirm</button>
-                                    {% endif %}
-                                </div>
-                                <div>
-                                    {% if is_campain_owner and not is_hvn_vip %}
-                                    <button class="th-btn_all" >Confirm All</button>
-                                    {% endif %}
-                                </div>
-                            </th>
-                            <th class="th-btns">
-                                <div>
-                                    {% if is_campain_owner and not is_hvn_vip %}
-                                    <button class="th-btn" type="button" id='delete'>Delete</button>
-                                    {% endif %}
-                                </div>
-                                <div>
-                                    {% if is_campain_owner and not is_hvn_vip %}
-                                    <button class="th-btn_all">Delete All</button>
-                                    {% endif %}
-                                </div>
-                            </th>
+                            
+                            
                             {% comment %} <th class="th-btns">
                                 <div>
                                     <button class="th-btn" type="button">Download</button>
@@ -666,43 +644,50 @@
                             
                         </tr>
                        {% for outlet in list_outlet_False %}
-                        
-                        <tr id="outlet{{outlet.0.id}}">  
-                            <td class="td-desc">{{ forloop.counter }}</td>  
-                            <td class="td-desc">{{outlet.0.created}}</td>
-                            <td class="td-desc">{{outlet.0.province}}</td>  
-                            <td class="td-desc text-red">{{outlet.0.ouletID}}</td>  
-                            <td class="td-desc text-red">{{outlet.0.type}}</td>  
-                            <td class="td-desc text-red">{{outlet.0.area}}</td> 
-                            <td class="td-desc text-small ">{{outlet.0.outlet_Name}}</td> 
-                            <td class="td-desc text-small ">{{outlet.0.outlet_address}}</td>  
-                            <td class="td-desc">{{outlet.1}}</td>   
-                            <td class="td-desc">{{outlet.2}}</td>  
-                            <td class="td-desc">{{outlet.0.created_by_SP}}</td> 
-
-                            <td class="td-desc">
-                                <label>
-                                    {% if is_campain_owner and not is_hvn_vip %}
-                                    <input type="checkbox"  class="sidebar-menu_checkbox" name = 'approvalOutlet' value="{{outlet.0.id}}">
-                                    <span class="checkmark" ></span>
-                                    {% endif %}
-                                </label>
-                            </td> 
-                            <td class="td-desc">
-                                <label>
-                                    {% if is_campain_owner and not is_hvn_vip %}
-                                    <input type="checkbox"  name ='outlet' class="sidebar-menu_checkbox" value="{{outlet.0.id}}">
-                                    <span class="checkmark"></span>
-                                    {% endif %}
-                                </label>
-                            </td> 
-                            {% comment %} <td class="td-desc">
-                                <label>
-                                    <input type="checkbox"  class="sidebar-menu_checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td>  {% endcomment %}
-                        </tr>  
+                       <tr id={{outlet.id}}>  
+                       <td class="td-desc">{{ forloop.counter }}</td>  
+                       <td class="td-desc">{{outlet.0.created}}</td>
+                       <td class="td-desc">
+                           <input type="text" class="input-number" value="{{outlet.0.province}}"  name="province" required>
+                           {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
+                       </td>  
+                       <td class="td-desc">
+                           <input type="text" class="input-number" value="{{outlet.0.ouletID}}"  name="outletid" required>
+                           {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
+                       </td>
+                       <td class="td-desc">
+                           <input type="text" class="input-number" value="{{outlet.0.type}}"  name="type" required>
+                           {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
+                       </td>
+                       <td class="td-desc">
+                           <input type="text" class="input-number" value="{{outlet.0.area}}"  name="area" required>
+                           {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
+                       </td>
+                       <td class="td-desc">
+                           <input type="text" class="input-number" value="{{outlet.0.outlet_Name}}"  name="outlet_Name" required>
+                           {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
+                       </td>
+                       <td class="td-desc">
+                        <input type="text" class="input-number" value="{{outlet.0.outlet_address}}"  name="outlet_address" required>
+                        {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
+                        </td>
+                       <td class="td-desc">
+                           <input type="text" class="input-number" value="{{outlet.1}}"  name="sale-volume"  disabled>
+                           {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
+                       </td>  
+                       <td class="td-desc">
+                           <input type="text" class="input-number" value="{{outlet.2}}"  name="table-share"  disabled>
+                           {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
+                       </td>  
+                       <td class="td-desc">
+                           <input type="text" class="input-number" value="{{outlet.0.created_by_SP}}"  name="created-by-sp"  disabled>
+                           {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
+                       </td>   
+                       <td class="td-desc">
+                            <button class="btn-send" id="edit-approval" type='button'><i class='bx bx-check'></i></button>
+                        </td> 
+                        <input type="hidden" name="outlet_id" value="{{outlet.0.id}}">
+                    </tr>  
                         {% endfor %}
                     </form>
                         
@@ -715,7 +700,7 @@
                         {% if is_campain_owner or is_hvn_vip %}
                         <div class="rightbox_kpi">
                             
-                            <a  href="{% url 'edit_outlet_approval' cam_id %}" class="btn-kpi" id='export'>Edit</a>
+                            <a  href="{% url 'outlet-approval' cam_id %}" class="btn-kpi" id='export'>Done</a>
                         </div>
                         {% endif %}
                     </div>
@@ -729,79 +714,77 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
    
     <script>  
-        // delete element 
-        $(document).ready(function() {
-            $("#delete").click(function(){
-                var arr = [];
-                $.each($("input[name ='outlet']:checked"), function(){
-                    arr.push((this.value));
-                });
-                //alert("Bạn đã xóa thành công");
-                console.log(arr);
-                const csrf = document.getElementsByName('csrfmiddlewaretoken')
-                var fd = new FormData();
-                fd.append('arr', arr);
-                $.ajax({
-                    type: 'POST',
-                    url: '{% url "delete_outlet_byHVN" %}',
-                    headers: {
-                        "X-CSRFToken": csrf[0].value
-                    },
-                    data: fd,
-                    
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        alert("Bạn đã xóa thành công!!!");
-                        arr.forEach(element => {
-                            $("#outlet"+element).remove();
-                        });
-                    },
-                    error: function(error) {
-                        console.log(error)
         
-                    }
-                })
+        $(document).on('click', '#edit-approval', function() {
+            var array_outlet = [];
+            var array_province = [];
+            var array_outletid = [];
+            var array_type = [];
+            var array_area = [];
+            var array_outlet_Name = [];
+            var array_outlet_address = [];
+            var array_outlet_id_system = []
+            $('input[name = "province"]').each(function(i) {
+                console.log(this.value);
+                array_province.push($(this).val());
             });
-        });
-    </script>
-    <script>
-        //approval element
-        $(document).ready(function() {
-            $("#approval").click(function(){
-                var arr = [];
-                $.each($("input[name ='approvalOutlet']:checked"), function(i){
-                    arr.push($(this).val());
-                });
-                console.log(arr)
-                alert("Bạn đã approval thành công!!!");
-                console.log(arr); 
-                const csrf = document.getElementsByName('csrfmiddlewaretoken')
-                var fd = new FormData();
-                fd.append('arr', arr);
-                $.ajax({
-                    type: 'POST',
-                    url: '{% url "outlet_approval_byHVN" %}',
-                    headers: {
-                        "X-CSRFToken": csrf[0].value
-                    },
-                    data: fd,
-                    
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        arr.forEach(element => {
-                            $("#outlet"+element).remove();
-                        });
-                    },
-                    error: function(error) {
-                        console.log(error)
-        
-                    }
-                })       
+            $('input[name = "outletid"]').each(function(i) {
+                console.log(this.value);
+                array_outletid.push($(this).val());
             });
-        });
+            $('input[name = "type"]').each(function(i) {
+                console.log(this.value);
+                array_type.push($(this).val());
+            });
+            $('input[name = "area"]').each(function(i) {
+                console.log(this.value);
+                array_area.push($(this).val());
+            });
+            $('input[name = "outlet_Name"]').each(function(i) {
+                console.log(this.value);
+                array_outlet_Name.push($(this).val());
+            });
+            $('input[name = "outlet_address"]').each(function(i) {
+                console.log(this.value);
+                array_outlet_address.push($(this).val());
+            });
+            $('input[name = "outlet_id"]').each(function(i) {
+                console.log(this.value);
+                array_outlet_id_system.push($(this).val());
+            });
+            array_outlet.push(array_outlet_id_system);
+            array_outlet.push(array_province);
+            array_outlet.push(array_outletid);
+            array_outlet.push(array_type);
+            array_outlet.push(array_area);
+            array_outlet.push(array_outlet_Name);
+            array_outlet.push(array_outlet_address);
+            
+            const csrf = document.getElementsByName('csrfmiddlewaretoken');
+            //const csrf = document.getElementsByName('csrfmiddlewaretoken')
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'edit_outlet_approval' %}",
+                headers: {
+                    "X-CSRFToken": csrf[0].value
+                },
+                data: JSON.stringify({ "array_outlet": array_outlet}),
         
+                processData: false,
+                contentType: false,
+                contentType: 'application/json',
+                dataType: "json",
+                success: function(resp) {
+                    alert("Đã sửa thành công!!!")
+                        // if (array_report_sale[2][0] != '') {
+                        //     document.querySelector('input[name="brand-volume"]').value = array_report_sale[2][0];
+                        // }
+                },
+                error: function(error) {
+                    console.log(error)
+                }
+            }); // end ajax
+        }); // end click volume sale
     </script>
 
     <script>

@@ -16,8 +16,10 @@ urlpatterns = [
     path('delete_outlet_byHVN/', views.delete_outlet_byHVN, name='delete_outlet_byHVN'),
     path('<int:campainID>/sp-info/', views.List_sp_management, name='sp-info'),
     path('ban-sp/', views.ban_sp, name='ban-sp'),
+    path('edit_outlet_approval/', views.edit_outlet_approval, name='edit_outlet_approval'),
     path('test/', TemplateView.as_view(template_name="dashboard/dashboard_testonetime.html"), name='test'),  #TEST DASHBOARD
     path('outlet_approval_byHVN/', views.outlet_approval_byHVN, name='outlet_approval_byHVN'),
+    
     #path('create-kpi/', TemplateView.as_view(template_name="dashboard/create-kpi.html"), name='create-kpi'),
 
 
@@ -28,6 +30,7 @@ urlpatterns = [
     path('kpi/<int:campainID>/', views.KPI_view, name='kpi'),
     path('management/<int:campainID>/', views.List_outlet_management, name='managementlist'),
     path('list_outlet-approval/<int:campainID>/', views.list_outlet_approval, name='outlet-approval'),
+    path('edit_outlet_approval/<int:campainID>/', views.view_edit_outlet_approval, name='edit_outlet_approval'), # edit outlet approval
     path('kpi/<int:campainID>/create_KPI/', views.create_KPI, name='create_KPI'),
     path('export-report/<int:campainID>/export/', views.export, name ='export'),
     path('<int:campainID>/list_gift_scheme/', views.list_gift_scheme, name='list_gift_scheme'),
@@ -45,6 +48,6 @@ urlpatterns = [
     path('<int:campainID>/edit_rawdata/edit_table_sale/', views.edit_table_sale, name='edit_table_sale'),
     path('<int:campainID>/edit_rawdata/edit_consumer_rp/', views.edit_consumer_rp, name='edit_consumer_rp'),
     path('<int:campainID>/edit_rawdata/edit_gift_rp/', views.edit_gift_rp, name='edit_gift_rp'),
-    #test
+    #load more outlet information
     path('management/<int:campainID>/posts-json/<int:num_posts>/', views.PostJsonListView.as_view(), name='posts-json-view'),
 ]
