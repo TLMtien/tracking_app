@@ -8,11 +8,11 @@ from . models import NewUser, HVN_vip, HVN, SalePerson
 class UserAdminConfig(UserAdmin):
     model = NewUser
    
-    list_display = ('id', 'user_name', 'is_active', 'is_staff', 'is_salePerson', 'is_HVN', 'is_HVNVip')
+    list_display = ('id', 'user_name', 'is_active', 'is_staff', 'is_salePerson', 'is_HVN', 'is_HVNVip', 'is_region', 'is_agency')
     ordering = ('-start_date',)
     fieldsets = (
         (None, {'fields': ('user_name',)}),
-        ('Permissions', {'fields': ('is_staff', 'is_active', 'is_salePerson', 'is_HVN', 'is_HVNVip')}),
+        ('Permissions', {'fields': ('is_staff', 'is_active', 'is_salePerson', 'is_HVN', 'is_HVNVip', 'is_region', 'is_agency')}),
     )
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 20, 'cols': 60})},
@@ -20,7 +20,7 @@ class UserAdminConfig(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('user_name', 'password1', 'password2', 'is_active', 'is_staff', 'is_salePerson', 'is_HVN', 'is_HVNVip')}
+            'fields': ('user_name', 'password1', 'password2', 'is_active', 'is_staff', 'is_salePerson', 'is_HVN', 'is_HVNVip', 'is_region', 'is_agency')}
          ),
     )
 
