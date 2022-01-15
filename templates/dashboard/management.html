@@ -584,7 +584,8 @@
                         
                         {% endfor %}
                     </table> 
-                    {% if check and cam_id == 1 or cam_id == 2 or cam_id == 8 or cam_id == 9  %}
+                    {% if cam_id == 1 or cam_id == 2 or cam_id == 8 or cam_id == 9  %}
+                    {% if check %}
                     <div class="pagin-table" id="loading-box">
                         <button id="load-btn">Load more</button>
                         {% comment %} <a href="#" class="back-page"><i class='bx bxs-chevrons-left' ></i></a>
@@ -593,6 +594,7 @@
                         <a href="#" id="page-2" class="number-page">10</a>
                         <a href="#" class="next-page"><i class='bx bxs-chevrons-right' ></i></a> {% endcomment %}
                     </div> 
+                    {% endif %}
                     {% endif %}
                 </div>
                 
