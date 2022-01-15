@@ -186,6 +186,15 @@
                         <li class="nav-sub"><a href="{% url 'sp-info' cam_id  %}">SP Information</a></li>
                     </ul>
                 </div>
+                
+                {% if is_campain_owner and not is_hvn_vip %}
+                <div class="rightbox_kpi">
+                    
+                    <a  href="{% url 'edit_outlet_approval' cam_id %}" class="btn-kpi" >Edit</a>
+                    
+
+                </div>
+                {% endif %}
                 {% comment %} <div class="rightbox">
                     <div class="lock-icon">
                         <i class='bx bxs-lock-alt' ></i> <span>Unlock to change</span>
@@ -707,18 +716,7 @@
                     </form>
                         
                     </table> 
-                    <div class="row raw-data-sub">
-                        <div class="leftbox">
-                            {% comment %} <span class="title-menu">Export Report</span> {% endcomment %}
-                            
-                        </div> 
-                        {% if is_campain_owner or is_hvn_vip %}
-                        <div class="rightbox_kpi">
-                            
-                            <a  href="{% url 'edit_outlet_approval' cam_id %}" class="btn-kpi" id='export'>Edit</a>
-                        </div>
-                        {% endif %}
-                    </div>
+                    
                 </div>
                 
             </div>
