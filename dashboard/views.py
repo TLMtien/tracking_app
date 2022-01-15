@@ -1404,7 +1404,7 @@ def raw_data(request, campainID):
                         outlet = rp_sale[0].outlet
                     else:
                         outlet = list_gift_rp[0].outlet
-                    if outlet.type == type: 
+                    if outlet.type__contains == type: 
                         List = []
                         list_name_gift = []
                         list_name_gift1 = [] 
