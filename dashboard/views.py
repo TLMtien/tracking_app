@@ -386,6 +386,7 @@ def edit_outlet_approval(request):
                         
                             outlet_info.created_by_SP = rp.SP 
                             break
+                        
                 outlet_info.save()
                 
 
