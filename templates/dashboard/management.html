@@ -81,7 +81,8 @@
                     </ul>
                     {% endif %}
 
-                    {% if request.user.is_agency  and is_agency %}
+                    {% if request.user.is_agency  %}
+                    {% if  is_agency %}
                     <ul class="navbar-nav">
                         {% if cam_id == 1%}
                         <li class="nav-list dropdown-nav 
@@ -153,6 +154,7 @@
                         {% endif %}
                         
                     </ul>
+                    {% endif %}
                     {% endif %}
                 </div>
                 <div class="profile-user dropdown-logout">
