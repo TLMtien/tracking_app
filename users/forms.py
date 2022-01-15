@@ -48,15 +48,15 @@ class SignupForm(forms.ModelForm):
 #######
     
 class LoginForm(forms.Form):
-	username = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'input-user', 'placeholder':"Tên đăng nhập"}))
+	username = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'input-user', 'placeholder':"Tên đăng nhập"}))
     
-	password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"Mật Khẩu", 'id':"password-field", 'name':"password"}))
+	password = forms.CharField(max_length=200, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"Mật Khẩu", 'id':"password-field", 'name':"password"}))
 
 #---------------------------------------------
 class LoginHVNForm(forms.Form):
-	username = forms.CharField(max_length=20, widget=forms.EmailInput(attrs={'class': 'input-user', 'placeholder':"example@example.com"}))
+	username = forms.CharField(max_length=200, widget=forms.EmailInput(attrs={'class': 'input-user', 'placeholder':"example@example.com"}))
     
-	password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"enter your password"}))
+	password = forms.CharField(max_length=200, widget=forms.PasswordInput(attrs={'class': 'input-password', 'id': 'password-field', 'placeholder':"enter your password"}))
 
 #--------------------------------------------
 class ChangePasswordForm(forms.Form):
