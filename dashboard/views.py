@@ -363,13 +363,13 @@ def edit_outlet_approval(request):
                 if count_rp_table > 0:
                     rp_table = tableReport.objects.filter(outlet=outlet_info)
                     for rp in rp_table:
-                        if rp.campain == outlet_info.compain:
+                        
                             outlet_info.created_by_SP = rp.SP 
                             break
                 elif count_rp_sale > 0:
                     rp_sale =  report_sale.objects.filter(outlet=outlet_info)
                     for rp in rp_sale:
-                        if rp.campain == outlet_info.compain:
+                        
                             outlet_info.created_by_SP = rp.SP 
                             break
                 outlet_info.save()
