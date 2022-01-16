@@ -481,16 +481,29 @@ def export_rawdata(campainID, all_outlet, from_date, to_date):
     for date_filter in List_date:
         List_outlet = []
         for SP in sale_person:
-            outlet=SP.outlet
-            rp_table = tableReport.objects.filter(campain = Cp, outlet=outlet, created = date_filter)
-            rp_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
-            consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
-            list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet, created=date_filter)
+            #outlet=SP.outlet
+            rp_table = tableReport.objects.filter(campain = Cp, SP=SP.user, created = date_filter)
+            rp_sale =  report_sale.objects.filter(campain=Cp, SP=SP.user, created = date_filter)
+            consumers_rp = consumerApproachReport.objects.filter(campain=Cp, SP=SP.user, created = date_filter)
+            list_gift_rp = giftReport.objects.filter(campain = Cp, SP=SP.user, created=date_filter)
         
             if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
+                report = rp_table
+                if rp_table.count() >= rp_sale.count() and rp_table.count() >= list_gift_rp.count():
+                    report = rp_table
+                elif rp_sale.count() >= rp_table.count() and  rp_sale.count() >= list_gift_rp.count():
+                    report = rp_sale
+                else:
+                    report = list_gift_rp
+
+                for rp in report:
+                    outlet = rp.outlet
                 
-                if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
-                    if not SP.outlet in List_outlet: 
+                    if not outlet in List_outlet: 
+                        rp_table = tableReport.objects.filter(campain = Cp, outlet=outlet, created = date_filter)
+                        rp_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
+                        consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
+                        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet, created=date_filter)
                         List = []
                         total_gift1_receive = 0
                         total_gift2_receive = 0
@@ -515,12 +528,13 @@ def export_rawdata(campainID, all_outlet, from_date, to_date):
                         total_gift5_remaining = 0
                         total_gift6_remaining = 0
                         total_gift7_remaining = 0
-                        
-                        List_outlet.append(SP.outlet)
+                         
+
+                        List_outlet.append(outlet)
                         table_share = Table_share(campainID, rp_table)
                         SaleVolume = sales_volume(campainID, rp_sale)
                         consumer = consumers_reached_rawdata(campainID, consumers_rp)
-                        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet, created=date_filter)
+                        #list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet, created=date_filter)
                         for gift_rp in list_gift_rp:
                             total_gift1_receive = gift_rp.gift1_received
                             total_gift2_receive = gift_rp.gift2_received
@@ -546,20 +560,20 @@ def export_rawdata(campainID, all_outlet, from_date, to_date):
                             total_gift6_remaining = gift_rp.gift6_remaining
                             total_gift7_remaining = gift_rp.gift7_remaining
                         if campainID == 1 or campainID == 4:
-                            List = ['Null', date_filter, SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4],  total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, total_gift4_remaining, total_gift5_remaining, total_gift6_remaining]
+                            List = ['Null', date_filter, outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4],  total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, total_gift4_remaining, total_gift5_remaining, total_gift6_remaining]
                             row_num +=1
                     
                             for col_num in range(len(List))[1:]:
                                 ws1.cell(row_num, col_num, str(List[col_num]))
                         elif campainID == 2:
-                            List = ['Null', date_filter, SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive,total_gift7_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given, total_gift7_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, total_gift4_remaining, total_gift5_remaining, total_gift6_remaining, total_gift7_remaining]
+                            List = ['Null', date_filter, outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive,total_gift7_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given, total_gift7_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, total_gift4_remaining, total_gift5_remaining, total_gift6_remaining, total_gift7_remaining]
                             row_num +=1
                     
                             for col_num in range(len(List))[1:]:
                                 ws1.cell(row_num, col_num, str(List[col_num]))
                         else:
                             #gift_raw_data = gift_rawdata(campainID, list_gift_rp)
-                            List = ['Null', date_filter, SP.outlet.province, SP.outlet.ouletID, SP.outlet.type, SP.outlet.area, SP.outlet.outlet_address, SP.outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, total_gift4_remaining]
+                            List = ['Null', date_filter, outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, total_gift4_remaining]
                             ['Null', 'Date', 'Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'Brand Volume Sales', 'HVN Volume Sales', 'Compertion Volume Sales', 'Total Table', 'Brand Table', 'HVN Table', 'Other Beer Table','Other Table', '%Table Share', 'Total Consumers', 'No.Consumers Approached', '% Consumers Reach', 'No. Consumers Bought', '%Conversion']
                             row_num +=1
                     
