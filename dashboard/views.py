@@ -1598,7 +1598,7 @@ def raw_data(request, campainID):
 
                     for rp in report:
                         outlet = rp.outlet
-                        if not SP.outlet in List_outlet:
+                        if not outlet in List_outlet:
                             List = []
                             list_name_gift = []
                             list_name_gift1 = [] 
@@ -2301,7 +2301,7 @@ def edit_rawdata(request, campainID):
 
                     for rp in report:
                         outlet = rp.outlet
-                        if not SP.outlet in List_outlet:
+                        if not outlet in List_outlet:
                             List = []
                             list_name_gift = []
                             list_name_gift1 = [] 
