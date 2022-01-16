@@ -582,15 +582,23 @@ def charts_views(request, campainID):
     Cp = Campain.objects.get(id=campainID)
     sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
     for SP in sale_person:
-        outlet=SP.outlet
-        rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-        rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-        gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+        
+        rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+        rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+        list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
     
-        if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
-            
-            if not outlet in all_outlet and outlet.created_by_HVN:
-                all_outlet.append(outlet)
+        if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
+            report = rp_table
+            if rp_table.count() >= rp_sale.count() and rp_table.count() >= list_gift_rp.count():
+                report = rp_table
+            elif rp_sale.count() >= rp_table.count() and  rp_sale.count() >= list_gift_rp.count():
+                report = rp_sale
+            else:
+                report = list_gift_rp
+            for rp in report:
+                outlet = rp.outlet
+                if not outlet in all_outlet and outlet.created_by_HVN:
+                    all_outlet.append(outlet)
     # volumperformance
     volume_per = VOLUME_PERFORMANCE(id, all_outlet, from_date, to_date)
     Average_brand_volume = [volume_per[2], volume_per[3]]
@@ -663,15 +671,23 @@ def filter_outlet_province(request, campainID):
             Cp = Campain.objects.get(id=campainID)
             sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
             for SP in sale_person:
-                outlet=SP.outlet
-                rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-                rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-                gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+                
+                rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+                rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+                list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
             
-                if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
-                    
-                    if not outlet in all_outlet and outlet.created_by_HVN:
-                        all_outlet.append(outlet)
+                if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
+                    report = rp_table
+                    if rp_table.count() >= rp_sale.count() and rp_table.count() >= list_gift_rp.count():
+                        report = rp_table
+                    elif rp_sale.count() >= rp_table.count() and  rp_sale.count() >= list_gift_rp.count():
+                        report = rp_sale
+                    else:
+                        report = list_gift_rp
+                    for rp in report:
+                        outlet = rp.outlet
+                        if not outlet in all_outlet and outlet.created_by_HVN:
+                            all_outlet.append(outlet)
             #end all_outlet
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
             volume_performance[5] = volume_perf[5]
@@ -886,15 +902,23 @@ def filter_outlet_type_province(request, campainID):
             Cp = Campain.objects.get(id=campainID)
             sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
             for SP in sale_person:
-                outlet=SP.outlet
-                rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-                rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-                gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+                
+                rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+                rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+                list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
             
-                if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
-                    
-                    if not outlet in all_outlet and outlet.created_by_HVN:
-                        all_outlet.append(outlet)
+                if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
+                    report = rp_table
+                    if rp_table.count() >= rp_sale.count() and rp_table.count() >= list_gift_rp.count():
+                        report = rp_table
+                    elif rp_sale.count() >= rp_table.count() and  rp_sale.count() >= list_gift_rp.count():
+                        report = rp_sale
+                    else:
+                        report = list_gift_rp
+                    for rp in report:
+                        outlet = rp.outlet
+                        if not outlet in all_outlet and outlet.created_by_HVN:
+                            all_outlet.append(outlet)
             # end filter outlet
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
             volume_performance[5] = volume_perf[5]
@@ -1021,15 +1045,23 @@ def filter_outletName_Province_type(request, campainID):
             #Cp = Campain.objects.get(id=campainID)
             sale_person = SalePerson.objects.filter(brand__pk=campainID)  # all_SP
             for SP in sale_person:
-                outlet=SP.outlet
-                rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-                rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-                gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+                
+                rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+                rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+                list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
             
-                if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
-                    
-                    if not outlet in all_outlet and outlet.created_by_HVN:
-                        all_outlet.append(outlet)
+                if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
+                    report = rp_table
+                    if rp_table.count() >= rp_sale.count() and rp_table.count() >= list_gift_rp.count():
+                        report = rp_table
+                    elif rp_sale.count() >= rp_table.count() and  rp_sale.count() >= list_gift_rp.count():
+                        report = rp_sale
+                    else:
+                        report = list_gift_rp
+                    for rp in report:
+                        outlet = rp.outlet
+                        if not outlet in all_outlet and outlet.created_by_HVN:
+                            all_outlet.append(outlet)
                 #end filter outlet
             volume_perf = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
             volume_performance[5] = volume_perf[5]
