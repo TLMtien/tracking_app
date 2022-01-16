@@ -16,7 +16,7 @@ import json
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_outlet_type, get_outlet, get_gift_scheme, get_outlet_type_province, get_outletName_type_province, Average_Sale_volume, Average_table_share
+from .charts import pie_chart, total_consumers_reached, HNK_volume_sale, top10_outlet, volume_achieved_byProvince, gift, VOLUME_PERFORMANCE, activation_progress, get_outlet_province, getAll_report_outlet, get_gift_scheme, get_outlet_type_province, get_outletName_type_province, Average_Sale_volume, Average_table_share
 from .rawData import Table_share, sales_volume, consumers_reached_rawdata, gift_rawdata, get_gift_scheme_rawdata
 from .exportExcel import export_chart
 # Create your views here.
