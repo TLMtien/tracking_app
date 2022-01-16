@@ -1352,6 +1352,12 @@ def raw_data(request, campainID):
                     
                         if outlet.province == province:
                             if not outlet in List_outlet:
+                                List = []
+                                list_name_gift = []
+                                list_name_gift1 = [] 
+                                list_name_gift2 = []
+                                list_name_gift3 = []
+                                list_name_gift4 = []
                                 List_outlet.append(outlet)
                                 rp_table = tableReport.objects.filter(campain = Cp, outlet=outlet, created = date_filter)
                                 rp_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
@@ -1406,6 +1412,12 @@ def raw_data(request, campainID):
                     
                         if outlet.type == type:
                             if not outlet in List_outlet:
+                                List = []
+                                list_name_gift = []
+                                list_name_gift1 = [] 
+                                list_name_gift2 = []
+                                list_name_gift3 = []
+                                list_name_gift4 = []
                                 List_outlet.append(outlet)
                                 rp_table = tableReport.objects.filter(campain = Cp, outlet=outlet, created = date_filter)
                                 rp_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
@@ -1464,6 +1476,12 @@ def raw_data(request, campainID):
 
                         if outletName.lower() in outlet.outlet_Name.lower():
                             if not outlet in List_outlet:
+                                List = []
+                                list_name_gift = []
+                                list_name_gift1 = [] 
+                                list_name_gift2 = []
+                                list_name_gift3 = []
+                                list_name_gift4 = []
                                 List_outlet.append(outlet)
                                 rp_table = tableReport.objects.filter(campain = Cp, outlet=outlet, created = date_filter)
                                 rp_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
@@ -1520,6 +1538,12 @@ def raw_data(request, campainID):
                     
                         if outlet_id in outlet.ouletID:
                             if not outlet in List_outlet:
+                                List = []
+                                list_name_gift = []
+                                list_name_gift1 = [] 
+                                list_name_gift2 = []
+                                list_name_gift3 = []
+                                list_name_gift4 = []
                                 List_outlet.append(outlet)
                                 rp_table = tableReport.objects.filter(campain = Cp, outlet=outlet, created = date_filter)
                                 rp_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
