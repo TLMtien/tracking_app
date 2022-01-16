@@ -1387,7 +1387,7 @@ def raw_data(request, campainID):
                 rp_sale =  report_sale.objects.filter(campain=Cp, SP=SP.user, created = date_filter)
                 consumers_rp = consumerApproachReport.objects.filter(campain=Cp, SP=SP.user, created = date_filter)
                 list_gift_rp = giftReport.objects.filter(campain = Cp, SP=SP.user, created=date_filter)
-                print(outlet.province)
+                #print(outlet.province)
                 if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
                     if rp_table.exists():
                         outlet = rp_table[0].outlet
