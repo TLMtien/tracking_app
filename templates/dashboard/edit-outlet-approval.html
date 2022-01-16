@@ -684,7 +684,8 @@
                            {% comment %} <button class="btn-send" id="volume-sale" type='button'><i class='bx bx-check'></i></button> {% endcomment %}
                        </td>   
                        <td class="td-desc">
-                            <button class="btn-send" class="input-number" id="edit-approval" type='button'><i class='bx bx-check'></i></button>
+                            <input type="text" class="input-number" value="{{outlet.0.created_by_SP}}"  name="created-by-sp"  disabled>
+                            <button class="btn-send"  id="edit-approval" type='button'><i class='bx bx-check'></i></button>
                         </td> 
                         <input type="hidden" name="outlet_id" value="{{outlet.0.id}}">
                     </tr>  
