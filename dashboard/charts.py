@@ -432,36 +432,32 @@ def get_outlet_province(campain_id, province, from_date, to_date):
     list_outlet = []
     list_type = []
     Cp = Campain.objects.get(id = campain_id)
-
+    all_outlet_province = []
     for pro in province:
-        #all_outlet_province = outletInfo.objects.filter(compain=Cp, province=pro, created_by_HVN=True)
-        # all_outlet_province
-        all_outlet_province = []
+        
         Cp = Campain.objects.get(id=campain_id)
         sale_person = SalePerson.objects.filter(brand__pk=campain_id)  # all_SP
         for SP in sale_person:
-            outlet=SP.outlet
-            rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-            rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
-            gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
+            
+            rp_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+            rp_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
+            gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp, SP=SP.user).filter(created__lte=to_date, campain = Cp, SP=SP.user)
         
             if rp_table.exists() or rp_sale.exists() or gift_rp.exists():
-                
-                if not outlet in all_outlet_province and outlet.created_by_HVN and outlet.province==pro:
-                    all_outlet_province.append(outlet)
+                report = rp_table
+                if rp_table.count() >= rp_sale.count() and rp_table.count() >= gift_rp.count():
+                    report = rp_table
+                elif rp_sale.count() >= rp_table.count() and  rp_sale.count() >= gift_rp.count():
+                    report = rp_sale
+                else:
+                    report = gift_rp
+                for rp in report:
+                    outlet = rp.outlet
+                    if not outlet in all_outlet_province and outlet.created_by_HVN and outlet.province==pro:
+                        all_outlet_province.append(outlet)
         # end
-        for outlet in all_outlet_province:
-            count_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()  #report of outlet
-            count_gift =  giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()
-            count_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()
-            if count_report_sale > 0 or count_gift > 0 or count_table > 0:
-                if not outlet.type in list_type: 
-                    list_type.append(outlet.type)
-
-                list_outlet.append(outlet)
-    
         
-    return list_outlet, list_type
+    return all_outlet_province, list_type
 
 # def get_outlet_type(campain_id, type, from_date, to_date):
 #     list_outlet = []
@@ -528,16 +524,17 @@ def get_outlet_type_province(campain_id, list_province_type1, from_date, to_date
                 for rp in report:
                     outlet = rp.outlet
                     if not outlet in all_outlet_province and outlet.created_by_HVN and outlet.province == list:
-                        all_outlet_province.append(outlet)
+                        all_outlet_province.append(outlet) #get all outlet by province
         # end filter outlet
-        for outlet in all_outlet_province:
-            count_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()  #report of outlet
-            count_gift =  giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()
-            count_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()
-            if count_report_sale > 0 or count_gift > 0 or count_table > 0:
-                list_outlet1.append(outlet)
-                if outlet.type in list_province_type:    
-                    list_outlet.append(outlet)
+    for outlet in all_outlet_province:
+        count_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()  #report of outlet
+        count_gift =  giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()
+        count_table = tableReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()
+        if count_report_sale > 0 or count_gift > 0 or count_table > 0:
+            list_outlet1.append(outlet)
+            if outlet.type in list_province_type:    
+                list_outlet.append(outlet)
+
     if len(list_outlet) == 0:
         list_outlet = list_outlet1
     if len(list_outlet1) == 0:
