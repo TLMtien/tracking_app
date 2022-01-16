@@ -1555,6 +1555,12 @@ def raw_data(request, campainID):
                     else:
                         outlet = list_gift_rp[0].outlet
                     if not SP.outlet in List_outlet:
+                        List = []
+                        list_name_gift = []
+                        list_name_gift1 = [] 
+                        list_name_gift2 = []
+                        list_name_gift3 = []
+                        list_name_gift4 = []
                         List_outlet.append(outlet)
                         rp_table = tableReport.objects.filter(campain = Cp, outlet=outlet, created = date_filter)
                         rp_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
@@ -1584,8 +1590,8 @@ def raw_data(request, campainID):
                             list_name_gift3.append(gift[7])
                             list_name_gift4.append(gift[9])
 
-                    list_name_gift.append(gift[1])
-                    List_raw_data.append(List)
+                        list_name_gift.append(gift[1])
+                        List_raw_data.append(List)
                        
             return render(request,'dashboard/raw-data.html', {"cam_id":campainID, 'List_raw_data':List_raw_data, 'list_name_gift':list_name_gift,'list_name_gift1':list_name_gift1, 'list_name_gift2':list_name_gift2, 'list_name_gift3':list_name_gift3, 'list_name_gift4':list_name_gift4, "date_filter":date_filter.strftime("%Y-%m-%d"),"province_filter":province_filter, 'is_campain_owner':is_campain_owner, 'is_hvn_vip':is_hvn_vip})
         
