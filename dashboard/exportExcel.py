@@ -302,16 +302,29 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
     for date_filter in List_date:
         List_outlet = []
         for SP in sale_person:
-            outlet=SP.outlet
-            rp_table = tableReport.objects.filter(campain = Cp, outlet=outlet, created = date_filter)
-            rp_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
-            consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
-            list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet, created=date_filter)
+            #outlet=SP.outlet
+            rp_table = tableReport.objects.filter(campain = Cp, SP=SP.user, created = date_filter)
+            rp_sale =  report_sale.objects.filter(campain=Cp, SP=SP.user, created = date_filter)
+            consumers_rp = consumerApproachReport.objects.filter(campain=Cp, SP=SP.user, created = date_filter)
+            list_gift_rp = giftReport.objects.filter(campain = Cp, SP=SP.user, created=date_filter)
         
             if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
+                report = rp_table
+                if rp_table.count() >= rp_sale.count() and rp_table.count() >= list_gift_rp.count():
+                    report = rp_table
+                elif rp_sale.count() >= rp_table.count() and  rp_sale.count() >= list_gift_rp.count():
+                    report = rp_sale
+                else:
+                    report = list_gift_rp
+
+                for rp in report:
+                    outlet = rp.outlet
                 
-                if rp_table.exists() or rp_sale.exists() or list_gift_rp.exists():
-                    if not SP.outlet in List_outlet: 
+                    if not outlet in List_outlet: 
+                        rp_table = tableReport.objects.filter(campain = Cp, outlet=outlet, created = date_filter)
+                        rp_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
+                        consumers_rp = consumerApproachReport.objects.filter(campain=Cp, outlet=outlet, created = date_filter)
+                        list_gift_rp = giftReport.objects.filter(campain = Cp, outlet = outlet, created=date_filter)
                         List = []
                         total_gift1_receive = 0
                         total_gift2_receive = 0
@@ -338,7 +351,7 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
                         total_gift7_remaining = 0
                          
 
-                        List_outlet.append(SP.outlet)
+                        List_outlet.append(outlet)
                         table_share = Table_share(campainID, rp_table)
                         SaleVolume = sales_volume(campainID, rp_sale)
                         consumer = consumers_reached_rawdata(campainID, consumers_rp)
