@@ -63,7 +63,7 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
     pie=pie_chart(campainID, table_rp)
     volume_per = VOLUME_PERFORMANCE(campainID, all_outlet, from_date, to_date)
     activation = activation_progress(campainID, all_outlet, from_date, to_date)
-    top10 = top10_outlet(campainID, all_outlet)
+    top10 = top10_outlet(campainID, all_outlet, from_date, to_date)
     list_gift_rp = giftReport.objects.filter(created__gte=from_date, campain = Cp).filter(created__lte=to_date, campain = Cp)
     gift_rp = gift(campainID, list_gift_rp)
     ## Volume

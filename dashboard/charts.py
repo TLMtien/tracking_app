@@ -219,7 +219,7 @@ def activation_progress(campain_id, all_outlet, from_date, to_date):
     return count, total_act
 
     
-def top10_outlet(campain_id, all_outlet):
+def top10_outlet(campain_id, all_outlet, from_date, to_date):
     
         Cp = Campain.objects.get(id = campain_id)
         
@@ -235,9 +235,9 @@ def top10_outlet(campain_id, all_outlet):
         new_list_name_reverse = []
         # all_outlet = outletInfo.objects.filter(compain=Cp)
         for outlet in all_outlet:
-            all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet)
+            all_report_sale =  report_sale.objects.filter(campain=Cp, outlet=outlet, created__gte=from_date).filter(campain=Cp, outlet=outlet, created__lte=to_date)
             
-            table_rp = tableReport.objects.filter(campain=Cp, outlet=outlet)
+            table_rp = tableReport.objects.filter(campain=Cp, outlet=outlet, created__gte=from_date).filter(campain=Cp, outlet=outlet, created__lte=to_date)
 
             sum_beer_brand = 0
             total_table_brand = 0
