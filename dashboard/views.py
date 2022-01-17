@@ -473,7 +473,7 @@ def KPI_view(request, campainID):
         check = False
         if count_kpi > 0:
             kpi = KPI.objects.filter(campain=campain).order_by('id')[0:count_kpi-1]
-            new_kpi =  KPI.objects.filter(campain=campain)[count_kpi-1:]
+            new_kpi =  KPI.objects.filter(campain=campain).order_by('id')[count_kpi-1:]
             
             check = True
         return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi, "cam_id":campainID, 'is_campain_owner':is_campain_owner,'is_hvn_vip':is_hvn_vip, 'new_kpi':new_kpi, 'check':check, 'count_kpi':count_kpi})
