@@ -392,7 +392,7 @@ def gift(campain_id, list_gift_rp):
     list = [percent_gift1, percent_gift2, percent_gift3, percent_gift4, percent_gift5, percent_gift6]
     list_4 = [percent_gift1, percent_gift2, percent_gift3, percent_gift4]
     list_7 = [percent_gift1, percent_gift2, percent_gift3, percent_gift4, percent_gift5, percent_gift6, percent_gift7]
-    
+    list_3 = [percent_gift1, percent_gift2, percent_gift3]
 
     if campain_id == 4:
         list_gift = ['Pin sạc', 'Ba lô', 'Bình Nước', 'Áo thun', 'Loa Bluetooth', 'Ly']
@@ -431,8 +431,11 @@ def gift(campain_id, list_gift_rp):
     elif campain_id == 8:
         list_gift = ['Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
         return list_4, list_gift
+    elif campain_id == 3:
+        list_gift = ['Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
+        return list_3 , list_gift
     else:
-        list_gift = ['Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue']
+        list_gift = ['E-voucher 25k','E-voucher 50k', 'E-voucher 100k']
         return list_4, list_gift
     
 
