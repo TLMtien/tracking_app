@@ -432,10 +432,10 @@ def gift(campain_id, list_gift_rp):
         list_gift = ['Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
         return list_4, list_gift
     elif campain_id == 3:
-        list_gift = ['Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
+        list_gift = ['E-voucher 25k','E-voucher 50k', 'E-voucher 100k']
         return list_3 , list_gift
     else:
-        list_gift = ['E-voucher 25k','E-voucher 50k', 'E-voucher 100k']
+        list_gift = ['Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue']
         return list_4, list_gift
     
 
