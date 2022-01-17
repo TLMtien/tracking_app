@@ -155,7 +155,8 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
     count_kpi = KPI.objects.filter(campain=Cp).count()
     if count_kpi > 0:
         new_kpi =  KPI.objects.filter(campain=Cp)[count_kpi-1:]
-        volume_achieved = int(new_kpi.volume_achieved)
+        volume_achieved = new_kpi.volume_achieved
+        volume_achieved = int(volume_achieved)
     # all_outlet = outletInfo.objects.filter(compain=Cp)
     count = 0
     count_volume_achieved = 0
