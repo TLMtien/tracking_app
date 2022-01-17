@@ -766,6 +766,26 @@ a {
     width: 100px;
 }
 
+.main-table_managenment .table-outlet .td-desc .btn-send {
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: 1px solid #1A5D1F;
+    background: #1A5D1F;
+    cursor: pointer;
+}
+
+.main-table_managenment .table-outlet .td-desc .btn-send:hover,
+.main-table_managenment .table-outlet .td-desc .btn-back:hover {
+    opacity: .8;
+}
+
+.main-table_managenment .table-outlet .td-desc .btn-send i {
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 20px;
+}
+
 .main-table_managenment .table-outlet .td-title .td-search:focus {
     outline: 1px solid #1A5D1F;
 }
