@@ -279,6 +279,9 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
     
     elif campainID == 8:
         colums = ['Null', 'Date', 'Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'Brand Volume Sales', 'HVN Volume Sales', 'Compertion Volume Sales', 'Total Table', 'Brand Table', 'HVN Table', 'Other Beer Table','Other Table', '%Table Share', 'Total Consumers', 'No.Consumers Approached', '% Consumers Reach', 'No. Consumers Bought', '%Conversion','Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly', 'Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly', 'Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
+
+    elif campainID == 3:
+        colums = ['Null', 'Date', 'Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'Brand Volume Sales', 'HVN Volume Sales', 'Compertion Volume Sales', 'Total Table', 'Brand Table', 'HVN Table', 'Other Beer Table','Other Table', '%Table Share', 'Total Consumers', 'No.Consumers Approached', '% Consumers Reach', 'No. Consumers Bought', '%Conversion','Áo thun', 'E-voucher 25k', 'E-voucher 50k', 'E-voucher 100k', 'E-voucher 25k', 'E-voucher 50k', 'E-voucher 100k', 'E-voucher 25k', 'E-voucher 50k', 'E-voucher 100k']
     
     else:
         colums = ['Null', 'Date', 'Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'Brand Volume Sales', 'HVN Volume Sales', 'Compertion Volume Sales', 'Total Table', 'Brand Table', 'HVN Table', 'Other Beer Table','Other Table', '%Table Share', 'Total Consumers', 'No.Consumers Approached', '% Consumers Reach', 'No. Consumers Bought', '%Conversion','Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue', 'Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue', 'Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue']
@@ -388,6 +391,13 @@ def export_chart(campainID, all_outlet, from_date, to_date, value, array_image, 
                                 ws1.cell(row_num, col_num, str(List[col_num]))
                         elif campainID == 2:
                             List = ['Null', date_filter, outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive,total_gift7_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given, total_gift7_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, total_gift4_remaining, total_gift5_remaining, total_gift6_remaining, total_gift7_remaining]
+                            row_num +=1
+                    
+                            for col_num in range(len(List))[1:]:
+                                ws1.cell(row_num, col_num, str(List[col_num]))
+                        
+                        elif campainID == 3:
+                            List = ['Null', date_filter, outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], total_gift1_receive, total_gift2_receive, total_gift3_receive,  total_gift1_given, total_gift2_given, total_gift3_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining]
                             row_num +=1
                     
                             for col_num in range(len(List))[1:]:
@@ -459,6 +469,9 @@ def export_rawdata(campainID, all_outlet, from_date, to_date):
     elif campainID == 8:
         colums = ['Null', 'Date', 'Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'Brand Volume Sales', 'HVN Volume Sales', 'Compertion Volume Sales', 'Total Table', 'Brand Table', 'HVN Table', 'Other Beer Table','Other Table', '%Table Share', 'Total Consumers', 'No.Consumers Approached', '% Consumers Reach', 'No. Consumers Bought', '%Conversion','Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly', 'Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly', 'Áo thun', 'Thùng 12 Lon', 'Nón', 'Ly']
     
+    elif campainID == 3:
+        colums = ['Null', 'Date', 'Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'Brand Volume Sales', 'HVN Volume Sales', 'Compertion Volume Sales', 'Total Table', 'Brand Table', 'HVN Table', 'Other Beer Table','Other Table', '%Table Share', 'Total Consumers', 'No.Consumers Approached', '% Consumers Reach', 'No. Consumers Bought', '%Conversion','Áo thun', 'E-voucher 25k', 'E-voucher 50k', 'E-voucher 100k', 'E-voucher 25k', 'E-voucher 50k', 'E-voucher 100k', 'E-voucher 25k', 'E-voucher 50k', 'E-voucher 100k']
+    
     else:
         colums = ['Null', 'Date', 'Province', 'Outlet ID', 'Type', 'Area', 'Address', 'Outlet name', 'Brand Volume Sales', 'HVN Volume Sales', 'Compertion Volume Sales', 'Total Table', 'Brand Table', 'HVN Table', 'Other Beer Table','Other Table', '%Table Share', 'Total Consumers', 'No.Consumers Approached', '% Consumers Reach', 'No. Consumers Bought', '%Conversion','Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue', 'Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue', 'Ba lô','Thùng 12 Lon', 'Nón', '02 Lon Larue']
     font_style = xlwt.XFStyle()
@@ -567,6 +580,12 @@ def export_rawdata(campainID, all_outlet, from_date, to_date):
                                 ws1.cell(row_num, col_num, str(List[col_num]))
                         elif campainID == 2:
                             List = ['Null', date_filter, outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift4_receive, total_gift5_receive, total_gift6_receive,total_gift7_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift4_given, total_gift5_given, total_gift6_given, total_gift7_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, total_gift4_remaining, total_gift5_remaining, total_gift6_remaining, total_gift7_remaining]
+                            row_num +=1
+                    
+                            for col_num in range(len(List))[1:]:
+                                ws1.cell(row_num, col_num, str(List[col_num]))
+                        elif campainID == 3:
+                            List = ['Null', date_filter, outlet.province, outlet.ouletID, outlet.type, outlet.area, outlet.outlet_address, outlet.outlet_Name, SaleVolume[0], SaleVolume[1], SaleVolume[2], table_share[0], table_share[1], table_share[2], table_share[3], table_share[4], table_share[5], consumer[0], consumer[1], consumer[2], consumer[3], consumer[4], total_gift1_receive, total_gift2_receive, total_gift3_receive,  total_gift1_given, total_gift2_given, total_gift3_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining]
                             row_num +=1
                     
                             for col_num in range(len(List))[1:]:
