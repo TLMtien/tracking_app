@@ -361,7 +361,7 @@ def edit_outlet_approval(request):
                 sale_person = SalePerson.objects.filter(brand__pk=4)
                 print(sale_person[i].user)
                 if outlet_info.created_by_SP == None:
-                    for j in range(len(sale_person)):
+                    for j in range(len(pk)):
                         outlet_info.created_by_SP = sale_person[j].user
                         if outlet_info.created_by_SP != None:
                             break
