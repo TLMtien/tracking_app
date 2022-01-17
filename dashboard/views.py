@@ -359,9 +359,13 @@ def edit_outlet_approval(request):
                 outlet_info.outlet_address = outlet_address[i]
                 #print(outlet_info.created_by_SP)
                 sale_person = SalePerson.objects.filter(brand__pk=4)
-                print(sale_person[i].user)
-                if outlet_info.created_by_SP == None :
-                        outlet_info.created_by_SP = sale_person[i-100].user
+                
+                if outlet_info.created_by_SP == None:
+                    for j in sale_person:
+                   
+                        outlet_info.created_by_SP = j.user
+                        if outlet_info.created_by_SP != None:
+                            break
                         
                 # rp_table = tableReport.objects.filter(outlet=outlet_info)
                 # count_rp_table = tableReport.objects.filter(outlet=outlet_info).count()
