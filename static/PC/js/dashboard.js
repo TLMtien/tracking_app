@@ -170,6 +170,9 @@ province.change(function() {
                 stroke: {
                     width: [0, 3],
                 },
+                legend: {
+                    show: false
+                },
                 title: {
                     text: 'Traffic Sources'
                 },
@@ -1219,6 +1222,9 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
                 stroke: {
                     width: [0, 3],
                 },
+                legend: {
+                    show: false
+                },
                 title: {
                     text: 'Traffic Sources'
                 },
@@ -1574,6 +1580,9 @@ $("#list_name_outlet").on("change", "input:checkbox", function() {
                 },
                 stroke: {
                     width: [0, 3],
+                },
+                legend: {
+                    show: false
                 },
                 title: {
                     text: 'Traffic Sources'
