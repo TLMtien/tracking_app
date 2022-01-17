@@ -361,7 +361,7 @@ def edit_outlet_approval(request):
                 sale_person = SalePerson.objects.filter(brand__pk=4)
                 print(sale_person[i].user)
                 if outlet_info.created_by_SP == None:
-                    outlet_info.created_by_SP = sale_person[i].user
+                    outlet_info.created_by_SP = sale_person[37].user
                 # rp_table = tableReport.objects.filter(outlet=outlet_info)
                 # count_rp_table = tableReport.objects.filter(outlet=outlet_info).count()
                 # count_rp_sale =  report_sale.objects.filter(outlet=outlet_info).count()
