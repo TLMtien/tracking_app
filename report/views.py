@@ -291,6 +291,22 @@ def gift_receiveReport(request):
                 report.save()
                 return render(request, "list_gift1/create-list-gift-receive.html", {'gift1_received':report.gift1_received, 
                         'gift2_received':report.gift2_received,  'gift3_received':report.gift3_received ,'gift4_received':report.gift4_received, 'gift5_received':report.gift5_received, 'gift6_received':report.gift6_received,'gift7_received':report.gift7_received, 'gift_name_1':'Ly 30cl', 'gift_name_2':'Voucher beer', 'gift_name_3':'Festive Box', 'gift_name_4':'Túi di lịch Tiger', 'gift_name_5':'Loa Tiger', 'gift_name_6':'Ví Tiger ', 'gift_name_7':'Iphone 13'})
+            if  SP.brand == campain3:
+                report = giftReport.objects.filter(created = datetime.date.today(), SP = request.user, outlet = SP.outlet).count()
+                if report < 1:
+                    p = giftReport.objects.create(SP=request.user, outlet=SP.outlet, campain=SP.brand, gift1_received=gift1_received, 
+                            gift2_received=gift2_received, gift3_received=gift3_received)
+                    p.save()
+                    
+                    return render(request, "list_gift2/create-list-gift-receive.html", {'gift1_received':gift1_received, 
+                        'gift2_received':gift2_received,  'gift3_received':gift3_received ,'gift_name_1':'E-voucher 25k', 'gift_name_2':'E-voucher 50k', 'gift_name_3':'E-voucher 100k'})
+                report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+                report.gift1_received = sum(gift1_received, report.gift1_received)
+                report.gift2_received = sum(gift2_received, report.gift2_received)
+                report.gift3_received = sum(gift3_received, report.gift3_received)
+                report.save()
+                return render(request, "list_gift2/create-list-gift-receive.html", {'gift1_received':report.gift1_received, 
+                        'gift2_received':report.gift2_received,  'gift3_received':report.gift3_received,'gift_name_1':'E-voucher 25k', 'gift_name_2':'E-voucher 50k', 'gift_name_3':'E-voucher 100k'})
     else:
         SP = SalePerson.objects.get(user=request.user)
         campain7 = Campain.objects.get(id=7)
@@ -317,6 +333,9 @@ def gift_receiveReport(request):
 
         elif SP.brand == campain2:
             return render(request,"list_gift1/listgift-received.html", {'form':form, 'gift_name_1':'Ly 30cl', 'gift_name_2':'Voucher beer', 'gift_name_3':'Festive Box', 'gift_name_4':'Túi di lịch Tiger', 'gift_name_5':'Loa Tiger', 'gift_name_6':'Ví Tiger ', 'gift_name_7':'Iphone 13'})
+
+        elif SP.brand == campain3:
+            return render(request,"list_gift2/listgift-received.html", {'form':form, 'gift_name_1':'E-voucher 25k', 'gift_name_2':'E-voucher 50k', 'gift_name_3':'E-voucher 100k'})
 
         elif SP.brand == campain4:
             return render(request,"list_gift/listgift-received.html", {'form':form, 'gift_name_1':'Pin sạc', 'gift_name_2':'Ba lô', 'gift_name_3':'Bình Nước', 'gift_name_4':'Áo thun', 'gift_name_5':'Loa Bluetooth', 'gift_name_6':'Ly'})
@@ -384,6 +403,14 @@ def gift_givenReport(request):
                     report.gift7_given = sum(gift6_given, report.gift7_given)
                     report.save()
                     return redirect('quantity-gift')
+                if SP.brand == campain3:
+                    SP = SalePerson.objects.get(user=request.user)
+                    report = giftReport.objects.get(created = datetime.date.today(), SP = request.user, outlet = SP.outlet)
+                    report.gift1_given = sum(gift1_given, report.gift1_given)
+                    report.gift2_given = sum(gift2_given, report.gift2_given)
+                    report.gift3_given = sum(gift3_given, report.gift3_given)
+                    report.save()
+                    return redirect('quantity-gift')
         else:
             form = gift_givenReportForm()
             campain7 = Campain.objects.get(id=7)
@@ -416,6 +443,9 @@ def gift_givenReport(request):
 
             if SP.brand == campain2:
                 return render(request,"list_gift1/listgift-sent.html", {'form':form, 'gift_name_1':'Ly 30cl', 'gift_name_2':'Voucher beer', 'gift_name_3':'Festive Box', 'gift_name_4':'Túi di lịch Tiger', 'gift_name_5':'Loa Tiger', 'gift_name_6':'Ví Tiger ', 'gift_name_7':'Iphone 13'})
+
+            if SP.brand == campain3:
+                return render(request,"list_gift2/listgift-sent.html", {'form':form, 'gift_name_1':'E-voucher 25k', 'gift_name_2':'E-voucher 50k', 'gift_name_3':'E-voucher 100k'})
 
             if SP.brand == campain4:
                 return render(request,"list_gift/listgift-sent.html", {'form':form, 'gift_name_1':'Pin sạc', 'gift_name_2':'Ba lô', 'gift_name_3':'Bình Nước', 'gift_name_4':'Áo thun', 'gift_name_5':'Loa Bluetooth', 'gift_name_6':'Ly'})
@@ -458,7 +488,10 @@ def gift_givenReport(request):
             return render(request, 'list_gift1/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
                 'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift5_given':gift5_given, 'gift6_given':gift6_given, 'gift7_given':gift7_given,'gift_name_1':'Ly 30cl', 'gift_name_2':'Voucher beer', 'gift_name_3':'Festive Box', 'gift_name_4':'Túi du lịch Tiger', 'gift_name_5':'Loa Tiger', 'gift_name_6':'Ví Tiger ', 'gift_name_7':'Iphone 13'}) 
 
-              
+        if SP.brand == campain3:
+            return render(request, 'list_gift2/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
+                'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift5_given':gift5_given, 'gift6_given':gift6_given, 'gift7_given':gift7_given,'gift_name_1':'E-voucher 25k', 'gift_name_2':'E-voucher 50k', 'gift_name_3':'E-voucher 100k'})
+
         if SP.brand == campain4:
             return render(request, 'list_gift/alert-gift-given.html', {'gift1_given':gift1_given, 'gift2_given':gift2_given,
                 'gift3_given':gift3_given,'gift4_given':gift4_given, 'gift5_given':gift5_given, 'gift6_given':gift6_given, 'gift_name_1':'Pin sạc', 'gift_name_2':'Ba lô', 'gift_name_3':'Bình Nước', 'gift_name_4':'Áo thun', 'gift_name_5':'Loa Bluetooth', 'gift_name_6':'Ly'}) 
@@ -535,6 +568,14 @@ def gift_remaining(request):
                         'gift3_received':report.gift3_received, 'gift4_received':report.gift4_received,'gift5_received':report.gift5_received, 'gift6_received':report.gift6_received, 'gift7_received':report.gift7_received,
                 'gift1_given':report.gift1_given, 'gift2_given':report.gift2_given, 
                 'gift3_given':report.gift3_given, 'gift4_given':report.gift4_given, 'gift5_given':report.gift5_given, 'gift6_given':report.gift6_given, 'gift7_given':report.gift7_given,'gift_name_1':'Ly 30cl', 'gift_name_2':'Voucher beer', 'gift_name_3':'Festive Box', 'gift_name_4':'Túi du lịch Tiger', 'gift_name_5':'Loa Tiger', 'gift_name_6':'Ví Tiger ', 'gift_name_7':'Iphone 13'})
+        
+        if SP.brand == campain3:
+            return render(request,'list_gift2/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
+                'gift2_remaining': report.gift2_remaining, 'gift3_remaining': report.gift3_remaining,
+                'gift1_received':report.gift1_received, 'gift2_received':report.gift2_received,
+                        'gift3_received':report.gift3_received,
+                'gift1_given':report.gift1_given, 'gift2_given':report.gift2_given, 
+                'gift3_given':report.gift3_given,'gift_name_1':'E-voucher 25k', 'gift_name_2':'E-voucher 50k', 'gift_name_3':'E-voucher 100k'})
 
         if SP.brand == campain4:
             return render(request,'list_gift/listgift-remain.html', {'gift1_remaining':report.gift1_remaining,
@@ -579,8 +620,13 @@ def gift_remaining(request):
                 'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0', 'gift5_remaining': '0', 'gift6_remaining': '0', 'gift_name_1':'Ly 30cl', 'gift_name_2':'Ly 33cl 3D', 'gift_name_3':'Ly Casablanca', 'gift_name_4':'Ví', 'gift_name_5':'Nón Tiger Crystal', 'gift_name_6':'Voucher Bia'})
         
         if SP.brand == campain2:
-            return render(request,'list_gift/listgift-remain.html', {'gift1_remaining':'0',
+            return render(request,'list_gift1/listgift-remain.html', {'gift1_remaining':'0',
                 'gift2_remaining': '0', 'gift3_remaining': '0', 'gift4_remaining': '0', 'gift5_remaining': '0', 'gift6_remaining': '0', 'gift7_remaining': '0','gift_name_1':'Ly 30cl', 'gift_name_2':'Voucher beer', 'gift_name_3':'Festive Box', 'gift_name_4':'Túi du lịch Tiger', 'gift_name_5':'Loa Tiger', 'gift_name_6':'Ví Tiger ', 'gift_name_7':'Iphone 13'})
+        
+        if SP.brand == campain3:
+            return render(request,'list_gift2/listgift-remain.html', {'gift1_remaining':'0',
+                'gift2_remaining': '0', 'gift3_remaining': '0',
+                'gift_name_1':'E-voucher 25k', 'gift_name_2':'E-voucher 50k', 'gift_name_3':'E-voucher 100k'})
   
         if SP.brand == campain4:
             return render(request,'list_gift/listgift-remain.html', {'gift1_remaining':'0',

@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Gift Received</title>
+
+    <link rel="stylesheet" href="{% static '/themify-icons.css' %} ">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %} ">
+</head>
+<body>
+    <div class="app">
+        <div class="container homeoutlet">
+                <!-- Header -->
+                <div class="row header">    
+                    <div class="logo">
+                        <a href="#"><img src="{% static '/img/logo-hnk.png' %} " alt="logo"></a>
+                    </div>
+                    <div class="profile-user"> 
+                        <img src="{% static '/img/img_avatar3.png' %}" alt="avatar"></img>
+                    </div>
+                </div>
+                <div class="icon-back">
+                    <a href="{% url 'quantity-gift' %}"><i class="ti-angle-double-left"></i></a>
+                </div>
+                <!-- Main -->
+                <div class="row main">
+                    <p class="report_title">quà nhận đầu ca</p>
+                    <form action=" " method="POST"class="listbox">
+                        {% csrf_token %} 
+                        
+                        <table class="table-list" style="width:100%">
+                            <tr>
+                                <th>Tên quà tặng</th>
+                                <th>Số lượng</th>
+                                
+                            </tr>
+                            <tr>
+                                <td class="td-name">{{gift_name_1}}</td>
+                                <td class="td-number">
+                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
+                                    {{gift1_given}}
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="td-name">{{gift_name_2}}</td>
+                                <td class="td-number">
+                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
+                                    {{gift2_given}}
+                                </td>
+                               
+                            </tr>
+                            <tr>
+                                <td class="td-name">{{gift_name_3}}</td>
+                                <td class="td-number">
+                                    {% comment %} <input type="number" id="input_quality" placeholder="Điền số lượng *" required> {% endcomment %}
+                                    {{gift3_given}}
+                                </td>
+                                
+                            </tr>
+                            
+                            
+                        </table>
+                        <p class="alert"> *Bạn chưa nhập số quà nhận
+                        <div class="box-center">
+                            <a class="btn btn-confirm"  href="{% url 'quantity-gift' %}">Quay lại"</a>
+                        </div>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    
+    <script src="{% static '/js/app.js' %}"></script>
+</body>
+</html>
