@@ -184,8 +184,8 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
                 total_sale = sum(total_sale, report_Sale.beer_brand)
     
     average_volume = 0
-    if count_volume_achieved  > 0:
-        average_volume = percent(total_sale, count_volume_achieved )
+    if count  > 0:
+        average_volume = percent(total_sale, count )
     
     total_volume_achieved = volume_achieved * count
 
