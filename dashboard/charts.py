@@ -185,7 +185,7 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
     
     average_volume = 0
     if count  > 0:
-        average_volume = (int(total_sale)/int(count))
+        average_volume = round(int(total_sale)/int(count), 0)
     
     total_volume_achieved = volume_achieved * count
 
