@@ -528,7 +528,7 @@ def create_KPI(request, campainID):
         check_percent = True
         campain = Campain.objects.get(id=campainID)
             
-        kpi = KPI.objects.filter(campain=campain)
+        kpi = KPI.objects.filter(campain=campain).order_by('id')
         return render(request,"dashboard/create-kpi.html", {'all_kpi':kpi, 'form':form,"cam_id":campainID, 'check_percent':check_percent})
 
 
