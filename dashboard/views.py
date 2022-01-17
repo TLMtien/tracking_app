@@ -492,10 +492,10 @@ def unlock_KPI(request, campainID):
                 
                 return redirect("create_KPI", campainID = campainID)
             messages.error(request, "password is incorrect")
-            return render(request,"dashboard/unlock.html",{'form':form, 'cam_id':campainID})
+            return render(request,"dashboard/unlock-kpi.html",{'form':form, 'cam_id':campainID})
            
     form = unlock_password()
-    return render(request,"dashboard/unlock.html",{'form':form, 'cam_id':campainID})
+    return render(request,"dashboard/unlock-kpi.html",{'form':form, 'cam_id':campainID})
 
 #HVN  create_KPI
 def create_KPI(request, campainID):
