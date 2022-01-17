@@ -1022,7 +1022,7 @@ def filter_outletName_Province_type(request, campainID):
             to_date = (date.today())
         list_outlet_typeAndProvince = total_array.split(',')
         #endcall ajax
-        list_outlet_chart = get_outletName_type_province(campainID, list_outlet_typeAndProvince)
+        list_outlet_chart = get_outletName_type_province(campainID, list_outlet_typeAndProvince, from_date, to_date)
         print(list_outlet_chart)
         list_rp = getAll_report_outlet(campainID, list_outlet_chart[0], from_date, to_date)
         pie = pie_chart(campainID, list_rp[0])
