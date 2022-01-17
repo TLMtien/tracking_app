@@ -225,7 +225,7 @@ province.change(function() {
                     }
                 },
                 legend: {
-                    show: true
+                    show: false,
                 },
                 lines: {
                     show: false,
@@ -1274,7 +1274,7 @@ $("#list_type_outlet").on("change", "input:checkbox", function() {
                     }
                 },
                 legend: {
-                    show: true
+                    show: false,
                 },
                 lines: {
                     show: false,
@@ -1658,7 +1658,7 @@ $("#list_name_outlet").on("change", "input:checkbox", function() {
                     }
                 },
                 legend: {
-                    show: true
+                    show: false
                 },
                 lines: {
                     show: false,
