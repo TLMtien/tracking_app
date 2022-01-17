@@ -207,10 +207,19 @@
                                 {% csrf_token %} 
                             <tr>
                                 <th>KPI</th>  
+
+                                {% for kpi in all_kpi %}
+                                <th class="th-kpi"><div><span>{{ forloop.counter }}</span> <span class="small">st</span>KPI</div></th>
+                                {% endfor %}
+
                                 <th>Input</th>
                             </tr>
                             <tr>
                                 <td class="td-desc bg-green">Start date</td>
+                                {% for kpi in all_kpi %}
+                                <td class="td-desc bg-green">{{kpi.start_day}}</td>  
+                                {% endfor %}
+
                                 <td class="td-desc bg-green">
                                     <input type="date" name="start_day" id="input-date_kpi" value="{{date_filter}}" required >
                                     <i class='bx bxs-sort-alt'></i>
@@ -218,24 +227,39 @@
                             </tr>
                             <tr>
                                 <td class="td-desc">Volume Achieved (Can/Bottle)</td>
+
+                                {% for kpi in all_kpi %}
+                                <td class="td-desc bg-green">{{kpi.volume_achieved}}</td>   
+                                {% endfor %}
+
                                 <td class="td-desc text-red">
                                     {{form.volume_achieved}}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-desc">Table Share</td>
+
+                                {% for kpi in all_kpi %}
+                                <td class="td-desc bg-green">{{kpi.table_share}}</td>   
+                                {% endfor %}
                                 <td class="td-desc text-red">
                                     {{form.table_share}}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-desc">% Consumer Reached</td>
+                                {% for kpi in all_kpi %}
+                                <td class="td-desc bg-green">{{kpi.consumer_reached}}</td>   
+                                {% endfor %}
                                 <td class="td-desc text-red">
                                     {{form.consumer_reached}}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-desc">% Conversion</td>
+                                {% for kpi in all_kpi %}
+                                <td class="td-desc bg-green">{{kpi.conversion}}</td>   
+                                {% endfor %}
                                 <td class="td-desc text-red">
                                     
                                     {{form.conversion}}

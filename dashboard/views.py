@@ -490,9 +490,12 @@ def create_KPI(request, campainID):
             conversion = form.cleaned_data.get('conversion')
             start_day = request.POST.get('start_day')
             check_percent = True
+            campain = Campain.objects.get(id=campainID)
+            
+            kpi = KPI.objects.filter(campain=campain)
             if not '%' in table_share or not '%' in consumer_reached:
                 check_percent = False
-                return render(request,"dashboard/create-kpi.html", {'form':form,"cam_id":campainID,'check_percent':check_percent, 'date_filter':start_day})
+                return render(request,"dashboard/create-kpi.html", {'all_kpi':kpi, 'form':form,"cam_id":campainID,'check_percent':check_percent, 'date_filter':start_day})
             
             kpi = KPI.objects.create(user=request.user, campain=campain, volume_achieved=volume_achieved,
             table_share=table_share, consumer_reached=consumer_reached, conversion=conversion, start_day=start_day)
@@ -504,7 +507,10 @@ def create_KPI(request, campainID):
     else:
         form = KPIForm()
         check_percent = True
-        return render(request,"dashboard/create-kpi.html", {'form':form,"cam_id":campainID, 'check_percent':check_percent})
+        campain = Campain.objects.get(id=campainID)
+            
+        kpi = KPI.objects.filter(campain=campain)
+        return render(request,"dashboard/create-kpi.html", {'all_kpi':kpi, 'form':form,"cam_id":campainID, 'check_percent':check_percent})
 
 
 def sum_revenue(request):
