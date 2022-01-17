@@ -112,7 +112,7 @@ def gift_rawdata(campain_id, gift_rp):
 
     list2_scheme1 = [total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift7_receive, 0, 0, total_gift1_given, total_gift2_given, total_gift3_given, total_gift7_given, 0,0,total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, total_gift7_remaining, 0 , 0]
     
-    gift_3 = [total_gift1_receive, total_gift2_receive, total_gift3_receive, total_gift1_given, total_gift2_given, total_gift3_given, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining]
+    gift_3 = [total_gift1_receive, total_gift2_receive, total_gift3_receive, 0, 0 , 0, total_gift1_given, total_gift2_given, total_gift3_given, 0, 0, 0, total_gift1_remaining, total_gift2_remaining, total_gift3_remaining, 0, 0, 0]
 
     list_6_scheme1 = [total_gift1_receive, total_gift2_receive, total_gift1_given, total_gift2_given, total_gift1_remaining, total_gift2_remaining]
     list_6_scheme2 = [total_gift3_receive, total_gift4_receive, total_gift3_given, total_gift4_given, total_gift3_remaining, total_gift4_remaining]
