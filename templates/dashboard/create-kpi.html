@@ -267,8 +267,13 @@
                             </tr>
                         
                     </table>
+                    
+                    {% if check_percent %}
+                    <p style="color:red">Số liệu phải nhỏ hơn 100%</p>
+                    {% endif %}
+
                     {% if not check_percent %}
-                    <p style="color:red">Vui lòng nhập %Table Share</p>
+                    <p style="color:red">Vui lòng nhập % cho các cột</p>
                     {% endif %}
                     <div class="btn-box">
                         <button type = 'submit' class="btn-create">CREATE</button>
