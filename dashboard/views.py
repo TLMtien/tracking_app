@@ -363,7 +363,8 @@ def edit_outlet_approval(request):
                 if outlet_info.created_by_SP == None:
                     for j in range(len(sale_person)):
                         outlet_info.created_by_SP = sale_person[j].user
-                        break
+                        if outlet_info.created_by_SP != None:
+                            break
                 # rp_table = tableReport.objects.filter(outlet=outlet_info)
                 # count_rp_table = tableReport.objects.filter(outlet=outlet_info).count()
                 # count_rp_sale =  report_sale.objects.filter(outlet=outlet_info).count()
