@@ -490,7 +490,7 @@ def create_KPI(request, campainID):
             conversion = form.cleaned_data.get('conversion')
             start_day = request.POST.get('start_day')
             check_percent = True
-            if not '%' in table_share:
+            if not '%' in table_share or not '%' in consumer_reached:
                 check_percent = False
                 return render(request,"dashboard/create-kpi.html", {'form':form,"cam_id":campainID,'check_percent':check_percent, 'date_filter':start_day})
             
