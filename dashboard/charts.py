@@ -131,6 +131,7 @@ def HNK_volume_sale(campain_id, all_report_sale):
         return 0
 
 def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
+    volume_achieved = 0
     if campain_id == 1:
         volume_achieved = 168
     elif campain_id == 2:
