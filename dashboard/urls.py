@@ -34,7 +34,7 @@ urlpatterns = [
     path('kpi/<int:campainID>/create_KPI/', views.create_KPI, name='create_KPI'),
     path('export-report/<int:campainID>/export/', views.export, name ='export'),
     path('<int:campainID>/list_gift_scheme/', views.list_gift_scheme, name='list_gift_scheme'),
-    
+    path('<int:campainID>/unlock-kpi/', views.unlock_KPI, name='unlock-kpi'),
     path('<int:campainID>/filter-outlet-province/', views.filter_outlet_province, name='filter-outlet-province'),
     #path('<int:campainID>/filter_outlet_type/', views.filter_outlet_type, name='filter_outlet_type'), 
     #path('<int:campainID>/filter_outlet/', views.filter_outlet, name='filter_outlet'),

@@ -477,6 +477,25 @@ def KPI_view(request, campainID):
             
             check = True
         return render(request, 'dashboard/kpi-setting.html', {'all_kpi':kpi, "cam_id":campainID, 'is_campain_owner':is_campain_owner,'is_hvn_vip':is_hvn_vip, 'new_kpi':new_kpi, 'check':check, 'count_kpi':count_kpi})
+#unlock KPI
+def unlock_KPI(request, campainID):
+    if request.method == "POST":
+        currentpassword = request.user.password
+        form = unlock_password(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data.get('password')
+            check = check_password(password, currentpassword)
+            print(password)
+            print(currentpassword)
+            print(check)
+            if check:
+                
+                return redirect("create_KPI", campainID = campainID)
+            messages.error(request, "password is incorrect")
+            return render(request,"dashboard/unlock.html",{'form':form, 'cam_id':campainID})
+           
+    form = unlock_password()
+    return render(request,"dashboard/unlock.html",{'form':form, 'cam_id':campainID})
 
 #HVN  create_KPI
 def create_KPI(request, campainID):
@@ -492,7 +511,7 @@ def create_KPI(request, campainID):
             check_percent = True
             campain = Campain.objects.get(id=campainID)
             
-            kpi = KPI.objects.filter(campain=campain)
+            kpi = KPI.objects.filter(campain=campain).order_by('id')
             if not '%' in table_share or not '%' in consumer_reached:
                 check_percent = False
                 return render(request,"dashboard/create-kpi.html", {'all_kpi':kpi, 'form':form,"cam_id":campainID,'check_percent':check_percent, 'date_filter':start_day})

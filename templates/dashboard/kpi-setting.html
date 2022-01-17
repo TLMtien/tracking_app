@@ -196,7 +196,7 @@
                 {%  if not request.user.is_agency %}
                 <div class="rightbox_kpi">
                     {% comment %} <button class="btn-kpi">SET NEW KPI</button> {% endcomment %}
-                    <a class="btn-kpi" href="create_KPI/">SET NEW KPI</a>
+                    <a class="btn-kpi" href="{% url 'unlock-kpi' cam_id %}">SET NEW KPI</a>
                     <!-- <div class="update-file-outlet">
                         <span class="label">
                             UPLOAD NEW OUTLET LIST
