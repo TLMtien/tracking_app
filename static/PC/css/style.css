@@ -766,26 +766,6 @@ a {
     width: 100px;
 }
 
-.main-table_managenment .table-outlet .td-desc .btn-send {
-    padding: 5px 15px;
-    border-radius: 5px;
-    border: 1px solid #1A5D1F;
-    background: #1A5D1F;
-    cursor: pointer;
-}
-
-.main-table_managenment .table-outlet .td-desc .btn-send:hover,
-.main-table_managenment .table-outlet .td-desc .btn-back:hover {
-    opacity: .8;
-}
-
-.main-table_managenment .table-outlet .td-desc .btn-send i {
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 20px;
-}
-
 .main-table_managenment .table-outlet .td-title .td-search:focus {
     outline: 1px solid #1A5D1F;
 }
@@ -1604,27 +1584,34 @@ a {
 }
 
 .box-right .col-horizontal .footer {
-    padding: 10px;
+    margin-top: -20px;
 }
 
 .box-right .col-horizontal .footer .icon-color {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .box-right .col-horizontal .footer .icon-color .icon-one {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background: #198631;
-    border-radius: 8px;
+    border-radius: 3px;
 }
 
 .box-right .col-horizontal .footer .icon-color .icon-two {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background: #1C263F;
-    border-radius: 8px;
+    border-radius: 3px;
+    margin-left: 15px;
+}
+
+.box-right .col-horizontal .footer .icon-color .smart-desc {
+    font-size: 12px;
+    color: #333;
+    padding-left: 5px;
 }
 
 .box-right .col-horizontal .boxcorlor {
@@ -1703,6 +1690,50 @@ a {
     background: #1A5D1F;
     color: #fff;
     border-radius: 5px;
+}
+
+.row-bottom .footer {
+    margin-top: -20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row-bottom .footer .icon-color {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+}
+
+.row-bottom .footer .icon-color .icon-one {
+    width: 15px;
+    height: 15px;
+    background: #198631;
+    border-radius: 3px;
+}
+
+.row-bottom .footer .icon-color .icon-two {
+    width: 45px;
+    height: 5px;
+    background: #1C263F;
+    border-radius: 2px;
+    margin-left: 15px;
+}
+
+.row-bottom .footer .icon-color .smart-desc {
+    font-size: 12px;
+    color: #333;
+    padding-left: 5px;
+}
+
+.row-bottom .footer .under {
+    width: 20%;
+}
+
+.row-bottom .footer .under p {
+    font-size: 12px;
 }
 
 #chart-acti,
