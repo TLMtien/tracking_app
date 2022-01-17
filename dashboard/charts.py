@@ -4,6 +4,7 @@ from outlet.models import tableReport, Campain, consumerApproachReport, report_s
 from users.models import SalePerson
 from operator import and_
 from functools import reduce
+from .models import KPI
 def sum(a, b):
     return int(int(a) + int(b))
 
@@ -150,6 +151,11 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
         volume_achieved = 192
 
     Cp = Campain.objects.get(id = campain_id)
+    
+    count_kpi = KPI.objects.filter(campain=Cp).count()
+    if count_kpi > 0:
+        new_kpi =  KPI.objects.filter(campain=Cp)[count_kpi-1:]
+        volume_achieved = int(new_kpi.volume_achieved)
     # all_outlet = outletInfo.objects.filter(compain=Cp)
     count = 0
     count_volume_achieved = 0
