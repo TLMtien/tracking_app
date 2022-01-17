@@ -472,7 +472,7 @@ def KPI_view(request, campainID):
         kpi = KPI.objects.filter(campain=campain)
         check = False
         if count_kpi > 0:
-            kpi = KPI.objects.filter(campain=campain)[:count_kpi-1]
+            kpi = KPI.objects.filter(campain=campain).order_by('id')[0:count_kpi-1]
             new_kpi =  KPI.objects.filter(campain=campain)[count_kpi-1:]
             
             check = True
