@@ -168,6 +168,7 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
     list_type = []
     count_outlet_under_performance = 0
     for outlet in all_outlet:
+        count_outlet_under_performance +=1
         total_sale_outlet = 0
         table_share = 0
         percent_consumer_reach = 0
@@ -204,7 +205,7 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
                     c = kpi.consumer_reached .replace("%","")
                     d = kpi.conversion.replace("%","")
                     if int(total_sale_outlet) >= int(a) and int(table_share) >= int(b) and int(percent_consumer_reach) >= int(c) and int(percent_conversion) >= int(d):
-                        count_outlet_under_performance +=1
+                        count_outlet_under_performance -=1
 
 
 

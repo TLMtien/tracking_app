@@ -931,6 +931,7 @@ def filter_outlet_type_province(request, campainID):
         print(gift_charts)
         list_outlet = ''
         print(list_outlet)
+        all_outlet = list_outlet_chart[0]
         if len(list_outlet_chart[0]) == 0:
             #Cp = Campain.objects.get(id = campainID)
             #all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
@@ -962,6 +963,7 @@ def filter_outlet_type_province(request, campainID):
             volume_performance[6] = volume_perf[6]
             volume_performance[0] = volume_perf[0]
             volume_performance[1] = volume_perf[1]
+            volume_performance[7] = volume_perf[7]
             list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
         
             pie = pie_chart(campainID, list_rp[0])
@@ -1043,7 +1045,7 @@ def filter_outlet_type_province(request, campainID):
                     <p class="desc">Target Volume</p>
             <span class="number-two">{volume_performance[1]}</span>
         '''
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1], 'list_type_outlet': list_type})
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1], 'list_type_outlet': list_type, 'count_all_outlet_performance':len(all_outlet), 'count_outlet_under_performance':volume_performance[7]})
 
 def filter_outletName_Province_type(request, campainID):
     # get_outletName_type_province
@@ -1074,6 +1076,7 @@ def filter_outletName_Province_type(request, campainID):
         print(gift_charts)
         list_outlet = ''
         print(list_outlet)
+        all_outlet = list_outlet_chart[0]
         if len(list_outlet_chart[0]) == 0:
             Cp = Campain.objects.get(id = campainID)
             #all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
@@ -1105,6 +1108,7 @@ def filter_outletName_Province_type(request, campainID):
             volume_performance[6] = volume_perf[6]
             volume_performance[0] = volume_perf[0]
             volume_performance[1] = volume_perf[1]
+            volume_performance[7] = volume_perf[7]
             list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
         
             pie = pie_chart(campainID, list_rp[0])
@@ -1169,7 +1173,7 @@ def filter_outletName_Province_type(request, campainID):
                     <p class="desc">Target Volume</p>
             <span class="number-two">{volume_performance[1]}</span>
         '''
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]})
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'Consumers_charts':Consumers, 'pie_chart': pie, 'volume_performance':volume_per,'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]), 'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1], 'count_all_outlet_performance':len(all_outlet), 'count_outlet_under_performance':volume_performance[7]})
 
 
 # def filter_outlet(request, campainID):
