@@ -48,9 +48,9 @@ class SignupForm(forms.ModelForm):
 #######
     
 class LoginForm(forms.Form):
-	username = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'input-user', 'placeholder':"Tên đăng nhập"}))
+	username = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'input-user', 'placeholder':"Tên đăng nhập", 'style':'font-size: 16px'}))
     
-	password = forms.CharField(max_length=200, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"Mật Khẩu", 'id':"password-field", 'name':"password"}))
+	password = forms.CharField(max_length=200, widget=forms.PasswordInput(attrs={'class': 'input-password', 'placeholder':"Mật Khẩu", 'id':"password-field", 'name':"password", 'style':'font-size: 16px'}))
 
 #---------------------------------------------
 class LoginHVNForm(forms.Form):
