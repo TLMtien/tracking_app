@@ -221,7 +221,7 @@
                             </th>
                             <input type="hidden" id="url" value="{% url 'sp-info' cam_id %}">
                             
-                            <th rowspan="2"  class="td-title">
+                            {% comment %} <th rowspan="2"  class="td-title">
                                 <a href="{% url 'sp-info' cam_id %}?date_filter={{date_filter}}" id="raw_data_filter_date">
                                 START DAY
                                
@@ -241,7 +241,7 @@
                                 </a>
                                 <br>
                                 <input type="date" class="td-date">
-                            </th>   
+                            </th>    {% endcomment %}
                             <th rowspan="2"  class="td-title">
                                 STATUS
                             </th>   
@@ -293,8 +293,8 @@
                             <td class="td-desc ">{{ sp.full_name }}</td>  
                             <td class="td-desc "></td>   {% endcomment %}
                             <td class="td-desc ">{{ sp.user.user_name }}</td>  
-                            <td class="td-desc ">{{ sp.joined.date }}</td>  
-                            <td class="td-desc"></td>
+                            {% comment %} <td class="td-desc ">{{ sp.joined.date }}</td>  
+                            <td class="td-desc"></td> {% endcomment %}
                             
                             {% if sp.user.is_active %}
                             <td class="td-desc td-color_icon-green" id="status{{sp.user.id}}">
