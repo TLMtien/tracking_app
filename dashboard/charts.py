@@ -201,10 +201,10 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
             if new_kpi.exists():
                 for kpi in new_kpi:
                     a = kpi.volume_achieved.replace("%","")
-                    b = kpi.table_share.replace("%","")
-                    c = kpi.consumer_reached .replace("%","")
-                    d = kpi.conversion.replace("%","")
-                    if int(total_sale_outlet) >= int(a) and int(table_share) >= int(b) and int(percent_consumer_reach) >= int(c) and int(percent_conversion) >= int(d):
+                    # b = kpi.table_share.replace("%","")
+                    # c = kpi.consumer_reached .replace("%","")
+                    # d = kpi.conversion.replace("%","")
+                    if int(total_sale_outlet) >= int(a):
                         count_outlet_under_performance -=1
 
 
