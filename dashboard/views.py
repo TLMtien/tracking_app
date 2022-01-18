@@ -664,7 +664,7 @@ def charts_views(request, campainID):
     percent_volume = per
     print(per)
     return render(request, 'dashboard/dashboard.html', {'text':pie, 'target_volume_achieved':target_volume_achieved, 
-     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1],'array_gift': append_array(gift_rp[1]),'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'percent_volume':percent_volume,'Average_brand_volume': Average_brand_volume, 'activation':activation[0],'total_activation':activation[1],  'top10_sale_reverse':top10[3], 'top10_table_reverse': top10[4], 'top10_name_reverse':top10[5], 'list_province':volume_per[4], 'list_name_outlet':volume_per[5], 'list_type':volume_per[6], "cam_id":campainID, 'from_date':from_date,'to_date':to_date})
+     'Volume_sale':Volume_sale, 'top10_sale':top10[0], 'top10_table':top10[1], 'top10_name':top10[2], 'gift_rp':gift_rp[0], 'gift_name' : gift_rp[1],'array_gift': append_array(gift_rp[1]),'total_consumers':report_customer[0] , 'ctm_reached':report_customer[1], 'total_bought_consumers':report_customer[2], 'per_reached':report_customer[3], 'average_conversion':report_customer[4], 'actual_volume' : volume_per[0], 'target_volume': volume_per[1], 'percent_volume':percent_volume,'Average_brand_volume': Average_brand_volume, 'activation':activation[0],'total_activation':activation[1],  'top10_sale_reverse':top10[3], 'top10_table_reverse': top10[4], 'top10_name_reverse':top10[5], 'list_province':volume_per[4], 'list_name_outlet':volume_per[5], 'list_type':volume_per[6], "cam_id":campainID, 'from_date':from_date,'to_date':to_date, 'count_all_outlet_performance':len(all_outlet), 'count_outlet_under_performance':volume_per[7]})
 
 
 ######
@@ -729,6 +729,7 @@ def filter_outlet_province(request, campainID):
             volume_performance[6] = volume_perf[6]
             volume_performance[0] = volume_perf[0]
             volume_performance[1] = volume_perf[1]
+            volume_performance[7] = volume_perf[7]
             list_rp = getAll_report_outlet(campainID, all_outlet, from_date, to_date)
         
             pie = pie_chart(campainID, list_rp[0])
@@ -810,7 +811,7 @@ def filter_outlet_province(request, campainID):
         print(pie)
         print(gift_charts[0])
         print(consumers_charts)
-        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'list_type_outlet': list_type,'Consumers_charts':Consumers,'volume_performance':volume_per, 'pie_chart': pie, 'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]) ,'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1]}) 
+        return JsonResponse({'created': 'ok', 'list_outlet':list_outlet, 'list_type_outlet': list_type,'Consumers_charts':Consumers,'volume_performance':volume_per, 'pie_chart': pie, 'gift':gift_charts[0], 'array_gift': append_array(gift_charts[1]) ,'top10_sale':top_10[0], 'top10_table':top_10[1], 'top10_name':top_10[2], 'Average_brand_volume':Average_brand_volume, 'activation':activation[0],'total_activation':activation[1], 'actual_volume':volume_performance[0], 'target_volume':volume_performance[1], 'count_all_outlet_performance':len(all_outlet), 'count_outlet_under_performance':volume_performance[7]}) 
     return JsonResponse({'created': 'ko'}) 
 
 

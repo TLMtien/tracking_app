@@ -155,9 +155,9 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
     
     count_kpi = KPI.objects.filter(campain=Cp).count()
     if count_kpi > 0:
-        new_kpi =  KPI.objects.filter(campain=Cp)[count_kpi-1:]
+        new_kpi =  KPI.objects.filter(campain=Cp).order_by('id')[count_kpi-1:]
         for kpi in new_kpi:
-            volume_achieved = kpi.volume_achieved
+            volume_achieved = kpi.volume_achieved.replace("%","")
             volume_achieved = int(volume_achieved)
     # all_outlet = outletInfo.objects.filter(compain=Cp)
     count = 0
@@ -166,10 +166,17 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
     list_province = []
     list_name_outlet = []
     list_type = []
+    count_outlet_under_performance = 0
     for outlet in all_outlet:
+        total_sale_outlet = 0
+        table_share = 0
+        percent_consumer_reach = 0
+        percent_conversion = 0
         all_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
         count_report_sale =  report_sale.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()  #report of outlet
         count_gift =  giftReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet).count()
+        table_rp = tableReport.objects.filter(campain=Cp, outlet=outlet, created__gte=from_date).filter(campain=Cp, outlet=outlet, created__lte=to_date)
+        consumers_rp = consumerApproachReport.objects.filter(created__gte=from_date, campain = Cp, outlet=outlet).filter(created__lte=to_date, campain = Cp, outlet=outlet)
         if count_report_sale > 0 or count_gift>0:
             if not outlet.province in list_province:        #filter province
                 list_province.append(outlet.province)
@@ -181,7 +188,26 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
             count = count + 1
             count_volume_achieved = count_volume_achieved + volume_achieved
             for report_Sale in all_report_sale:
-                total_sale = sum(total_sale, report_Sale.beer_brand)
+                total_sale = sum(total_sale, report_Sale.beer_brand)  
+                total_sale_outlet = sum(total_sale_outlet, report_Sale.beer_brand) #sale of outlet
+            
+            table_share = Average_table_share(table_rp)# 
+
+            report_consumer = total_consumers_reached(campain_id, consumers_rp)
+            percent_consumer_reach = report_consumer[3]
+            percent_conversion = report_consumer[4]
+
+            if new_kpi.exists():
+                for kpi in new_kpi:
+                    a = kpi.volume_achieved.replace("%","")
+                    b = kpi.table_share.replace("%","")
+                    c = kpi.consumer_reached .replace("%","")
+                    d = kpi.conversion.replace("%","")
+                    if int(total_sale_outlet) >= int(a) and int(table_share) >= int(b) and int(percent_consumer_reach) >= int(c) and int(percent_conversion) >= int(d):
+                        count_outlet_under_performance +=1
+
+
+
     
     average_volume = 0
     if count  > 0:
@@ -189,7 +215,7 @@ def VOLUME_PERFORMANCE(campain_id, all_outlet, from_date, to_date):
     
     total_volume_achieved = volume_achieved * count
 
-    return [total_sale, total_volume_achieved , average_volume, volume_achieved, list_province, list_name_outlet, list_type]
+    return [total_sale, total_volume_achieved , average_volume, volume_achieved, list_province, list_name_outlet, list_type, count_outlet_under_performance]
 
 def activation_progress(campain_id, all_outlet, from_date, to_date):
     Cp = Campain.objects.get(id = campain_id)

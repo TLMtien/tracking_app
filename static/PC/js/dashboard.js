@@ -10,6 +10,8 @@ pie_chart = document.getElementById('pie')
 list_type_outlet = document.getElementById('list_type_outlet')
 Consumers_charts = document.getElementById('Consumers_charts')
 volume_performance = document.getElementById('volume_performance')
+
+outlet_unded_performance = document.getElementById('unded-performance')
     ///////////////
 
 province.change(function() {
@@ -54,6 +56,7 @@ province.change(function() {
             outlet_list.innerHTML = response.list_outlet
             list_type_outlet.innerHTML = response.list_type_outlet
             Consumers_charts.innerHTML = response.Consumers_charts
+            outlet_unded_performance.innerHTML = `<p>Under performance: ${response.count_outlet_under_performance}/${response.count_all_outlet_performance}</p>`
                 //volume_performance.innerHTML = response.volume_performance
                 //pie_chart.value
             console.log(response.pie_chart)
