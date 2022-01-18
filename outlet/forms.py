@@ -3,10 +3,10 @@ from django.db.models import fields
 from .models import outletInfo, tableReport, posmReport, giftReport, report_sale, consumerApproachReport, search
 
 class outletInfoForm(forms.ModelForm):
-    outlet_Name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Tên outlet *"}))
+    outlet_Name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Tên outlet *", 'style':'font-size: 16px'}))
     #type = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Loại outlet *"}))
-    outlet_address = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Địa chỉ outlet *"}))
-    ouletID = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"ID outlet *"}), required=False)
+    outlet_address = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Địa chỉ outlet *", 'style':'font-size: 16px'}))
+    ouletID = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"ID outlet *", 'style':'font-size: 16px'}), required=False)
 
     class Meta:
         model = outletInfo
@@ -19,9 +19,9 @@ class outletInfoForm(forms.ModelForm):
         super(outletInfoForm, self).__init__(*args, **kwargs)
 
 class reportSaleForm(forms.ModelForm):
-    beer_brand = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    beer_HVN = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    beer_other = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
+    beer_brand = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    beer_HVN = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    beer_other = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
 
     class Meta:
         model = report_sale
@@ -32,13 +32,13 @@ class reportSaleForm(forms.ModelForm):
         super(reportSaleForm, self).__init__(*args, **kwargs)
 
 class gift_ReceiveReportForm(forms.ModelForm):
-    gift1_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    gift2_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    gift3_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    gift4_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    gift5_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
-    gift6_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
-    gift7_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
+    gift1_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    gift2_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    gift3_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    gift4_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    gift5_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}), required=False)
+    gift6_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}), required=False)
+    gift7_received = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}), required=False)
     class Meta:
         model = giftReport
         fields = ("gift1_received", "gift2_received", 
@@ -49,13 +49,13 @@ class gift_ReceiveReportForm(forms.ModelForm):
         super(gift_ReceiveReportForm, self).__init__(*args, **kwargs)
 
 class gift_givenReportForm(forms.ModelForm):
-    gift1_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    gift2_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    gift3_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    gift4_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}))
-    gift5_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
-    gift6_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
-    gift7_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*'}), required=False)
+    gift1_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    gift2_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    gift3_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    gift4_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    gift5_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}), required=False)
+    gift6_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}), required=False)
+    gift7_given = forms.CharField(widget=forms.TextInput(attrs={'id' :'input_quality','placeholder':"Điền số lượng *", 'pattern':'[0-9]*', 'style':'font-size: 16px'}), required=False)
     class Meta:
         model = giftReport
         fields = ("gift1_given", "gift2_given", 
@@ -67,10 +67,10 @@ class gift_givenReportForm(forms.ModelForm):
 
 
 class tableReportForm(forms.ModelForm):
-    other_beer_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'})) 
-    brand_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
-    other_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
-    HVN_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
+    other_beer_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*', 'style':'font-size: 16px'})) 
+    brand_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    other_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    HVN_table = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
     
     class Meta:
         model = tableReport
@@ -84,9 +84,9 @@ class tableReportForm(forms.ModelForm):
         super(tableReportForm, self).__init__(*args, **kwargs)
 
 class consumerApproachReportForm(forms.ModelForm):
-    consumers_approach = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'})) 
-    consumers_brough = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
-    Total_Consumers = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*'}))
+    consumers_approach = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*', 'style':'font-size: 16px'})) 
+    consumers_brough = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
+    Total_Consumers = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Điền số lượng *", 'id':'input_quality', 'pattern':'[0-9]*', 'style':'font-size: 16px'}))
    
     class Meta:
         model = tableReport
@@ -101,8 +101,8 @@ class consumerApproachReportForm(forms.ModelForm):
 
 
 class searchForm(forms.ModelForm):
-    province = forms.CharField(widget=forms.TextInput(attrs={'class':"billing_address_1", 'name':'', 'value':''})) 
-    district = forms.CharField(widget=forms.TextInput(attrs={'class':"billing_address_2", 'name':'', 'value':''})) 
+    province = forms.CharField(widget=forms.TextInput(attrs={'class':"billing_address_1", 'name':'', 'value':'', 'style':'font-size: 16px'})) 
+    district = forms.CharField(widget=forms.TextInput(attrs={'class':"billing_address_2", 'name':'', 'value':'', 'style':'font-size: 16px'})) 
     
     class Meta:
         model = search
