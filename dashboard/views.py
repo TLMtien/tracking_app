@@ -699,6 +699,7 @@ def filter_outlet_province(request, campainID):
         #print(gift_charts)
         list_outlet = ''
         list_type = ''
+        all_outlet = list_outlet_chart[0]
         if len(list_outlet_chart[0]) == 0:
             #all_outlet = outletInfo.objects.filter(compain = Cp, created_by_HVN=True)
             #all__outlet
