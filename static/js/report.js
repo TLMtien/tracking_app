@@ -29,9 +29,11 @@ report.addEventListener('submit', e => {
         contentType: false,
         beforeSend: function() {
             $("#loader").removeClass('hidden');
+            $("#load-text").html('Đang gửi...');
         },
         success: function(response) {
             $("#loader").addClass('hidden');
+            $("#load-text").html('');
             setTimeout(function() {
                 alert('Bạn đã gửi thành công');
             }, 100);

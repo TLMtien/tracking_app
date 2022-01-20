@@ -1460,6 +1460,16 @@ select+select {
     z-index: 999;
     opacity: 1;
     transition: all 0.5s;
+    border-radius: 50%;
+}
+
+.text-loading {
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    width: 100%;
+    font-style: italic;
+    color: white;
 }
 
 
