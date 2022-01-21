@@ -776,15 +776,15 @@ def uploadFile_report(request, campainID):
                             rp.Total_Consumers = '0'
                             rp.consumers_approach = '0'
                             rp.consumers_brough = '0'
-                            if excel_data[i+1][16] != None:
-                                rp.Total_Consumers = str(excel_data[i+1][16])
-                                rp.save()
-                            if excel_data[i+1][17] != None:
-                                rp.consumers_approach = str(excel_data[i+1][17])
-                                rp.save()
-                            if excel_data[i+1][19] != None:
-                                rp.consumers_brough = str(excel_data[i+1][19])
-                                rp.save()
+                            # if excel_data[i+1][16] != None:
+                            #     rp.Total_Consumers = str(excel_data[i+1][16])
+                            #     rp.save()
+                            # if excel_data[i+1][17] != None:
+                            #     rp.consumers_approach = str(excel_data[i+1][17])
+                            #     rp.save()
+                            # if excel_data[i+1][19] != None:
+                            #     rp.consumers_brough = str(excel_data[i+1][19])
+                            #     rp.save()
                             rp.save()
                         for rp in list_gift_rp:
                             rp.gift1_received = '0'
