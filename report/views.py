@@ -732,10 +732,7 @@ def uploadFile_report(request, campainID):
                     campain = Campain.objects.get(id=campainID)
                     #filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
                     filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][2])
-                    #print(str(excel_data[i+1][12]))
-                    #if str(excel_data[i+1][12]) == None or str(excel_data[i+1][12]) == 'None' :
-                        #print(str(excel_data[i+1][12]))
-                        #break
+                    
                     for outlet in filter_outlet:
                         campain = Campain.objects.get(id=campainID)
                         try:
@@ -752,22 +749,22 @@ def uploadFile_report(request, campainID):
                             rp.beer_brand  = '0'
                             rp.beer_HVN  = '0'
                             rp.beer_other = '0'
-                            if excel_data[i+1][7] != None or excel_data[i+1][7] != 'None' or excel_data[i+1][7] != '' or not '=' in excel_data[i+1][7]:
+                            if excel_data[i+1][7] != None and excel_data[i+1][7] != 'None' and excel_data[i+1][7] != '' and not '=' in excel_data[i+1][7]:
                                 rp.beer_brand = str(excel_data[i+1][7])
                                 rp.save()
-                            if excel_data[i+1][8] != None or excel_data[i+1][8] != 'None' or excel_data[i+1][8] != '' or not '=' in excel_data[i+1][8]:
+                            if excel_data[i+1][8] != None and excel_data[i+1][8] != 'None' and excel_data[i+1][8] != '' and not '=' in excel_data[i+1][8]:
                                 rp.beer_HVN = str(excel_data[i+1][8])
                                 rp.save()
-                            if excel_data[i+1][9] != None or excel_data[i+1][9] != 'None' or excel_data[i+1][9] != '' or not '=' in excel_data[i+1][9]:
+                            if excel_data[i+1][9] != None and excel_data[i+1][9] != 'None' and excel_data[i+1][9] != '' and not '=' in excel_data[i+1][9]:
                                 rp.beer_other = str(excel_data[i+1][9])
                                 rp.save()
                                 
                             rp.save()
                         for rp in rp_table:
-                            if excel_data[i+1][11] != None or excel_data[i+1][11] != 'None':
+                            if excel_data[i+1][11] != None and excel_data[i+1][11] != 'None':
                                 rp.brand_table = str(excel_data[i+1][11])
                                 rp.save()
-                            if excel_data[i+1][12] != None or excel_data[i+1][12] != 'None':
+                            if excel_data[i+1][12] != None and excel_data[i+1][12] != 'None':
                                 rp.HVN_table = str(excel_data[i+1][12])
                             
                             rp.other_beer_table = '0'
