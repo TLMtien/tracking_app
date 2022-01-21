@@ -745,35 +745,52 @@ def uploadFile_report(request, campainID):
                         consumers_rp = consumerApproachReport.objects.filter(campain=campain, outlet=outlet, created = date_filter)
                         list_gift_rp = giftReport.objects.filter(campain = campain,  outlet=outlet, created=date_filter)
                         for rp in rp_sale:
-                            rp.beer_brand = str(excel_data[i+1][7])
-                            rp.beer_HVN = str(excel_data[i+1][8])
-                            rp.beer_other = str(excel_data[i+1][9])
+                            if excel_data[i+1][7] != None:
+                                rp.beer_brand = str(excel_data[i+1][7])
+                            if excel_data[i+1][8] != None:
+                                rp.beer_HVN = str(excel_data[i+1][8])
+                            if excel_data[i+1][9] != None:
+                                rp.beer_other = str(excel_data[i+1][9])
                             rp.save()
                         for rp in rp_table:
-                            rp.brand_table = excel_data[i+1][11]
-                            rp.HVN_table = excel_data[i+1][12]
-                            rp.other_beer_table = excel_data[i+1][13]
-                            rp.other_table = excel_data[i+1][14]
+                            if excel_data[i+1][11] != None:
+                                rp.brand_table = excel_data[i+1][11]
+                            if excel_data[i+1][12] != None:
+                                rp.HVN_table = excel_data[i+1][12]
+                            if excel_data[i+1][13] != None:
+                                rp.other_beer_table = excel_data[i+1][13]
+                            if excel_data[i+1][14] != None:
+                                rp.other_table = excel_data[i+1][14]
                             rp.save()
                         for rp in consumers_rp:
-                            rp.Total_Consumers = excel_data[i+1][16]
-                            rp.consumers_approach = excel_data[i+1][17]
-                            rp.consumers_brough = excel_data[i+1][19]
+                            if excel_data[i+1][16] != None:
+                                rp.Total_Consumers = excel_data[i+1][16]
+                            if excel_data[i+1][17] != None:
+                                rp.consumers_approach = excel_data[i+1][17]
+                            if excel_data[i+1][19] != None:
+                                rp.consumers_brough = excel_data[i+1][19]
                             rp.save()
                         for rp in list_gift_rp:
-                            rp.gift1_received = excel_data[i+1][21]
-                            rp.gift2_received = excel_data[i+1][22]
-                            rp.gift3_received = excel_data[i+1][23]
-                            rp.gift4_received = excel_data[i+1][24]
-                            rp.gift5_received = excel_data[i+1][25]
-                            rp.gift6_received = excel_data[i+1][26]
-
-                            rp.gift1_given = excel_data[i+1][27]
-                            rp.gift2_given = excel_data[i+1][28]
-                            rp.gift3_given = excel_data[i+1][29]
-                            rp.gift4_given = excel_data[i+1][30]
-                            rp.gift3_given = excel_data[i+1][31]
-                            rp.gift4_given = excel_data[i+1][32]
+                            if excel_data[i+1][21] != None:
+                                rp.gift1_received = str(excel_data[i+1][21])
+                            if excel_data[i+1][22] != None:
+                                rp.gift2_received = str(excel_data[i+1][22])
+                            if excel_data[i+1][23] != None:
+                                rp.gift3_received = str(excel_data[i+1][23])
+                            if excel_data[i+1][24] != None:
+                                rp.gift4_received = str(excel_data[i+1][24])
+                            #rp.gift5_received = str(excel_data[i+1][25])
+                            #rp.gift6_received = str(excel_data[i+1][26])
+                            if excel_data[i+1][27] != None:
+                                rp.gift1_given = str(excel_data[i+1][27])
+                            if excel_data[i+1][28] != None:
+                                rp.gift2_given = str(excel_data[i+1][28])
+                            if excel_data[i+1][29] != None:
+                                rp.gift3_given = str(excel_data[i+1][29])
+                            if excel_data[i+1][30] != None:
+                                rp.gift4_given = str(excel_data[i+1][30])
+                            #rp.gift3_given = str(excel_data[i+1][31])
+                            #rp.gift4_given = str(excel_data[i+1][32])
                             
 
                             rp.save()
