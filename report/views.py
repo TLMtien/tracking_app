@@ -752,16 +752,16 @@ def uploadFile_report(request, campainID):
                             if excel_data[i+1][9] != None:
                                 rp.beer_other = str(excel_data[i+1][9])
                             rp.save()
-                        for rp in rp_table:
-                            if excel_data[i+1][11] != None:
-                                rp.brand_table = excel_data[i+1][11]
-                            if excel_data[i+1][12] != None:
-                                rp.HVN_table = excel_data[i+1][12]
-                            if excel_data[i+1][13] != None:
-                                rp.other_beer_table = excel_data[i+1][13]
-                            if excel_data[i+1][14] != None:
-                                rp.other_table = excel_data[i+1][14]
-                            rp.save()
+                        # for rp in rp_table:
+                        #     if excel_data[i+1][11] != None:
+                        #         rp.brand_table = excel_data[i+1][11]
+                        #     if excel_data[i+1][12] != None:
+                        #         rp.HVN_table = excel_data[i+1][12]
+                        #     if excel_data[i+1][13] != None:
+                        #         rp.other_beer_table = excel_data[i+1][13]
+                        #     if excel_data[i+1][14] != None:
+                        #         rp.other_table = excel_data[i+1][14]
+                        #     rp.save()
                         for rp in consumers_rp:
                             if excel_data[i+1][16] != None:
                                 rp.Total_Consumers = excel_data[i+1][16]
