@@ -700,144 +700,144 @@ def clean_data_today(request):
     return HttpResponse('ok')
 
 
-from datetime import datetime
-def uploadFile_report(request, campainID):
+# from datetime import datetime
+# def uploadFile_report(request, campainID):
 	
-            if "GET" == request.method:
-                return render(request, 'report/upload-report.html', {'cam_id':campainID})
-            else:
-                excel_file = request.FILES["upload"]
-                wb = openpyxl.load_workbook(excel_file)
+#             if "GET" == request.method:
+#                 return render(request, 'report/upload-report.html', {'cam_id':campainID})
+#             else:
+#                 excel_file = request.FILES["upload"]
+#                 wb = openpyxl.load_workbook(excel_file)
                 
-                sheets = wb.sheetnames
-                #print(sheets[0])
-                worksheet = wb[sheets[0]]   #Trang tính
+#                 sheets = wb.sheetnames
+#                 #print(sheets[0])
+#                 worksheet = wb[sheets[0]]   #Trang tính
 
-                excel_data = list()
+#                 excel_data = list()
             
-                for row in worksheet.iter_rows():
-                    row_data = list()
+#                 for row in worksheet.iter_rows():
+#                     row_data = list()
 
-                    for cell in row:
-                        #if not (cell.value) == None: 
-                        row_data.append(str(cell.value))
+#                     for cell in row:
+#                         #if not (cell.value) == None: 
+#                         row_data.append(str(cell.value))
 
-                    excel_data.append(row_data)
-                #print(len(excel_data)-2)
-                # for i in range(len(excel_data)-1):
-                #     a = Message(phone_number = '+84'+ excel_data[i+1][0][1:len(excel_data[i+1][0])], content = excel_data[i+1][1])
-                #     a.save()
-                list_outlet = []
-                for i in range(len(excel_data)-1):
-                    campain = Campain.objects.get(id=campainID)
-                    #filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
-                    filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][2])
+#                     excel_data.append(row_data)
+#                 #print(len(excel_data)-2)
+#                 # for i in range(len(excel_data)-1):
+#                 #     a = Message(phone_number = '+84'+ excel_data[i+1][0][1:len(excel_data[i+1][0])], content = excel_data[i+1][1])
+#                 #     a.save()
+#                 list_outlet = []
+#                 for i in range(len(excel_data)-1):
+#                     campain = Campain.objects.get(id=campainID)
+#                     #filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
+#                     filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][2])
                     
-                    for outlet in filter_outlet:
-                        campain = Campain.objects.get(id=campainID)
-                        try:
-                            date_filter = excel_data[i+1][0]
-                            date_filter = datetime.strptime(date_filter,"%Y-%m-%d %H:%M:%S")
-                        except:
-                            date_filter = excel_data[i+1][0]
-                            date_filter = datetime.strptime(date_filter,"%d/%m/%Y")
-                        rp_table = tableReport.objects.filter(campain = campain,  outlet=outlet, created = date_filter)
-                        rp_sale =  report_sale.objects.filter(campain=campain, outlet=outlet, created = date_filter)
-                        consumers_rp = consumerApproachReport.objects.filter(campain=campain, outlet=outlet, created = date_filter)
-                        list_gift_rp = giftReport.objects.filter(campain = campain,  outlet=outlet, created=date_filter)
-                        for rp in rp_sale:
-                            rp.beer_brand  = '0'
-                            rp.beer_HVN  = '0'
-                            rp.beer_other = '0'
-                            if excel_data[i+1][7] != None and excel_data[i+1][7] != 'None' and excel_data[i+1][7] != '' and not '=' in excel_data[i+1][7]:
-                                rp.beer_brand = str(excel_data[i+1][7])
-                                rp.save()
-                            if excel_data[i+1][8] != None and excel_data[i+1][8] != 'None' and excel_data[i+1][8] != '' and not '=' in excel_data[i+1][8]:
-                                rp.beer_HVN = str(excel_data[i+1][8])
-                                rp.save()
-                            if excel_data[i+1][9] != None and excel_data[i+1][9] != 'None' and excel_data[i+1][9] != '' and not '=' in excel_data[i+1][9]:
-                                rp.beer_other = str(excel_data[i+1][9])
-                                rp.save()
+#                     for outlet in filter_outlet:
+#                         campain = Campain.objects.get(id=campainID)
+#                         try:
+#                             date_filter = excel_data[i+1][0]
+#                             date_filter = datetime.strptime(date_filter,"%Y-%m-%d %H:%M:%S")
+#                         except:
+#                             date_filter = excel_data[i+1][0]
+#                             date_filter = datetime.strptime(date_filter,"%d/%m/%Y")
+#                         rp_table = tableReport.objects.filter(campain = campain,  outlet=outlet, created = date_filter)
+#                         rp_sale =  report_sale.objects.filter(campain=campain, outlet=outlet, created = date_filter)
+#                         consumers_rp = consumerApproachReport.objects.filter(campain=campain, outlet=outlet, created = date_filter)
+#                         list_gift_rp = giftReport.objects.filter(campain = campain,  outlet=outlet, created=date_filter)
+#                         for rp in rp_sale:
+#                             rp.beer_brand  = '0'
+#                             rp.beer_HVN  = '0'
+#                             rp.beer_other = '0'
+#                             if excel_data[i+1][7] != None and excel_data[i+1][7] != 'None' and excel_data[i+1][7] != '' and not '=' in excel_data[i+1][7]:
+#                                 rp.beer_brand = str(excel_data[i+1][7])
+#                                 rp.save()
+#                             if excel_data[i+1][8] != None and excel_data[i+1][8] != 'None' and excel_data[i+1][8] != '' and not '=' in excel_data[i+1][8]:
+#                                 rp.beer_HVN = str(excel_data[i+1][8])
+#                                 rp.save()
+#                             if excel_data[i+1][9] != None and excel_data[i+1][9] != 'None' and excel_data[i+1][9] != '' and not '=' in excel_data[i+1][9]:
+#                                 rp.beer_other = str(excel_data[i+1][9])
+#                                 rp.save()
                                 
-                            rp.save()
-                        for rp in rp_table:
-                            if excel_data[i+1][11] != None and excel_data[i+1][11] != 'None':
-                                rp.brand_table = str(excel_data[i+1][11])
-                                rp.save()
-                            if excel_data[i+1][12] != None and excel_data[i+1][12] != 'None':
-                                rp.HVN_table = str(excel_data[i+1][12])
+#                             rp.save()
+#                         for rp in rp_table:
+#                             if excel_data[i+1][11] != None and excel_data[i+1][11] != 'None':
+#                                 rp.brand_table = str(excel_data[i+1][11])
+#                                 rp.save()
+#                             if excel_data[i+1][12] != None and excel_data[i+1][12] != 'None':
+#                                 rp.HVN_table = str(excel_data[i+1][12])
                             
-                            rp.other_beer_table = '0'
-                            rp.other_table = '0'
-                            rp.save()
-                            #     rp.save()
-                            # if excel_data[i+1][13] != None:
-                            #     rp.other_beer_table = str(excel_data[i+1][13])
-                            #     rp.save()
-                            # if excel_data[i+1][14] != None:
-                            #     rp.other_table = str(excel_data[i+1][14])
-                            #     rp.save()
-                        for rp in consumers_rp:
-                            rp.Total_Consumers = '0'
-                            rp.consumers_approach = '0'
-                            rp.consumers_brough = '0'
-                            # if excel_data[i+1][16] != None:
-                            #     rp.Total_Consumers = str(excel_data[i+1][16])
-                            #     rp.save()
-                            # if excel_data[i+1][17] != None:
-                            #     rp.consumers_approach = str(excel_data[i+1][17])
-                            #     rp.save()
-                            # if excel_data[i+1][19] != None:
-                            #     rp.consumers_brough = str(excel_data[i+1][19])
-                            #     rp.save()
-                            rp.save()
-                        for rp in list_gift_rp:
-                            rp.gift1_received = '0'
-                            rp.gift2_received = '0'
-                            rp.gift3_received = '0'
-                            rp.gift4_received= '0'
-                            # if excel_data[i+1][21] != None or  excel_data[i+1][21] !='None' or  excel_data[i+1][21]!='':
-                            #     rp.gift1_received = str(excel_data[i+1][21])
-                            #     rp.save()
-                            # if excel_data[i+1][22] != None:
-                            #     rp.gift2_received = str(excel_data[i+1][22])
-                            #     rp.save()
-                            # if excel_data[i+1][23] != None:
-                            #     rp.gift3_received = str(excel_data[i+1][23])
-                            #     rp.save()
-                            # if excel_data[i+1][24] != None:
-                            #     rp.gift4_received = str(excel_data[i+1][24])
-                            #     rp.save()
-                            #rp.gift5_received = str(excel_data[i+1][25])
-                            #rp.gift6_received = str(excel_data[i+1][26])
-                            rp.gift1_given = '0'
-                            rp.gift2_given = '0'
-                            rp.gift3_given = '0'
-                            rp.gift4_given = '0'
-                            # if excel_data[i+1][27] != None or  excel_data[i+1][27] !='None' or  excel_data[i+1][27]!='':
-                            #     rp.gift1_given = str(excel_data[i+1][27])
-                            #     rp.save()
-                            # if excel_data[i+1][28] != None:
-                            #     rp.gift2_given = str(excel_data[i+1][28])
-                            #     rp.save()
-                            # if excel_data[i+1][29] != None:
-                            #     rp.gift3_given = str(excel_data[i+1][29])
-                            #     rp.save()
-                            # if excel_data[i+1][30] != None:
-                            #     rp.gift4_given = str(excel_data[i+1][30])
-                            rp.save()
-                            #rp.gift3_given = str(excel_data[i+1][31])
-                            #rp.gift4_given = str(excel_data[i+1][32])
+#                             rp.other_beer_table = '0'
+#                             rp.other_table = '0'
+#                             rp.save()
+#                             #     rp.save()
+#                             # if excel_data[i+1][13] != None:
+#                             #     rp.other_beer_table = str(excel_data[i+1][13])
+#                             #     rp.save()
+#                             # if excel_data[i+1][14] != None:
+#                             #     rp.other_table = str(excel_data[i+1][14])
+#                             #     rp.save()
+#                         for rp in consumers_rp:
+#                             rp.Total_Consumers = '0'
+#                             rp.consumers_approach = '0'
+#                             rp.consumers_brough = '0'
+#                             # if excel_data[i+1][16] != None:
+#                             #     rp.Total_Consumers = str(excel_data[i+1][16])
+#                             #     rp.save()
+#                             # if excel_data[i+1][17] != None:
+#                             #     rp.consumers_approach = str(excel_data[i+1][17])
+#                             #     rp.save()
+#                             # if excel_data[i+1][19] != None:
+#                             #     rp.consumers_brough = str(excel_data[i+1][19])
+#                             #     rp.save()
+#                             rp.save()
+#                         for rp in list_gift_rp:
+#                             rp.gift1_received = '0'
+#                             rp.gift2_received = '0'
+#                             rp.gift3_received = '0'
+#                             rp.gift4_received= '0'
+#                             # if excel_data[i+1][21] != None or  excel_data[i+1][21] !='None' or  excel_data[i+1][21]!='':
+#                             #     rp.gift1_received = str(excel_data[i+1][21])
+#                             #     rp.save()
+#                             # if excel_data[i+1][22] != None:
+#                             #     rp.gift2_received = str(excel_data[i+1][22])
+#                             #     rp.save()
+#                             # if excel_data[i+1][23] != None:
+#                             #     rp.gift3_received = str(excel_data[i+1][23])
+#                             #     rp.save()
+#                             # if excel_data[i+1][24] != None:
+#                             #     rp.gift4_received = str(excel_data[i+1][24])
+#                             #     rp.save()
+#                             #rp.gift5_received = str(excel_data[i+1][25])
+#                             #rp.gift6_received = str(excel_data[i+1][26])
+#                             rp.gift1_given = '0'
+#                             rp.gift2_given = '0'
+#                             rp.gift3_given = '0'
+#                             rp.gift4_given = '0'
+#                             # if excel_data[i+1][27] != None or  excel_data[i+1][27] !='None' or  excel_data[i+1][27]!='':
+#                             #     rp.gift1_given = str(excel_data[i+1][27])
+#                             #     rp.save()
+#                             # if excel_data[i+1][28] != None:
+#                             #     rp.gift2_given = str(excel_data[i+1][28])
+#                             #     rp.save()
+#                             # if excel_data[i+1][29] != None:
+#                             #     rp.gift3_given = str(excel_data[i+1][29])
+#                             #     rp.save()
+#                             # if excel_data[i+1][30] != None:
+#                             #     rp.gift4_given = str(excel_data[i+1][30])
+#                             rp.save()
+#                             #rp.gift3_given = str(excel_data[i+1][31])
+#                             #rp.gift4_given = str(excel_data[i+1][32])
                             
 
                            
                             
-                        print(date_filter)
-                        # print(excel_data[i+1][1])
-                        # print(excel_data[i+1][2])
-                        # print(excel_data[i+1][3])
+#                         print(date_filter)
+#                         # print(excel_data[i+1][1])
+#                         # print(excel_data[i+1][2])
+#                         # print(excel_data[i+1][3])
                         
-                        # list_outlet.append(a)
+#                         # list_outlet.append(a)
             
-                return render(request, "dashboard/management.html", {'list_outlet':list_outlet, "cam_id":campainID})
+#                 return render(request, "dashboard/management.html", {'list_outlet':list_outlet, "cam_id":campainID})
    
