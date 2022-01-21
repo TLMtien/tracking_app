@@ -757,6 +757,7 @@ def uploadFile_report(request, campainID):
                             if excel_data[i+1][9] != None or excel_data[i+1][9] != 'None' or excel_data[i+1][9] != '' or not '=' in excel_data[i+1][9]:
                                 rp.beer_other = str(excel_data[i+1][9])
                                 rp.save()
+                                
                             rp.save()
                         for rp in rp_table:
                             if excel_data[i+1][11] != None:
