@@ -736,7 +736,7 @@ def uploadFile_report(request, campainID):
                         campain = Campain.objects.get(id=campainID)
                         try:
                             date_filter = excel_data[i+1][0]
-                            date_filter = datetime.strptime(date_filter,"%Y-%m-%d %H:%M:%S")
+                            date_filter = datetime.strptime(date_filter,"%Y-%m-%d")
                         except:
                             date_filter = excel_data[i+1][0]
                             date_filter = datetime.strptime(date_filter,"%d/%m/%Y")
