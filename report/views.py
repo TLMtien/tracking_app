@@ -731,12 +731,12 @@ def uploadFile_report(request, campainID):
                 for i in range(len(excel_data)-1):
                     campain = Campain.objects.get(id=campainID)
                     #filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
-                    filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3])
+                    filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][2])
                     for outlet in filter_outlet:
                         campain = Campain.objects.get(id=campainID)
                         try:
                             date_filter = excel_data[i+1][0]
-                            date_filter = datetime.strptime(date_filter,"%Y-%m-%d")
+                            date_filter = datetime.strptime(date_filter,"%Y-%m-%d %H:%M:%S")
                         except:
                             date_filter = excel_data[i+1][0]
                             date_filter = datetime.strptime(date_filter,"%d/%m/%Y")
