@@ -765,11 +765,16 @@ def uploadFile_report(request, campainID):
                             rp.gift2_received = excel_data[i+1][22]
                             rp.gift3_received = excel_data[i+1][23]
                             rp.gift4_received = excel_data[i+1][24]
+                            rp.gift5_received = excel_data[i+1][25]
+                            rp.gift6_received = excel_data[i+1][26]
 
-                            rp.gift1_given = excel_data[i+1][25]
-                            rp.gift2_given = excel_data[i+1][26]
-                            rp.gift3_given = excel_data[i+1][27]
-                            rp.gift4_given = excel_data[i+1][28]
+                            rp.gift1_given = excel_data[i+1][27]
+                            rp.gift2_given = excel_data[i+1][28]
+                            rp.gift3_given = excel_data[i+1][29]
+                            rp.gift4_given = excel_data[i+1][30]
+                            rp.gift3_given = excel_data[i+1][31]
+                            rp.gift4_given = excel_data[i+1][32]
+                            
 
                             rp.save()
                             
