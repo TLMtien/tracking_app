@@ -790,15 +790,15 @@ def uploadFile_report(request, campainID):
                             # if excel_data[i+1][21] != None or  excel_data[i+1][21] !='None' or  excel_data[i+1][21]!='':
                             #     rp.gift1_received = str(excel_data[i+1][21])
                             #     rp.save()
-                            if excel_data[i+1][22] != None:
-                                rp.gift2_received = str(excel_data[i+1][22])
-                                rp.save()
-                            if excel_data[i+1][23] != None:
-                                rp.gift3_received = str(excel_data[i+1][23])
-                                rp.save()
-                            if excel_data[i+1][24] != None:
-                                rp.gift4_received = str(excel_data[i+1][24])
-                                rp.save()
+                            # if excel_data[i+1][22] != None:
+                            #     rp.gift2_received = str(excel_data[i+1][22])
+                            #     rp.save()
+                            # if excel_data[i+1][23] != None:
+                            #     rp.gift3_received = str(excel_data[i+1][23])
+                            #     rp.save()
+                            # if excel_data[i+1][24] != None:
+                            #     rp.gift4_received = str(excel_data[i+1][24])
+                            #     rp.save()
                             #rp.gift5_received = str(excel_data[i+1][25])
                             #rp.gift6_received = str(excel_data[i+1][26])
                             rp.gift1_given = '0'
@@ -808,14 +808,14 @@ def uploadFile_report(request, campainID):
                             # if excel_data[i+1][27] != None or  excel_data[i+1][27] !='None' or  excel_data[i+1][27]!='':
                             #     rp.gift1_given = str(excel_data[i+1][27])
                             #     rp.save()
-                            if excel_data[i+1][28] != None:
-                                rp.gift2_given = str(excel_data[i+1][28])
-                                rp.save()
-                            if excel_data[i+1][29] != None:
-                                rp.gift3_given = str(excel_data[i+1][29])
-                                rp.save()
-                            if excel_data[i+1][30] != None:
-                                rp.gift4_given = str(excel_data[i+1][30])
+                            # if excel_data[i+1][28] != None:
+                            #     rp.gift2_given = str(excel_data[i+1][28])
+                            #     rp.save()
+                            # if excel_data[i+1][29] != None:
+                            #     rp.gift3_given = str(excel_data[i+1][29])
+                            #     rp.save()
+                            # if excel_data[i+1][30] != None:
+                            #     rp.gift4_given = str(excel_data[i+1][30])
                             rp.save()
                             #rp.gift3_given = str(excel_data[i+1][31])
                             #rp.gift4_given = str(excel_data[i+1][32])
