@@ -745,9 +745,9 @@ def uploadFile_report(request, campainID):
                         consumers_rp = consumerApproachReport.objects.filter(campain=campain, outlet=outlet, created = date_filter)
                         list_gift_rp = giftReport.objects.filter(campain = campain,  outlet=outlet, created=date_filter)
                         for rp in rp_sale:
-                            rp.beer_brand = excel_data[i+1][7]
-                            rp.beer_HVN = excel_data[i+1][8]
-                            rp.beer_other = excel_data[i+1][9]
+                            rp.beer_brand = str(excel_data[i+1][7])
+                            rp.beer_HVN = str(excel_data[i+1][8])
+                            rp.beer_other = str(excel_data[i+1][9])
                             rp.save()
                         for rp in rp_table:
                             rp.brand_table = excel_data[i+1][11]
