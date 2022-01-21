@@ -731,7 +731,7 @@ def uploadFile_report(request, campainID):
                 for i in range(len(excel_data)-1):
                     campain = Campain.objects.get(id=campainID)
                     #filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
-                    filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], created_by_HVN = True)
+                    filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3])
                     for outlet in filter_outlet:
                         campain = Campain.objects.get(id=campainID)
                         try:
