@@ -748,15 +748,15 @@ def uploadFile_report(request, campainID):
                             rp.beer_brand  = '0'
                             rp.beer_HVN  = '0'
                             rp.beer_other = '0'
-                            if excel_data[i+1][7] != None:
-                                rp.beer_brand = str(excel_data[i+1][7])
-                                rp.save()
-                            if excel_data[i+1][8] != None:
-                                rp.beer_HVN = str(excel_data[i+1][8])
-                                rp.save()
-                            if excel_data[i+1][9] != None:
-                                rp.beer_other = str(excel_data[i+1][9])
-                                rp.save()
+                            # if excel_data[i+1][7] != None:
+                            #     rp.beer_brand = str(excel_data[i+1][7])
+                            #     rp.save()
+                            # if excel_data[i+1][8] != None:
+                            #     rp.beer_HVN = str(excel_data[i+1][8])
+                            #     rp.save()
+                            # if excel_data[i+1][9] != None:
+                            #     rp.beer_other = str(excel_data[i+1][9])
+                            #     rp.save()
                             rp.save()
                         for rp in rp_table:
                             if excel_data[i+1][11] != None:
