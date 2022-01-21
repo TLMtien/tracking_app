@@ -761,6 +761,7 @@ def uploadFile_report(request, campainID):
                                 rp.save()
                             if excel_data[i+1][12] != None:
                                 rp.HVN_table = str(excel_data[i+1][12])
+                            
                             rp.other_beer_table = '0'
                             rp.other_table = '0'
                             rp.save()
@@ -772,6 +773,9 @@ def uploadFile_report(request, campainID):
                             #     rp.other_table = str(excel_data[i+1][14])
                             #     rp.save()
                         for rp in consumers_rp:
+                            rp.Total_Consumers = '0'
+                            rp.consumers_approach = '0'
+                            rp.consumers_brough = '0'
                             if excel_data[i+1][16] != None:
                                 rp.Total_Consumers = str(excel_data[i+1][16])
                                 rp.save()
@@ -781,7 +785,7 @@ def uploadFile_report(request, campainID):
                             if excel_data[i+1][19] != None:
                                 rp.consumers_brough = str(excel_data[i+1][19])
                                 rp.save()
-                           
+                            rp.save()
                         for rp in list_gift_rp:
                             rp.gift1_received = '0'
                             rp.gift2_received = '0'
