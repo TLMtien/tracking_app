@@ -5,6 +5,8 @@ from outlet.models import tableReport, report_sale, consumerApproachReport, gift
 from outlet.forms import tableReportForm, reportSaleForm, consumerApproachReportForm, gift_ReceiveReportForm, gift_givenReportForm
 from django.views.generic import  DayArchiveView
 import datetime
+from django.http.response import Http404
+import openpyxl
 from users.models import SalePerson
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -696,3 +698,87 @@ def clean_data_today(request):
     reportPOSM = posmReport.objects.filter(created = datetime.date.today()).delete()
     
     return HttpResponse('ok')
+
+
+from datetime import datetime
+def uploadFile_report(request, campainID):
+	
+            if "GET" == request.method:
+                return render(request, 'report/upload-report.html', {'cam_id':campainID})
+            else:
+                excel_file = request.FILES["upload"]
+                wb = openpyxl.load_workbook(excel_file)
+                
+                sheets = wb.sheetnames
+                print(sheets[0])
+                worksheet = wb[sheets[0]]   #Trang tính
+
+                excel_data = list()
+            
+                for row in worksheet.iter_rows():
+                    row_data = list()
+
+                    for cell in row:
+                        #if not (cell.value) == None: 
+                        row_data.append(str(cell.value))
+
+                    excel_data.append(row_data)
+                print(len(excel_data)-2)
+                # for i in range(len(excel_data)-1):
+                #     a = Message(phone_number = '+84'+ excel_data[i+1][0][1:len(excel_data[i+1][0])], content = excel_data[i+1][1])
+                #     a.save()
+                list_outlet = []
+                for i in range(len(excel_data)-1):
+                    campain = Campain.objects.get(id=campainID)
+                    #filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], province=excel_data[i+1][2],  outlet_address=excel_data[i+1][6], outlet_Name=excel_data[i+1][7]).count()
+                    filter_outlet = outletInfo.objects.filter(compain=campain ,ouletID=excel_data[i+1][3], created_by_HVN = True)
+                    for outlet in filter_outlet:
+                        campain = Campain.objects.get(id=campainID)
+                        try:
+                            date_filter = excel_data[i+1][0]
+                            date_filter = datetime.strptime(date_filter,"%Y-%m-%d %H:%M:%S")
+                        except:
+                            date_filter = excel_data[i+1][0]
+                            date_filter = datetime.strptime(date_filter,"%d/%m/%Y")
+                        rp_table = tableReport.objects.filter(campain = campain,  outlet=outlet, created = date_filter)
+                        rp_sale =  report_sale.objects.filter(campain=campain, outlet=outlet, created = date_filter)
+                        consumers_rp = consumerApproachReport.objects.filter(campain=campain, outlet=outlet, created = date_filter)
+                        list_gift_rp = giftReport.objects.filter(campain = campain,  outlet=outlet, created=date_filter)
+                        for rp in rp_sale:
+                            rp.beer_brand = excel_data[i+1][7]
+                            rp.beer_HVN = excel_data[i+1][8]
+                            rp.beer_other = excel_data[i+1][9]
+                            rp.save()
+                        for rp in rp_table:
+                            rp.brand_table = excel_data[i+1][11]
+                            rp.HVN_table = excel_data[i+1][12]
+                            rp.other_beer_table = excel_data[i+1][13]
+                            rp.other_table = excel_data[i+1][14]
+                            rp.save()
+                        for rp in consumers_rp:
+                            rp.Total_Consumers = excel_data[i+1][16]
+                            rp.consumers_approach = excel_data[i+1][17]
+                            rp.consumers_brough = excel_data[i+1][19]
+                            rp.save()
+                        for rp in list_gift_rp:
+                            rp.gift1_received = excel_data[i+1][21]
+                            rp.gift2_received = excel_data[i+1][22]
+                            rp.gift3_received = excel_data[i+1][23]
+                            rp.gift4_received = excel_data[i+1][24]
+
+                            rp.gift1_given = excel_data[i+1][25]
+                            rp.gift2_given = excel_data[i+1][26]
+                            rp.gift3_given = excel_data[i+1][27]
+                            rp.gift4_given = excel_data[i+1][28]
+
+                            rp.save()
+                            
+                        print(date_filter)
+                        # print(excel_data[i+1][1])
+                        # print(excel_data[i+1][2])
+                        # print(excel_data[i+1][3])
+                        
+                        # list_outlet.append(a)
+            
+                return render(request, "dashboard/management.html", {'list_outlet':list_outlet, "cam_id":campainID})
+   

@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management</title>
+
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static '/PC/themify-icons.css' %}">
+    <!-- css -->
+    <link rel="stylesheet" href="{% static '/PC/css/style.css' %}">
+</head>
+<body>
+<div class="app">
+    <div class="container-home">
+            <!-- Header Home -->
+
+        <div id="uploadFile">
+            <div class="content-upload">
+                <form action="{% url 'uploadFile_report' cam_id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input-upload">
+                        <div class="update-file-outlet">
+                            <span class="label">
+                                <i class='ti-clip'></i> Upload File
+                            </span>
+                            <input type="file" name="upload" id="upload" class="upload-box" placeholder="UPLOAD NEW OUTLET LIST">
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <a class="btn-cancel" href="{% url 'managementlist' 8 %}">Cancel</a>
+                        <button class="btn-upload">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown-nav").click(function(){
+                $(this).find(".dropdown-menu").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown-nav");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu").slideUp("fast");
+            }            
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            // Show hide popover
+            $(".dropdown_raw").click(function(){
+                $(this).find(".dropdown-menu_raw").slideToggle("fast");
+            });
+        });
+        $(document).on("click", function(event){
+            var $trigger = $(".dropdown_raw");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $(".dropdown-menu_raw").slideUp("fast");
+            }            
+        });
+    </script>
+    <script>
+        $( '#topheader .navbar-nav a' ).on( 'click', function () {
+        $( '#topheader .navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+        $( this ).parent( 'li' ).addClass( 'active' );
+    });
+    </script>
+    <script>
+        $( '#leftMenu .sidebar a' ).on( 'click', function () {
+        $( '#leftMenu .sidebar' ).find( 'li.active' ).removeClass( 'active' );
+        $( this ).parent( 'li' ).addClass( 'active' );
+    });
+    </script>
+    <script>/* ============Active Pagin============= */
+        const room  = document.querySelector('.pagin-table');
+        const btns = document.querySelectorAll('.number-page'); 
+
+        room.addEventListener('click', e => {
+
+        btns.forEach(btn => {
+
+            if(btn.getAttribute('id') === e.target.getAttribute('id'))
+            btn.classList.add('active');
+            else
+            btn.classList.remove('active');
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{% static 'PC/js/chart.js' %}"></script>
+    <script src="{% static 'PC/js/app.js' %}"></script>
+</body>
+</html>
