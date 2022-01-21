@@ -763,6 +763,7 @@ def uploadFile_report(request, campainID):
                                 rp.HVN_table = str(excel_data[i+1][12])
                             rp.other_beer_table = '0'
                             rp.other_table = '0'
+                            rp.save()
                             #     rp.save()
                             # if excel_data[i+1][13] != None:
                             #     rp.other_beer_table = str(excel_data[i+1][13])
@@ -786,7 +787,7 @@ def uploadFile_report(request, campainID):
                             rp.gift2_received = '0'
                             rp.gift3_received = '0'
                             rp.gift4_received= '0'
-                            if excel_data[i+1][21] != None:
+                            if excel_data[i+1][21] != None or  excel_data[i+1][21] !='None' or  excel_data[i+1][21]!='':
                                 rp.gift1_received = str(excel_data[i+1][21])
                                 rp.save()
                             if excel_data[i+1][22] != None:
@@ -804,7 +805,7 @@ def uploadFile_report(request, campainID):
                             rp.gift2_given = '0'
                             rp.gift3_given = '0'
                             rp.gift4_given = '0'
-                            if excel_data[i+1][27] != None:
+                            if excel_data[i+1][27] != None or  excel_data[i+1][27] !='None' or  excel_data[i+1][27]!='':
                                 rp.gift1_given = str(excel_data[i+1][27])
                                 rp.save()
                             if excel_data[i+1][28] != None:
