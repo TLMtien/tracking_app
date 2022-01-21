@@ -16,7 +16,7 @@ urlpatterns = [
     path('reportPOSM/', views.reportPosm, name='reportPosm'),
     path('report-endcase/', views.reportEndcase, name='report-endcase'),
 
-    path('uploadFile_report/<int:campainID>',views.uploadFile_report,name='uploadFile_report')
+    #path('uploadFile_report/<int:campainID>',views.uploadFile_report,name='uploadFile_report')
     #####
     #path('clean-data/', views.clean_data_today, name='clean'),
 ]
