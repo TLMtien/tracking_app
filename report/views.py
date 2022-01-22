@@ -402,7 +402,7 @@ def gift_givenReport(request):
                     report.gift4_given = sum(gift4_given, report.gift4_given)
                     report.gift5_given = sum(gift5_given, report.gift5_given)
                     report.gift6_given = sum(gift6_given, report.gift6_given)
-                    report.gift7_given = sum(gift6_given, report.gift7_given)
+                    report.gift7_given = sum(gift7_given, report.gift7_given)
                     report.save()
                     return redirect('quantity-gift')
                 if SP.brand == campain3:
