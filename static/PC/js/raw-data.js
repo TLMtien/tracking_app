@@ -483,7 +483,7 @@ $(document).on('click', '#gift-scheme1', function() {
     array_report_sale.push(array_gift_given_6);
     array_report_sale.push(array_gift_given_7);
 
-    console.log(array_report_sale)
+    //console.log(array_report_sale)
     const csrf = document.getElementsByName('csrfmiddlewaretoken');
     //const csrf = document.getElementsByName('csrfmiddlewaretoken')
     $.ajax({
@@ -500,6 +500,10 @@ $(document).on('click', '#gift-scheme1', function() {
         dataType: "json",
         success: function(resp) {
             alert("Đã sửa thành công!!!")
+            console.log(resp.list_gift_remain[0][0])
+            console.log(resp.list_gift_remain)
+            console.log(resp.id)
+
             for (let i = 0; i < resp.id.length; i++) {
                 $("#gift-remain1-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][0])
                 $("#gift-remain2-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][1])
