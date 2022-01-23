@@ -403,6 +403,10 @@ $(document).on('click', '#gift-scheme1', function() {
     var array_gift_given_5 = [];
     var array_gift_given_6 = [];
     var array_gift_given_7 = [];
+
+    $('input[name = "gift_id"]').each(function(i) {
+        array_gift_id.push($(this).val());
+    });
     //gift received
     $('input[name = "gift-receive-1-scheme2"]').each(function(i) {
         array_gift_receive_1.push($(this).val());
@@ -427,9 +431,39 @@ $(document).on('click', '#gift-scheme1', function() {
 
     });
 
-    for (let i = 0; i < array_gift_receive_1.length; i++) {
-        if (array_gift_receive_1.length > array_gift_receive_7.length) {
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_receive_7.length) {
             array_gift_receive_7.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_receive_6.length) {
+            array_gift_receive_6.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_receive_5.length) {
+            array_gift_receive_5.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_receive_4.length) {
+            array_gift_receive_4.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_receive_3.length) {
+            array_gift_receive_3.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_receive_2.length) {
+            array_gift_receive_2.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_receive_1.length) {
+            array_gift_receive_1.push('0');
         }
     }
     //Gift given
@@ -455,15 +489,44 @@ $(document).on('click', '#gift-scheme1', function() {
         array_gift_given_7.push($(this).val());
 
     });
-    for (let i = 0; i < array_gift_given_1.length; i++) {
-        if (array_gift_given_1.length > array_gift_given_7.length) {
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_given_7.length) {
             array_gift_given_7.push('0');
         }
     }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_given_6.length) {
+            array_gift_given_6.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_given_5.length) {
+            array_gift_given_5.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_given_4.length) {
+            array_gift_given_4.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_given_3.length) {
+            array_gift_given_3.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_given_2.length) {
+            array_gift_given_2.push('0');
+        }
+    }
+    for (let i = 0; i < array_gift_id.length; i++) {
+        if (array_gift_id.length > array_gift_given_1.length) {
+            array_gift_given_1.push('0');
+        }
+    }
+
     /////////////////
-    $('input[name = "gift_id"]').each(function(i) {
-        array_gift_id.push($(this).val());
-    });
+
     array_report_sale.push(array_gift_id);
     //array gift receive
 
@@ -483,7 +546,7 @@ $(document).on('click', '#gift-scheme1', function() {
     array_report_sale.push(array_gift_given_6);
     array_report_sale.push(array_gift_given_7);
 
-    //console.log(array_report_sale)
+    console.log(array_report_sale)
     const csrf = document.getElementsByName('csrfmiddlewaretoken');
     //const csrf = document.getElementsByName('csrfmiddlewaretoken')
     $.ajax({
@@ -500,10 +563,6 @@ $(document).on('click', '#gift-scheme1', function() {
         dataType: "json",
         success: function(resp) {
             alert("Đã sửa thành công!!!")
-            console.log(resp.list_gift_remain[0][0])
-            console.log(resp.list_gift_remain)
-            console.log(resp.id)
-
             for (let i = 0; i < resp.id.length; i++) {
                 $("#gift-remain1-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][0])
                 $("#gift-remain2-scheme2" + resp.id[i]).val(resp.list_gift_remain[i][1])
