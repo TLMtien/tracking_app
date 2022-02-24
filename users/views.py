@@ -20,7 +20,7 @@ from outlet.models import Campain, outletInfo
 # Create your views here.
 
 def index(request):
-    return HttpResponse('ok')
+	return HttpResponse('ok')
 	
 
 
@@ -78,37 +78,37 @@ def PasswordChangeHVN(request):
 
 @unauthenticated_user
 def loginPage(request):
-    if request.method == 'POST':
+	if request.method == 'POST':
 
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+		username = request.POST.get('username')
+		password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('page')
-        else:
-            messages.info(request, "Sai Tài Khoản hoặc Sai Mật Khẩu")
-            return redirect('loginPage')
-    form = LoginForm()
-    return render(request, 'users/login.html', {'form':form})
+		user = authenticate(request, username=username, password=password)
+		if user is not None:
+			login(request, user)
+			return redirect('page')
+		else:
+			messages.info(request, "Sai Tài Khoản hoặc Sai Mật Khẩu")
+			return redirect('loginPage')
+	form = LoginForm()
+	return render(request, 'users/login.html', {'form':form})
 
 @unauthenticated_user_HVN
 def loginHVN(request):
-    if request.method == 'POST':
+	if request.method == 'POST':
 
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+		username = request.POST.get('username')
+		password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect("dashboard", campainID = request.user.hvn.brand.all()[0].id)
-        else:
-            messages.info(request, "Sai Tài Khoản hoặc Sai Mật Khẩu")
-            return redirect('loginHVN')
-    form = LoginHVNForm()
-    return render(request, 'users/loginHVN.html', {'form':form})
+		user = authenticate(request, username=username, password=password)
+		if user is not None:
+			login(request, user)
+			return redirect("dashboard", campainID = request.user.hvn.brand.all()[0].id)
+		else:
+			messages.info(request, "Sai Tài Khoản hoặc Sai Mật Khẩu")
+			return redirect('loginHVN')
+	form = LoginHVNForm()
+	return render(request, 'users/loginHVN.html', {'form':form})
 
 login_required
 def page_user(request):
@@ -134,8 +134,8 @@ def upload_user(request):
 		wb = openpyxl.load_workbook(excel_file)
 		
 		sheets = wb.sheetnames
-		print(sheets[8])
-		worksheet = wb[sheets[8]]   #Trang tính
+		print(sheets[4])
+		worksheet = wb[sheets[4]]   #Trang tính
 
 		excel_data = list()
 	
@@ -150,26 +150,28 @@ def upload_user(request):
 		print(len(excel_data)-2)
 		
 		for i in range(len(excel_data)-1):
-			campain = Campain.objects.get(id=9)
+			campain = Campain.objects.get(id=4)
 			print(excel_data[i+1][2])
 			print(excel_data[i+1][3])
 			#SPPP
-			# outlet = outletInfo.objects.filter(compain = campain)
-			# try:
+			outlet = outletInfo.objects.filter(compain = campain)
+			try:
 			# 	user1 = NewUser.objects.create_user_SP(user_name=excel_data[i+1][2], password=excel_data[i+1][3])
-			# 	sp=SalePerson.objects.create(user=user1, brand = campain, outlet = outlet[1])
-			# 	sp.save()
-			# except:
-			# 	pass
+				user1 = NewUser.objects.get(user_name=excel_data[i+1][2])
+			 	sp=SalePerson.objects.create(user=user1, brand = campain, outlet = outlet[1])
+			 	sp.save()
+			except:
+			 	pass
 			
 			#HVN
-			try:
-				user1 = NewUser.objects.create_user_HVN(user_name=excel_data[i+1][2] + '@hnk.com', password=excel_data[i+1][3])
-				sp=HVN.objects.create(user=user1)
-				sp.brand.add(campain)
-				sp.save()
-			except:	
-				pass
+			# try:
+			# 	user1 = NewUser.objects.create_user_HVN(user_name=excel_data[i+1][2] + '@hnk.com', password=excel_data[i+1][3])
+			# 	sp=HVN.objects.create(user=user1)
+			# 	sp.brand.add(campain)
+			# 	sp.save()
+			# except:	
+			# 	pass
+
 		return redirect('PasswordChangeDone')
 
 	
