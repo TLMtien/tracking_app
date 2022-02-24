@@ -135,8 +135,8 @@ def upload_user(request):
 		wb = openpyxl.load_workbook(excel_file)
 		
 		sheets = wb.sheetnames
-		print(sheets[4])
-		worksheet = wb[sheets[4]]   #Trang tính
+		print(sheets[5])
+		worksheet = wb[sheets[5]]   #Trang tính
 
 		excel_data = list()
 	
@@ -151,7 +151,7 @@ def upload_user(request):
 		print(len(excel_data)-2)
 		
 		for i in range(len(excel_data)-1):
-			campain = Campain.objects.get(id=4)
+			campain = Campain.objects.get(id=5)
 			print(excel_data[i+1][2])
 			print(excel_data[i+1][3])
 			#SPPP
