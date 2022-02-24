@@ -3230,14 +3230,32 @@ def edit_gift_rp(request, campainID):
 #     return response
 
 def clear_data(request):
-    
-    date1 = date(2022,1,10)
-    post_rp = posmReport.objects.all().exclude(created=date1).delete()
-    table_rp = tableReport.objects.all().exclude(created=date1).delete()
-    gift_rp = giftReport.objects.all().exclude(created=date1).delete()
-    over_rp = overallReport.objects.all().exclude(created=date1).delete()
-    consumer_rp = consumerApproachReport.objects.all().exclude(created=date1).delete()
-    sale_rp = report_sale.objects.all().exclude(created=date1).delete()
+    list_outlet = []
+    #date1 = date(2022,1,10)
+    date1 = date(2022,2,24)
+    post_rp = posmReport.objects.filter(created=date1)
+    table_rp = tableReport.objects.filter(created=date1)
+    gift_rp = giftReport.objects.filter(created=date1)
+    over_rp = overallReport.objects.filter(created=date1)
+    consumer_rp = consumerApproachReport.objects.filter(created=date1)
+    sale_rp = report_sale.objects.filter(created=date1)
+    for rp in post_rp:
+        list_outlet.append(rp.outlet.outlet_address)
+    for rp in table_rp:
+        list_outlet.append(rp.outlet.outlet_address)
+    for rp in gift_rp:
+        list_outlet.append(rp.outlet.outlet_address)
+    for rp in over_rp:
+        list_outlet.append(rp.outlet.outlet_address)
+    for rp in consumer_rp:
+        list_outlet.append(rp.outlet.outlet_address)
+    for rp in sale_rp:
+        list_outlet.append(rp.outlet.outlet_address)
+
+    all_outlets = outletInfo.objects.all()
+    for outlet in all_outlets:
+        if not outlet.outlet_address in list_outlet:
+            outlet.delete()
     
     return HttpResponse('ok')
 
