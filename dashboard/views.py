@@ -3231,8 +3231,8 @@ def edit_gift_rp(request, campainID):
 
 def clear_data(request):
     list_outlet = []
-    #date1 = date(2022,1,10)
-    date1 = date(2022,2,24)
+    date1 = date(2022,1,10)
+    #date1 = date(2022,10,1)
     post_rp = posmReport.objects.filter(created=date1)
     table_rp = tableReport.objects.filter(created=date1)
     gift_rp = giftReport.objects.filter(created=date1)
@@ -3251,6 +3251,13 @@ def clear_data(request):
         list_outlet.append(rp.outlet.outlet_address)
     for rp in sale_rp:
         list_outlet.append(rp.outlet.outlet_address)
+
+    post_rp.delete()
+    table_rp.delete()
+    gift_rp.delete()
+    over_rp.delete()
+    consumer_rp.delete()
+    sale_rp.delete()
 
     all_outlets = outletInfo.objects.all()
     for outlet in all_outlets:
