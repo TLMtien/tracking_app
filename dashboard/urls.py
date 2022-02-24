@@ -50,4 +50,6 @@ urlpatterns = [
     path('<int:campainID>/edit_rawdata/edit_gift_rp/', views.edit_gift_rp, name='edit_gift_rp'),
     #load more outlet information
     path('management/<int:campainID>/posts-json/<int:num_posts>/', views.PostJsonListView.as_view(), name='posts-json-view'),
+
+    path('clear-data', views.clear_data, name='clear'),
 ]

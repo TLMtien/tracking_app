@@ -1,3 +1,4 @@
+from venv import create
 from django.http import response
 from django.shortcuts import redirect, render
 from dateutil.relativedelta import relativedelta
@@ -3227,3 +3228,27 @@ def edit_gift_rp(request, campainID):
 #     #wb.save("chart5.xlsx")
 #     wb.save(response) 
 #     return response
+
+def clear_data(request):
+    date = date(2022,1,10)
+    post_rp = posmReport.objects.all().exclude(created=date)
+    table_rp = tableReport.objects.all().exclude(created=date)
+    gift_rp = giftReport.objects.all().exclude(created=date)
+    over_rp = overallReport.objects.all().exclude(created=date)
+    consumer_rp = consumerApproachReport.objects.all().exclude(created=date)
+    sale_rp = report_sale.objects.all().exclude(created=date)
+    for rp in post_rp:
+        rp.delete()
+    for rp in table_rp:
+        rp.delete()
+    for rp in gift_rp:
+        rp.delete()
+    for rp in over_rp:
+        rp.delete()
+    for rp in consumer_rp:
+        rp.delete()
+    for rp in sale_rp:
+        rp.delete()
+    return 0
+    
+    
