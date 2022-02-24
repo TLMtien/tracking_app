@@ -125,7 +125,8 @@ def PasswordChangeDone(request):
 
 
 
-#import excel data ----> create account for SP 
+
+
 def upload_user(request):
 	if "GET" == request.method:
 			return render(request, 'users/upload-user.html', {})
@@ -155,13 +156,15 @@ def upload_user(request):
 			print(excel_data[i+1][3])
 			#SPPP
 			outlet = outletInfo.objects.filter(compain = campain)
-			try:
+			
 			# 	user1 = NewUser.objects.create_user_SP(user_name=excel_data[i+1][2], password=excel_data[i+1][3])
+			try:
 				user1 = NewUser.objects.get(user_name=excel_data[i+1][2])
-			 	sp=SalePerson.objects.create(user=user1, brand = campain, outlet = outlet[1])
-			 	sp.save()
+				sp=SalePerson.objects.create(user=user1, brand = campain, outlet = outlet[1])
+				sp.save()
 			except:
-			 	pass
+				pass
+			
 			
 			#HVN
 			# try:
@@ -173,7 +176,6 @@ def upload_user(request):
 			# 	pass
 
 		return redirect('PasswordChangeDone')
-
 	
 # tigerTP 1
 # tigerFA 2
